@@ -18,25 +18,24 @@ const Login = () => {
 
   if (!isImageLoaded) {
     return (
-      <div className='flex justify-center items-center' style={{background: '#202020', height: '100vh'}}>
-        <div className='loading-indicator'>Loading...</div>
+      <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
       </div>
     );
   }
 
   return (
-    <div className='flex justify-center items-center' style={{background: '#202020', height: '100vh'}}>
-      <div className="flex justify-between" style={{width: '65rem', height: 'auto' , background: '#fff', borderRadius: '1.25rem'}}>
+    <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
+      <div className="anime flex justify-between" style={{width: '65rem', height: 'auto' , background: '#f7f7f7', borderRadius: '1.25rem'}}>
         <div className="form flex flex-col items-center justify-center gap-5" style={{width: '100%'}}>
           <img src={Logo} alt="Logo" style={{width: '6rem', height: '1.10rem'}}/>
-          <div className="titSub">
-            <h1 className='tit'>Seja bem-vindo de volta!</h1>
-            <span className='sub'>Realize o Login para acessar a Workzen.</span>
+          <div className="tituSub">
+            <h1 className='titLogin'>Seja bem-vindo de volta!</h1>
+            <span className='subLogin'>Realize o Login para acessar a Workzen.</span>
           </div>
           <input type="text" placeholder='Email'/>
           <input type="password" placeholder='Senha'/>
           <span className='sub flex self-end'>Esqueceu a Senha?</span>
-          <a className='btn' href="/">Entrar</a>
+          <a className='btnLogin' href="/">Entrar</a>
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
@@ -51,7 +50,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <img src={img} alt="Login Visual" style={{width: '34rem', height: '40rem'}}/>
+        <img className='imgLogin' src={img} alt="Login Visual" style={{maxWidth: '34rem', height: '40rem'}}/>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ const Navbar = ({ menu, setMenu}) => {
             </div>
           </div>
           <div className="button flex flex-col mx-auto gap-5">
-            <a href="/" className="flex justify-center items-center text-center" style={{fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem', border: '2px solid #64748B', height: '4rem', color: '#64748B'}}>Entrar</a>
+            <Link to="/Login" className="flex justify-center items-center text-center" style={{fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem', border: '2px solid #64748B', height: '4rem', color: '#64748B'}}>Entrar</Link>
             <a href="/" className="flex justify-center items-center text-white p-2 bg-primary text-center" style={{width: '90vw', height: '4rem', fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem'}}>Criar Conta</a>
           </div>
         </div>
