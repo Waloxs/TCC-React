@@ -54,11 +54,11 @@
 .menuHamb {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   width: 25px;
 }
 
 .menuHamb .line {
+  margin-top: 6px !important;
   background: #000;
   height: 2px;
   width: 100%;
