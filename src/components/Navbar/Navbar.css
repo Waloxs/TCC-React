@@ -11,8 +11,13 @@
     margin-top: 5px;
 }
 
+@media (max-width: 1200px) {
+  .navbar{
+    border-radius: 0px !important;
+    width: 100vh !important;
+  }
+}
 
-  
   @media (max-width: 780px) {
 
     .Logo{

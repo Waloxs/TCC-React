@@ -17,7 +17,7 @@ const Navbar = ({ menu, setMenu}) => {
 
   return (
     <>
-      <div className="navbar font-lexend h-16 rounded-b-none xl:rounded-b-[0.9375rem] w-[80.1875rem] max-w-full mx-auto shadow-[0px_247px_69px_0px_rgba(0,0,0,0.00),_0px_158px_63px_0px_rgba(0,0,0,0.01),_0px_89px_53px_0px_rgba(0,0,0,0.05),_0px_40px_40px_0px_rgba(0,0,0,0.09),_0px_10px_22px_0px_rgba(0,0,0,0.10)] flex justify-between items-center md:text-center">
+      <div className="navbar font-lexend h-16 rounded-b-[0.9375rem] w-[90vw] max-w-full mx-auto shadow-[0px_247px_69px_0px_rgba(0,0,0,0.00),_0px_158px_63px_0px_rgba(0,0,0,0.01),_0px_89px_53px_0px_rgba(0,0,0,0.05),_0px_40px_40px_0px_rgba(0,0,0,0.09),_0px_10px_22px_0px_rgba(0,0,0,0.10)] flex justify-between items-center md:text-center">
         <div className="flex gap-5 items-center">
           <a href="/">
             <img src={Logo} alt="Logo" className="Logo w-[6.5625rem] ml-[2rem]" />

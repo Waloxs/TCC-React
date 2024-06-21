@@ -23,7 +23,7 @@ const Footer = () => {
           padding: '5rem',
           borderRadius: '1.5625rem 1.5625rem 0rem 0rem',
           background: 'var(--blackclear, #202020)',
-          width: '80rem',
+          width: '90vw',
           marginLeft: '20px',
           marginRight: '20px',
       }}>
@@ -55,7 +55,7 @@ const Footer = () => {
           gap: '20px',
           borderRadius: '1.5625rem 1.5625rem 0rem 0rem',
           background: 'var(--blackclear, #202020)',
-          width: '80rem',
+          width: '90vw',
           marginLeft: '20px',
           marginRight: '20px',
       }}>
