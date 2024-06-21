@@ -1,0 +1,95 @@
+.tit{
+    color: var(--grey-text-dark, #020617);
+text-align: center;
+font-family: Lexend;
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 2.25rem */
+}
+
+.sub{
+    color: var(--grey-text-light, #64748B);
+text-align: center;
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 300;
+line-height: 140%; /* 1.75rem */
+}
+
+.form{
+    padding: 2rem;
+    position: relative;
+}
+
+input{
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--white, #FFF);
+    padding-left: 15px;
+    font-family: 'Lexend';
+    font-weight: 100;
+}
+
+input::placeholder{
+    font-family: 'Lexend';
+    font-weight: 100;
+}
+
+
+.btn{
+    display: flex;
+    width: 100%;
+    height: 3.125rem;
+    padding: 0.625rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+    background: var(--primary-500, #3B82F6);
+    font-family: 'Lexend';
+    font-weight: 100;
+    color: #fff;
+}
+
+.line{
+    margin-top: 20px;
+    width: 100%;
+    height: 0.75px;
+    background: #94A3B8;
+}
+
+.cont{
+    color: var(--grey-text-light, #64748B);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 140%; /* 1.75rem */
+    position: absolute;
+    top: 467px;
+    background: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.mid{
+    border: 1px solid #E2E8F0;
+    border-radius: 0.5rem;
+    padding: 10px 40px;
+}
+
+.gog{
+    font-family: Lexend;
+    color: rgb(236, 87, 87);
+    font-weight: 100;
+}
+
+.fac{
+    font-family: Lexend;
+    color: #0866FF;
+    font-weight: 100;
+}

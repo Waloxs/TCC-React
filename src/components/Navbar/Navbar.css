@@ -1,0 +1,107 @@
+.menuHamb {
+    display: none;
+    cursor: pointer;
+  }
+
+  .LogoResp{
+    display: none;
+  }
+
+  .dropList{
+    margin-top: 5px;
+}
+
+
+  
+  @media (max-width: 780px) {
+
+    .Logo{
+      display: none;
+    }
+
+    .LogoResp{
+      display: flex;
+      width: 2rem;
+      margin-left: 3rem;
+    }
+
+    .menu{
+      animation: apareceMenu ease 0.5s;
+    }
+
+    @keyframes apareceMenu {
+      to{
+        transform: translateX(0);
+      }
+      from{
+        transform: translateX(100%);
+      }
+    }
+
+    .links {
+      display: none !important;
+    }
+  
+    .buttons {
+      display: none !important;
+    }
+
+    
+    .dropList{
+      font-size: 2rem;
+    }
+  
+.menuHamb {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 25px;
+}
+
+.menuHamb .line {
+  background: #000;
+  height: 2px;
+  width: 100%;
+  transition: all 0.5s ease-out;
+}
+
+.menuHamb .clicked:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 5px);
+}
+
+.menuHamb .clicked:nth-child(2) {
+  transform: rotate(45deg) translate(0.5px, -0.5px);
+}
+
+.menuHamb .clicked:nth-child(3) {
+  transform: rotate(-45deg) translate(6.5px, -5px);
+}
+
+.menuHamb .unclicked:nth-child(1) {
+  transform: rotate(0) translate(0);
+}
+
+.menuHamb .unclicked:nth-child(2) {
+  transform: rotate(0) translate(0);
+}
+
+.menuHamb .unclicked:nth-child(3) {
+  transform: rotate(0) translate(0);
+}
+
+  }
+
+  
+  @media (max-width: 630px) {
+    .dropList{
+      font-size: 2rem;
+    }
+  }
+
+
+ 
+  @media (max-width: 500px) {
+    .link a{
+      font-size: 1.3rem !important;
+    }
+  }
