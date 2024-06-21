@@ -1,45 +1,60 @@
-import React, { Suspense, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
+import img from '../../assets/login.png';
 import Logo from '../../assets/Logo.png';
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 
-const LoginImage = lazy(() => import('../../assets/login.png'));
-
 const Login = () => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = img;
+    image.onload = () => {
+      setIsImageLoaded(true);
+    };
+  }, []);
+
+  if (!isImageLoaded) {
+    return (
+      <div className='flex justify-center items-center' style={{background: '#202020', height: '100vh'}}>
+        <div className='loading-indicator'>Loading...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className='flex justify-center items-center' style={{ background: '#202020', height: '100vh' }}>
-      <div className="flex justify-between" style={{ width: '65rem', height: 'auto', background: '#fff', borderRadius: '1.25rem' }}>
-        <div className="form flex flex-col items-center justify-center gap-5" style={{ width: '100%' }}>
-          <img src={Logo} alt="" style={{ width: '6rem', height: '1.10rem' }} />
+    <div className='flex justify-center items-center' style={{background: '#202020', height: '100vh'}}>
+      <div className="flex justify-between" style={{width: '65rem', height: 'auto' , background: '#fff', borderRadius: '1.25rem'}}>
+        <div className="form flex flex-col items-center justify-center gap-5" style={{width: '100%'}}>
+          <img src={Logo} alt="Logo" style={{width: '6rem', height: '1.10rem'}}/>
           <div className="titSub">
             <h1 className='tit'>Seja bem-vindo de volta!</h1>
             <span className='sub'>Realize o Login para acessar a Workzen.</span>
           </div>
-          <input type="text" placeholder='Email' />
-          <input type="password" placeholder='Senha' />
+          <input type="text" placeholder='Email'/>
+          <input type="password" placeholder='Senha'/>
           <span className='sub flex self-end'>Esqueceu a Senha?</span>
           <a className='btn' href="/">Entrar</a>
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
-          <div className="redes flex justify-around" style={{ width: '100%' }}>
+          <div className="redes flex justify-around" style={{width: '100%'}}>
             <div className="mid flex items-center gap-2">
-              <FcGoogle style={{ width: '20px', height: '20px' }} />
+              <FcGoogle style={{width: '20px', height: '20px'}}/>
               <h2 className='gog'>Google</h2>
             </div>
             <div className="mid flex items-center gap-2">
-              <FaFacebook style={{ width: '20px', height: '20px', color: '#0866FF' }} />
+              <FaFacebook style={{width: '20px', height: '20px', color: '#0866FF'}}/>
               <h2 className='fac'>Facebook</h2>
             </div>
           </div>
         </div>
-        <Suspense fallback={<div className="image-placeholder" style={{ width: '34rem', height: '40rem', backgroundColor: '#f0f0f0' }} />}>
-          <img src={LoginImage} alt="Login" style={{ width: '34rem', height: '40rem' }} />
-        </Suspense>
+        <img src={img} alt="Login Visual" style={{width: '34rem', height: '40rem'}}/>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
