@@ -39,13 +39,13 @@ const Login = () => {
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
-          <div className="redes flex justify-around" style={{width: '100%'}}>
+          <div className="redes flex justify-around gap-5" style={{maxWidth: '100%'}}>
             <div className="mid flex items-center gap-2">
-              <FcGoogle style={{width: '20px', height: '20px'}}/>
+              <FcGoogle style={{maxWidth: '20px', height: '20px'}}/>
               <h2 className='gog'>Google</h2>
             </div>
             <div className="mid flex items-center gap-2">
-              <FaFacebook style={{width: '20px', height: '20px', color: '#0866FF'}}/>
+              <FaFacebook style={{maxWidth: '20px', height: '20px', color: '#0866FF'}}/>
               <h2 className='fac'>Facebook</h2>
             </div>
           </div>

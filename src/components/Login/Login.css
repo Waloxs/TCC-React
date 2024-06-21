@@ -96,6 +96,7 @@ input::placeholder{
     border: 1px solid #E2E8F0;
     border-radius: 0.5rem;
     padding: 10px 40px;
+    width: 100%;
 }
 
 .gog{
@@ -110,6 +111,7 @@ input::placeholder{
     font-weight: 100;
 }
 
+
 @media(max-width: 1105px){
     .imgLogin{
         display: none;
@@ -120,3 +122,4 @@ input::placeholder{
         height: 40rem !important;
     }
 }
+
