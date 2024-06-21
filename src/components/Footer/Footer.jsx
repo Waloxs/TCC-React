@@ -68,7 +68,7 @@ const Footer = () => {
               <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('empresas')} />
             )}
           </div>
-          <div className="line"></div>
+          <div className="linef"></div>
           {dropStates.empresas && (
             <div>
               <span className='spanFooter'>Como anunciar vaga</span>
@@ -85,7 +85,7 @@ const Footer = () => {
               <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('talentos')} />
             )}
           </div>
-          <div className="line"></div>
+          <div className="linef"></div>
           {dropStates.talentos && (
             <div>
               <span className='spanFooter'>Como encontrar trabalho</span>
@@ -102,7 +102,7 @@ const Footer = () => {
               <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('recursos')} />
             )}
           </div>
-          <div className="line"></div>
+          <div className="linef"></div>
           {dropStates.recursos && (
             <div>
               <span className='spanFooter'>Ajuda e Suporte</span><br />

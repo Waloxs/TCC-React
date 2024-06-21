@@ -27,6 +27,7 @@
 
     .menu{
       animation: apareceMenu ease 0.5s;
+      height: calc(100vh - 100px);
     }
 
     @keyframes apareceMenu {
@@ -55,6 +56,7 @@
   display: flex;
   flex-direction: column;
   width: 25px;
+  margin-bottom: 7px;
 }
 
 .menuHamb .line {

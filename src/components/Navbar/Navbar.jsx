@@ -42,7 +42,7 @@ const Navbar = ({ menu, setMenu}) => {
       </div>
 
       {menu && (
-        <div className="menu flex flex-col justify-between" style={{width: '100%', height: '90vh'}}>
+        <div className="menu flex flex-col justify-between" style={{width: '100%'}}>
           <div className="flex flex-col items-center gap-6" style={{marginTop: '2rem'}}>
 
             <div className="link flex justify-between items-center" style={{width: '90vw'}}>
