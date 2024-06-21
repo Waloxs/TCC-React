@@ -5,12 +5,12 @@
         margin-right: 50px;
     }
 
-    .tit{
+    .titu{
         font-size: 1.5rem !important;
         width: 25rem !important;
     }
 
-    .sub{
+    .subu{
         width: 25rem !important;
     }
 }
@@ -33,13 +33,13 @@
         padding-left: 0px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 2.5rem !important;
         width: 35rem !important;
     }
 
-    .sub{
-        font-size: 1.25rem !important;
+    .subu{
+        fuont-size: 1.25rem !important;
         width: 40rem !important;
     }
 
@@ -60,12 +60,12 @@
         margin-right: 20px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 2rem !important;
         width: 30rem !important;
     }
 
-    .sub{
+    .subu{
         font-size: 1rem !important;
         width: 30rem !important;
     }
@@ -78,12 +78,12 @@
         margin-right: 20px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 1.5rem !important;
         width: 25rem !important;
     }
 
-    .sub{
+    .subu{
         font-size: 1rem !important;
         width: 25rem !important;
     }
@@ -100,12 +100,12 @@
         margin-right: 20px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 1.25rem !important;
         width: 20rem !important;
     }
 
-    .sub{
+    .subu{
         font-size: 0.75rem !important;
         width: 20rem !important;
     }
@@ -127,12 +127,12 @@
         margin-right: 20px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 1.10rem !important;
         width: 18rem !important;
     }
 
-    .sub{
+    .subu{
         font-size: 0.75rem !important;
         width: 18rem !important;
     }
@@ -144,12 +144,12 @@
         margin-right: 20px !important;
     }
 
-    .tit{
+    .titu{
         font-size: 1rem !important;
         width: 16rem !important;
     }
 
-    .sub{
+    .subu{
         font-size: 0.65rem !important;
         width: 16rem !important;
     }

@@ -15,9 +15,9 @@ const Section = () => {
      }}>
         <img className='imgMain' src={img1Main} alt="" style={{width: '29rem'}}/>
         <div className='flex flex-col gap-2'>
-            <h1 className='tit' style={{fontFamily: 'Lexend', fontSize: '1.80rem', fontWeight: '700', width: '35rem'}}>Encontre os melhores talentos para sua Empresa</h1>
+            <h1 className='titu' style={{fontFamily: 'Lexend', fontSize: '1.80rem', fontWeight: '700', width: '35rem'}}>Encontre os melhores talentos para sua Empresa</h1>
 
-            <p className='sub' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #202020)', width: '35rem'}}>
+            <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #202020)', width: '35rem'}}>
                 Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
              <div className='btn flex justify-center items-center' style={{width: '160px', height: '50px', borderRadius: '1rem', background: 'var(--primary-500, #3B82F6)'}}>
@@ -34,8 +34,8 @@ const Section = () => {
         background: 'var(--grey-background, #3B82F6)'
       }}>
          <div className='flex flex-col gap-2 pl-8'>
-            <h1 className='tit' style={{fontFamily: 'Lexend', fontSize: '1.80em', fontWeight: '700', color: '#fff'}}>Dê o Próximo Passo em Sua Carreira</h1>
-            <p className='sub' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #fff)', width: '35rem'}}>Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
+            <h1 className='titu' style={{fontFamily: 'Lexend', fontSize: '1.80em', fontWeight: '700', color: '#fff'}}>Dê o Próximo Passo em Sua Carreira</h1>
+            <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #fff)', width: '35rem'}}>Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
              <div className='btn flex justify-center items-center' style={{width: '160px', height: '50px', borderRadius: '1rem', background: 'var(--primary-500, #fff)'}}>
                 <a href="" style={{fontFamily: 'Lexend', color: '#3B82F6', fontSize: '1rem'}} 
