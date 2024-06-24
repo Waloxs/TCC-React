@@ -61,7 +61,7 @@ const Footer = () => {
       }}>
         <div>
           <div className='flex justify-between items-center'>
-            <h1 className='h1Footer'>Para Empresas</h1>
+            <h1 className='h1Footer' onClick={() => clicou('empresas')}>Para Empresas</h1>
             {dropStates.empresas ? (
               <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('empresas')} />
             ) : (
@@ -78,7 +78,7 @@ const Footer = () => {
 
         <div>
           <div className='flex justify-between items-center'>
-            <h1 className='h1Footer'>Para Talentos</h1>
+            <h1 className='h1Footer' onClick={() => clicou('talentos')}>Para Talentos</h1>
             {dropStates.talentos ? (
               <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('talentos')} />
             ) : (
@@ -88,14 +88,14 @@ const Footer = () => {
           <div className="linef"></div>
           {dropStates.talentos && (
             <div>
-              <span className='spanFooter'>Como encontrar trabalho</span>
+              <span className='spanFooter'>Como achar um emprego</span>
             </div>
           )}
         </div>
 
         <div>
           <div className='flex justify-between items-center'>
-            <h1 className='h1Footer'>Recursos</h1>
+            <h1 className='h1Footer' onClick={() => clicou('recursos')}>Recursos</h1>
             {dropStates.recursos ? (
               <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('recursos')} />
             ) : (
@@ -105,8 +105,7 @@ const Footer = () => {
           <div className="linef"></div>
           {dropStates.recursos && (
             <div>
-              <span className='spanFooter'>Ajuda e Suporte</span><br />
-              <span className='spanFooter'>Histórias de Sucesso</span>
+              <span className='spanFooter'>História de Sucesso</span>
             </div>
           )}
         </div>

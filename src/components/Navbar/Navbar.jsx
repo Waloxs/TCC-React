@@ -5,6 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import './Navbar.css';
+import { BiBorderRadius } from 'react-icons/bi';
 
 const Navbar = ({ menu, setMenu}) => {
   const [clicked, setClicked] = useState(false);
@@ -57,8 +58,8 @@ const Navbar = ({ menu, setMenu}) => {
             </div>
           </div>
           <div className="button flex flex-col mx-auto gap-5">
-            <Link to="/Login" className="flex justify-center items-center text-center" style={{fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem', border: '2px solid #64748B', height: '4rem', color: '#64748B'}}>Entrar</Link>
-           <BtnPrincipal texto="Criar Conta" color="#fff" width="90vw"/>
+          <Link to="/Login"><BtnPrincipal texto="Entrar" color="#000" width="90vw" back="#fff" border="1px solid"/></Link>
+           <BtnPrincipal texto="Criar Conta" color="#fff" width="90vw" back="#3B82F6"/>
           </div>
         </div>
       )}

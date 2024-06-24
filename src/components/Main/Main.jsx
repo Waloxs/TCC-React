@@ -12,7 +12,7 @@ const Main = () => {
           Aqui nós estamos comprometidos em <span className="text-primary-700">conectar talentos</span> e 
           <span className="text-primary-700"> oportunidades de carreira!</span>
         </p>
-        <BtnPrincipal texto="Começar" color="#fff" width="160px"/>
+        <BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6"/>
       </div>
       
       <div className="flex w-full justify-center">
