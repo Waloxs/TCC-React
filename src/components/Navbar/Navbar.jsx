@@ -5,7 +5,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import './Navbar.css';
-import { BiBorderRadius } from 'react-icons/bi';
 
 const Navbar = ({ menu, setMenu}) => {
   const [clicked, setClicked] = useState(false);

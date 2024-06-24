@@ -1,6 +1,8 @@
 import React from 'react'
 import ImageSection from '../../assets/ImageSection.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
+import { Link } from 'react-router-dom';
+
 import './Main.css'
 
 const Main = () => {
@@ -12,7 +14,7 @@ const Main = () => {
           Aqui nós estamos comprometidos em <span className="text-primary-700">conectar talentos</span> e 
           <span className="text-primary-700"> oportunidades de carreira!</span>
         </p>
-        <BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6"/>
+       <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6"/></Link> 
       </div>
       
       <div className="flex w-full justify-center">
