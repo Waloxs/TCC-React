@@ -1,6 +1,7 @@
 import React from 'react'
 import img1Main from '../../assets/img1Main.png'
 import img2Main from '../../assets/img2Main.png'
+import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import './Section.css'
 
 const Section = () => {
@@ -21,9 +22,7 @@ const Section = () => {
                 Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
              <div className='btn flex justify-center items-center' style={{width: '160px', height: '50px', borderRadius: '1rem', background: 'var(--primary-500, #3B82F6)'}}>
-                <a href="" style={{fontFamily: 'Lexend', color: '#FFF', fontSize: '1rem'}} 
-                className="">Anuncie Agora
-                </a>
+             <BtnPrincipal texto="Anuncie Agora" color="#fff"/>
             </div>
          </div>
       </div>

@@ -3,6 +3,7 @@ import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png'
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import './Navbar.css';
 
 const Navbar = ({ menu, setMenu}) => {
@@ -42,7 +43,7 @@ const Navbar = ({ menu, setMenu}) => {
       </div>
 
       {menu && (
-        <div className="menu flex flex-col justify-between" style={{width: '100%'}}>
+        <div className="menu flex flex-col justify-between" style={{width: '100vw'}}>
           <div className="flex flex-col items-center gap-6" style={{marginTop: '2rem'}}>
 
             <div className="link flex justify-between items-center" style={{width: '90vw'}}>
@@ -57,7 +58,7 @@ const Navbar = ({ menu, setMenu}) => {
           </div>
           <div className="button flex flex-col mx-auto gap-5">
             <Link to="/Login" className="flex justify-center items-center text-center" style={{fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem', border: '2px solid #64748B', height: '4rem', color: '#64748B'}}>Entrar</Link>
-            <a href="/" className="flex justify-center items-center text-white p-2 bg-primary text-center" style={{width: '90vw', height: '4rem', fontFamily: 'Lexend', fontSize: '1.5rem', borderRadius: '1.5rem'}}>Criar Conta</a>
+           <BtnPrincipal texto="Criar Conta" color="#fff" width="90vw"/>
           </div>
         </div>
       )}

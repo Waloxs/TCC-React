@@ -7,6 +7,33 @@ import { FaFacebook } from "react-icons/fa";
 
 const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Evite o comportamento padrão do formulário
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    try {
+        const response = await fetch('localhost:3000/api/usuarios', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            console.log('Dados enviados com sucesso!');
+            // Lógica adicional após o envio bem-sucedido
+        } else {
+            console.error('Erro ao enviar os dados para a API.');
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+};
+
 
   useEffect(() => {
     const image = new Image();
@@ -26,7 +53,7 @@ const Login = () => {
   return (
     <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
       <div className="anime flex justify-between" style={{width: '65rem', height: 'auto' , background: '#f7f7f7', borderRadius: '1.25rem'}}>
-        <div className="form flex flex-col items-center justify-center gap-5" style={{width: '100%'}}>
+        <div className="form flex flex-col items-center justify-center gap-5" style={{width: '100%'}} onSubmit={handleSubmit}>
           <img src={Logo} alt="Logo" style={{width: '6rem', height: '1.10rem'}}/>
           <div className="tituSub">
             <h1 className='titLogin'>Seja bem-vindo de volta!</h1>
@@ -35,7 +62,7 @@ const Login = () => {
           <input type="text" placeholder='Email'/>
           <input type="password" placeholder='Senha'/>
           <span className='sub flex self-end'>Esqueceu a Senha?</span>
-          <a className='btnLogin' href="/">Entrar</a>
+          <a className='btnLogin' href="/" type='submit'>Entrar</a>
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
