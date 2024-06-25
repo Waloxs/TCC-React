@@ -32,7 +32,7 @@ body{
 
 .camph2{
     display: flex;
-    max-width: 320px;
+    width: 320px;
     padding: 0.85rem 1.75rem 0.85rem 1.75rem;
     align-items: center;
     gap: 2rem;
