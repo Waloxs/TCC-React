@@ -28,13 +28,13 @@ const Escolha = () => {
     <div>
       <div className='anime flex flex-col justify-center items-center' style={{ background: '#fff', height: '100%', gap: '30px', marginTop: '40px' }}>
         <div className="flex justify-start" style={{ width: '65rem' }}>
-        <Link to="/Home">
+        <Link to="/">
             <img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} />
         </Link>
         </div>
         <div className="flex justify-between" style={{ width: '65rem', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
           <div className='flex flex-col'>
-            <Link to="/Home"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
+            <Link to="/"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
             <div className='flex flex-col p-8 gap-3' style={{ marginTop: '-20px' }}>
               <h1 className='EscTit'>Agora sim, nos conte como podemos te ajudar, o que você é?</h1>
               <p className='EscPar'>Conectamos empresas e talentos para transformar objetivos em realidade. Estamos aqui para ajudar

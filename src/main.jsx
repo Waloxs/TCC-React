@@ -9,7 +9,7 @@ import Escolha from './components/Escolha/Escolha.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "Home",
+    path: "",
     element: <Home></Home>
   },
   {
