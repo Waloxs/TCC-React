@@ -1,0 +1,69 @@
+.EscTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+}
+
+
+.EscPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+.titEnt{
+    color: var(--primary-500, #3B82F6);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 1.625rem */
+}
+
+.camph2{
+    display: flex;
+    max-width: 310px;
+    padding: 0.85rem 1.75rem 0.85rem 1.75rem;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0.9375rem;
+    border: 2px solid var(--grey-300, #CBD5E1);
+    background: #FFF;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+.cinza{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--grey-text-light, #64748B);
+}
+
+.branco{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--grey-text-light, #fff);
+}
+
+.azul{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--grey-text-light, #3B82F6);
+}
+
+.none{
+    display: none;
+}

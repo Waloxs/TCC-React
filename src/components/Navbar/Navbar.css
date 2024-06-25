@@ -109,6 +109,6 @@
  
   @media (max-width: 500px) {
     .link a{
-      font-size: 1.3rem !important;
+      font-size: 1rem !important;
     }
   }

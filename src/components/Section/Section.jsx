@@ -2,6 +2,7 @@ import React from 'react'
 import img1Main from '../../assets/img1Main.png'
 import img2Main from '../../assets/img2Main.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
+import { Link } from 'react-router-dom'
 import './Section.css'
 
 const Section = () => {
@@ -21,9 +22,8 @@ const Section = () => {
             <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #202020)', width: '35rem'}}>
                 Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
-             <div className='btn flex justify-center items-center' style={{width: '160px', height: '50px', borderRadius: '1rem', background: 'var(--primary-500, #3B82F6)'}}>
-             <BtnPrincipal texto="Anuncie Agora" color="#fff"/>
-            </div>
+             <Link to="/Escolha"><BtnPrincipal texto="Anuncie Agora" color="#fff" width="160px" back="#3B82F6"/></Link>
+           
          </div>
       </div>
       <div className='padding flex items-center gap-11' style={{
@@ -36,11 +36,7 @@ const Section = () => {
             <h1 className='titu' style={{fontFamily: 'Lexend', fontSize: '1.80em', fontWeight: '700', color: '#fff'}}>Dê o Próximo Passo em Sua Carreira</h1>
             <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #fff)', width: '35rem'}}>Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
-             <div className='btn flex justify-center items-center' style={{width: '160px', height: '50px', borderRadius: '1rem', background: 'var(--primary-500, #fff)'}}>
-                <a href="" style={{fontFamily: 'Lexend', color: '#3B82F6', fontSize: '1rem'}} 
-                className="">Buscar Agora
-                </a>
-            </div>
+             <Link to="/Escolha"><BtnPrincipal texto="Buscar Agora" color="#3B82F6" width="160px" back="#fff"/></Link>
          </div>
          
         <img className='imgMain' src={img2Main} alt="" style={{maxWidth: '30.5rem'}} />
