@@ -1,3 +1,7 @@
+body{
+    overflow-y: hidden;
+}
+
 .EscTit{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;

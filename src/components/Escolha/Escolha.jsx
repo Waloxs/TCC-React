@@ -26,7 +26,7 @@ const Escolha = () => {
 
   return (
     <div>
-      <div className='anime flex flex-col justify-center items-center' style={{ background: '#fff', height: '100%', gap: '30px', marginTop: '40px' }}>
+      <div className='anime flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px' }}>
         <div className="flex justify-start" style={{ width: '65rem' }}>
         <Link to="/">
             <img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} />
