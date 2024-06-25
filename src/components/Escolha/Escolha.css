@@ -45,13 +45,16 @@ body{
     font-style: normal;
     font-weight: 300;
     line-height: 130%; /* 1.625rem */
+    position: relative;
 }
 
 .cinza{
+    position: absolute;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: var(--grey-text-light, #64748B);
+    left: 270px;
 }
 
 .branco{
@@ -59,7 +62,6 @@ body{
     height: 15px;
     border-radius: 50%;
     background: var(--grey-text-light, #fff);
-    margin-left: 1px;
 }
 
 .azul{
