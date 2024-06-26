@@ -29,7 +29,7 @@
 
 .camph2{
     display: flex;
-    width: 320px;
+    max-width: 320px;
     padding: 0.85rem 1.75rem 0.85rem 1.75rem;
     align-items: center;
     gap: 2rem;
@@ -38,7 +38,7 @@
     background: #FFF;
     color: var(--grey-text-light, #64748B);
     font-family: Lexend;
-    font-size: 1rem;
+    font-size: 0.90rem;
     font-style: normal;
     font-weight: 300;
     line-height: 130%; /* 1.625rem */
@@ -61,8 +61,38 @@
     display: none;
 }
 
+
+.container{
+animation: animaCont 1s ease-out forwards;
+}
+
+@keyframes animaCont {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
 @media(max-width: 900px){
     .imgEscolha{
         display: none;
+    }
+}
+
+@media(max-width: 452px){
+    .camph2{
+        font-size: 0.85rem;
+    }
+}
+
+
+@media(max-width: 422px){
+    .camph2{
+        font-size: 0.75rem;
     }
 }

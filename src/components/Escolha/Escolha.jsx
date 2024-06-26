@@ -35,7 +35,7 @@ const Escolha = () => {
 
   return (
     <div className='flex justify-center' style={{width: '100vw'}}>
-      <div className='flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', maxWidth: '65rem', padding: '20px'}}>
+      <div className='container flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', maxWidth: '65rem', padding: '40px'}}>
         <div className="flex self-start" style={{ maxWidth: '65rem' }}>
           <Link to="/">
             <img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} />
@@ -52,7 +52,7 @@ const Escolha = () => {
             <div className='flex flex-col gap-5' style={{padding: '2rem'}}>
               <div className='Empresa flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou uma Empresa</h1>
-                <div className='camph2 flex justify-between' onClick={() => ativaBtn('empresa')}>
+                <div className='camph2 flex justify-around' onClick={() => ativaBtn('empresa')}>
                   <h2>Em busca de um Talento</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'empresa' ? 'selected' : ''}`}></div>
@@ -62,7 +62,7 @@ const Escolha = () => {
               
               <div className='Talento flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou um Talento</h1>
-                <div className='camph2 flex justify-between' onClick={() => ativaBtn('talento')}>
+                <div className='camph2 flex justify-around' onClick={() => ativaBtn('talento')}>
                   <h2>Em busca de um Emprego</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'talento' ? 'selected' : ''}`}></div>
