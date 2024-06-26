@@ -1,6 +1,3 @@
-body{
-    overflow-y: hidden;
-}
 
 .EscTit{
     color: var(--grey-text-dark, #020617);
@@ -62,4 +59,10 @@ body{
 
 .none{
     display: none;
+}
+
+@media(max-width: 900px){
+    .imgEscolha{
+        display: none;
+    }
 }
