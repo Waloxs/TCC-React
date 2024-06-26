@@ -27,7 +27,7 @@ const Login = () => {
   }
 
   return (
-    <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
+    <div className='tudo flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
       <div className="anime flex justify-between" style={{width: '65rem', height: 'auto' , background: '#f7f7f7', borderRadius: '1.25rem'}}>
         <form className="form flex flex-col items-center justify-center gap-5" style={{width: '100%'}}>
           <img src={Logo} alt="Logo" style={{width: '6rem', height: '1.10rem'}}/>

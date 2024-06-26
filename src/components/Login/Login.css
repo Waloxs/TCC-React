@@ -2,6 +2,10 @@
     animation: animaCont 1s ease-out forwards;
 }
 
+.tudo{
+    overflow-y: hidden;
+}
+
 @keyframes animaCont {
     from {
         opacity: 0;
