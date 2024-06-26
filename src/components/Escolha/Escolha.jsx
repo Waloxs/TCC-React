@@ -34,7 +34,7 @@ const Escolha = () => {
   };
 
   return (
-    <div className='flex justify-center' style={{width: '100vw'}}>
+    <div className='tudo flex justify-center' style={{width: '100vw'}}>
       <div className='container flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', maxWidth: '65rem', padding: '20px'}}>
         <div className="flex self-start" style={{ maxWidth: '65rem' }}>
           <Link to="/">
