@@ -1,3 +1,8 @@
+.EscPar{
+    max-width: 40ch;
+    text-align: center;
+}
+
 @media(max-width: 1060px){
     .imgTalento{
         display: none;
@@ -22,8 +27,11 @@
 
 
 
-@media (max-width: 470px) {
-    #confirmarSenha::placeholder {
-      content: 'Confirmar';
-    }
-  }
+
+@media(max-width: 430px){
+    .EscPar{
+        max-width: 30ch;
+    }    
+}
+
+

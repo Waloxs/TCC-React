@@ -10,7 +10,7 @@ import Input from '../Form/input';
 const Talento = () => {
   return (
     <div>
-      <div className='tudo2 flex justify-center' style={{width: '100vw'}}>
+      <div className='tudo flex justify-center' style={{width: '100vw'}}>
       <div className='container flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', maxWidth: '65rem', padding: '20px'}}>
         
         <div className="containerLogo" style={{ width: '100%'}}>
@@ -25,7 +25,7 @@ const Talento = () => {
             <Link to="/Escolha"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
             <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem'}}>
               <h1 className='EscTit text-center'>Olá seja Bem-vindo!</h1>
-              <p className='EscPar text-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
+              <p className='EscPar flex self-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
             </div>
 
             <form action="" className='formTalento flex flex-col gap-3' style={{padding: '3rem', marginTop: '-40px'}}>
