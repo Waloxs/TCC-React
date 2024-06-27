@@ -24,11 +24,11 @@ const router = createBrowserRouter([
     element: <Escolha></Escolha>
   },
   {
-  path: "Talento",
+  path: "Empresa",
   element: <Empresa></Empresa>
   },
   {
-    path: "Empresa",
+    path: "Talento",
     element: <Talento></Talento>
   }
 ])

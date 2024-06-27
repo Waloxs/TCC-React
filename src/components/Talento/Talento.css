@@ -1,0 +1,10 @@
+@media(max-width: 1060px){
+    .imgTalento{
+        display: none;
+    }
+
+    .containerLogo{
+        justify-content: center;
+        max-width: 34rem !important;
+    }
+}
