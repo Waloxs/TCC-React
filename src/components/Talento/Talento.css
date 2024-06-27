@@ -4,7 +4,26 @@
     }
 
     .containerLogo{
-        justify-content: center;
         max-width: 34rem !important;
     }
 }
+
+
+@media(max-width: 550px){
+    
+    .s{
+        font-size: 0.80rem !important;
+    }
+
+    .nameSob, .senhaCon{
+        gap: 1rem;
+    }
+}
+
+
+
+@media (max-width: 470px) {
+    #confirmarSenha::placeholder {
+      content: 'Confirmar';
+    }
+  }

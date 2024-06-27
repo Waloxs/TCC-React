@@ -28,15 +28,15 @@ const Talento = () => {
               <p className='EscPar text-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
             </div>
 
-            <form action="" className='flex flex-col gap-3' style={{padding: '3rem', marginTop: '-40px'}}>
+            <form action="" className='formTalento flex flex-col gap-3' style={{padding: '3rem', marginTop: '-40px'}}>
               <div className="nameSob flex justify-center gap-8">
-                <Input placeholder='Nome'/>
-                <Input placeholder='Sobrenome'/>
+                <Input placeholder='Nome' className='s'/>
+                <Input placeholder='Sobrenome' className='s'/>
               </div>
-                 <Input placeholder='Email' type='email'/>
+                 <Input placeholder='Email' type='email'className='s'/>
               <div className="senhaCon flex justify-center gap-8">
-                <Input placeholder='Senha' type='password'/>
-                <Input placeholder='Confirmar Senha' type='password'/>
+                <Input placeholder='Senha' type='password' className='s'/>
+                <Input placeholder='Confirmar' type='password' className='s'/>
               </div>
               <button type='submit'><BtnPrincipal texto='Avançar' back='#0866FF' color='#fff'/></button>
             </form>
