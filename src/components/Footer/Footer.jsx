@@ -60,12 +60,12 @@ const Footer = () => {
           marginRight: '20px',
       }}>
         <div>
-          <div className='flex justify-between items-center'>
-            <h1 className='h1Footer' onClick={() => clicou('empresas')}>Para Empresas</h1>
+          <div className='flex justify-between items-center' onClick={() => clicou('empresas')}>
+            <h1 className='h1Footer'>Para Empresas</h1>
             {dropStates.empresas ? (
-              <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('empresas')} />
+              <IoIosArrowUp className='down' style={{color: '#fff'}} />
             ) : (
-              <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('empresas')} />
+              <IoIosArrowDown className='down' style={{color: '#fff'}}  />
             )}
           </div>
           <div className="linef"></div>
@@ -77,12 +77,12 @@ const Footer = () => {
         </div>
 
         <div>
-          <div className='flex justify-between items-center'>
-            <h1 className='h1Footer' onClick={() => clicou('talentos')}>Para Talentos</h1>
+          <div className='flex justify-between items-center' onClick={() => clicou('talentos')}>
+            <h1 className='h1Footer'>Para Talentos</h1>
             {dropStates.talentos ? (
-              <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('talentos')} />
+              <IoIosArrowUp className='down' style={{color: '#fff'}} />
             ) : (
-              <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('talentos')} />
+              <IoIosArrowDown className='down' style={{color: '#fff'}}/>
             )}
           </div>
           <div className="linef"></div>
@@ -94,12 +94,12 @@ const Footer = () => {
         </div>
 
         <div>
-          <div className='flex justify-between items-center'>
-            <h1 className='h1Footer' onClick={() => clicou('recursos')}>Recursos</h1>
+          <div className='flex justify-between items-center' onClick={() => clicou('recursos')}>
+            <h1 className='h1Footer'>Recursos</h1>
             {dropStates.recursos ? (
-              <IoIosArrowUp className='down' style={{color: '#fff'}} onClick={() => clicou('recursos')} />
+              <IoIosArrowUp className='down' style={{color: '#fff'}} />
             ) : (
-              <IoIosArrowDown className='down' style={{color: '#fff'}} onClick={() => clicou('recursos')} />
+              <IoIosArrowDown className='down' style={{color: '#fff'}} />
             )}
           </div>
           <div className="linef"></div>

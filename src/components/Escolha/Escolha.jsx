@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import img from '../../assets/login.png';
+import React, { useState, useEffect } from 'react';
 import imgEscolha from '../../assets/imgEscolha.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import './Escolha.css';
 import { Link } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Escolha = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -14,6 +14,22 @@ const Escolha = () => {
     back: '#fff',
     border: '2px solid #CBD5E1'
   });
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = imgEscolha;
+    
+    const timeout = setTimeout(() => {
+      setShowLoader(false); 
+      image.onload = () => {
+        setIsImageLoaded(!isImageLoaded); 
+      };
+    }, 2000);
+
+    return () => clearTimeout(timeout); 
+  }, []);
 
   const ativaBtn = (option) => {
     setSelectedOption(option);
@@ -32,6 +48,24 @@ const Escolha = () => {
     }
     return '';
   };
+
+  if (showLoader) {
+    return (
+      <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
+        <div className="loader-container">
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="#0866FF"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='tudo flex justify-center' style={{width: '100vw'}}>
@@ -52,7 +86,7 @@ const Escolha = () => {
             <div className='flex flex-col gap-5' style={{padding: '2rem'}}>
               <div className='Empresa flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou uma Empresa</h1>
-                <div className='camph2 flex justify-around' onClick={() => ativaBtn('empresa')}>
+                <div className='camph2 flex justify-between' onClick={() => ativaBtn('empresa')}>
                   <h2>Em busca de um Talento</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'empresa' ? 'selected' : ''}`}></div>
@@ -62,7 +96,7 @@ const Escolha = () => {
               
               <div className='Talento flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou um Talento</h1>
-                <div className='camph2 flex justify-around' onClick={() => ativaBtn('talento')}>
+                <div className='camph2 flex justify-between' onClick={() => ativaBtn('talento')}>
                   <h2>Em busca de um Emprego</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'talento' ? 'selected' : ''}`}></div>

@@ -11,16 +11,76 @@
     margin-top: 5px;
 }
 
+.novaCor{
+  color: #0866FF;
+}
+
+
+.menuDrop{
+  width: 90vw;
+  z-index: 1;
+  position: absolute;
+  padding: 40px;
+  background: #fff;
+  border-top: 1px solid #E2E8F0;
+  animation: animaDrop 0.5s ease forwards;
+}
+
+@keyframes animaDrop {
+  from {
+    transform: translateY(-20px);
+    opacity: 0; 
+  }
+  to {
+    transform: translateY(0); 
+    opacity: 1;
+  }
+}
+
+.DropH1{
+  color: var(--primary-500, #3B82F6);
+  font-family: Lexend;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem; /* 142.857% */
+}
+
+.DropP{
+  color: var(--grey-text-light, #64748B);
+  font-family: Lexend;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.25rem; /* 166.667% */
+}
+
+
+
 @media (max-width: 1200px) {
   .navbar{
     border-radius: 0px !important;
     width: 100vh !important;
   }
+
+  .menuDrop{
+    width: 100vw;
+    z-index: 1;
+    position: absolute;
+    padding: 40px;
+    background: #fff;
+    border-top: 1px solid #E2E8F0;
+  }
+  
 }
 
   @media (max-width: 780px) {
 
     .Logo{
+      display: none;
+    }
+
+    .menuDrop{
       display: none;
     }
 
@@ -101,7 +161,8 @@
   
   @media (max-width: 630px) {
     .dropList{
-      font-size: 2rem;
+      font-size: 1.5rem;
+      margin-right: 25px;
     }
   }
 

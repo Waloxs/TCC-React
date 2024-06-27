@@ -8,9 +8,6 @@ import { FaFacebook } from "react-icons/fa";
 const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
- 
-
-
   useEffect(() => {
     const image = new Image();
     image.src = img;
