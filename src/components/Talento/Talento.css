@@ -9,6 +9,58 @@
     text-align: center;
 }
 
+.conteudo{
+    position: relative;
+}
+
+.line2{
+    margin-top: 20px;
+    width: 100%;
+    height: 0.75px;
+    background: #94A3B8;
+}
+
+.cont2{
+    color: var(--grey-text-light, #64748B);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 140%; /* 1.75rem */
+    position: absolute;
+    background: #f7f7f7;
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 86.5%;
+}
+
+.senha{
+    position: relative;
+}
+
+.Eye1{
+    cursor: pointer;
+    font-size: 1.25rem;
+    top: 33%;
+    position: absolute;
+    right: 25px;
+    color: rgb(198, 198, 198);
+}
+
+.conf{
+    position: relative;
+}
+
+.Eye2{
+    cursor: pointer;
+    font-size: 1.25rem;
+    top: 33%;
+    position: absolute;
+    right: 25px;
+    color: rgb(198, 198, 198);
+}
+
 @media(max-width: 1060px){
     .imgTalento{
         display: none;
@@ -32,6 +84,11 @@
     .EscPar2{
         max-width: 30ch;
     }    
+
+    
+.cont2{
+    top: 89%;
+}
 }
 
 
