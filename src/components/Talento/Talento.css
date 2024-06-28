@@ -1,4 +1,10 @@
-.EscPar{
+.EscPar2{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
     max-width: 40ch;
     text-align: center;
 }
@@ -8,28 +14,22 @@
         display: none;
     }
 
+    .container{
+        max-width: 34rem !important;
+    }
+
     .containerLogo{
         max-width: 34rem !important;
     }
 }
 
 
-@media(max-width: 550px){
-    
-    .s{
-        font-size: 0.80rem !important;
-    }
-
-    .nameSob, .senhaCon{
-        gap: 1rem;
-    }
-}
 
 
 
 
 @media(max-width: 430px){
-    .EscPar{
+    .EscPar2{
         max-width: 30ch;
     }    
 }
