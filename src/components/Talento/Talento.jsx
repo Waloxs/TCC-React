@@ -7,7 +7,6 @@ import './Talento.css';
 import { Link } from 'react-router-dom';
 import Input from '../Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
-
 const Talento = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -18,6 +17,25 @@ const Talento = () => {
 
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const userData = {
+      nome: event.target.nome.value,
+      email: event.target.email.value,
+      senha: event.target.senha.value,
+      localizacao: event.target.localizacao.value,
+      telefone: event.target.telefone.value
+    };
+
+    try {
+      console.log('Dados enviados com sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+    }
+
   };
 
   return (
@@ -36,12 +54,12 @@ const Talento = () => {
                 <h1 className='EscTit text-center'>Olá seja Bem-vindo!</h1>
                 <p className='EscPar2 flex self-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
               </div>
-              <form action="" className='formTalento flex flex-col gap-3' style={{ padding: '3rem', marginTop: '-40px' }}>
-                <Input placeholder='Nome' className='s' />
-                <Input placeholder='Sobrenome' className='s' />
-                <Input placeholder='Email' type='email' className='s' />
+              <form className='formTalento flex flex-col gap-3' style={{ padding: '3rem', marginTop: '-40px' }} onSubmit={handleSubmit}>
+                <Input name='nome' placeholder='Nome' className='s' />
+                <Input name='email' placeholder='Email' type='email' className='s' />
                 <div className="senha">
                   <Input
+                    name='senha'
                     placeholder='Senha'
                     type={passwordVisible ? 'text' : 'password'}
                     className='inputEye1'
@@ -52,18 +70,8 @@ const Talento = () => {
                     <IoEyeSharp className='Eye1' onClick={togglePasswordVisibility} />
                   )}
                 </div>
-                <div className="conf">
-                  <Input
-                    placeholder='Confirmar'
-                    type={confirmPasswordVisible ? 'text' : 'password'}
-                    className='inputEye2'
-                  />
-                  {confirmPasswordVisible ? (
-                    <IoEyeOffSharp className='Eye2' onClick={toggleConfirmPasswordVisibility} />
-                  ) : (
-                    <IoEyeSharp className='Eye2' onClick={toggleConfirmPasswordVisibility} />
-                  )}
-                </div>
+                <Input name='localizacao' placeholder='Localização' type='text' className='s' />
+                <Input name='telefone' placeholder='Telefone' type='text' className='s' />
                 <button type='submit'><BtnPrincipal texto='Avançar' back='#0866FF' color='#fff' /></button>
                 <div className="line2 flex self-center"></div>
               </form>
