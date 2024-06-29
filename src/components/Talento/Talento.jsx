@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import imgTalento from '../../assets/imgTalento.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import './Talento.css';
-import { Link } from 'react-router-dom';
-import Input from '../Form/input';
+import { Link, useNavigate } from 'react-router-dom'; // updated import
+import Input from '../Form/input';// assuming Input component is properly implemented
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
+
 const Talento = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const navigate = useNavigate(); // useNavigate hook
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
   const handleSubmit = async (event) => {
@@ -31,11 +29,25 @@ const Talento = () => {
     };
 
     try {
+      console.log('Tentando enviar os dados para o servidor:', userData);
+      const response = await axios.post('http://localhost:3000/v1/register', userData);
       console.log('Dados enviados com sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);
+      if (error.response) {
+        // O servidor respondeu com um código de status fora do intervalo 2xx
+        console.error('Dados da resposta:', error.response.data);
+        console.error('Status da resposta:', error.response.status);
+        console.error('Cabeçalhos da resposta:', error.response.headers);
+      } else if (error.request) {
+        // A requisição foi feita mas não houve resposta
+        console.error('Requisição:', error.request);
+      } else {
+        // Algo aconteceu na configuração da requisição que acionou um erro
+        console.error('Erro', error.message);
+      }
+      console.error('Configuração da requisição:', error.config);
     }
-
   };
 
   return (

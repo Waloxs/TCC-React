@@ -8,6 +8,7 @@ import Login from './components/Login/Login.jsx'
 import Escolha from './components/Escolha/Escolha.jsx'
 import Empresa from './components/Empresa/Empresa.jsx'
 import Talento from './components/Talento/Talento.jsx'
+import ProtectedPage from './components/ProtectedPage/ProtectedPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "Talento",
     element: <Talento></Talento>
+  },
+  {
+    path: "teste",
+    element: <ProtectedPage></ProtectedPage>
   }
 ])
 
