@@ -9,22 +9,85 @@
     max-width: 30ch;
 }
 
-.Azul25{
-    width: calc(100% - 75%);
-    height: 2px;
-    background: #3B82F6;
+.user{
+    cursor: pointer;
+    font-size: 5rem;
 }
 
-.Azul25Azul25{
-    width: calc(100% - 50%);
-    height: 2px;
-    background: #3B82F6;
+@keyframes growTo25 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: calc(100% - 75%);
+    }
 }
 
-.Azul25Azul2525{
-    width: calc(100% - 25%);
+@keyframes growTo50 {
+    from {
+        width: 25%;
+    }
+    to {
+        width: calc(100% - 50%);
+    }
+}
+
+@keyframes growTo75 {
+    from {
+        width: 50%;
+    }
+    to {
+        width: calc(100% - 25%);
+    }
+}
+
+@keyframes growTo100 {
+    from {
+        width: 75%;
+    }
+    to {
+        width: calc(100%);
+    }
+}
+
+.Azul25 {
     height: 2px;
     background: #3B82F6;
+    animation: growTo25 1s ease-in-out forwards;
+}
+
+.Azul25Azul25 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo50 1s ease-in-out forwards;
+}
+
+.Azul25Azul2525 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo75 1s ease-in-out forwards;
+}
+
+.Azul25Azul252525 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo100 1s ease-in-out forwards;
+}
+
+
+.animate{
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .func{
