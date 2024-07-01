@@ -17,7 +17,7 @@ const ProtectedPage = () => {
       };
 
       try {
-        const response = await axios.get('http://localhost:3000/v1/protected', config);
+        const response = await axios.get('http://localhost:3000/v1/me', config);
         setData(response.data);
         setLoading(false);
       } catch (error) {

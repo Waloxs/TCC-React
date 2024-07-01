@@ -9,6 +9,7 @@ import Escolha from './components/Escolha/Escolha.jsx'
 import Empresa from './components/Empresa/Empresa.jsx'
 import Talento from './components/Talento/Talento.jsx'
 import ProtectedPage from './components/ProtectedPage/ProtectedPage.jsx'
+import TalentoPasso1 from './components/TalentoPasso/TalentoPasso1.jsx'
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "teste",
     element: <ProtectedPage></ProtectedPage>
+  },
+  {
+    path: "TalentoPasso1",
+    element: <TalentoPasso1></TalentoPasso1>
   }
 ])
 

@@ -1,0 +1,219 @@
+
+.PassTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 30ch;
+}
+
+
+
+.func{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
+
+
+.PassPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
+.PassTit3{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+
+
+.PassPar3{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 65ch;
+}
+
+
+.PassTit2{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+.conteudo{
+    display: relative;
+}
+
+
+.txArea{
+    width: 200px;
+    height: max-content;
+    padding: 20px;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--grey-disable-color, #94A3B8);
+}
+
+.titArea{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 0.975rem */
+}
+
+.subArea{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.50rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 0.975rem */
+}
+
+.PassPar2{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 65ch;
+}
+
+.lin{
+    width: calc(100% - 4rem) !important;
+}
+
+.lin2{
+    max-width: 600px !important;
+    height: 140px !important;
+}
+
+.container2{
+    animation: animaCont 1s ease-out forwards;
+}
+
+
+
+
+.btnProximo{
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+}
+
+
+
+
+@media(max-width: 735px){
+    .cx{
+        margin-bottom: 10rem !important;
+        place-self: center;
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    .pd2{
+        
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
+
+
+@media(max-width: 625px){
+
+    .PassTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 30ch;
+    }
+
+    .PassTit2{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+    
+    .PassPar2{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.70rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+    
+    .PassPar{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.70rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+
+}
+
+
+
+
+
+@media(max-width: 500px){
+    .cx{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 470px){
+    .pd{
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    .lin{
+        width: calc(100% - 2rem) !important;
+    }
+
+    .lin::placeholder{
+        font-size: 0.74rem;
+    }
+}
