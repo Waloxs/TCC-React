@@ -60,7 +60,7 @@
 @media (max-width: 1200px) {
   .navbar{
     border-radius: 0px !important;
-    width: 100vh !important;
+    width: 100vw !important;
   }
 
   .menuDrop{

@@ -68,8 +68,8 @@ const TalentoPasso1 = () => {
 
             {!block2&& (
               <div className='flex flex-col' style={{ height: '100%', gap: '5rem' }}>
-                <div className='flex flex-row justify-between' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                    <div className="flex flex-col gap-2" style={{marginRight: '30px'}}>
+                <div className='pd flex flex-row justify-between' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+                    <div className="m flex flex-col gap-2" style={{marginRight: '30px'}}>
                         <h1 className='PassTit3'>Perfeito. Agora escreva uma biografia para contar ao mundo sobre você.</h1>
                         <p className='PassPar3'>Ajude as empresas a conhecer você rapidamente. Qual trabalho você faz melhor? Diga-lhes claramente, usando parágrafos ou marcadores. Você sempre pode editar mais tarde; apenas certifique-se de revisar agora.</p>
                     </div>
@@ -80,7 +80,7 @@ const TalentoPasso1 = () => {
                     </div>
                 </div>
 
-                <div className='flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem',  marginBottom: '3rem'}}>
+                <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem',  marginBottom: '5rem'}}>
                   <p className='PassPar2'>Sua Biografia</p>
                   <Input type='text' placeholder='' className='lin2'/>
                 </div>

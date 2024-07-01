@@ -113,7 +113,7 @@
 
 .lin2{
     max-width: 600px !important;
-    height: 140px !important;
+    height: 120px !important;
 }
 
 .container2{
@@ -131,6 +131,11 @@
 
 
 
+@media(max-width: 940px){
+    .txArea{
+        display: none;
+    }
+}
 
 @media(max-width: 735px){
     .cx{
@@ -148,8 +153,46 @@
 }
 
 
+@media(max-width: 655px){
+
+.m{
+    margin-right: 0px !important;
+}
+
+.PassTit3{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+
+
+.PassPar3{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.70rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+}
 
 @media(max-width: 625px){
+
+    .PassPar{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.70rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
 
     .PassTit{
         color: var(--grey-text-dark, #020617);
@@ -170,6 +213,8 @@
         line-height: 130%; /* 2.6rem */
         max-width: 40ch;
     }
+
+    
     
     .PassPar2{
         color: var(--grey-text-light, #64748B);
@@ -180,17 +225,6 @@
         line-height: 130%; /* 1.625rem */
         max-width: 60ch;
     }
-    
-    .PassPar{
-        color: var(--grey-text-light, #64748B);
-        font-family: Lexend;
-        font-size: 0.70rem;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 130%; /* 1.625rem */
-        max-width: 60ch;
-    }
-
 }
 
 
@@ -216,4 +250,11 @@
     .lin::placeholder{
         font-size: 0.74rem;
     }
+
+    .btnProximo{
+        right: -2rem !important;
+        bottom: 0px;
+        position: absolute;
+    }
 }
+
