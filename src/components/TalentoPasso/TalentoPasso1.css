@@ -9,7 +9,23 @@
     max-width: 30ch;
 }
 
+.Azul25{
+    width: calc(100% - 75%);
+    height: 2px;
+    background: #3B82F6;
+}
 
+.Azul25Azul25{
+    width: calc(100% - 50%);
+    height: 2px;
+    background: #3B82F6;
+}
+
+.Azul25Azul2525{
+    width: calc(100% - 25%);
+    height: 2px;
+    background: #3B82F6;
+}
 
 .func{
     color: var(--grey-text-light, #64748B);
@@ -121,12 +137,16 @@
 }
 
 
-
-
 .btnProximo{
     right: 0px;
     bottom: 0px;
     position: absolute;
+}
+
+.cxCinza{
+    width: calc(100% - 8rem);
+    height: 2px;
+    background: #fff;
 }
 
 

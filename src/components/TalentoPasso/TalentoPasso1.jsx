@@ -9,30 +9,40 @@ import BtnPrincipal from '../Buttons/BtnPrincipal';
 const TalentoPasso1 = () => {
   const [block, setBlock] = React.useState(true);
   const [block2, setBlock2] = React.useState(true);
+  const [valor, setValor] = React.useState('Azul25');
 
 
   const handleClick = (e) => {
     e.preventDefault();
     setBlock(!block);
+    setValor(valor + valor);
   };
 
   const handleClick2 = (e) => {
     e.preventDefault();
     setBlock2(!block2);
+    setValor(valor + '25');
   };
 
   return (
     <div className='tudo flex justify-center' style={{ width: '100vw' }}>
       <div className='container2 flex flex-col justify-center items-center' style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', padding: '20px' }}>
         <div className="containerLogo2" style={{ width: '100%' }}>
-          <Link to="/" style={{ width: '100%' }}>
-            <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />
-          </Link>
+          
+             <Link to="/" style={{ width: '100%' }}>
+                <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />
+            </Link>
+
+        
         </div>
         <div className="conteudo flex" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
           <div className='flex flex-col' style={{ height: '35rem', width: '100%' }}>
-            <Link to="/Talento"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
-
+            <div className='flex items-center'>
+                <Link to="/Talento"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
+                <div className='cxCinza'>
+                    <div className={`cxAzul ${valor}`}></div>
+                </div>
+            </div>
             {block && (
               <div className='flex flex-col' style={{ height: '100%', gap: '5rem' }}>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
