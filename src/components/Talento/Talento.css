@@ -83,6 +83,10 @@
     .cont2{
         top: 82%;
     }
+
+    .top{
+        margin-top: -30px;
+    }
 }
 
 
@@ -95,6 +99,10 @@
     
 .cont2{
     top: 85%;
+}
+
+.top{
+    margin-top: -35px;
 }
 }
 

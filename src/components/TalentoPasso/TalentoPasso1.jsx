@@ -138,7 +138,7 @@ const TalentoPasso1 = () => {
 
     <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
       <label htmlFor="file-upload" className='user'>
-        {image ? <img src={image} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} /> : <FaUserPlus />}
+        {image ? <img src={image} alt="Profile" style={{ width: '100px', height: '90px', borderRadius: '50%' }} /> : <FaUserPlus />}
       </label>
       <input id="file-upload" type="file" style={{ display: 'none' }} onChange={handleImageUpload} />
     </div>

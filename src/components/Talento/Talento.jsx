@@ -8,6 +8,8 @@ import './Talento.css';
 import { Link, useNavigate } from 'react-router-dom'; // updated import
 import Input from '../Form/input';// assuming Input component is properly implemented
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
+import { FcGoogle } from "react-icons/fc";
+
 
 const Talento = () => {
   const [passwordVisible2, setPasswordVisible2] = useState(false);
@@ -97,6 +99,13 @@ const Talento = () => {
                 <div className="line2 flex self-center"></div>
               </form>
               <h3 className='cont2 flex self-center'>Ou continuar com</h3>
+
+              <div className='flex justify-center'>
+              <div className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
+              <FcGoogle style={{ width: '20px', height: '20px' }} />
+              <h2 className='gog'>Google</h2>
+               </div>
+               </div>
             </div>
             <img className='imgTalento' src={imgTalento} alt="Login Visual" style={{ maxWidth: '30rem', height: '35rem' }} />
           </div>
