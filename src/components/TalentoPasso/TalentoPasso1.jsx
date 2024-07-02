@@ -36,6 +36,7 @@ const TalentoPasso1 = () => {
   const [image, setImage] = useState(null);
 
   const handleImageUpload = (event) => {
+    event.preventDefault();
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -46,8 +47,11 @@ const TalentoPasso1 = () => {
     if (file) {
       reader.readAsDataURL(file);
     }
-  }
-  
+    
+    // Reset input value to allow re-upload of the same file
+    event.target.value = null;
+}
+
   return (
     <div className='tudo flex justify-center' style={{ width: '100vw' }}>
       <div className='container2 flex flex-col justify-center items-center' style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', padding: '20px' }}>
@@ -134,7 +138,7 @@ const TalentoPasso1 = () => {
 
     <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
       <label htmlFor="file-upload" className='user'>
-        {image ? <img src={image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> : <FaUserPlus />}
+        {image ? <img src={image} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} /> : <FaUserPlus />}
       </label>
       <input id="file-upload" type="file" style={{ display: 'none' }} onChange={handleImageUpload} />
     </div>

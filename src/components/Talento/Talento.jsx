@@ -10,11 +10,13 @@ import Input from '../Form/input';// assuming Input component is properly implem
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 
 const Talento = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible2, setPasswordVisible2] = useState(false);
+
   const navigate = useNavigate(); // useNavigate hook
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+  
+  const togglePasswordVisibility2 = () => {
+    setPasswordVisible2(!passwordVisible2);
   };
 
   const handleSubmit = async (event) => {
@@ -60,32 +62,37 @@ const Talento = () => {
             </Link>
           </div>
           <div className="conteudo flex justify-between" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
-            <div className='flex flex-col' style={{ height: '35rem', width: '46rem' }}>
+            <div className='ui flex flex-col' style={{ height: '35rem', width: '46rem' }}>
               <Link to="/Escolha"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
               <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem' }}>
                 <h1 className='EscTit self-center'>Olá seja Bem-vindo!</h1>
                 <p className='EscPar2 flex self-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
               </div>
               <form className='formTalento flex flex-col gap-3' style={{ padding: '3rem', marginTop: '-40px' }} onSubmit={handleSubmit}>
-                <Input name='nome' placeholder='Nome' className='s' />
+                <div className='gri'>
+                  <Input name='nome' placeholder='Nome' type='text' className='s'/>
+                  
+                  <Input name='sobrenome' placeholder='Sobrenome' type='text' className='s' />
+                </div>
+                
                 <Input name='email' placeholder='Email' type='email' className='s' />
+
                 <div className="senha">
                   <Input
                     name='senha'
                     placeholder='Senha'
-                    type={passwordVisible ? 'text' : 'password'}
+                    type={passwordVisible2 ? 'text' : 'password'}
                     className='inputEye1'
                   />
-                  {passwordVisible ? (
-                    <IoEyeOffSharp className='Eye1' onClick={togglePasswordVisibility} />
+              
+                  {passwordVisible2 ? (
+                    <IoEyeOffSharp className='Eye2' onClick={togglePasswordVisibility2} />
                   ) : (
-                    <IoEyeSharp className='Eye1' onClick={togglePasswordVisibility} />
+                    <IoEyeSharp className='Eye2' onClick={togglePasswordVisibility2} />
                   )}
                 </div>
-                <Input name='localizacao' placeholder='Localização' type='text' className='s' />
-                <Input name='telefone' placeholder='Telefone' type='text' className='s' />
       
-                <Link to='/TalentoPasso1'><BtnPrincipal type='submit' texto='Avançar' back='#0866FF' color='#fff'/></Link>
+                <Link to='/TalentoPasso1'><BtnPrincipal type='submit' texto='Criar Conta' back='#0866FF' color='#fff'/></Link>
                 
                 <div className="line2 flex self-center"></div>
               </form>
