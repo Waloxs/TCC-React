@@ -14,6 +14,71 @@
     font-size: 5rem;
 }
 
+
+.tudo{
+    position: relative;
+}
+
+.back{
+    background: #b3b3b3;
+}
+
+.sombra {
+    filter: brightness(0.7);
+}
+
+@keyframes animeAdc {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.containAdc{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: animeAdc .7s ease-in-out forwards;
+}
+
+.FormAdc{
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-radius: 0.9375rem;
+    padding: 10px 40px;
+}
+
+.FormAdc label{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 1.6rem */
+}
+
+.titAdc{
+    color: var(--grey-text-dark, #020617);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 2.25rem */
+}
+
+.gr{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+
 @keyframes growTo25 {
     from {
         width: 0%;
