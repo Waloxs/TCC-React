@@ -36,13 +36,13 @@
     }
 }
 
-.containAdc{
-    position: absolute;
-    z-index: 1;
+.containAdc {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    animation: animeAdc .7s ease-in-out forwards;
+    position: absolute;
+    z-index: 1;
+    animation: animeAdc 1s ease-in-out forwards;
+    transform: translate(-50%, -50%); 
 }
 
 .FormAdc{
@@ -141,6 +141,7 @@
 
 
 .animate{
+    position: relative;
     animation: fadeIn 1s ease-in-out forwards;
 }
 
@@ -277,7 +278,33 @@
     background: #fff;
 }
 
+.expTit{
+    color: var(--primary-500, #3B82F6);
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 110%; /* 1.1rem */
+}
 
+.expTitPr{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 1.625rem */
+}
+
+.bord{
+    border-radius: 0.9375rem;
+border: 2px solid var(--grey-300, #CBD5E1);
+}
+
+.tudoExp{
+    position: absolute;
+    bottom: 100px;
+}
 
 @media(max-width: 940px){
     .txArea{

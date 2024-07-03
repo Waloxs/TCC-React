@@ -23,6 +23,7 @@ const TalentoPasso1 = () => {
   const [inicio, setInicio] = useState('');
   const [fim, setFim] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [experiencia, setExperiencia] = useState(null); // Add this line
 
   const click = (event) => {
     event.preventDefault();
@@ -68,7 +69,7 @@ const TalentoPasso1 = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const experiencia = {
+    let experiencia = {
       titulo,
       empresa,
       localizacao,
@@ -77,6 +78,7 @@ const TalentoPasso1 = () => {
       fim,
       descricao
     };
+    setExperiencia(experiencia); // Update the state with experiencia data
     console.log(experiencia);
     // Aqui você pode fazer algo com os dados, como enviar para uma API
   };
@@ -120,8 +122,8 @@ const TalentoPasso1 = () => {
                 <label htmlFor="area">Descrição</label>
                 <textarea id="area" style={{ height: '120px' }} value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
               </div>
-              <div className='flex self-end'>
-                <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn' onClick={handleSave} />
+              <div className='flex self-end'  onClick={handleSave} >
+                <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>
               </div>
             </div>
           </form>
@@ -161,6 +163,32 @@ const TalentoPasso1 = () => {
                       <h1 className='PassTit2'>Ótimo, agora, se você tiver experiência profissional relevante, adicione-a aqui.</h1>
                       <p className='PassPar2'>Talentos que colocam sua experiência têm duas vezes mais chances de ganhar trabalho. Mas se você está apenas começando, ainda pode criar um ótimo perfil. Basta ir para a próxima página.</p>
                     </div>
+                    {experiencia && (
+                    <div className='tudoExp flex flex-col gap-5' style={{paddingLeft: '4rem', paddingRight: '4rem', marginTop: '-220px', maxWidth: '1000px'}}>
+                        <h1 className='expTitPr'>Sua Expêriencia</h1>
+                        <div className='bord flex flex-col p-5' style={{maxWidth: '350px'}}>
+                          <div>
+                            <h1 className='expTit'>Titulo</h1>
+                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          </div>
+
+                          <div>
+                            <h1 className='expTit'>Titulo</h1>
+                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          </div>
+
+                          <div>
+                            <h1 className='expTit'>Titulo</h1>
+                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          </div>
+
+                          <div>
+                            <h1 className='expTit'>Titulo</h1>
+                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          </div>
+                        </div>
+                    </div>
+                    )}
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
                         <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' />
