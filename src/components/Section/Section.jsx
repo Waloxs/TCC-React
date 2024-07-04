@@ -4,10 +4,35 @@ import img2Main from '../../assets/img2Main.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import { Link } from 'react-router-dom'
 import './Section.css'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLayoutEffect } from 'react'
+
 
 const Section = () => {
+
+  useLayoutEffect(() => {
+
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".section", {
+      x: 0,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: ".scroll",
+        markers: false,
+        start: "top 650px",
+        end: "bottom 1200px",
+        scrub: true
+      }
+    })
+
+    return () => {
+      gsap.killTweensOf(".section")
+    }
+  }, [])
+
   return (
-  <div className='flex justify-center' style={{width: '100vw'}}>
+  <div className='scroll flex justify-center' style={{width: '100vw'}}>
     <div className='section flex flex-col gap-3' style={{width: '70rem'}}>
       <div className='padding flex items-center gap-11' style={{
         width: '100%',

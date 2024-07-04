@@ -5,8 +5,11 @@ import Carousel from '../components/Carousel/Carousel';
 import Section from '../components/Section/Section';
 import Footer from '../components/Footer/Footer';
 
+
 const Home = () => {
   const [menu, setMenu] = React.useState(false);
+
+  
 
   return (
     <div>

@@ -290,7 +290,7 @@ line-height: 110%; /* 1.1rem */
 .expTitPr{
     color: var(--grey-text-light, #64748B);
 font-family: Lexend;
-font-size: 1rem;
+font-size: 0.85rem;
 font-style: normal;
 font-weight: 400;
 line-height: 130%; /* 1.625rem */
@@ -303,8 +303,20 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
 .tudoExp{
     position: absolute;
-    bottom: 100px;
+    bottom: 110px;
 }
+
+.descAdc{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 100%;
+    height: 100px;
+}
+
 
 @media(max-width: 940px){
     .txArea{

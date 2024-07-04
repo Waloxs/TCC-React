@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Input from '../Form/input';
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
+import { data } from 'autoprefixer';
 
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
@@ -110,17 +111,17 @@ const TalentoPasso1 = () => {
                 <div className='gr'>
                   <div>
                     <label htmlFor='inicio'>Data de Início</label>
-                    <Input id='inicio' value={inicio} onChange={(e) => setInicio(e.target.value)} />
+                    <Input id='inicio' type='date' value={inicio} onChange={(e) => setInicio(e.target.value)} />
                   </div>
                   <div>
                     <label htmlFor='fim'>Data de Termino</label>
-                    <Input id='fim' value={fim} onChange={(e) => setFim(e.target.value)} />
+                    <Input id='fim' type='date' value={fim} onChange={(e) => setFim(e.target.value)} />
                   </div>
                 </div>
               </div>
               <div className='flex flex-col'>
                 <label htmlFor="area">Descrição</label>
-                <textarea id="area" style={{ height: '120px' }} value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+                <textarea id="area" style={{ maxHeight: '120px',  minHeight: '120px' }} value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
               </div>
               <div className='flex self-end'  onClick={handleSave} >
                 <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>
@@ -164,28 +165,36 @@ const TalentoPasso1 = () => {
                       <p className='PassPar2'>Talentos que colocam sua experiência têm duas vezes mais chances de ganhar trabalho. Mas se você está apenas começando, ainda pode criar um ótimo perfil. Basta ir para a próxima página.</p>
                     </div>
                     {experiencia && (
-                    <div className='tudoExp flex flex-col gap-5' style={{paddingLeft: '4rem', paddingRight: '4rem', marginTop: '-220px', maxWidth: '1000px'}}>
+                    <div className='tudoExp flex flex-col gap-3' style={{paddingLeft: '4rem', paddingRight: '4rem', width: '100%'}}>
                         <h1 className='expTitPr'>Sua Expêriencia</h1>
-                        <div className='bord flex flex-col p-5' style={{maxWidth: '350px'}}>
-                          <div>
+                        <div className="flex gap-5">
+                        <div className='bord flex flex-col p-5 gap-2' style={{width: '250px'}}>
+                          <div className='flex flex-col'>
                             <h1 className='expTit'>Titulo</h1>
                             <span className='PassPar2'>{experiencia.titulo}</span>
                           </div>
 
-                          <div>
-                            <h1 className='expTit'>Titulo</h1>
-                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          <div className='flex flex-col'>
+                            <h1 className='expTit'>Empresa</h1>
+                            <span className='PassPar2'>{experiencia.empresa}</span>
                           </div>
 
-                          <div>
-                            <h1 className='expTit'>Titulo</h1>
-                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          <div className='flex flex-col'>
+                            <h1 className='expTit'>Localização</h1>
+                            <span className='PassPar2'>{experiencia.localizacao} ({experiencia.estado})</span>
                           </div>
 
-                          <div>
-                            <h1 className='expTit'>Titulo</h1>
-                            <span className='PassPar2'>{experiencia.titulo}</span>
+                          <div className='flex flex-col'>
+                            <h1 className='expTit'>Data de Inicio e Término</h1>
+                            <span className='PassPar2'>{experiencia.inicio} - {experiencia.fim}</span>
                           </div>
+                        </div>
+                        <div className="bord p-5" style={{width: '250px'}}>
+                          <div className="flex flex-col">
+                            <h1 className='expTit'>Descrição</h1>
+                            <h1 className='descAdc'>{experiencia.descricao}</h1>
+                          </div>
+                        </div>
                         </div>
                     </div>
                     )}

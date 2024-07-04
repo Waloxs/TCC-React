@@ -28,7 +28,7 @@
 
 @keyframes animaDrop {
   from {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
     opacity: 0; 
   }
   to {
@@ -56,6 +56,23 @@
 }
 
 
+.fix{
+  position: fixed;
+  top: 4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: #fff;
+}
+
+.fix2{
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: #fff;
+}
 
 @media (max-width: 1200px) {
   .navbar{

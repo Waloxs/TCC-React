@@ -1,3 +1,10 @@
+.section{
+    transform: translateX(-1500px);
+    opacity: 0;
+    transition: 1s;
+}
+
+
 @media (max-width : 1200px){
     .section{
         width: 60rem !important;
