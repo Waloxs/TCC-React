@@ -4,6 +4,8 @@ import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion"
 
+
+
 import './Main.css'
 
 const Main = () => {
@@ -30,6 +32,8 @@ const Main = () => {
         />
       </div>
     </motion.div>
+
+    
   )
 }
 

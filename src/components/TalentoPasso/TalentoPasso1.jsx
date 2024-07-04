@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import Input from '../Form/input';
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
-import { data } from 'autoprefixer';
 
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
