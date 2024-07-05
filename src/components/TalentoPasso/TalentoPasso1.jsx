@@ -69,18 +69,23 @@ const TalentoPasso1 = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    let experiencia = {
-      titulo,
-      empresa,
-      localizacao,
-      estado,
-      inicio,
-      fim,
-      descricao
-    };
-    setExperiencia(experiencia); // Update the state with experiencia data
-    console.log(experiencia);
-    // Aqui você pode fazer algo com os dados, como enviar para uma API
+    const form = e.target.closest('form');
+    if (form.checkValidity()) {
+      let experiencia = {
+        titulo,
+        empresa,
+        localizacao,
+        estado,
+        inicio,
+        fim,
+        descricao
+      };
+      setExperiencia(experiencia);
+      console.log(experiencia);
+      // Aqui você pode fazer algo com os dados, como enviar para uma API
+    } else {
+      form.reportValidity();
+    }
   };
 
   return (
@@ -93,36 +98,36 @@ const TalentoPasso1 = () => {
             <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
               <div>
                 <label htmlFor='titulo'>Título</label>
-                <Input id='titulo' placeholder='Ex: Desenvolvedor Back-end' value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+                <Input id='titulo' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)}/>
               </div>
               <div>
                 <label htmlFor='empresa'>Empresa</label>
-                <Input id='empresa' placeholder='Ex: Hexalab' value={empresa} onChange={(e) => setEmpresa(e.target.value)} />
+                <Input id='empresa' placeholder='Ex: Hexalab' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} />
               </div>
               <div>
                 <label htmlFor='loca'>Localização</label>
-                <div className='gr'>
-                  <Input id='loca' placeholder='Ex: Itapeva' value={localizacao} onChange={(e) => setLocalizacao(e.target.value)} />
-                  <Input id='' placeholder='Ex: SP' value={estado} onChange={(e) => setEstado(e.target.value)} />
+                <div className='gr1'>
+                  <Input id='loca' placeholder='Ex: Itapeva' value={localizacao} required onChange={(e) => setLocalizacao(e.target.value)} />
+                  <Input id='' placeholder='Ex: SP' value={estado} required onChange={(e) => setEstado(e.target.value)} />
                 </div>
               </div>
               <div>
-                <div className='gr'>
+                <div className='gr2'>
                   <div>
                     <label htmlFor='inicio'>Data de Início</label>
-                    <Input id='inicio' type='date' value={inicio} onChange={(e) => setInicio(e.target.value)} />
+                    <Input id='inicio' type='date' value={inicio} required onChange={(e) => setInicio(e.target.value)} />
                   </div>
                   <div>
                     <label htmlFor='fim'>Data de Termino</label>
-                    <Input id='fim' type='date' value={fim} onChange={(e) => setFim(e.target.value)} />
+                    <Input id='fim' type='date' value={fim} required onChange={(e) => setFim(e.target.value)} />
                   </div>
                 </div>
               </div>
               <div className='flex flex-col'>
                 <label htmlFor="area">Descrição</label>
-                <textarea id="area" style={{ maxHeight: '120px',  minHeight: '120px' }} value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+                <textarea id="area" style={{ height: '120px'}} value={descricao} required onChange={(e) => setDescricao(e.target.value)}></textarea>
               </div>
-              <div className='flex self-end'  onClick={handleSave} >
+              <div className='ct flex self-end'  onClick={handleSave} >
                 <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>
               </div>
             </div>
