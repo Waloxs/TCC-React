@@ -20,7 +20,7 @@ const Section = () => {
       scrollTrigger: {
         trigger: ".scroll",
         markers: false,
-        start: "top 650px",
+        start: "top 600px",
         end: "bottom 1200px",
         scrub: true
       }

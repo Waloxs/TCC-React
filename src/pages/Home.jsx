@@ -6,6 +6,8 @@ import Section from '../components/Section/Section';
 import Footer from '../components/Footer/Footer';
 import ImageSection from '../assets/ImageSection.png';
 import { ThreeDots } from 'react-loader-spinner';
+import Logo from '../assets/Logo.png';
+import './Home.css'
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -20,17 +22,30 @@ const Home = () => {
       setIsImageLoaded(true); 
     };
 
-    const timeout = setTimeout(() => {
-      setShowLoader(false); 
-    }, 9000);
+    // Garantir que o loader apareça por pelo menos 5 segundos
+    const minLoaderTime = setTimeout(() => {
+      if (isImageLoaded) {
+        setShowLoader(false);
+      }
+    }, 5000);
 
-    return () => clearTimeout(timeout); 
-  }, []);
+    // Ocultar o loader após 10 segundos, independentemente do carregamento da imagem
+    const maxLoaderTime = setTimeout(() => {
+      setShowLoader(false);
+    }, 10000);
 
-  if (showLoader && !isImageLoaded) {
+    return () => {
+      clearTimeout(minLoaderTime);
+      clearTimeout(maxLoaderTime);
+    };
+  }, [isImageLoaded]);
+
+  if (showLoader) {
     return (
       <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
-        <div className="loader-container">
+        <div className="flex flex-col items-center loader-container">
+          <img src={Logo} alt=""/>
+          <div>
           <ThreeDots
             height="80"
             width="80"
@@ -39,7 +54,9 @@ const Home = () => {
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
             visible={true}
+            style={{position: 'absolute'}}
           />
+          </div>
         </div>
       </div>
     );
