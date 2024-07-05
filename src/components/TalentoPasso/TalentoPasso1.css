@@ -322,6 +322,10 @@ border: 2px solid var(--grey-300, #CBD5E1);
     padding-right: 20px;
 }
 
+.data{
+    width: 100%;
+}
+
 @media(max-width: 940px){
     .txArea{
         display: none;
@@ -481,8 +485,8 @@ border: 2px solid var(--grey-300, #CBD5E1);
     }
 
     .FormAdc{
-        margin-top: -30px !important;
-        height: 700px;
+        margin-top: -20px !important;
+        height: 650px;
         width: 300px !important;
         background: #fff;
         border-radius: 0.9375rem;
@@ -491,7 +495,7 @@ border: 2px solid var(--grey-300, #CBD5E1);
     }
 
     #area{
-        height: 90px !important;
+        height: 60px !important;
     }
 
     .gr2{
