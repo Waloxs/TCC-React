@@ -460,6 +460,11 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     .data{
         font-size: 0.75rem !important;
+        padding-left: 10px;
+    }
+    
+    .pdl{
+        padding-left: 10px !important;
     }
 
     #inicio, #fim{

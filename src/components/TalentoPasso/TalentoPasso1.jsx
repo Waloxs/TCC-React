@@ -98,17 +98,17 @@ const TalentoPasso1 = () => {
             <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
               <div>
                 <label htmlFor='titulo'>Título</label>
-                <Input id='titulo' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)}/>
+                <Input id='titulo' className='pdl' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)}/>
               </div>
               <div>
                 <label htmlFor='empresa'>Empresa</label>
-                <Input id='empresa' placeholder='Ex: Hexalab' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} />
+                <Input id='empresa' className='pdl' placeholder='Ex: Hexalab' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} />
               </div>
               <div>
                 <label htmlFor='loca'>Localização</label>
                 <div className='gr1'>
-                  <Input id='loca' placeholder='Ex: Itapeva' value={localizacao} required onChange={(e) => setLocalizacao(e.target.value)} />
-                  <Input id='' placeholder='Ex: SP' value={estado} required onChange={(e) => setEstado(e.target.value)} />
+                  <Input id='loca' className='pdl' placeholder='Ex: Itapeva' value={localizacao} required onChange={(e) => setLocalizacao(e.target.value)} />
+                  <Input id='' className='pdl' placeholder='Ex: SP' value={estado} required onChange={(e) => setEstado(e.target.value)} />
                 </div>
               </div>
               <div>
