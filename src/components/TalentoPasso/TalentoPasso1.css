@@ -318,6 +318,10 @@ border: 2px solid var(--grey-300, #CBD5E1);
 }
 
 
+#inicio, #fim{
+    padding-right: 20px;
+}
+
 @media(max-width: 940px){
     .txArea{
         display: none;
@@ -454,6 +458,14 @@ border: 2px solid var(--grey-300, #CBD5E1);
         height: 90px !important;
     }
 
+    .data{
+        font-size: 0.75rem !important;
+    }
+
+    #inicio, #fim{
+        padding-right: 10px;
+    }
+
 }
 
 
@@ -483,6 +495,10 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     .ct{
         place-self: center;
+    }
+
+    .FormAdc label{
+        font-size: 0.75rem !important;
     }
 
     ::placeholder{

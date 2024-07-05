@@ -115,11 +115,11 @@ const TalentoPasso1 = () => {
                 <div className='gr2'>
                   <div>
                     <label htmlFor='inicio'>Data de Início</label>
-                    <Input id='inicio' type='date' value={inicio} required onChange={(e) => setInicio(e.target.value)} />
+                    <Input className='data' id='inicio' type='date' value={inicio} required onChange={(e) => setInicio(e.target.value)} />
                   </div>
                   <div>
                     <label htmlFor='fim'>Data de Termino</label>
-                    <Input id='fim' type='date' value={fim} required onChange={(e) => setFim(e.target.value)} />
+                    <Input className='data' id='fim' type='date' value={fim} required onChange={(e) => setFim(e.target.value)} />
                   </div>
                 </div>
               </div>
