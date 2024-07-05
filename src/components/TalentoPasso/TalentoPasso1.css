@@ -326,6 +326,12 @@ border: 2px solid var(--grey-300, #CBD5E1);
     width: 100%;
 }
 
+#area{
+    border: 1px solid #b3b3b3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 @media(max-width: 940px){
     .txArea{
         display: none;
@@ -496,6 +502,7 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     #area{
         height: 60px !important;
+        font-size: 0.75rem;
     }
 
     .gr2{
