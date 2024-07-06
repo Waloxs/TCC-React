@@ -1,3 +1,7 @@
+.dec{
+    color: #1D4ED8;
+}
+
 @media (max-width: 1400px){
     .main{
         max-width: 60rem !important;

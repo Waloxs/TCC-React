@@ -10,6 +10,8 @@ const Navbar = ({ menu, setMenu }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
+  const [menuDropMobile1, setMenuDropMobile1] = useState(false);
+  const [menuDropMobile2, setMenuDropMobile2] = useState(false);
   const [border, setBorder] = useState(false);
 
   const handleClick = () => {
@@ -31,9 +33,24 @@ const Navbar = ({ menu, setMenu }) => {
     setBorder(!menuDrop2);
   };
 
+  const toggleMenuMobile1 = (e) => {
+    e.preventDefault();
+    setMenuDropMobile1(!menuDropMobile1);
+    setMenuDropMobile2(false); 
+  };
+
+  const toggleMenuMobile2 = (e) => {
+    e.preventDefault();
+    setMenuDropMobile2(!menuDropMobile2);
+    setMenuDropMobile1(false); 
+  };
+
   const estiloBorder = border ? 'rounded-b-[0px]' : 'rounded-b-[0.9375rem]';
   const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
   const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
+  
+  const estiloSetaMobile1 = menuDropMobile1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
+  const estiloSetaMobile2 = menuDropMobile2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
   return (
     <>
@@ -91,16 +108,28 @@ const Navbar = ({ menu, setMenu }) => {
         </div>
       )}
 
+      {menuDropMobile1 && (
+        <div className="flex justify-center">
+          <h1>oi1</h1>
+        </div>
+      )}
+
+      {menuDropMobile2 && (
+        <div className="flex justify-center">
+          <h1>oi2</h1>
+        </div>
+      )}
+
       {menu && (
         <div className="menu flex flex-col justify-between" style={{width: '100vw'}}>
           <div className="flex flex-col items-center gap-6" style={{marginTop: '2rem'}}>
-            <div className="link flex justify-between items-center" style={{width: '90vw'}}>
+            <div className="link flex justify-between items-center" onClick={toggleMenuMobile1}  style={{width: '90vw'}}>
               <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Buscar Trabalho</a>
-              {estiloSeta1}
+              {estiloSetaMobile1}
             </div>
-            <div className="link flex justify-between items-center" style={{width: '90vw'}}>
+            <div className="link flex justify-between items-center" onClick={toggleMenuMobile2}  style={{width: '90vw'}}>
               <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Anunciar Vaga</a>
-              {estiloSeta2}
+              {estiloSetaMobile2}
             </div>
           </div>
           <div className="button flex flex-col mx-auto gap-5">

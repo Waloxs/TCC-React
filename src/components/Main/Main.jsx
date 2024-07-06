@@ -18,8 +18,8 @@ const Main = () => {
       <div className="titSub flex flex-col items-start gap-4 w-full">
         <h1 className="titulo font-lexend text-7xl font-bold max-w-2xl">Seja bem-vindo <br /> ao Workzen!</h1>
         <p className="parag font-lexend font-normal text-black max-w-lg">
-          Aqui nós estamos comprometidos em <span className="text-primary-700">conectar talentos</span> e 
-          <span className="text-primary-700"> oportunidades de carreira!</span>
+          Aqui nós estamos comprometidos em <span className="dec">conectar talentos</span> e 
+          <span className="dec"> oportunidades de carreira!</span>
         </p>
        <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6"/></Link> 
       </div>

@@ -1,6 +1,10 @@
 import React from 'react'
 import './Footer.css'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaInstagram } from "react-icons/fa";
+import { IoLogoGithub } from "react-icons/io";
+import { MdOutlineEmail } from "react-icons/md";
+
 
 const Footer = () => {
   const [dropStates, setDropStates] = React.useState({
@@ -46,6 +50,20 @@ const Footer = () => {
           <h1 className='h1Footer'>Entre em contato</h1>
           <h2 className='SubFooter'>Endereço: Rua Edilson Araújo, Cará-cará - Ponta Grossa/PR</h2>
           <h2 className='SubFooter'>Tel: (15) 99665-1551</h2>
+
+          <div className="flex justify-end gap-8">
+            <div className="contain">
+              <FaInstagram className='iconRedes'/>
+            </div>
+
+            <div className="contain">
+              <IoLogoGithub className='iconRedes'/>
+            </div>
+
+            <div className="contain">
+              <MdOutlineEmail className='iconRedes'/>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -114,6 +132,21 @@ const Footer = () => {
           <h1 className='h1Footer'>Entre em contato</h1>
           <h2 className='SubFooter'>Endereço: Rua Edilson Araújo, Cará-cará - Ponta Grossa/PR</h2>
           <h2 className='SubFooter'>Tel: (15) 99665-1551</h2>
+
+          
+          <div className="flex gap-8" style={{marginTop: '30px'}}>
+            <div className="contain">
+              <FaInstagram className='iconRedes'/>
+            </div>
+
+            <div className="contain">
+              <IoLogoGithub className='iconRedes'/>
+            </div>
+
+            <div className="contain">
+              <MdOutlineEmail className='iconRedes'/>
+            </div>
+          </div>
         </div>
       </div>
     </div>

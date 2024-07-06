@@ -3,8 +3,17 @@
 }
 
 
+.iconRedes{
+    font-size: 1.5rem;
+    color: #3B82F6;
+}
 
-
+.contain{
+    cursor: pointer;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+}
 
 @media (max-width: 1300px){
     .SubFooter{
@@ -30,11 +39,11 @@
 
     .spanFooter{
         color: var(--grey-300, #CBD5E1);
-font-family: Lexend;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 500;
-line-height: 160%; /* 1.4rem */
+        font-family: Lexend;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 1.4rem */
     }
 
     .linef{
