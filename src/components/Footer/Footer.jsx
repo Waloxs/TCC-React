@@ -52,17 +52,17 @@ const Footer = () => {
           <h2 className='SubFooter'>Tel: (15) 99665-1551</h2>
 
           <div className="flex justify-end gap-8">
-            <div className="contain">
+            <a href='https://www.instagram.com/workzenup/' className="contain">
               <FaInstagram className='iconRedes'/>
-            </div>
+            </a>
 
-            <div className="contain">
+            <a href='https://github.com/Waloxs/TCC-React' className="contain">
               <IoLogoGithub className='iconRedes'/>
-            </div>
+            </a>
 
-            <div className="contain">
+            <a href='mailto:waloxgustavo0@gmail.com' className="contain">
               <MdOutlineEmail className='iconRedes'/>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -135,17 +135,17 @@ const Footer = () => {
 
           
           <div className="flex gap-8" style={{marginTop: '30px'}}>
-            <div className="contain">
+            <a href='https://www.instagram.com/workzenup/' className="contain">
               <FaInstagram className='iconRedes'/>
-            </div>
+            </a>
 
-            <div className="contain">
+            <a href='https://github.com/Waloxs/TCC-React' className="contain">
               <IoLogoGithub className='iconRedes'/>
-            </div>
+            </a>
 
-            <div className="contain">
+            <a href='mailto:waloxgustavo0@gmail.com' className="contain">
               <MdOutlineEmail className='iconRedes'/>
-            </div>
+            </a>
           </div>
         </div>
       </div>
