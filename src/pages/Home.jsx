@@ -34,7 +34,7 @@ const Home = () => {
     };
   }, [isImageLoaded]);
 
-  if (!showLoader) {
+  if (showLoader) {
     return (
       <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
         <div className="flex flex-col items-center loader-container">
