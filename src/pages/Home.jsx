@@ -5,8 +5,7 @@ import Carousel from '../components/Carousel/Carousel';
 import Section from '../components/Section/Section';
 import Footer from '../components/Footer/Footer';
 import ImageSection from '../assets/ImageSection.png';
-import { ThreeDots } from 'react-loader-spinner';
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/logoResp.png';
 import './Home.css'
 
 const Home = () => {
@@ -29,33 +28,26 @@ const Home = () => {
       }
     }, 5000);
 
-    // Ocultar o loader após 10 segundos, independentemente do carregamento da imagem
-    const maxLoaderTime = setTimeout(() => {
-      setShowLoader(false);
-    }, 10000);
-
+   
     return () => {
       clearTimeout(minLoaderTime);
-      clearTimeout(maxLoaderTime);
     };
   }, [isImageLoaded]);
 
-  if (showLoader) {
+  if (!showLoader) {
     return (
       <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
         <div className="flex flex-col items-center loader-container">
-          <img src={Logo} alt=""/>
-          <div>
-          <ThreeDots
-            height="80"
-            width="80"
-            radius="9"
-            color="#0866FF"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            visible={true}
-            style={{position: 'absolute'}}
-          />
+          <div className='flex items-end' style={{height: '100%'}}>
+            <img src={Logo} alt="" className='anim'/>
+            <div className='ex flex'>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>o</h1>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>r</h1>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>k</h1>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>z</h1>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>e</h1>
+              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>n</h1>
+            </div>
           </div>
         </div>
       </div>
