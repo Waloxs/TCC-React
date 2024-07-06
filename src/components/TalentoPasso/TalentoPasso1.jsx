@@ -50,9 +50,9 @@ const TalentoPasso1 = () => {
     setValor(valor + '25');
   };
 
-  const handleImageUpload = (event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {

@@ -108,17 +108,6 @@ const Navbar = ({ menu, setMenu }) => {
         </div>
       )}
 
-      {menuDropMobile1 && (
-        <div className="flex justify-center">
-          <h1>oi1</h1>
-        </div>
-      )}
-
-      {menuDropMobile2 && (
-        <div className="flex justify-center">
-          <h1>oi2</h1>
-        </div>
-      )}
 
       {menu && (
         <div className="menu flex flex-col justify-between" style={{width: '100vw'}}>
@@ -127,10 +116,20 @@ const Navbar = ({ menu, setMenu }) => {
               <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Buscar Trabalho</a>
               {estiloSetaMobile1}
             </div>
+              {menuDropMobile1 && (
+                <div className="flex justify-center">
+                  <h1>oi1</h1>
+                </div>
+              )}
             <div className="link flex justify-between items-center" onClick={toggleMenuMobile2}  style={{width: '90vw'}}>
               <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Anunciar Vaga</a>
               {estiloSetaMobile2}
             </div>
+          {menuDropMobile2 && (
+            <div className="flex justify-center">
+              <h1>oi2</h1>
+            </div>
+          )}
           </div>
           <div className="button flex flex-col mx-auto gap-5">
             <Link to="/Login"><BtnPrincipal texto="Entrar" color="#000" width="90vw" back="#fff" border="1px solid"/></Link>
