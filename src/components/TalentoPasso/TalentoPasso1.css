@@ -373,6 +373,12 @@ border: 2px solid var(--grey-300, #CBD5E1);
     border-radius: 5px;
 }
 
+#area2{
+    border: 1px solid #b3b3b3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 @media(max-width: 940px){
     .txArea{
         display: none;
@@ -546,6 +552,11 @@ border: 2px solid var(--grey-300, #CBD5E1);
         font-size: 0.75rem;
     }
 
+    #area2{
+        height: 100px !important;
+        font-size: 0.75rem;
+    }
+
     .gr2{
         grid-template-columns: auto;
     }
@@ -591,3 +602,9 @@ border: 2px solid var(--grey-300, #CBD5E1);
     }
 }
 
+@media(max-width: 370px){
+    #area2{
+        height: 80px !important;
+        font-size: 0.75rem; 
+    }
+}

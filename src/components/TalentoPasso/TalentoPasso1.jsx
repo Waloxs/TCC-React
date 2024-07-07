@@ -263,7 +263,7 @@ const TalentoPasso1 = () => {
                     </div>
                     <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
                       <p className='PassPar2'>Sua Biografia</p>
-                        <textarea id="area" style={{ height: '120px', maxWidth: '600px', resize: 'none'}} ></textarea>
+                        <textarea id="area2" style={{ height: '120px', maxWidth: '600px', resize: 'none'}} ></textarea>
                     </div>
                   </div>
                 )}
@@ -301,11 +301,6 @@ const TalentoPasso1 = () => {
                 )}
                 {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
-                    </div>
-                )}
-                {!block4 && (
-                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick4}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
                     </div>
                 )}
