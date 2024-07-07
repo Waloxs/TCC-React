@@ -6,11 +6,15 @@ import { Link } from 'react-router-dom';
 import Input from '../Form/input';
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
+
+
 
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
   const [block2, setBlock2] = useState(true);
   const [block3, setBlock3] = useState(true);
+  const [block4, setBlock4] = useState(true);
   const [modal, setModal] = useState(false);
   const [valor, setValor] = useState('Azul25');
   const [sombra, setSombra] = useState(false);
@@ -23,7 +27,10 @@ const TalentoPasso1 = () => {
   const [inicio, setInicio] = useState('');
   const [fim, setFim] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [experiencia, setExperiencia] = useState(null); // Add this line
+  const [experiencia, setExperiencia] = useState(null); 
+  const navigate = useNavigate();
+
+
 
   const click = (event) => {
     event.preventDefault();
@@ -35,20 +42,29 @@ const TalentoPasso1 = () => {
   const handleClick = (e) => {
     e.preventDefault();
     setBlock(!block);
-    setValor(valor + valor);
+    setBlock2(!block2);
+    setValor('Azul50');
   };
 
   const handleClick2 = (e) => {
     e.preventDefault();
     setBlock2(!block2);
-    setValor(valor + '25');
+    setBlock3(!block3);
+    setValor('Azul75');
+
   };
 
   const handleClick3 = (e) => {
     e.preventDefault();
     setBlock3(!block3);
-    setValor(valor + '25');
+    setBlock4(!block4);
+    setValor('Azul100');
   };
+
+  const handleClick4 = (e) => {
+    e.preventDefault();
+  };
+
 
   const handleImageUpload = (e) => {
     e.preventDefault();
@@ -88,6 +104,29 @@ const TalentoPasso1 = () => {
     }
   };
 
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    if (block == true) {
+      navigate('/talento');
+    } else if (!block2 == true){
+      setValor('Azul25antes')
+      setBlock(true);
+      setBlock2(true);
+    } else if (!block3 == true){
+      setValor('Azul50antes')
+      setBlock(false)
+      setBlock2(false);
+      setBlock3(true);
+    } else if (!block4 == true){
+      setValor('Azul75antes')
+      setBlock(false)
+      setBlock2(true);
+      setBlock3(false);
+      setBlock4(true);
+  };
+  
+}
+
   return (
     <div className={`${back ? 'back' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
       {modal && (
@@ -125,7 +164,7 @@ const TalentoPasso1 = () => {
               </div>
               <div className='flex flex-col'>
                 <label htmlFor="area">Descrição</label>
-                <textarea id="area" style={{ height: '120px'}} value={descricao} required onChange={(e) => setDescricao(e.target.value)}></textarea>
+                <textarea id="area" style={{ height: '120px', resize: 'none'}} value={descricao} required onChange={(e) => setDescricao(e.target.value)}></textarea>
               </div>
               <div className='ct flex self-end'  onClick={handleSave} >
                 <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>
@@ -143,7 +182,7 @@ const TalentoPasso1 = () => {
         <div className="conteudo flex" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
           <div className='flex flex-col' style={{ height: '35rem', width: '100%' }}>
             <div className='flex items-center'>
-              <Link to="/Talento"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
+              <IoIosArrowBack onClick={handleBackClick} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} />
               <div className='cxCinza'>
                 <div className={`cxAzul ${valor}`}></div>
               </div>
@@ -160,9 +199,7 @@ const TalentoPasso1 = () => {
                 </div>
               </div>
             )}
-            {block2 && (
-              <>
-                {!block && (
+            {!block2 && (
                   <div className='animate flex flex-col justify-between' style={{ height: '100%', gap: '5rem' }}>
                     <div className='pd2 flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                       <h1 className='PassTit2'>Ótimo, agora, se você tiver experiência profissional relevante, adicione-a aqui.</h1>
@@ -206,15 +243,13 @@ const TalentoPasso1 = () => {
                       <div onClick={click} style={{ cursor: 'pointer' }}>
                         <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' />
                       </div>
-                      <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' />
+                      <div onClick={handleClick2} style={{cursor: 'pointer'}}>
+                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn'/>
+                      </div>
                     </div>
                   </div>
-                )}
-              </>
             )}
-            {block3 && (
-              <>
-                {!block2 && (
+            {!block3 && (
                   <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
                     <div className='pd flex flex-row justify-between' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                       <div className="m flex flex-col gap-2" style={{ marginRight: '30px' }}>
@@ -228,13 +263,11 @@ const TalentoPasso1 = () => {
                     </div>
                     <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
                       <p className='PassPar2'>Sua Biografia</p>
-                      <Input type='text' placeholder='' className='lin2' />
+                        <textarea id="area" style={{ height: '120px', maxWidth: '600px', resize: 'none'}} ></textarea>
                     </div>
                   </div>
                 )}
-              </>
-            )}
-            {!block3 && (
+            {!block4 && (
               <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
                 <div className='pd flex flex-col text-center gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                   <h1 className='PassTit3'>Últimos detalhes, agora, você pode verificar e publicar seu perfil.</h1>
@@ -254,35 +287,28 @@ const TalentoPasso1 = () => {
                   <BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" border="1px solid #3B82F6" />
                 </div>
               </div>
-            )}
-            {block3 && (
-              <>
-                <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
-                  <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
-                </div>
-                {!block && (
-                  <div>
+               )}
+              
+                {block && (
+                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
+                    </div>
+                )}
+                {!block2 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
                     </div>
-                  </div>
                 )}
-                {!block2 && (
-                  <div>
+                {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
                     </div>
-                  </div>
                 )}
-                {!block3 && (
-                  <div>
-                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }}>
+                {!block4 && (
+                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick4}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
                     </div>
-                  </div>
                 )}
-              </>
-            )}
           </div>
         </div>
       </div>

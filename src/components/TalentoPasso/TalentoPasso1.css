@@ -88,6 +88,15 @@
     }
 }
 
+@keyframes growTo25antes {
+    from {
+        width: calc(100% - 50%)
+    }
+    to {
+        width: 25%;
+    }
+}
+
 @keyframes growTo50 {
     from {
         width: 25%;
@@ -97,12 +106,30 @@
     }
 }
 
+@keyframes growTo50antes {
+    from {
+        width: calc(100% - 25%)
+    }
+    to {
+        width: 50%;
+    }
+}
+
 @keyframes growTo75 {
     from {
         width: 50%;
     }
     to {
         width: calc(100% - 25%);
+    }
+}
+
+@keyframes growTo75antes {
+    from {
+        width: calc(100%)
+    }
+    to {
+        width: 75%;
     }
 }
 
@@ -121,19 +148,37 @@
     animation: growTo25 1s ease-in-out forwards;
 }
 
-.Azul25Azul25 {
+.Azul25antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo25antes 1s ease-in-out forwards;
+}
+
+.Azul50antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo50antes 1s ease-in-out forwards;
+}
+
+.Azul75antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo75antes 1s ease-in-out forwards;
+}
+
+.Azul50 {
     height: 2px;
     background: #3B82F6;
     animation: growTo50 1s ease-in-out forwards;
 }
 
-.Azul25Azul2525 {
+.Azul75 {
     height: 2px;
     background: #3B82F6;
     animation: growTo75 1s ease-in-out forwards;
 }
 
-.Azul25Azul252525 {
+.Azul100 {
     height: 2px;
     background: #3B82F6;
     animation: growTo100 1s ease-in-out forwards;
@@ -256,10 +301,6 @@
     width: calc(100% - 4rem) !important;
 }
 
-.lin2{
-    max-width: 600px !important;
-    height: 120px !important;
-}
 
 .container2{
     animation: animaCont 1s ease-out forwards;
