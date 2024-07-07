@@ -5,7 +5,7 @@ import Carousel from '../components/Carousel/Carousel';
 import Section from '../components/Section/Section';
 import Footer from '../components/Footer/Footer';
 import ImageSection from '../assets/ImageSection.png';
-import Logo from '../assets/logoResp.png';
+import ClipLoader from 'react-spinners/ClipLoader';
 import './Home.css'
 
 const Home = () => {
@@ -36,19 +36,9 @@ const Home = () => {
 
   if (showLoader) {
     return (
-      <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
-        <div className="flex flex-col items-center loader-container">
-          <div className='flex items-end' style={{height: '100%'}}>
-            <img src={Logo} alt="" className='anim'/>
-            <div className='ex flex'>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>o</h1>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>r</h1>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>k</h1>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>z</h1>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>e</h1>
-              <h1 style={{fontSize: '6rem', marginBottom: '-25px'}}>n</h1>
-            </div>
-          </div>
+      <div className='flex justify-center items-center' style={{height: '100vh'}}>
+        <div>
+          <ClipLoader color="#123abc" loading={true} size={100} />
         </div>
       </div>
     );
