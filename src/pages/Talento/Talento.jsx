@@ -3,10 +3,10 @@ import axios from 'axios';
 import imgTalento from '../../assets/imgTalento.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
-import BtnPrincipal from '../Buttons/BtnPrincipal';
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal'
 import './Talento.css';
 import { Link, useNavigate } from 'react-router-dom'; // updated import
-import Input from '../Form/input';// assuming Input component is properly implemented
+import Input from '../../components/Form/input';// assuming Input component is properly implemented
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 

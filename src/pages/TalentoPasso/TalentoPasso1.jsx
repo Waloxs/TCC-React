@@ -3,8 +3,8 @@ import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import './TalentoPasso1.css';
 import { Link } from 'react-router-dom';
-import Input from '../Form/input';
-import BtnPrincipal from '../Buttons/BtnPrincipal';
+import Input from '../../components/Form/input';
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 

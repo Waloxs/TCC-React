@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import imgEscolha from '../../assets/imgEscolha.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
-import BtnPrincipal from '../Buttons/BtnPrincipal';
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import './Escolha.css';
 import { Link } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';

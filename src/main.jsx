@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Home from './pages/Home.jsx'
+import Home from './pages/Home/Home.jsx'
 import './assets/styles/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Login from './components/Login/Login.jsx'
-import Escolha from './components/Escolha/Escolha.jsx'
-import Empresa from './components/Empresa/Empresa.jsx'
-import Talento from './components/Talento/Talento.jsx'
-import ProtectedPage from './components/ProtectedPage/ProtectedPage.jsx'
-import TalentoPasso1 from './components/TalentoPasso/TalentoPasso1.jsx'
+import Login from './pages/Login/Login.jsx'
+import Escolha from './pages/Escolha/Escolha.jsx'
+import Empresa from './pages/Empresa/Empresa.jsx'
+import Talento from './pages/Talento/Talento.jsx'
+import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx'
+import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx'
 
 
 const router = createBrowserRouter([
