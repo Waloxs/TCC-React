@@ -21,7 +21,7 @@ const Main = () => {
           Aqui nós estamos comprometidos em <span className="dec">conectar talentos</span> e 
           <span className="dec"> oportunidades de carreira!</span>
         </p>
-       <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6"/></Link> 
+       <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6" /></Link> 
       </div>
       
       <div className="flex w-full justify-center">
