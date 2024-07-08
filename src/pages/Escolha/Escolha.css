@@ -3,10 +3,6 @@
 }
 
 
-body{
-    height: 100dvh;
-  }
-
 .EscTit{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;

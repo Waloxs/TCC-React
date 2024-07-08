@@ -45,7 +45,7 @@ const Home = () => {
   }
   
   return (
-    <div className='dvh'>
+    <div>
       <Navbar menu={menu} setMenu={setMenu} />
       {!menu && <Main />}
       {!menu && <Carousel />}
