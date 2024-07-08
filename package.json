@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "display": "standalone",
+  "start_url": "/",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -36,4 +39,5 @@
     "tailwindcss": "^3.4.4",
     "vite": "^5.2.0"
   }
+  
 }
