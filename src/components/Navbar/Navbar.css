@@ -7,7 +7,6 @@
     display: none;
   }
 
-
   .dropList{
     margin-top: 5px;
 }
@@ -94,7 +93,7 @@
 
     .menu{
       animation: apareceMenu ease 0.5s;
-      height: calc(100% - 100px);
+      height: calc(100vh - 100px);
     }
 
     @keyframes apareceMenu {
