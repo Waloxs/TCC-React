@@ -6,7 +6,7 @@ import Section from '../../components/Section/Section';
 import Footer from '../../components/Footer/Footer';
 import ImageSection from '../../assets/ImageSection.png';
 import ClipLoader from 'react-spinners/ClipLoader';
-import './Home.css';
+import './Home.css'
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -28,33 +28,24 @@ const Home = () => {
       }
     }, 5000);
 
+   
     return () => {
       clearTimeout(minLoaderTime);
     };
   }, [isImageLoaded]);
 
-  useEffect(() => {
-    const setHeight = () => {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-    };
-    setHeight();
-    window.addEventListener('resize', setHeight);
-
-    return () => {
-      window.removeEventListener('resize', setHeight);
-    };
-  }, []);
-
   if (showLoader) {
     return (
-      <div className='flex justify-center items-center' style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
-        <ClipLoader color="#123abc" loading={true} size={100} />
+      <div className='flex justify-center items-center' style={{height: '100vh'}}>
+        <div>
+          <ClipLoader color="#123abc" loading={true} size={100} />
+        </div>
       </div>
     );
   }
-
+  
   return (
-    <div style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
+    <div>
       <Navbar menu={menu} setMenu={setMenu} />
       {!menu && <Main />}
       {!menu && <Carousel />}
@@ -62,6 +53,6 @@ const Home = () => {
       {!menu && <Footer />}
     </div>
   );
-};
+}
 
 export default Home;

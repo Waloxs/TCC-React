@@ -2,12 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --vh: 1vh;
-  }
-  
-  body {
+body{
     overflow-x: hidden;
-    height: 100%;
-  }
-  
+    height: 100vh !important;
+}
