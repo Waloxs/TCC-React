@@ -5,4 +5,5 @@
 body{
     overflow-x: hidden;
     height: 100dvh !important;
+    box-sizing: border-box;
 }
