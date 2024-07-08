@@ -6,6 +6,11 @@
     overflow-y: hidden;
 }
 
+
+body{
+    height: 100dvh;
+  }
+
 @keyframes animaCont {
     from {
         opacity: 0;

@@ -9,6 +9,11 @@
     max-width: 30ch;
 }
 
+
+body{
+    height: 100dvh;
+  }
+
 .user{
     cursor: pointer;
     font-size: 5rem;
