@@ -3,9 +3,6 @@ import ImageSection from '../../assets/ImageSection.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion"
-
-
-
 import './Main.css'
 
 const Main = () => {
@@ -21,7 +18,9 @@ const Main = () => {
           Aqui nós estamos comprometidos em <span className="dec">conectar talentos</span> e 
           <span className="dec"> oportunidades de carreira!</span>
         </p>
-       <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6" /></Link> 
+     
+          <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6" hover="#3A61D4"  /></Link> 
+        
       </div>
       
       <div className="flex w-full justify-center">

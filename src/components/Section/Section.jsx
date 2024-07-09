@@ -47,7 +47,7 @@ const Section = () => {
             <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #202020)', width: '35rem'}}>
                 Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
-             <Link to="/Escolha"><BtnPrincipal texto="Anuncie Agora" color="#fff" width="160px" back="#3B82F6"/></Link>
+             <Link to="/Escolha"><BtnPrincipal texto="Anuncie Agora" color="#fff" hover="#3A61D4" width="160px" back="#3B82F6"/></Link>
            
          </div>
       </div>
@@ -61,7 +61,7 @@ const Section = () => {
             <h1 className='titu' style={{fontFamily: 'Lexend', fontSize: '1.80em', fontWeight: '700', color: '#fff'}}>Dê o Próximo Passo em Sua Carreira</h1>
             <p className='subu' style={{fontFamily: 'Lexend', fontSize: '1rem', fontWeight: '300', color: 'var(--blackclear, #fff)', width: '35rem'}}>Conecte-se com os melhores talentos ao redor do mundo em minutos. Simplifique seu processo de recrutamento e encontre o ajuste perfeito para sua
              equipe. Junte-se a empresas líderes e leve seu negócio ao próximo nível conosco.</p>
-             <Link to="/Escolha"><BtnPrincipal texto="Buscar Agora" color="#3B82F6" width="160px" back="#fff"/></Link>
+             <Link to="/Escolha"><BtnPrincipal texto="Buscar Agora" color="#3B82F6" hover="#d7d7d7" width="160px" back="#fff"/></Link>
          </div>
          
         <img className='imgMain' src={img2Main} alt="" style={{maxWidth: '30.5rem'}} />

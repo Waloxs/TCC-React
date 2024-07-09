@@ -68,8 +68,9 @@ const Navbar = ({ menu, setMenu }) => {
         </div>
 
         <div className="flex items-center gap-5 mr-[3rem]">
-          <Link to="/Login" className="buttons text-sm text-grey-text-light">Entrar</Link>
-          <Link to="/Escolha" className="buttons text-sm rounded-[1.25rem] text-white bg-btnCriar" style={{padding: '10px 25px'}}>Criar Conta</Link>
+          <Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px"/></Link>
+          <Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px"/></Link>
+
           <div className='menuHamb' onClick={handleClick}>
             <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
             <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>

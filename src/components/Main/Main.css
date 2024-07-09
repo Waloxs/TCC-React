@@ -2,7 +2,9 @@
     color: #1D4ED8;
 }
 
-
+.hover:hover{
+    background: red !important;
+}
 
 @media (max-width: 1400px){
     .main{
