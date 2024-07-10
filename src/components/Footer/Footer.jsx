@@ -33,17 +33,17 @@ const Footer = () => {
       }}>
         <div>
           <h1 className='h1Footer'>Para Empresas</h1>
-          <a href='' className='SubFooter'>Como anunciar vaga</a>
+          <a href='' className='linkfooter SubFooter'>Como anunciar vaga</a>
         </div>
 
         <div>
           <h1 className='h1Footer'>Para Talentos</h1>
-          <a href='' className='SubFooter'>Como encontrar trabalho</a>
+          <a href='' className='linkfooter SubFooter'>Como encontrar trabalho</a>
         </div>
 
         <div>
           <h1 className='h1Footer'>Recursos</h1>
-          <a href='' className='SubFooter'>Como encontrar trabalho</a>
+          <a href='' className='linkfooter SubFooter'>Como encontrar trabalho</a>
         </div>
 
         <div>
@@ -52,16 +52,16 @@ const Footer = () => {
           <h2 className='SubFooter'>Tel: (15) 99665-1551</h2>
 
           <div className="flex justify-end gap-8">
-            <a href='https://www.instagram.com/workzenup/' className="contain">
-              <FaInstagram className='iconRedes'/>
+            <a href='https://www.instagram.com/workzenup/' className="contain1">
+              <FaInstagram className='iconRedes1'/>
             </a>
 
-            <a href='https://github.com/Waloxs/TCC-React' className="contain">
-              <IoLogoGithub className='iconRedes'/>
+            <a href='https://github.com/Waloxs/TCC-React' className="contain2">
+              <IoLogoGithub className='iconRedes2'/>
             </a>
 
-            <a href='mailto:waloxgustavo0@gmail.com' className="contain">
-              <MdOutlineEmail className='iconRedes'/>
+            <a href='mailto:waloxgustavo0@gmail.com' className="contain3">
+              <MdOutlineEmail className='iconRedes3'/>
             </a>
           </div>
         </div>
@@ -77,7 +77,7 @@ const Footer = () => {
           marginLeft: '20px',
           marginRight: '20px',
       }}>
-        <div>
+        <div style={{cursor: 'pointer'}}>
           <div className='flex justify-between items-center' onClick={() => clicou('empresas')}>
             <h1 className='h1Footer'>Para Empresas</h1>
             {dropStates.empresas ? (
@@ -89,12 +89,12 @@ const Footer = () => {
           <div className="linef"></div>
           {dropStates.empresas && (
             <div>
-              <span className='spanFooter'>Como anunciar vaga</span>
+              <a href='/' className='linkfooter spanFooter'>Como anunciar vaga</a>
             </div>
           )}
         </div>
 
-        <div>
+        <div style={{cursor: 'pointer'}}>
           <div className='flex justify-between items-center' onClick={() => clicou('talentos')}>
             <h1 className='h1Footer'>Para Talentos</h1>
             {dropStates.talentos ? (
@@ -106,12 +106,12 @@ const Footer = () => {
           <div className="linef"></div>
           {dropStates.talentos && (
             <div>
-              <span className='spanFooter'>Como achar um emprego</span>
+              <a href='/' className='linkfooter spanFooter'>Como achar um emprego</a>
             </div>
           )}
         </div>
 
-        <div>
+        <div style={{cursor: 'pointer'}}>
           <div className='flex justify-between items-center' onClick={() => clicou('recursos')}>
             <h1 className='h1Footer'>Recursos</h1>
             {dropStates.recursos ? (
@@ -123,7 +123,7 @@ const Footer = () => {
           <div className="linef"></div>
           {dropStates.recursos && (
             <div>
-              <span className='spanFooter'>História de Sucesso</span>
+              <a href='/' className='linkfooter spanFooter'>História de Sucesso</a>
             </div>
           )}
         </div>
@@ -135,16 +135,16 @@ const Footer = () => {
 
           
           <div className="flex gap-8" style={{marginTop: '30px'}}>
-            <a href='https://www.instagram.com/workzenup/' className="contain">
-              <FaInstagram className='iconRedes'/>
+            <a href='https://www.instagram.com/workzenup/' className="contain1">
+              <FaInstagram className='iconRedes1'/>
             </a>
 
-            <a href='https://github.com/Waloxs/TCC-React' className="contain">
-              <IoLogoGithub className='iconRedes'/>
+            <a href='https://github.com/Waloxs/TCC-React' className="contain2">
+              <IoLogoGithub className='iconRedes2'/>
             </a>
 
-            <a href='mailto:waloxgustavo0@gmail.com' className="contain">
-              <MdOutlineEmail className='iconRedes'/>
+            <a href='mailto:waloxgustavo0@gmail.com' className="contain3">
+              <MdOutlineEmail className='iconRedes3'/>
             </a>
           </div>
         </div>

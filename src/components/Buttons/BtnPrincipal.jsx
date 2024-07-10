@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const BtnPrincipal = (props) => {
   return (
     <motion.button 
-      whileHover={{ backgroundColor: props.hover }}
+      whileHover={{ backgroundColor: props.hover, color: props.hoverColor }}
       transition={{ duration: 0.3 }} 
       className='flex justify-center items-center' 
       style={{

@@ -182,7 +182,7 @@ const TalentoPasso1 = () => {
         <div className="conteudo flex" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
           <div className='flex flex-col' style={{ height: '35rem', width: '100%' }}>
             <div className='flex items-center'>
-              <IoIosArrowBack onClick={handleBackClick} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} />
+              <IoIosArrowBack onClick={handleBackClick} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF', cursor: 'pointer' }} />
               <div className='cxCinza'>
                 <div className={`cxAzul ${valor}`}></div>
               </div>
@@ -241,10 +241,10 @@ const TalentoPasso1 = () => {
                     )}
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
-                        <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' />
+                        <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' />
                       </div>
                       <div onClick={handleClick2} style={{cursor: 'pointer'}}>
-                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn'/>
+                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' hoverColor="#3A61D4"/>
                       </div>
                     </div>
                   </div>
@@ -284,24 +284,24 @@ const TalentoPasso1 = () => {
                     <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6" />
                   </label>
                   <input id="file-upload" type="file" style={{ display: 'none' }} onChange={handleImageUpload} />
-                  <BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" border="1px solid #3B82F6" />
+                  <BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" hover='#3A61D4' border="1px solid #3B82F6" />
                 </div>
               </div>
                )}
               
                 {block && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
                     </div>
                 )}
                 {!block2 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
                     </div>
                 )}
                 {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
                     </div>
                 )}
           </div>

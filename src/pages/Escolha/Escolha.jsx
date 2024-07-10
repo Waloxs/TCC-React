@@ -36,7 +36,8 @@ const Escolha = () => {
     setBtnProps({
       color: '#fff',
       back: '#0866FF', 
-      border: '2px solid #0866FF' 
+      border: '2px solid #0866FF',
+      hover: '#3A61D4'
     });
   };
 
@@ -86,7 +87,7 @@ const Escolha = () => {
             <div className='flex flex-col gap-5' style={{padding: '2rem'}}>
               <div className='Empresa flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou uma Empresa</h1>
-                <div className='camph2 flex justify-between' onClick={() => ativaBtn('empresa')}>
+                <div className='camph2 flex justify-between' onClick={() => ativaBtn('empresa')} style={{cursor: 'pointer'}}>
                   <h2>Em busca de um Talento</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'empresa' ? 'selected' : ''}`}></div>
@@ -96,7 +97,7 @@ const Escolha = () => {
               
               <div className='Talento flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou um Talento</h1>
-                <div className='camph2 flex justify-between' onClick={() => ativaBtn('talento')}>
+                <div className='camph2 flex justify-between' onClick={() => ativaBtn('talento')} style={{cursor: 'pointer'}}>
                   <h2>Em busca de um Emprego</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'talento' ? 'selected' : ''}`}></div>
@@ -108,7 +109,7 @@ const Escolha = () => {
           <img className='imgEscolha' src={imgEscolha} alt="Login Visual" style={{ maxWidth: '34rem', height: '35rem' }} />
         </div>
         <div className='flex self-end' style={{ marginTop: '-20px', maxWidth: '65rem' }}>
-          <Link to={getLinkPath()}><BtnPrincipal texto="Continuar" color={btnProps.color} width="160px" back={btnProps.back} border={btnProps.border} /></Link>
+          <Link to={getLinkPath()}><BtnPrincipal texto="Continuar" color={btnProps.color} width="160px" back={btnProps.back} border={btnProps.border} hover={btnProps.hover} /></Link>
         </div>
       </div>
     </div>

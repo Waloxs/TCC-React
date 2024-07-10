@@ -3,16 +3,45 @@
 }
 
 
-.iconRedes{
+.iconRedes1, .iconRedes2, .iconRedes3{
     font-size: 1.5rem;
     color: #3B82F6;
 }
 
-.contain{
+.contain1, .contain2, .contain3 {
     cursor: pointer;
     background: #fff;
     border-radius: 50%;
     padding: 10px;
+    transition: background 0.4s ease-in-out; 
+}
+
+.contain1:hover {
+    background: #000;
+
+    .iconRedes1{
+        color: #fff;
+    }
+}
+
+.contain2:hover{
+    background: #000;
+
+    .iconRedes2{
+        color: #fff;
+    }
+}
+
+.contain3:hover{
+    background: #000;
+
+    .iconRedes3{
+        color: #fff;
+    }
+}
+
+.linkfooter:hover{
+    color: #f7f7f7;
 }
 
 @media (max-width: 1300px){
