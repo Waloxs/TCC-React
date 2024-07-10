@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import './TalentoPasso1.css';
@@ -7,7 +7,7 @@ import Input from '../../components/Form/input';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 
 
 const TalentoPasso1 = () => {
@@ -29,7 +29,59 @@ const TalentoPasso1 = () => {
   const [descricao, setDescricao] = useState('');
   const [experiencia, setExperiencia] = useState(null); 
   const navigate = useNavigate();
+  const [estados, setEstados] = useState([]);
+  const [cidades, setCidades] = useState([]);
+  const [estadoSelecionado, setEstadoSelecionado] = useState('');
 
+
+  useEffect(() => {
+    // Lista de estados com os códigos de UF
+    const estadosBrasil = [
+      { codigo: 'AC', nome: 'Acre' },
+      { codigo: 'AL', nome: 'Alagoas' },
+      { codigo: 'AM', nome: 'Amazonas' },
+      { codigo: 'AP', nome: 'Amapá' },
+      { codigo: 'BA', nome: 'Bahia' },
+      { codigo: 'CE', nome: 'Ceará' },
+      { codigo: 'DF', nome: 'Distrito Federal' },
+      { codigo: 'ES', nome: 'Espírito Santo' },
+      { codigo: 'GO', nome: 'Goiás' },
+      { codigo: 'MA', nome: 'Maranhão' },
+      { codigo: 'MG', nome: 'Minas Gerais' },
+      { codigo: 'MS', nome: 'Mato Grosso do Sul' },
+      { codigo: 'MT', nome: 'Mato Grosso' },
+      { codigo: 'PA', nome: 'Pará' },
+      { codigo: 'PB', nome: 'Paraíba' },
+      { codigo: 'PE', nome: 'Pernambuco' },
+      { codigo: 'PI', nome: 'Piauí' },
+      { codigo: 'PR', nome: 'Paraná' },
+      { codigo: 'RJ', nome: 'Rio de Janeiro' },
+      { codigo: 'RN', nome: 'Rio Grande do Norte' },
+      { codigo: 'RS', nome: 'Rio Grande do Sul' },
+      { codigo: 'RO', nome: 'Rondônia' },
+      { codigo: 'RR', nome: 'Roraima' },
+      { codigo: 'SC', nome: 'Santa Catarina' },
+      { codigo: 'SP', nome: 'São Paulo' },
+      { codigo: 'SE', nome: 'Sergipe' },
+      { codigo: 'TO', nome: 'Tocantins' }
+    ];
+    setEstados(estadosBrasil);
+  }, []);
+
+  useEffect(() => {
+    if (estadoSelecionado) {
+      fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoSelecionado}/municipios`)
+        .then(response => response.json())
+        .then(data => {
+          const cidadesData = data.map(cidade => cidade.nome);
+          setCidades(cidadesData);
+        })
+        .catch(error => {
+          console.error('Erro ao buscar cidades:', error);
+        });
+    }
+  }, [estadoSelecionado]);
+  
 
 
   const click = (event) => {
@@ -59,10 +111,6 @@ const TalentoPasso1 = () => {
     setBlock3(!block3);
     setBlock4(!block4);
     setValor('Azul100');
-  };
-
-  const handleClick4 = (e) => {
-    e.preventDefault();
   };
 
 
@@ -144,10 +192,30 @@ const TalentoPasso1 = () => {
                 <Input id='empresa' className='pdl' placeholder='Ex: Hexalab' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} />
               </div>
               <div>
-                <label htmlFor='loca'>Localização</label>
                 <div className='gr1'>
-                  <Input id='loca' className='pdl' placeholder='Ex: Itapeva' value={localizacao} required onChange={(e) => setLocalizacao(e.target.value)} />
-                  <Input id='' className='pdl' placeholder='Ex: SP' value={estado} required onChange={(e) => setEstado(e.target.value)} />
+                  <div>
+                  <label htmlFor="cidade">Cidade:</label><br/>
+                      <select id="cidade" value={localizacao}  required onChange={(e) => setLocalizacao(e.target.value)} style={{width: '100%'}} >
+                        <option value="">Selecione uma cidade</option>
+                            {cidades.map((cidade, index) => (
+                              <option key={index} value={cidade}>
+                        {cidade}
+                    </option>
+                      ))}
+                  </select>
+                  </div>
+
+                  <div>        
+                    <label htmlFor="estado">Estado:</label><br/>
+                    <select id="estado" onChange={e => {setEstadoSelecionado(e.target.value) , setEstado(e.target.value)}} value={estado} style={{width: '100%'}} required>
+                    <option value="" style={{marginLeft: '10px'}}>Selecione um estado</option>
+                    {estados.map(estado => (
+                    <option key={estado.codigo} value={estado.codigo}>
+                    {estado.nome}
+                    </option>
+                    ))}
+                    </select>
+                  </div>
                 </div>
               </div>
               <div>
@@ -164,7 +232,7 @@ const TalentoPasso1 = () => {
               </div>
               <div className='flex flex-col'>
                 <label htmlFor="area">Descrição</label>
-                <textarea id="area" style={{ height: '120px', resize: 'none'}} value={descricao} required onChange={(e) => setDescricao(e.target.value)}></textarea>
+                <textarea id="area" style={{ height: '120px', resize: 'none' }} value={descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200}></textarea>
               </div>
               <div className='ct flex self-end'  onClick={handleSave} >
                 <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>

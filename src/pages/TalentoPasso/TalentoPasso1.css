@@ -355,10 +355,24 @@ border: 2px solid var(--grey-300, #CBD5E1);
     font-style: normal;
     font-weight: 300;
     line-height: 130%; /* 1.625rem */
-    max-width: 100%;
+    width: 100%;
     height: 100px;
+    word-wrap: break-word; 
 }
 
+#cidade, #estado{
+    height: 40px;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */   
+    border-radius: 8px;
+    border: 1px solid var(--grey-300, #CBD5E1);
+}
 
 #inicio, #fim{
     padding-right: 20px;
