@@ -550,12 +550,13 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     .titAdc{
         font-size: 0.85rem;
+        margin-top: 20px;
     }
 
     .FormAdc{
         margin-top: -20px !important;
         height: 650px;
-        width: 300px !important;
+        width: 350px !important;
         background: #fff;
         border-radius: 0.9375rem;
         padding: 10px 40px;
@@ -587,6 +588,11 @@ border: 2px solid var(--grey-300, #CBD5E1);
     ::placeholder{
         font-size: 0.75rem !important;
     }
+
+    #cidade, #estado{
+        font-size: 0.75rem !important;
+    }
+    
 
 }
 
