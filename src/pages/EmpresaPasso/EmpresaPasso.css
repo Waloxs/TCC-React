@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 30ch;
+    max-width: 40ch;
 }
 
 
@@ -212,20 +212,6 @@
     max-width: 60ch;
 }
 
-.select-wrapper2{
-    position: relative;
-}
-
-
-.icondown{
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #333;
-    font-size: 36px;
-}
 
 
 .PassPar{
@@ -375,7 +361,6 @@ border: 2px solid var(--grey-300, #CBD5E1);
 }
 
 #cidade, #estado{
-    padding-left: 15px;
     height: 40px;
     width: 100%;
     padding-top: 0px;
@@ -387,16 +372,10 @@ border: 2px solid var(--grey-300, #CBD5E1);
     line-height: 130%; /* 1.625rem */   
     border-radius: 8px;
     border: 1px solid var(--grey-300, #CBD5E1);
-    
-
-  appearance: none; /* Remove the default dropdown arrow */
-  -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
-  -moz-appearance: none; /* Remove the default dropdown arrow for Firefox */
 }
 
 #inicio, #fim{
-    padding-left: 15px;
-    padding-right: 13px !important;
+    padding-right: 20px;
 }
 
 .data{
@@ -571,7 +550,7 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     .titAdc{
         font-size: 0.85rem;
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .FormAdc{

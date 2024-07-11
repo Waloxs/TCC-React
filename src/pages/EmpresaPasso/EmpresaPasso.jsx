@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
-import './TalentoPasso1.css';
+import './EmpresaPasso.css';
 import { Link } from 'react-router-dom';
 import Input from '../../components/Form/input';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { RiArrowDropDownLine } from "react-icons/ri";
-
-import axios from 'axios';
 
 
 const TalentoPasso1 = () => {
@@ -157,7 +154,7 @@ const TalentoPasso1 = () => {
   const handleBackClick = (e) => {
     e.preventDefault();
     if (block == true) {
-      navigate('/talento');
+      navigate('/empresa');
     } else if (!block2 == true){
       setValor('Azul25antes')
       setBlock(true);
@@ -197,7 +194,6 @@ const TalentoPasso1 = () => {
                 <div className='gr1'>
                   <div>
                   <label htmlFor="cidade">Cidade:</label><br/>
-                  <div className='select-wrapper2'>
                       <select id="cidade" value={localizacao}  required onChange={(e) => setLocalizacao(e.target.value)} style={{width: '100%'}} >
                         <option value="">Selecione uma cidade</option>
                             {cidades.map((cidade, index) => (
@@ -206,14 +202,10 @@ const TalentoPasso1 = () => {
                     </option>
                       ))}
                   </select>
-                  <RiArrowDropDownLine className='icondown'/>
-                  
-                  </div>
                   </div>
 
                   <div>        
                     <label htmlFor="estado">Estado:</label><br/>
-                  <div className='select-wrapper2'>
                     <select id="estado" onChange={e => {setEstadoSelecionado(e.target.value) , setEstado(e.target.value)}} value={estado} style={{width: '100%'}} required>
                     <option value="" style={{marginLeft: '10px'}}>Selecione um estado</option>
                     {estados.map(estado => (
@@ -222,9 +214,6 @@ const TalentoPasso1 = () => {
                     </option>
                     ))}
                     </select>
-                  <RiArrowDropDownLine className='icondown'/>
-
-                  </div>
                   </div>
                 </div>
               </div>
@@ -268,7 +257,7 @@ const TalentoPasso1 = () => {
             {block && (
               <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                  <h1 className='PassTit'>Muito bem, agora, adicione um título para contar ao mundo o que você faz.</h1>
+                  <h1 className='PassTit'>Muito bem, agora, preencha algumas informações.</h1>
                   <p className='PassPar'>É a primeira coisa que as Empresas veem, então faça valer a pena. Destaque-se descrevendo sua experiência com suas próprias palavras.</p>
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
@@ -368,7 +357,7 @@ const TalentoPasso1 = () => {
                )}
               
                 {block && (
-                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
+                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={''}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
                     </div>
                 )}

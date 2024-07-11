@@ -88,7 +88,7 @@ const Empresa = () => {
                   )}
                 </div>
       
-                <Link to='/TalentoPasso1'><BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#0866FF' color='#fff' hover='#3A61D4'/></Link>
+                <Link to='/EmpresaPasso'><BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#0866FF' color='#fff' hover='#3A61D4'/></Link>
                 
                 <div className="line2 flex self-center"></div>
               </form>

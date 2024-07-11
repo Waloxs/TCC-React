@@ -10,6 +10,8 @@ import Empresa from './pages/Empresa/Empresa.jsx'
 import Talento from './pages/Talento/Talento.jsx'
 import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx'
 import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx'
+import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx'
+
 
 
 const router = createBrowserRouter([
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "TalentoPasso1",
     element: <TalentoPasso1></TalentoPasso1>
+  },
+  {
+    path: "EmpresaPasso",
+    element: <EmpresaPasso></EmpresaPasso>
   }
 ])
 
