@@ -14,8 +14,6 @@ import { FcGoogle } from "react-icons/fc";
 const Talento = () => {
   const [passwordVisible2, setPasswordVisible2] = useState(false);
 
-  const navigate = useNavigate(); // useNavigate hook
-
   
   const togglePasswordVisibility2 = () => {
     setPasswordVisible2(!passwordVisible2);
