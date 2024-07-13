@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
 
-const Navbar = ({ menu, setMenu }) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
@@ -48,7 +48,7 @@ const Navbar = ({ menu, setMenu }) => {
   const estiloBorder = border ? 'rounded-b-[0px]' : 'rounded-b-[0.9375rem]';
   const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
   const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
-  
+
   const estiloSetaMobile1 = menuDropMobile1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
   const estiloSetaMobile2 = menuDropMobile2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
@@ -67,16 +67,18 @@ const Navbar = ({ menu, setMenu }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 mr-[3rem]">
-          <div className='dnone'><Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px"/></Link></div>
-          <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px"/></Link></div>
+        {showDashnone && (
+          <div className="dashnone flex items-center gap-5 mr-[3rem]">
+            <div className='dnone'><Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px"/></Link></div>
+            <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px"/></Link></div>
 
-          <div className='menuHamb' onClick={handleClick}>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div> 
+            <div className='menuHamb' onClick={handleClick}>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div> 
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {menuDrop1 && (

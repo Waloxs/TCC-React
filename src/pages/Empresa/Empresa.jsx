@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/Logo.png';
 import imgEmpresa from '../../assets/imgEmpresa.png';
@@ -10,6 +10,8 @@ import Input from '../../components/Form/input';// assuming Input component is p
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { ThreeDots } from 'react-loader-spinner';
+
 
 const Empresa = () => {
 
@@ -20,6 +22,41 @@ const Empresa = () => {
     setPasswordVisible2(!passwordVisible2);
   };
 
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = imgEmpresa;
+    
+    const timeout = setTimeout(() => {
+      setShowLoader(false); 
+      image.onload = () => {
+        setIsImageLoaded(!isImageLoaded); 
+      };
+    }, 2000);
+
+    return () => clearTimeout(timeout); 
+  }, []);
+
+
+  if (showLoader) {
+    return (
+      <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
+        <div className="loader-container">
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="#0866FF"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

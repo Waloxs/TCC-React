@@ -10,47 +10,50 @@ import Input from '../../components/Form/input';// assuming Input component is p
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 
-
 const Talento = () => {
   const [passwordVisible2, setPasswordVisible2] = useState(false);
+  const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [dados, setDados] = useState(null);
+  const navigate = useNavigate();
 
-  
   const togglePasswordVisibility2 = () => {
     setPasswordVisible2(!passwordVisible2);
   };
+  
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const form = e.target.closest('form');
+    if (form.checkValidity()) {
+      let dados = {
+        firstName: nome,
+        lastName: sobrenome,
+        email,
+        password: senha
+      };
+  
+      try {
+        const response = await axios.post('https://workzen.onrender.com/v1/user/register', dados);
+        console.log(response.data);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    const userData = {
-      nome: event.target.nome.value,
-      email: event.target.email.value,
-      senha: event.target.senha.value,
-      localizacao: event.target.localizacao.value,
-      telefone: event.target.telefone.value
-    };
 
-    try {
-      console.log('Tentando enviar os dados para o servidor:', userData);
-      const response = await axios.post('http://localhost:3000/v1/register', userData);
-      console.log('Dados enviados com sucesso:', response.data);
-    } catch (error) {
-      console.error('Erro ao enviar os dados:', error);
-      if (error.response) {
-        // O servidor respondeu com um código de status fora do intervalo 2xx
-        console.error('Dados da resposta:', error.response.data);
-        console.error('Status da resposta:', error.response.status);
-        console.error('Cabeçalhos da resposta:', error.response.headers);
-      } else if (error.request) {
-        // A requisição foi feita mas não houve resposta
-        console.error('Requisição:', error.request);
-      } else {
-        // Algo aconteceu na configuração da requisição que acionou um erro
-        console.error('Erro', error.message);
+        const { token } = response.data;
+        localStorage.setItem('authToken', token);
+
+
+
+        navigate("/TalentoPasso1"); // Redireciona após salvar
+      } catch (error) {
+        console.error('Erro ao enviar os dados:', error);
       }
-      console.error('Configuração da requisição:', error.config);
+    } else {
+      form.reportValidity();
     }
   };
+  
 
   return (
     <div>
@@ -68,42 +71,38 @@ const Talento = () => {
                 <h1 className='EscTit self-center'>Olá seja Bem-vindo!</h1>
                 <p className='EscPar2 flex self-center'>Cadastre-se e encontre o trabalho ideal para você.</p>
               </div>
-              <form className='formTalento flex flex-col gap-3' style={{ padding: '3rem', marginTop: '-40px' }} onSubmit={handleSubmit}>
+              <form className='formTalento flex flex-col gap-3' style={{ padding: '3rem', marginTop: '-40px' }} onSubmit={handleSave}>
                 <div className='gri'>
-                  <Input name='nome' placeholder='Nome' type='text' className='s'/>
-                  
-                  <Input name='sobrenome' placeholder='Sobrenome' type='text' className='s' />
+                  <Input name='nome' placeholder='Nome' type='text' className='s' value={nome} onChange={(e) => setNome(e.target.value)} required/>
+                  <Input name='sobrenome' placeholder='Sobrenome' type='text' className='s' value={sobrenome} onChange={(e) => setSobrenome(e.target.value)} required/>
                 </div>
-                
-                <Input name='email' placeholder='Email' type='email' className='s' />
-
+                <Input name='email' placeholder='Email' type='email' className='s' value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 <div className="senha">
                   <Input
                     name='senha'
                     placeholder='Senha'
                     type={passwordVisible2 ? 'text' : 'password'}
                     className='inputEye1'
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    required
                   />
-              
                   {passwordVisible2 ? (
                     <IoEyeOffSharp className='Eye2' onClick={togglePasswordVisibility2} />
                   ) : (
                     <IoEyeSharp className='Eye2' onClick={togglePasswordVisibility2} />
                   )}
                 </div>
-      
-                <Link to='/TalentoPasso1'><BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#0866FF' color='#fff' hover='#3A61D4'/></Link>
-                
+                <BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#0866FF' color='#fff' hover='#3A61D4'/>
                 <div className="line2 flex self-center"></div>
               </form>
               <h3 className='cont2 flex self-center'>Ou continuar com</h3>
-
               <div className='flex justify-center'>
-              <div className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
-              <FcGoogle style={{ width: '20px', height: '20px' }} />
-              <h2 className='gog'>Google</h2>
-               </div>
-               </div>
+                <div className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
+                  <FcGoogle style={{ width: '20px', height: '20px' }} />
+                  <h2 className='gog'>Google</h2>
+                </div>
+              </div>
             </div>
             <img className='imgTalento' src={imgTalento} alt="Login Visual" style={{ maxWidth: '30rem', height: '35rem' }} />
           </div>

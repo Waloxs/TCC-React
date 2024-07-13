@@ -16,7 +16,7 @@ const BtnPrincipal = (props) => {
         transition: '0.3s ease' 
       }}
     >
-      <a 
+      <button 
         href={props.href} 
         style={{
           fontFamily: 'Lexend', 
@@ -25,7 +25,7 @@ const BtnPrincipal = (props) => {
         }}
       >
         {props.texto}
-      </a>
+      </button>
     </motion.button>
   )
 }

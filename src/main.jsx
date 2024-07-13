@@ -11,6 +11,7 @@ import Talento from './pages/Talento/Talento.jsx'
 import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx'
 import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx'
 import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx'
+import Dashboard from './pages/Dashboard/Dashboard.jsx'
 
 
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "EmpresaPasso",
     element: <EmpresaPasso></EmpresaPasso>
+  },
+  {
+    path: "Dashboard",
+    element: <Dashboard></Dashboard>
   }
 ])
 

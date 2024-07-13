@@ -12,6 +12,9 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import axios from 'axios';
 
 
+
+
+
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
   const [block2, setBlock2] = useState(true);
@@ -85,7 +88,6 @@ const TalentoPasso1 = () => {
   }, [estadoSelecionado]);
   
 
-
   const click = (event) => {
     event.preventDefault();
     setModal(!modal);
@@ -116,44 +118,57 @@ const TalentoPasso1 = () => {
   };
 
 
-  const handleImageUpload = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const reader = new FileReader();
 
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-    
-    // Reset input value to allow re-upload of the same file
-    event.target.value = null;
-  }
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     const form = e.target.closest('form');
+    
     if (form.checkValidity()) {
-      let experiencia = {
-        titulo,
-        empresa,
+      const experienciaData = {
+        title: titulo,
+        company: empresa,
         localizacao,
-        estado,
-        inicio,
-        fim,
-        descricao
+        dataInicio: inicio,
+        dataTermino: fim,
+        description: descricao
       };
-      setExperiencia(experiencia);
-      console.log(experiencia);
-      // Aqui você pode fazer algo com os dados, como enviar para uma API
+  
+  // Obter o token do localStorage
+const token = localStorage.getItem('authToken');
+
+// Verificar se o token existe
+if (token) {
+  try {
+    // Configurar o header de autorização com o token
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+
+    // Fazer a requisição POST usando Axios
+    const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experienciaData, config);
+    const dados = await axios.get('https://workzen.onrender.com/v1/me/xp', config)
+    setExperiencia(dados.data)
+    
+    console.log(dados);
+    // Processar a resposta
+    console.log('Dados enviados com sucesso:', response.data);
+    // Aqui você pode adicionar lógica adicional após enviar os dados
+  } catch (error) {
+    console.error('Erro ao enviar dados:', error);
+    // Aqui você pode lidar com erros de requisição
+  }
+} else {
+  console.error('Token não encontrado no localStorage');
+}
+
     } else {
       form.reportValidity();
     }
   };
-
   const handleBackClick = (e) => {
     e.preventDefault();
     if (block == true) {
@@ -176,6 +191,37 @@ const TalentoPasso1 = () => {
   };
   
 }
+
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  setImage(URL.createObjectURL(file)); // Exibe a pré-visualização da imagem para o usuário
+
+  // Prepara os dados para enviar via formData
+  const formData = new FormData();
+  formData.append('image', file); // 'profileImage' deve ser o nome do campo esperado pela API
+
+  // Envia a requisição PUT
+  
+const token = localStorage.getItem('authToken');
+
+  fetch('https://workzen.onrender.com/v1/me/', {
+    method: 'PUT',
+    body: formData,
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    // Trata a resposta da API conforme necessário
+    console.log('Imagem enviada com sucesso:', response);
+    // Redireciona para a página de Dashboard após o envio
+  })
+  .catch(error => {
+    console.error('Erro ao enviar imagem:', error);
+    // Trata o erro conforme necessário
+  });
+};
+
 
   return (
     <div className={`${back ? 'back' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
@@ -206,7 +252,7 @@ const TalentoPasso1 = () => {
                     </option>
                       ))}
                   </select>
-                  <RiArrowDropDownLine className='icondown'/>
+
                   
                   </div>
                   </div>
@@ -222,8 +268,6 @@ const TalentoPasso1 = () => {
                     </option>
                     ))}
                     </select>
-                  <RiArrowDropDownLine className='icondown'/>
-
                   </div>
                   </div>
                 </div>
@@ -283,40 +327,42 @@ const TalentoPasso1 = () => {
                       <h1 className='PassTit2'>Ótimo, agora, se você tiver experiência profissional relevante, adicione-a aqui.</h1>
                       <p className='PassPar2'>Talentos que colocam sua experiência têm duas vezes mais chances de ganhar trabalho. Mas se você está apenas começando, ainda pode criar um ótimo perfil. Basta ir para a próxima página.</p>
                     </div>
-                    {experiencia && (
-                    <div className='tudoExp flex flex-col gap-3' style={{paddingLeft: '4rem', paddingRight: '4rem', width: '100%'}}>
-                        <h1 className='expTitPr'>Sua Expêriencia</h1>
-                        <div className="flex gap-5">
-                        <div className='bord flex flex-col p-5 gap-2' style={{width: '250px'}}>
-                          <div className='flex flex-col'>
-                            <h1 className='expTit'>Titulo</h1>
-                            <span className='PassPar2'>{experiencia.titulo}</span>
-                          </div>
+                    {experiencia && experiencia.length > 0 && (
+  <div className='tudoExp flex flex-col gap-3' style={{paddingLeft: '4rem', paddingRight: '4rem', width: '100%'}}>
+    <h1 className='expTitPr'>Sua Primeira Experiência</h1>
+    <div className="flex gap-5">
+      <div className='bord flex flex-col p-5 gap-2' style={{width: '250px'}}>
+        <div className='flex flex-col'>
+          <h1 className='expTit'>Título</h1>
+          <span className='PassPar2'>{experiencia[0].title}</span>
+        </div>
 
-                          <div className='flex flex-col'>
-                            <h1 className='expTit'>Empresa</h1>
-                            <span className='PassPar2'>{experiencia.empresa}</span>
-                          </div>
+        <div className='flex flex-col'>
+          <h1 className='expTit'>Empresa</h1>
+          <span className='PassPar2'>{experiencia[0].company}</span>
+        </div>
 
-                          <div className='flex flex-col'>
-                            <h1 className='expTit'>Localização</h1>
-                            <span className='PassPar2'>{experiencia.localizacao} ({experiencia.estado})</span>
-                          </div>
+        <div className='flex flex-col'>
+          <h1 className='expTit'>Localização</h1>
+          <span className='PassPar2'>{experiencia[0].localizacao}</span>
+        </div>
 
-                          <div className='flex flex-col'>
-                            <h1 className='expTit'>Data de Inicio e Término</h1>
-                            <span className='PassPar2'>{experiencia.inicio} - {experiencia.fim}</span>
-                          </div>
-                        </div>
-                        <div className="bord p-5" style={{width: '250px'}}>
-                          <div className="flex flex-col">
-                            <h1 className='expTit'>Descrição</h1>
-                            <h1 className='descAdc'>{experiencia.descricao}</h1>
-                          </div>
-                        </div>
-                        </div>
-                    </div>
-                    )}
+        <div className='flex flex-col'>
+          <h1 className='expTit'>Data de Início e Término</h1>
+          <span className='PassPar2'>{experiencia[0].dataInicio} - {experiencia[0].dataTermino}</span>
+        </div>
+      </div>
+
+      <div className="bord p-5" style={{width: '250px'}}>
+        <div className="flex flex-col">
+          <h1 className='expTit'>Descrição</h1>
+          <span className='descAdc'>{experiencia[0].description}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
                         <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' />
@@ -346,25 +392,29 @@ const TalentoPasso1 = () => {
                   </div>
                 )}
             {!block4 && (
-              <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
-                <div className='pd flex flex-col text-center gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                  <h1 className='PassTit3'>Últimos detalhes, agora, você pode verificar e publicar seu perfil.</h1>
-                  <p className='PassPar3 self-center'>Uma foto profissional ajuda você a construir a confiança das empresas.</p>
-                </div>
-                <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
-                  <label htmlFor="file-upload" className='user'>
-                    {image ? <img src={image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} /> : <FaUserPlus />}
-                  </label>
-                  <input id="file-upload" type="file" style={{ display: 'none' }} onChange={handleImageUpload} />
-                </div>
-                <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
-                  <label htmlFor="file-upload" className='user'>
-                    <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6" />
-                  </label>
-                  <input id="file-upload" type="file" style={{ display: 'none' }} onChange={handleImageUpload} />
-                  <BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" hover='#3A61D4' border="1px solid #3B82F6" />
-                </div>
-              </div>
+    <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
+    <div className='pd flex flex-col text-center gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+      <h1 className='PassTit3'>Últimos detalhes, agora, você pode verificar e publicar seu perfil.</h1>
+      <p className='PassPar3 self-center'>Uma foto profissional ajuda você a construir a confiança das empresas.</p>
+    </div>
+    <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
+      <label htmlFor="file-upload" className='user'>
+        {image ? (
+          <img src={image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
+        ) : (
+          <FaUserPlus />
+        )}
+      </label>
+      <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+    </div>
+    <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
+      <label htmlFor="file-upload" className='user'>
+        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6"></BtnPrincipal>
+      </label>
+      <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+      <Link to='/Dashboard'><BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" hover='#3A61D4' border="1px solid #3B82F6" /></Link>
+    </div>
+  </div>
                )}
               
                 {block && (
