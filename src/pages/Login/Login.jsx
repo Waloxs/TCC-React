@@ -20,13 +20,13 @@ const Login = () => {
 
     const userData = {
       email: event.target.email.value,
-      senha: event.target.senha.value
+      password: event.target.senha.value
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/v1/login', userData);
-      localStorage.setItem('token', response.data.token); // Armazena o token no localStorage
-      navigate('/teste'); // Redireciona para '/teste'
+      const response = await axios.post('https://workzen.onrender.com/v1/user/login', userData);
+      localStorage.setItem('authToken', response.data.token); // Armazena o token no localStorage
+      navigate('/Dashboard'); // Redireciona para '/teste'
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);
       // Tratamento de erro aqui
