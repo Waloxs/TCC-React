@@ -7,12 +7,8 @@ import Input from '../../components/Form/input';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { RiArrowDropDownLine } from "react-icons/ri";
-
 import axios from 'axios';
-
-
-
+import User from '../../components/Request/Get/UserProfile.jsx';
 
 
 const TalentoPasso1 = () => {
@@ -32,7 +28,7 @@ const TalentoPasso1 = () => {
   const [inicio, setInicio] = useState('');
   const [fim, setFim] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [experiencia, setExperiencia] = useState(null); 
+  const [experiencia, setExperiencia] = useState(null);
   const navigate = useNavigate();
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
@@ -151,8 +147,11 @@ if (token) {
     // Fazer a requisição POST usando Axios
     const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experienciaData, config);
     const dados = await axios.get('https://workzen.onrender.com/v1/me/xp', config)
+
+  
+
     setExperiencia(dados.data)
-    
+
     console.log(dados);
     // Processar a resposta
     console.log('Dados enviados com sucesso:', response.data);
@@ -312,12 +311,12 @@ const token = localStorage.getItem('authToken');
             {block && (
               <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                  <h1 className='PassTit'>Muito bem, agora, adicione um título para contar ao mundo o que você faz.</h1>
+                <h1 className='PassTit'>Muito bem <User nome={true} />, agora, adicione um título para contar ao mundo o que você faz.</h1>
                   <p className='PassPar'>É a primeira coisa que as Empresas veem, então faça valer a pena. Destaque-se descrevendo sua experiência com suas próprias palavras.</p>
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
                   <p className='func'>Sua função Profissional</p>
-                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' />
+                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' required />
                 </div>
               </div>
             )}

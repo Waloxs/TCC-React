@@ -23,6 +23,7 @@ const BtnPrincipal = (props) => {
           color: props.color, 
           fontSize: '1rem'
         }}
+        onClick={props.click}
       >
         {props.texto}
       </button>

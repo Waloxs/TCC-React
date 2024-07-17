@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
+import './Dashboard.css'
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -42,22 +43,15 @@ const Dashboard = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  // Supondo que 'userData' contenha um campo 'avatarUrl' que já é uma string base64
+
   const { image } = userData;
 
   return (
     <div>
-      <Navbar showDashnone={false} />
-      <div>
-        <h1>User Data</h1>
-        <pre>{JSON.stringify(userData, null, 2)}</pre>
-        {image && (
-          <div>
-            <h2>Avatar</h2>
-            <img src={`data:image/png;base64,${image}`} alt="User Avatar" />
-          </div>
-        )}
-      </div>
+        <Navbar showDashnone={false} img={true} className='navDash' />
+  
+        
+          
     </div>
   );
 };

@@ -1,0 +1,29 @@
+.Conta, .Conta2{
+    width: 90vw;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid transparent;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 50px 15px 0px rgba(0, 0, 0, 0.00), 
+            0px -50px 15px 0px rgba(0, 0, 0, 0.00), 
+            0px 30px 12px 0px rgba(0, 0, 0, 0.01), 
+            0px -30px 12px 0px rgba(0, 0, 0, 0.01), 
+            0px 15px 9px 0px rgba(0, 0, 0, 0.05), 
+            0px -15px 9px 0px rgba(0, 0, 0, 0.05), 
+            0px 7px 7px 0px rgba(0, 0, 0, 0.09), 
+            0px -7px 7px 0px rgba(0, 0, 0, 0.09), 
+            0px 3px 4px 0px rgba(0, 0, 0, 0.10), 
+            0px -3px 4px 0px rgba(0, 0, 0, 0.10);
+    margin-top: 40px;
+}
+
+.tit{
+    font-size: 2.5rem;
+    font-family: Lexend;
+}
+
+.subt{
+    font-size: 1.5rem;
+    font-family: Lexend;
+}

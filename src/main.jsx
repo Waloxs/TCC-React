@@ -12,6 +12,7 @@ import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx'
 import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx'
 import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx'
+import Configura from './pages/Configura/Configura.jsx'
 
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "Dashboard",
     element: <Dashboard></Dashboard>
+  },
+  {
+    path: "Configura",
+    element: <Configura></Configura>
   }
 ])
 

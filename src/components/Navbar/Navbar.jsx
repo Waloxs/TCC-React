@@ -1,18 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
+import User from '../Request/Get/UserProfile.jsx';
+import { IoMdSettings } from "react-icons/io";
+import { CiLogout } from "react-icons/ci";
+import { motion } from 'framer-motion';
 
-const Navbar = ({ menu, setMenu, showDashnone = true }) => {  
+
+const Navbar = ({ menu, setMenu, showDashnone = true, img = false }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
   const [menuDropMobile1, setMenuDropMobile1] = useState(false);
   const [menuDropMobile2, setMenuDropMobile2] = useState(false);
   const [border, setBorder] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [modal, setModal] = useState(false);
+
+
+  const sitModal = () => {
+    setModal(!modal);
+    setMenuDrop1(false);
+    setMenuDrop2(false);
+    setBorder(false);
+  }
+
+
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('authToken'); // Substitua 'authToken' pela chave correta se necessário
+
+      try {
+        const response = await fetch('https://workzen.onrender.com/v1/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleClick = () => {
     setMenu(!menu);
@@ -29,7 +74,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true }) => {
   const toggleMenu2 = (e) => {
     e.preventDefault();
     setMenuDrop2(!menuDrop2);
-    setMenuDrop1(false); 
+    setMenuDrop1(false);
     setBorder(!menuDrop2);
   };
 
@@ -52,8 +97,23 @@ const Navbar = ({ menu, setMenu, showDashnone = true }) => {
   const estiloSetaMobile1 = menuDropMobile1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
   const estiloSetaMobile2 = menuDropMobile2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
+  const modalRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setModal(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <>
+    <div>
       <div className={`navbar font-lexend h-16 w-[90vw] max-w-full mx-auto shadow-[0px_247px_69px_0px_rgba(0,0,0,0.00),_0px_158px_63px_0px_rgba(0,0,0,0.01),_0px_89px_53px_0px_rgba(0,0,0,0.05),_0px_40px_40px_0px_rgba(0,0,0,0.09),_0px_10px_22px_0px_rgba(0,0,0,0.10)] flex justify-between items-center md:text-center ${estiloBorder}`}>
         <div className="flex gap-5 items-center">
           <a href="/">
@@ -79,6 +139,61 @@ const Navbar = ({ menu, setMenu, showDashnone = true }) => {
             </div>
           </div>
         )}
+
+        {img && userData && userData.image && (
+          <div className="imgCadas" onClick={sitModal}>
+            <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgUser' />
+          </div>
+        )}
+
+        {img && userData && !userData.image && (
+          <div className="imgCadas" onClick={sitModal}>
+            <div className='imgUserNone'>
+              <User prLet={true}/>
+            </div>
+          </div>
+        )}
+
+        {modal &&(
+          <>
+          {!userData.image &&(
+            <motion.div className='flex flex-col justify-between modal'  ref={modalRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }}>
+            <div className='flex flex-col items-center'>
+              <div className='imgUserNone2'>
+                <User prLet={true} size={'2rem'}/>
+              </div>
+              <div>
+                <span><User nome={true}/> <User sobrenome={true}/></span>
+              </div>
+            </div>
+            <div style={{marginBottom: '15px'}}>
+
+              <Link to="/Configura">
+              <div className='hv flex' style={{cursor: 'pointer'}}>
+              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
+              <IoMdSettings className='conf'/> 
+              <h1>Configurações</h1>
+              </div>
+              </div>
+              </Link>
+
+              <div className='hv flex' style={{cursor: 'pointer'}}>
+              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
+              <CiLogout className='conf'/> 
+              <h1>Sair</h1>
+              </div>
+              </div>
+            </div>
+            </motion.div>
+          )}
+          {userData.image &&(
+              <div className='modal'>
+               <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgUser' />
+              </div>
+          )}
+          </>
+        )}
+
       </div>
 
       {menuDrop1 && (
@@ -140,7 +255,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
