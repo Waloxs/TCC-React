@@ -11,7 +11,7 @@ import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 
 
-const Navbar = ({ menu, setMenu, showDashnone = true, img = false }) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
@@ -121,16 +121,23 @@ const Navbar = ({ menu, setMenu, showDashnone = true, img = false }) => {
             <Link to="/"><img src={LogoResp} alt="Logo" className="LogoResp" /></Link>
           </a>
 
+        {link && (
           <div className="links flex gap-5">
             <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={toggleMenu1}>Buscar Trabalho {estiloSeta1}</a>
             <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={toggleMenu2}>Anunciar Vaga {estiloSeta2}</a>
           </div>
+        )}
+
         </div>
 
         {showDashnone && (
           <div className="dashnone flex items-center gap-5 mr-[3rem]">
             <div className='dnone'><Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px"/></Link></div>
+
+            {criConta && (
             <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px"/></Link></div>
+            )}
+
 
             <div className='menuHamb' onClick={handleClick}>
               <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>

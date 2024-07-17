@@ -75,7 +75,10 @@ const Login = () => {
                   )}
           </div>
 
-          <span className='sub flex self-end'>Esqueceu a Senha?</span>
+          <Link to="/Password" className='flex self-end'>
+            <span className='sub'>Esqueceu a Senha?</span>
+          </Link>
+
           <button type='submit' className='btnLogin'>Entrar</button>
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>

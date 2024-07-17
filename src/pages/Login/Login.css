@@ -6,7 +6,9 @@
     overflow-y: hidden;
 }
 
-
+.sub:hover{
+    text-decoration: underline;
+}
 
 @keyframes animaCont {
     from {
