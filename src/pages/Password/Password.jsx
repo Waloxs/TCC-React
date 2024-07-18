@@ -7,7 +7,7 @@ import { MdMarkEmailRead } from "react-icons/md";
 import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
-
+import Footer from '../../components/Footer/Footer';
 
 
 
@@ -137,7 +137,9 @@ const handleModal2 = () => {
     </div>
     )}
 
-    </div>
+<Footer/>
+
+  </div>
   )
 }
 

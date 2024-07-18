@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 
 
 const Login = () => {
@@ -79,7 +80,9 @@ const Login = () => {
             <span className='sub'>Esqueceu a Senha?</span>
           </Link>
 
-          <button type='submit' className='btnLogin'>Entrar</button>
+
+          <BtnPrincipal class="btnLogin" texto="Entrar" color="#fff" width="100%" back="#3B82F6" hover='#3A61D4' /> {/* Botão para salvar as mudanças */}
+          
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
