@@ -1,21 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Home from './pages/Home/Home.jsx'
-import './assets/styles/index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Home from './pages/Home/Home.jsx';
+import './assets/styles/index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Login from './pages/Login/Login.jsx'
-import Escolha from './pages/Escolha/Escolha.jsx'
-import Empresa from './pages/Empresa/Empresa.jsx'
-import Talento from './pages/Talento/Talento.jsx'
-import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx'
-import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx'
-import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx'
-import Dashboard from './pages/Dashboard/Dashboard.jsx'
-import Configura from './pages/Configura/Configura.jsx'
-import Password from './pages/Password/Password.jsx'
-
-
+import Login from './pages/Login/Login.jsx';
+import Escolha from './pages/Escolha/Escolha.jsx';
+import Empresa from './pages/Empresa/Empresa.jsx';
+import Talento from './pages/Talento/Talento.jsx';
+import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx';
+import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx';
+import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import Configura from './pages/Configura/Configura.jsx';
+import Password from './pages/Password/Password.jsx';
+import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,8 +30,8 @@ const router = createBrowserRouter([
     element: <Escolha></Escolha>
   },
   {
-  path: "Empresa",
-  element: <Empresa></Empresa>
+    path: "Empresa",
+    element: <Empresa></Empresa>
   },
   {
     path: "Talento",
@@ -61,11 +60,15 @@ const router = createBrowserRouter([
   {
     path: "Password",
     element: <Password></Password>
+  },
+  {
+    path: "verificar-email/:token",
+    element: <VerificEmail></VerificEmail>
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router}/>
   </React.StrictMode>,
-)
+);

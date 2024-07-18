@@ -3,10 +3,10 @@ import axios from 'axios';
 import imgTalento from '../../assets/imgTalento.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
-import BtnPrincipal from '../../components/Buttons/BtnPrincipal'
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import './Talento.css';
-import { Link, useNavigate } from 'react-router-dom'; // updated import
-import Input from '../../components/Form/input';// assuming Input component is properly implemented
+import { Link, useNavigate } from 'react-router-dom';
+import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 
@@ -22,7 +22,7 @@ const Talento = () => {
   const togglePasswordVisibility2 = () => {
     setPasswordVisible2(!passwordVisible2);
   };
-  
+
   const handleSave = async (e) => {
     e.preventDefault();
     const form = e.target.closest('form');
@@ -33,19 +33,25 @@ const Talento = () => {
         email,
         password: senha
       };
-  
+
       try {
         const response = await axios.post('https://workzen.onrender.com/v1/user/register', dados);
         console.log(response.data);
 
+        if (response.status === 201) {
+          const { token } = response.data;
+          localStorage.setItem('authToken', token);
 
+          // Enviar email de verificação
+          try {
+            const emailResponse = await axios.post('https://workzen.onrender.com/v1/mail/send/verify', { email });
+            console.log('Email de verificação enviado:', emailResponse.data);
+          } catch (emailError) {
+            console.error('Erro ao enviar o email de verificação:', emailError);
+          }
 
-        const { token } = response.data;
-        localStorage.setItem('authToken', token);
-
-
-
-        navigate("/TalentoPasso1"); // Redireciona após salvar
+          navigate("/TalentoPasso1"); // Redireciona após salvar e enviar o email
+        }
       } catch (error) {
         console.error('Erro ao enviar os dados:', error);
       }
@@ -53,7 +59,6 @@ const Talento = () => {
       form.reportValidity();
     }
   };
-  
 
   return (
     <div>
