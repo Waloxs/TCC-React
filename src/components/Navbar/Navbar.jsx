@@ -190,18 +190,42 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
               </Link>
 
               <div className='hv flex' style={{cursor: 'pointer'}}>
-              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
+              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}} onClick={ApagaToken}>
               <CiLogout className='conf'/> 
-              <h1 onClick={ApagaToken}>Sair</h1>
+              <h1>Sair</h1>
               </div>
               </div>
             </div>
             </motion.div>
           )}
           {userData.image &&(
-              <div className='modal'>
-               <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgUser' />
-              </div>
+                        <motion.div className='flex flex-col justify-between modal'  ref={modalRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }}>
+                        <div className='flex flex-col items-center'>
+                           <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgModal' />
+                        
+                          <div>
+                            <span><User nome={true}/> <User sobrenome={true}/></span>
+                          </div>
+                        </div>
+                        <div style={{marginBottom: '15px'}}>
+            
+                          <Link to="/Configura">
+                          <div className='hv flex' style={{cursor: 'pointer'}}>
+                          <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
+                          <IoMdSettings className='conf'/> 
+                          <h1>Configurações</h1>
+                          </div>
+                          </div>
+                          </Link>
+            
+                          <div className='hv flex' style={{cursor: 'pointer'}}>
+                          <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}} onClick={ApagaToken}>
+                          <CiLogout className='conf'/> 
+                          <h1>Sair</h1>
+                          </div>
+                          </div>
+                        </div>
+                        </motion.div>
           )}
           </>
         )}

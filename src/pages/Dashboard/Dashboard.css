@@ -27,6 +27,14 @@
     margin-top: 20px;
 }
 
+.imgModal{
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
 .imgCadas{
     margin-right: 2rem;
     cursor: pointer;
