@@ -18,6 +18,8 @@
     margin-top: 40px;
 }
 
+
+
 .tit{
     font-size: 2.5rem;
     font-family: Lexend;
@@ -26,4 +28,20 @@
 .subt{
     font-size: 1.5rem;
     font-family: Lexend;
+}
+
+.divPen{
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+
+
+.divPen:hover{
+    background-color: #3B82F6;
+
+    .pen{
+        color: #fff;
+    }
 }

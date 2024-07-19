@@ -4,12 +4,20 @@ import User from '../../components/Request/Get/UserProfile';
 import './Configura.css';
 import { FaPen } from "react-icons/fa";
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
+import Footer from '../../components/Footer/Footer';
+import { motion } from 'framer-motion';
+
 
 const Configura = () => {
     const [input, setInput] = useState('');
     const [input2, setInput2] = useState('');
     const [input3, setInput3] = useState('');
     const [userData, setUserData] = useState(null); 
+    const [mostra, setMostra] = useState(true);
+
+    const clickMostra = () => {
+        setMostra(!mostra);
+    }
 
     useEffect(() => {
         loadUserData(); // Carregar dados do usuário ao montar o componente
@@ -87,9 +95,12 @@ const Configura = () => {
         }
     };
 
+
+
     return (
         <div>
             <Navbar showDashnone={false} img={true} className='navDash' />
+
 
             <div className='Conta'>
                 <div>
@@ -102,7 +113,9 @@ const Configura = () => {
                         <User id={true} />
                     </div>
 
-                    <FaPen style={{ cursor: 'pointer', fontSize: '2rem'}} />
+                    <div className='divPen' onClick={clickMostra} >
+                        <FaPen style={{ fontSize: '2rem'}} className='pen'/>
+                    </div>
                 </div>
 
                 <div>
@@ -120,8 +133,10 @@ const Configura = () => {
                     <User email={true} />
                 </div>
             </div>
+            
 
-            <div className="Conta2">
+            {!mostra && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }} className="Conta2">
                 <h1 className='tit'>Conta</h1>
 
                 <div>
@@ -155,7 +170,10 @@ const Configura = () => {
                     <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" hover='#3A61D4' click={saveChanges}>Salvar</BtnPrincipal> {/* Botão para salvar as mudanças */}
                 </div>
 
-            </div>
+            </motion.div>
+            )}
+
+            <Footer/>
         </div>
     );
 };

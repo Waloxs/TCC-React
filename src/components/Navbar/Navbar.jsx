@@ -30,6 +30,11 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
   }
 
 
+  const ApagaToken = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/Login'; 
+  };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -187,7 +192,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
               <div className='hv flex' style={{cursor: 'pointer'}}>
               <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
               <CiLogout className='conf'/> 
-              <h1>Sair</h1>
+              <h1 onClick={ApagaToken}>Sair</h1>
               </div>
               </div>
             </div>

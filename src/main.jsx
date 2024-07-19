@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Configura from './pages/Configura/Configura.jsx';
 import Password from './pages/Password/Password.jsx';
 import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
+import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "verificar-email/:token",
     element: <VerificEmail></VerificEmail>
+  },
+  {
+    path: "recuperar-senha/:token",
+    element: <PasswordReset></PasswordReset>
   }
 ]);
 
