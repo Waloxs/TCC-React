@@ -69,7 +69,7 @@ const Configura = () => {
             return;
         }
 
-        const updatedUserData = { ...userData, firstName: input, lastName: input2, email: input3 };
+        const updatedUserData = { firstName: input, lastName: input2, email: input3 };
 
         console.log(updatedUserData);
 
