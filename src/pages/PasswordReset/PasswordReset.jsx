@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Input from '../../components/Form/input'; // Certifique-se de que o caminho está correto
-import BtnPrincipal from '../../components/Buttons/BtnPrincipal'; // Certifique-se de que o caminho está correto
+import Input from '../../components/Form/input'; 
+import BtnPrincipal from '../../components/Buttons/BtnPrincipal'; 
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 
 const PasswordReset = () => {
@@ -95,6 +95,7 @@ const PasswordReset = () => {
               type={password2Visible ? 'text' : 'password'}
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              width="100%"
             />
             {password2Visible ? (
               <IoEyeOffSharp className='Eye' onClick={togglePassword2} />

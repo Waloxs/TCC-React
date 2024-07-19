@@ -4,30 +4,17 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import './Password.css';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { MdMarkEmailRead } from "react-icons/md";
-import Input from '../../components/Form/input';
-import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
-import { RiLockPasswordLine } from "react-icons/ri";
 import Footer from '../../components/Footer/Footer';
 
 const Password = () => {
   const [modal, setModal] = useState(true);
   const [modal2, setModal2] = useState(false);
-  const [modal3, setModal3] = useState(false);
-  const [password, setPassword] = useState(false);
-  const [password2, setPassword2] = useState(false);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const togglePassword = () => {
-    setPassword(!password);
-  };
-
-  const togglePassword2 = () => {
-    setPassword2(!password2);
-  };
-
+  
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -64,11 +51,6 @@ const Password = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleModal2 = () => {
-    setModal2(false);
-    setModal3(true);
   };
 
   return (
@@ -117,51 +99,14 @@ const Password = () => {
               </div>
 
               <div style={{marginTop: '40px'}} className='flex items-center justify-end'>
-                <BtnPrincipal texto="Entrar" color="#fff" width="200px" back="#3B82F6" hover='#3A61D4' click={handleModal2} />
+                <BtnPrincipal texto="Entrar" color="#fff" width="200px" back="#3B82F6" hover='#3A61D4'/>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {modal3 && (
-        <div className='flex justify-center items-center' style={{height: '100%'}}>
-          <div className='flex flex-col items-center justify-center br' style={{ margin: '0 auto'}}>
-            <RiLockPasswordLine style={{fontSize: '7rem'}}/>
-
-            <div style={{width: '100%'}}>
-              <div className='flex flex-col items-center'>
-                <h1 className='titSenha'>Atualizar Senha</h1>
-              </div>
-
-              <div className='cpSenha' style={{marginTop: '20px'}}>
-                <h1 className='subSenha2'>Nova Senha</h1>
-                <Input name='senha' placeholder='Senha' type={password ? 'text' : 'password'} />
-                {password ? (
-                  <IoEyeOffSharp className='Eye' onClick={togglePassword} />
-                ) : (
-                  <IoEyeSharp className='Eye' onClick={togglePassword} />
-                )}
-              </div>
-
-              <div className='cpSenha' style={{marginTop: '20px'}}>
-                <h1 className='subSenha2'>Confirmar Senha</h1>
-                <Input name='senha' placeholder='Confirmar Senha' type={password2 ? 'text' : 'password'} />
-                {password2 ? (
-                  <IoEyeOffSharp className='Eye' onClick={togglePassword2} />
-                ) : (
-                  <IoEyeSharp className='Eye' onClick={togglePassword2} />
-                )}
-              </div>
-
-              <div style={{marginTop: '40px'}} className='flex items-center justify-center'>
-                <BtnPrincipal texto="Atualizar Senha" color="#fff" width="200px" back="#3B82F6" hover='#3A61D4' />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
+     
       <Footer/>
     </div>
   );
