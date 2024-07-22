@@ -18,6 +18,33 @@
     margin-top: 40px;
 }
 
+.imgModal2{
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+    transition: ease .4s;
+}
+
+
+.imgModal2:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
+}
+
+.cameraIcon{
+    position: absolute;
+    top: calc(50% + 10px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.user{
+    position: relative;
+}
 
 
 .tit{

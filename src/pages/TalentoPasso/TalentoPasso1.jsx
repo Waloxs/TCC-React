@@ -33,7 +33,68 @@ const TalentoPasso1 = () => {
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
+  const [profissional, setProfissional] = useState('');
+  const [biografia, setBiografia] = useState('');
 
+
+
+  const handleRegister = async () => {
+    const token = localStorage.getItem('authToken');
+    
+    if (token) {
+      try {
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        };
+  
+        const data = {
+         titulo: profissional,
+        };
+  
+        const response = await axios.put('https://workzen.onrender.com/v1/me', data, config);
+        console.log('Dados enviados com sucesso:', response.data);
+        // Aqui você pode adicionar lógica adicional após enviar os dados
+      } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+        // Aqui você pode lidar com erros de requisição
+      }
+    } else {
+      console.error('Token não encontrado no localStorage');
+    }
+  };
+  
+
+  const handleRegister2 = async () => {
+    const token = localStorage.getItem('authToken');
+    
+    if (token) {
+      try {
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        };
+  
+        const data = {
+         bio: biografia,
+        };
+  
+        const response = await axios.put('https://workzen.onrender.com/v1/me', data, config);
+        console.log('Dados enviados com sucesso:', response.data);
+        // Aqui você pode adicionar lógica adicional após enviar os dados
+      } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+        // Aqui você pode lidar com erros de requisição
+      }
+    } else {
+      console.error('Token não encontrado no localStorage');
+    }
+  };
+  
 
   useEffect(() => {
     // Lista de estados com os códigos de UF
@@ -93,6 +154,7 @@ const TalentoPasso1 = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    handleRegister();
     setBlock(!block);
     setBlock2(!block2);
     setValor('Azul50');
@@ -108,6 +170,7 @@ const TalentoPasso1 = () => {
 
   const handleClick3 = (e) => {
     e.preventDefault();
+    handleRegister2();
     setBlock3(!block3);
     setBlock4(!block4);
     setValor('Azul100');
@@ -316,7 +379,7 @@ const token = localStorage.getItem('authToken');
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
                   <p className='func'>Sua função Profissional</p>
-                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' required />
+                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' required value={profissional} onChange={(e) => setProfissional(e.target.value)}/>
                 </div>
               </div>
             )}
@@ -386,7 +449,13 @@ const token = localStorage.getItem('authToken');
                     </div>
                     <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
                       <p className='PassPar2'>Sua Biografia</p>
-                        <textarea id="area2" style={{ height: '120px', maxWidth: '600px', resize: 'none'}} ></textarea>
+                      <label htmlFor="area2">Biografia</label>
+                    <textarea
+                      id="area2"
+                      style={{ height: '120px', maxWidth: '600px', resize: 'none' }}
+                      value={biografia}
+                      onChange={(e) => setBiografia(e.target.value)}
+                    />
                     </div>
                   </div>
                 )}

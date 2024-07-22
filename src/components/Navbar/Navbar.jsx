@@ -154,7 +154,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
 
         {img && userData && userData.image && (
           <div className="imgCadas" onClick={sitModal}>
-            <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgUser' />
+            <img src={`${userData.image}`} alt="User Avatar" className='imgUser' />
           </div>
         )}
 
@@ -201,7 +201,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           {userData.image &&(
                         <motion.div className='flex flex-col justify-between modal'  ref={modalRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }}>
                         <div className='flex flex-col items-center'>
-                           <img src={`data:image/png;base64,${userData.image}`} alt="User Avatar" className='imgModal' />
+                           <img src={`${userData.image}`} alt="User Avatar" className='imgModal' />
                         
                           <div>
                             <span><User nome={true}/> <User sobrenome={true}/></span>
