@@ -21,12 +21,11 @@ const Home = () => {
       setIsImageLoaded(true); 
     };
 
-    // Garantir que o loader apareça por pelo menos 5 segundos
     const minLoaderTime = setTimeout(() => {
       if (isImageLoaded) {
         setShowLoader(false);
       }
-    }, 5000);
+    }, 3000);
 
    
     return () => {

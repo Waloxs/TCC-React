@@ -10,10 +10,12 @@ import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 
 const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -26,11 +28,10 @@ const Login = () => {
 
     try {
       const response = await axios.post('https://workzen.onrender.com/v1/user/login', userData);
-      localStorage.setItem('authToken', response.data.token); // Armazena o token no localStorage
-      navigate('/Dashboard'); // Redireciona para '/teste'
+      localStorage.setItem('authToken', response.data.token);
+      navigate('/Dashboard'); 
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);
-      // Tratamento de erro aqui
     }
   };
 
@@ -46,11 +47,23 @@ const Login = () => {
     image.onload = () => {
       setIsImageLoaded(true);
     };
-  }, []);
 
-  if (!isImageLoaded) {
+    const Loader = setTimeout(() => {
+      if(isImageLoaded){
+        setShowLoader(false);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(Loader)
+    };
+  }, [isImageLoaded]);
+
+
+  if (showLoader) {
     return (
       <div className='flex justify-center items-center' style={{ background: '#fff', height: '100vh' }}>
+        <ClipLoader color="#123abc" loading={true} size={100} />
       </div>
     );
   }
@@ -86,10 +99,10 @@ const Login = () => {
           <div className="line"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
-          <div className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
+          <a href='https://workzen.onrender.com/v1/auth/google' className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
               <FcGoogle style={{ width: '20px', height: '20px' }} />
               <h2 className='gog'>Google</h2>
-          </div>
+          </a>
         </form>
         <img className='imgLogin' src={img} alt="Login Visual" style={{ maxWidth: '34rem', height: '40rem' }} />
       </div>
