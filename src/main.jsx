@@ -16,6 +16,7 @@ import Configura from './pages/Configura/Configura.jsx';
 import Password from './pages/Password/Password.jsx';
 import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
 import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
+import Magic from './pages/magic/magic.jsx';
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
   {
     path: "recuperar-senha/:token",
     element: <PasswordReset></PasswordReset>
+  },
+  {
+    path: "Magic",
+    element: <Magic></Magic>
   }
 ]);
 

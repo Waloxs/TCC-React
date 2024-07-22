@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const magic = () => {
+const Magic = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const magic = () => {
   );
 };
 
-export default magic;
+export default Magic;
