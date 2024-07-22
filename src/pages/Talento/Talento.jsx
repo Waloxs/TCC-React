@@ -103,10 +103,10 @@ const Talento = () => {
               </form>
               <h3 className='cont2 flex self-center'>Ou continuar com</h3>
               <div className='flex justify-center'>
-                <div className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
+                <a href='https://workzen.onrender.com/v1/auth/google' className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
                   <FcGoogle style={{ width: '20px', height: '20px' }} />
                   <h2 className='gog'>Google</h2>
-                </div>
+                </a>
               </div>
             </div>
             <img className='imgTalento' src={imgTalento} alt="Login Visual" style={{ maxWidth: '30rem', height: '35rem' }} />
