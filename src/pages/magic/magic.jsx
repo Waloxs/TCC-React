@@ -10,7 +10,6 @@ const Magic = () => {
 
     if (token) {
       localStorage.setItem('authToken', token);
-
       navigate('/Dashboard');
     }
   }, [navigate]);
