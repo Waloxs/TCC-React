@@ -29,7 +29,7 @@ const Dashboard = () => {
         const data = await response.json();
         setUserData(data);
       } catch (error) {
-        navigate('/Login');      
+        navigate('/Login');  
         setError(error);
       } finally {
         setLoading(false);
@@ -53,9 +53,6 @@ const Dashboard = () => {
   return (
     <div>
         <Navbar showDashnone={false} img={true} className='navDash' />
-  
-        
-          
     </div>
   );
 };
