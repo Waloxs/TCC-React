@@ -36,33 +36,6 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
   };
 
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem('authToken'); // Substitua 'authToken' pela chave correta se necessário
-
-      try {
-        const response = await fetch('https://workzen.onrender.com/v1/me', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   const handleClick = () => {
     setMenu(!menu);

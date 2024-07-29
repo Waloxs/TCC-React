@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import imgTalento from '../../assets/imgTalento.png';
 import Logo from '../../assets/Logo.png';
@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
+import { ThreeDots } from 'react-loader-spinner';
 
 const Talento = () => {
   const [passwordVisible2, setPasswordVisible2] = useState(false);
@@ -59,6 +60,44 @@ const Talento = () => {
       form.reportValidity();
     }
   };
+
+
+  
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = imgTalento;
+    
+    const timeout = setTimeout(() => {
+      setShowLoader(false); 
+      image.onload = () => {
+        setIsImageLoaded(!isImageLoaded); 
+      };
+    }, 2000);
+
+    return () => clearTimeout(timeout); 
+  }, []);
+
+
+  if (showLoader) {
+    return (
+      <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>
+        <div className="loader-container">
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="#0866FF"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            visible={true}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

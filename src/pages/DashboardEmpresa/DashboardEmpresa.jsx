@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
-import './Dashboard.css'
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 
-const Dashboard = () => {
-  const [userData, setUserData] = useState(null);
+
+const DashboardEmpresa = () => {
+
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchUserData = async () => {
+      
       const token = localStorage.getItem('authToken'); 
 
       try {
-        const response = await fetch('https://workzen.onrender.com/v1/me', {
+        const response = await fetch('https://workzen.onrender.com/v1/empresa/profile', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
+
+        
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -28,16 +34,18 @@ const Dashboard = () => {
 
         const data = await response.json();
         setUserData(data);
+        console.log(data);
       } catch (error) {
-        navigate('/Login');  
+        navigate('/Empresa');  
         setError(error);
+        console.log(error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchUserData();
-  }, [navigate]);
+}, [navigate]);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -48,12 +56,12 @@ const Dashboard = () => {
   }
 
 
-
   return (
+    
     <div>
-        <Navbar showDashnone={false} img={true} className='navDash' />
+      <Navbar showDashnone={false} img={false} className='navDash' />
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default DashboardEmpresa

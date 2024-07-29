@@ -17,6 +17,7 @@ import Password from './pages/Password/Password.jsx';
 import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
 import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
 import Magic from './pages/Magic/Magic.jsx';
+import DashboardEmpresa from './pages/DashboardEmpresa/DashboardEmpresa.jsx';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: "Magic",
     element: <Magic></Magic>
+  },
+  {
+    path: "DashboardEmpresa",
+    element: <DashboardEmpresa></DashboardEmpresa>
   }
 ]);
 
