@@ -16,7 +16,7 @@ import Configura from './pages/Configura/Configura.jsx';
 import Password from './pages/Password/Password.jsx';
 import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
 import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
-import Magic from './pages/Magic/Magic.jsx';
+import Magic from './pages/magic/magic.jsx';
 import DashboardEmpresa from './pages/DashboardEmpresa/DashboardEmpresa.jsx';
 
 const router = createBrowserRouter([
