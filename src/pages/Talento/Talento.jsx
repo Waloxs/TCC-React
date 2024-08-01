@@ -43,7 +43,6 @@ const Talento = () => {
           const { token } = response.data;
           localStorage.setItem('authToken', token);
 
-          // Enviar email de verificação
           try {
             const emailResponse = await axios.post('https://workzen.onrender.com/v1/mail/send/verify', { email });
             console.log('Email de verificação enviado:', emailResponse.data);

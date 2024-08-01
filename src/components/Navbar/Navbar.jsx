@@ -6,24 +6,35 @@ import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
 import User from '../Request/Get/UserProfile.jsx';
+import UserEmpresa from '../Request/Get/UserEmpresa.jsx';
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 
 
-const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true }) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, userData, userDataEmpresa}) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
   const [menuDropMobile1, setMenuDropMobile1] = useState(false);
   const [menuDropMobile2, setMenuDropMobile2] = useState(false);
   const [border, setBorder] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [modal, setModal] = useState(false);
+  const [modal2, setModal2] = useState(false);
+
+
+
 
 
   const sitModal = () => {
     setModal(!modal);
+    setMenuDrop1(false);
+    setMenuDrop2(false);
+    setBorder(false);
+  }
+
+  const sitModal2 = () => {
+    setModal2(!modal2);
     setMenuDrop1(false);
     setMenuDrop2(false);
     setBorder(false);
@@ -125,6 +136,9 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           </div>
         )}
 
+        {userTalento && (
+
+        <>
         {img && userData && userData.image && (
           <div className="imgCadas" onClick={sitModal}>
             <img src={`${userData.image}`} alt="User Avatar" className='imgUser' />
@@ -139,70 +153,109 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           </div>
         )}
 
-        {modal &&(
-          <>
-          {!userData.image &&(
-            <motion.div className='flex flex-col justify-between modal'  ref={modalRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }}>
-            <div className='flex flex-col items-center'>
-              <div className='imgUserNone2'>
-                <User prLet={true} size={'2rem'}/>
-              </div>
-              <div>
-                <span><User nome={true}/> <User sobrenome={true}/></span>
-              </div>
-            </div>
-            <div style={{marginBottom: '15px'}}>
-
-              <Link to="/Configura">
-              <div className='hv flex' style={{cursor: 'pointer'}}>
-              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
-              <IoMdSettings className='conf'/> 
+{modal && (
+  <>
+    <motion.div
+      className='flex flex-col justify-between modal'
+      ref={modalRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeOut", duration: 1 }}
+    >
+      <div className='flex flex-col items-center'>
+        {userData.image ? (
+          <img src={`${userData.image}`} alt="User Avatar" className='imgModal' />
+        ) : (
+          <div className='imgUserNone2'>
+            <User prLet={true} size={'2rem'} />
+          </div>
+        )}
+        <div>
+          <span>
+            <User nome={true} /> <User sobrenome={true} />
+          </span>
+        </div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <Link to="/Configura">
+          <div className='hv flex' style={{ cursor: 'pointer' }}>
+            <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+              <IoMdSettings className='conf' />
               <h1>Configurações</h1>
-              </div>
-              </div>
-              </Link>
-
-              <div className='hv flex' style={{cursor: 'pointer'}}>
-              <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}} onClick={ApagaToken}>
-              <CiLogout className='conf'/> 
-              <h1>Sair</h1>
-              </div>
-              </div>
             </div>
-            </motion.div>
-          )}
-          {userData.image &&(
-                        <motion.div className='flex flex-col justify-between modal'  ref={modalRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 1 }}>
-                        <div className='flex flex-col items-center'>
-                           <img src={`${userData.image}`} alt="User Avatar" className='imgModal' />
-                        
-                          <div>
-                            <span><User nome={true}/> <User sobrenome={true}/></span>
-                          </div>
-                        </div>
-                        <div style={{marginBottom: '15px'}}>
-            
-                          <Link to="/Configura">
-                          <div className='hv flex' style={{cursor: 'pointer'}}>
-                          <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}}>
-                          <IoMdSettings className='conf'/> 
-                          <h1>Configurações</h1>
-                          </div>
-                          </div>
-                          </Link>
-            
-                          <div className='hv flex' style={{cursor: 'pointer'}}>
-                          <div className='flex gap-2 items-center' style={{cursor: 'pointer', marginLeft: '20px'}} onClick={ApagaToken}>
-                          <CiLogout className='conf'/> 
-                          <h1>Sair</h1>
-                          </div>
-                          </div>
-                        </div>
-                        </motion.div>
-          )}
-          </>
+          </div>
+        </Link>
+        <div className='hv flex' style={{ cursor: 'pointer' }}>
+          <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
+            <CiLogout className='conf' />
+            <h1>Sair</h1>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  </>
+)}
+
+        </>
         )}
 
+        {NavEmpresa && (
+
+<>
+{userDataEmpresa && (
+  <>
+  <div className="imgCadas" onClick={sitModal2}>
+    <div className='imgUserNone'>
+      <UserEmpresa prLet={true}/>
+    </div>
+  </div>
+
+{modal2 && (
+    <motion.div
+      className='flex flex-col justify-between modal'
+      ref={modalRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeOut", duration: 1 }}
+    >
+      <div className='flex flex-col items-center'>
+        {userDataEmpresa.image ? (
+          <img src={`${userDataEmpresa.image}`} alt="User Avatar" className='imgModal' />
+        ) : (
+          <div className='imgUserNone2'>
+            <UserEmpresa prLet={true} size={'2rem'} />
+          </div>
+        )}
+        <div>
+          <span>
+            <UserEmpresa nome={true} />
+          </span>
+        </div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <Link to="/Configura2">
+          <div className='hv flex' style={{ cursor: 'pointer' }}>
+            <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+              <IoMdSettings className='conf' />
+              <h1>Configurações</h1>
+            </div>
+          </div>
+        </Link>
+        <div className='hv flex' style={{ cursor: 'pointer' }}>
+          <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
+            <CiLogout className='conf' />
+            <h1>Sair</h1>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+)}
+</>
+)}
+
+
+</>
+)}
       </div>
 
       {menuDrop1 && (

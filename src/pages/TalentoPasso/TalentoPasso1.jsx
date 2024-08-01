@@ -56,10 +56,8 @@ const TalentoPasso1 = () => {
   
         const response = await axios.put('https://workzen.onrender.com/v1/me', data, config);
         console.log('Dados enviados com sucesso:', response.data);
-        // Aqui você pode adicionar lógica adicional após enviar os dados
       } catch (error) {
         console.error('Erro ao enviar dados:', error);
-        // Aqui você pode lidar com erros de requisição
       }
     } else {
       console.error('Token não encontrado no localStorage');

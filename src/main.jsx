@@ -13,6 +13,7 @@ import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx';
 import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Configura from './pages/Configura/Configura.jsx';
+import Configura2 from './pages/Configura2/Configura2.jsx';
 import Password from './pages/Password/Password.jsx';
 import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
 import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "Configura",
     element: <Configura></Configura>
+  },
+  {
+    path: "Configura2",
+    element: <Configura2></Configura2>
   },
   {
     path: "Password",

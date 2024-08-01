@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   return (
     <div>
-        <Navbar showDashnone={false} img={true} className='navDash' />
+        <Navbar showDashnone={false} img={true} userTalento={true} className='navDash' userData={userData}/>
     </div>
   );
 };

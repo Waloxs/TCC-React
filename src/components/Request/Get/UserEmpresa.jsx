@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-const User = ({ nome, sobrenome, email, prLet, id, ...props }) => {
+const UserEmpresa = ({ nome, email, cnpj, areaAtua, prLet, ...props }) => {
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ const User = ({ nome, sobrenome, email, prLet, id, ...props }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://workzen.onrender.com/v1/me', config);
+        const response = await axios.get('https://workzen.onrender.com/v1/empresa/profile', config);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -40,22 +41,22 @@ const User = ({ nome, sobrenome, email, prLet, id, ...props }) => {
   return (
     <>
       {prLet && (
-        <span style={{ color: '#fff', fontSize: props.size }}>{data.firstName.charAt(0)}</span>
+        <span style={{ color: '#fff', fontSize: props.size }}>{data.nome.charAt(0)}</span>
       )}
       {nome && (
-        <>{data.firstName}</>
-      )}
-      {sobrenome && (
-        <>{data.lastName}</>
+        <>{data.nome}</>
       )}
       {email && (
         <>{data.email}</>
       )}
-      {id && (
-        <>{data._id}</>
+      {cnpj && (
+        <>{data.cnpj}</>
+      )}
+      {areaAtua && (
+        <>{data.ramo_atividade}</>
       )}
     </>
   );
 };
 
-export default User;
+export default UserEmpresa;

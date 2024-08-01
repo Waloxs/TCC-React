@@ -25,15 +25,22 @@ const Login = () => {
       email: event.target.email.value,
       password: event.target.senha.value
     };
-
+    
     try {
       const response = await axios.post('https://workzen.onrender.com/v1/user/login', userData);
       localStorage.setItem('authToken', response.data.token);
-      navigate('/Dashboard'); 
+      navigate('/Dashboard');
     } catch (error) {
-      console.error('Erro ao enviar os dados:', error);
+      console.error('Erro ao tentar login de usuário:', error);
+      try {
+        const responseEmpresa = await axios.post('https://workzen.onrender.com/v1/empresa/login', userData);
+        localStorage.setItem('authToken', responseEmpresa.data.token);
+        navigate('/DashboardEmpresa');
+      } catch (empresaError) {
+        console.error('Erro ao tentar login de empresa:', empresaError);
+      }
     }
-  };
+  }
 
   const [password, setPassword] = useState(false);
 
