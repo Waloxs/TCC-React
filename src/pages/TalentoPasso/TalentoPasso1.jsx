@@ -248,7 +248,7 @@ if (token) {
       setBlock2(true);
       setBlock3(false);
       setBlock4(true);
-  };
+  }
   
 }
 

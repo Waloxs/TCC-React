@@ -170,7 +170,7 @@ const TalentoPasso1 = () => {
       setBlock2(true);
       setBlock3(false);
       setBlock4(true);
-  };
+  }
   
 }
 
