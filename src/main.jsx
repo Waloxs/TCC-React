@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './pages/Home/Home.jsx';
+import Home from './views/Home/Home.jsx';
 import './assets/styles/index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Login from './pages/Login/Login.jsx';
-import Escolha from './pages/Escolha/Escolha.jsx';
-import Empresa from './pages/Empresa/Empresa.jsx';
-import Talento from './pages/Talento/Talento.jsx';
-import ProtectedPage from './pages/ProtectedPage/ProtectedPage.jsx';
-import TalentoPasso1 from './pages/TalentoPasso/TalentoPasso1.jsx';
-import EmpresaPasso from './pages/EmpresaPasso/EmpresaPasso.jsx';
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
-import Configura from './pages/Configura/Configura.jsx';
-import Configura2 from './pages/Configura2/Configura2.jsx';
-import Password from './pages/Password/Password.jsx';
-import VerificEmail from './pages/VerificEmail/VerificEmail.jsx';
-import PasswordReset from './pages/PasswordReset/PasswordReset.jsx';
-import Magic from './pages/magic/magic.jsx';
-import DashboardEmpresa from './pages/DashboardEmpresa/DashboardEmpresa.jsx';
+import Login from './views/Login/Login.jsx';
+import Escolha from './views/Escolha/Escolha.jsx';
+import Empresa from './views/Empresa/Empresa.jsx';
+import Talento from './views/Talento/Talento.jsx';
+import ProtectedPage from './views/ProtectedPage/ProtectedPage.jsx';
+import TalentoPasso1 from './views/TalentoPasso/TalentoPasso1.jsx';
+import EmpresaPasso from './views/EmpresaPasso/EmpresaPasso.jsx';
+import Dashboard from './views/Dashboard/Dashboard.jsx';
+import Configura from './views/Configura/Configura.jsx';
+import Configura2 from './views/Configura2/Configura2.jsx';
+import Password from './views/Password/Password.jsx';
+import VerificEmail from './views/VerificEmail/VerificEmail.jsx';
+import PasswordReset from './views/PasswordReset/PasswordReset.jsx';
+import Magic from './views/magic/magic.jsx';
+import DashboardEmpresa from './views/DashboardEmpresa/DashboardEmpresa.jsx';
 
 const router = createBrowserRouter([
   {
