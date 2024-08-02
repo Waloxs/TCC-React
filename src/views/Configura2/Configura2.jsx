@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import UserEmpresa from '../../components/Request/Get/UserEmpresa';
+import UserEmpresa from '../../services/UserEmpresa';
 import './Configura.css';
 import { FaPen } from "react-icons/fa";
 import Footer from '../../components/Footer/Footer';

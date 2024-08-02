@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Crie uma instância do axios com a baseURL definida
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/v1',
+  baseURL: 'https://workzen.onrender.com/v1',
   headers: {
     'Content-Type': 'application/json',
     // Aqui você pode adicionar outros cabeçalhos comuns, se necessário

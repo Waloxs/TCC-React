@@ -5,8 +5,8 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
-import User from '../Request/Get/UserProfile.jsx';
-import UserEmpresa from '../Request/Get/UserEmpresa.jsx';
+import User from '../../services/UserProfile.jsx';
+import UserEmpresa from '../../services/UserEmpresa.jsx';
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
@@ -121,10 +121,10 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
 
         {showDashnone && (
           <div className="dashnone flex items-center gap-5 mr-[3rem]">
-            <div className='dnone'><Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px"/></Link></div>
+            <div className='dnone'><Link to="/Login"><BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px" borderRadius="20px" padding="10px"/></Link></div>
 
             {criConta && (
-            <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px"/></Link></div>
+            <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px" borderRadius="20px" padding="10px"/></Link></div>
             )}
 
 
@@ -312,8 +312,8 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           )}
           </div>
           <div className="button flex flex-col mx-auto gap-5">
-            <Link to="/Login"><BtnPrincipal texto="Entrar" color="#000" width="90vw" back="#fff" border="1px solid"/></Link>
-            <Link to="/Escolha"><BtnPrincipal texto="Criar Conta" color="#fff" width="90vw" back="#3B82F6"/></Link> 
+            <Link to="/Login"><BtnPrincipal texto="Entrar" color="#000" width="90vw" back="#fff" border="1px solid" borderRadius="20px" padding="10px"/></Link>
+            <Link to="/Escolha"><BtnPrincipal texto="Criar Conta" color="#fff" width="90vw" back="#3B82F6" borderRadius="20px" padding="10px"/></Link> 
           </div>
         </div>
       )}

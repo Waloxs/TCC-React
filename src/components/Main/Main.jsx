@@ -19,7 +19,7 @@ const Main = () => {
           <span className="dec"> oportunidades de carreira!</span>
         </p>
      
-          <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6" hover="#3A61D4"  /></Link> 
+          <Link to="/Escolha"><BtnPrincipal texto="Começar" color="#fff" width="160px" back="#3B82F6" hover="#3A61D4" borderRadius="20px" padding="10px" /></Link> 
         
       </div>
       

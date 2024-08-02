@@ -8,7 +8,7 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import User from '../../components/Request/Get/UserProfile.jsx';
+import User from '../../services/UserProfile';
 
 
 const TalentoPasso1 = () => {
@@ -349,7 +349,7 @@ const token = localStorage.getItem('authToken');
                 <textarea id="area" style={{ height: '120px', resize: 'none' }} value={descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200}></textarea>
               </div>
               <div className='ct flex self-end'  onClick={handleSave} >
-                <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn'/>
+                <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn' borderRadius="20px" padding="10px"/>
               </div>
             </div>
           </form>
@@ -425,10 +425,10 @@ const token = localStorage.getItem('authToken');
 
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
-                        <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' />
+                        <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' borderRadius="20px" padding="10px"/>
                       </div>
                       <div onClick={handleClick2} style={{cursor: 'pointer'}}>
-                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' hoverColor="#3A61D4"/>
+                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' hoverColor="#3A61D4" borderRadius="20px" padding="10px"/>
                       </div>
                     </div>
                   </div>
@@ -475,7 +475,7 @@ const token = localStorage.getItem('authToken');
     </div>
     <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
       <label htmlFor="file-upload" className='user'>
-        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6"></BtnPrincipal>
+        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6" borderRadius="20px" padding="10px"></BtnPrincipal>
       </label>
       <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
       <Link to='/Dashboard'><BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" hover='#3A61D4' border="1px solid #3B82F6" /></Link>
@@ -485,17 +485,17 @@ const token = localStorage.getItem('authToken');
               
                 {block && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block2 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
           </div>

@@ -109,7 +109,7 @@ const Escolha = () => {
           <img className='imgEscolha' src={imgEscolha} alt="Login Visual" style={{ maxWidth: '34rem', height: '35rem' }} />
         </div>
         <div className='flex self-end' style={{ marginTop: '-20px', maxWidth: '65rem' }}>
-          <Link to={getLinkPath()}><BtnPrincipal texto="Continuar" color={btnProps.color} width="160px" back={btnProps.back} border={btnProps.border} hover={btnProps.hover} /></Link>
+          <Link to={getLinkPath()}><BtnPrincipal texto="Continuar" color={btnProps.color} width="160px" back={btnProps.back} border={btnProps.border} hover={btnProps.hover} borderRadius="20px" padding="10px"/></Link>
         </div>
       </div>
     </div>

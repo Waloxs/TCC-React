@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import User from '../../components/Request/Get/UserProfile';
+import User from '../../services/UserProfile';
 import './Configura.css';
 import { FaPen } from "react-icons/fa";
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import Footer from '../../components/Footer/Footer';
 import { motion } from 'framer-motion';
-import { FaUserPlus } from "react-icons/fa6";
-
 import { FaCamera } from "react-icons/fa";
 
 
