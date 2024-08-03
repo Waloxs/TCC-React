@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -12,7 +11,6 @@ const DashboardEmpresa = () => {
   const [dataVaga, setDataVaga] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [company, setCompany] = useState('');
   const [titulo, setTitulo] = useState('');
   const [descric, setDescric] = useState('');
   const [requiriment, setRequiriment] = useState('');
@@ -24,7 +22,6 @@ const DashboardEmpresa = () => {
 
     if (form.checkValidity()) {
       let dados = {
-        company: company,
         title: titulo,
         description: descric,
         requirements: requiriment,
@@ -161,7 +158,7 @@ const DashboardEmpresa = () => {
       <div className="vaga">
        <h1>{dataVaga.map((item) => 
       
-        <h1>{item.title}</h1>
+        <h1 key={item.id}>{item.title}</h1>
       
       )}</h1> 
       </div>

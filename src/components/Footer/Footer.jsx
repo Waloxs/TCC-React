@@ -130,7 +130,7 @@ const Footer = () => {
 
         <div>
           <h1 className='h1Footer'>Entre em contato</h1>
-          <h2 className='SubFooter'>Endereço: Rua Edilson Araújo, Cará-cará - Ponta Grossa/PR</h2>
+          <h2 className='SubFooter'>Endereço: Rua Edilson Araújo, Cará-cará-Ponta Grossa/PR</h2>
           <h2 className='SubFooter'>Tel: (15) 99665-1551</h2>
 
           

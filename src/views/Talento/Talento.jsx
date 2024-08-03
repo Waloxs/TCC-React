@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import imgTalento from '../../assets/imgTalento.png';
 import Logo from '../../assets/Logo.png';
@@ -17,7 +17,6 @@ const Talento = () => {
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [dados, setDados] = useState(null);
   const navigate = useNavigate();
 
   const togglePasswordVisibility2 = () => {
@@ -77,7 +76,7 @@ const Talento = () => {
     }, 2000);
 
     return () => clearTimeout(timeout); 
-  }, []);
+  }, [isImageLoaded]);
 
 
   if (showLoader) {

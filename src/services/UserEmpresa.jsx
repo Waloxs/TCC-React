@@ -1,5 +1,7 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 
 const UserEmpresa = ({ nome, email, cnpj, areaAtua, prLet, ...props }) => {
 
@@ -7,15 +9,15 @@ const UserEmpresa = ({ nome, email, cnpj, areaAtua, prLet, ...props }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const token = localStorage.getItem('authToken');
 
-  const config = {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  };
 
   useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
     const fetchData = async () => {
       try {
         const response = await axios.get('https://workzen.onrender.com/v1/empresa/profile', config);
@@ -57,6 +59,15 @@ const UserEmpresa = ({ nome, email, cnpj, areaAtua, prLet, ...props }) => {
       )}
     </>
   );
+};
+
+UserEmpresa.propTypes = {
+  nome: PropTypes.string,
+  email: PropTypes.string,
+  cnpj: PropTypes.string,
+  areaAtua: PropTypes.string,
+  prLet: PropTypes.string,
+  size: PropTypes.string,
 };
 
 export default UserEmpresa;

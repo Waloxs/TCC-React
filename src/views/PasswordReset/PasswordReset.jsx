@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Input from '../../components/Form/input'; 
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal'; 
@@ -54,7 +54,6 @@ const PasswordReset = () => {
         throw new Error('Erro ao redefinir a senha.');
       }
 
-      const data = await response.json();
       setMessage('Senha redefinida com sucesso!');
     } catch (error) {
       setError('Erro ao redefinir a senha.');

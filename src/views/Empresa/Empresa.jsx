@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/Logo.png';
@@ -45,7 +44,7 @@ const Empresa = () => {
     }, 2000);
 
     return () => clearTimeout(timeout); 
-  }, []);
+  }, [isImageLoaded]);
 
   const HandleSave = async (e) => {
     e.preventDefault();

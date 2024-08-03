@@ -1,4 +1,3 @@
-import React from 'react'
 import img1Main from '../../assets/img1Main.png'
 import img2Main from '../../assets/img2Main.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'

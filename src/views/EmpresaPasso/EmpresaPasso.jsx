@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import './EmpresaPasso.css';
@@ -357,7 +357,7 @@ const TalentoPasso1 = () => {
                )}
               
                 {block && (
-                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={''}>
+                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
                       <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' />
                     </div>
                 )}

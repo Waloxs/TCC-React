@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import User from '../../services/UserProfile';
 import './Configura.css';
@@ -68,12 +68,6 @@ const Configura = () => {
     const handleInputChange3 = (e) => {
         const { value } = e.target;
         setInput3(value);
-    };
-
-
-    const handleInputChange4 = (e) => {
-        const { value } = e.target;
-        setInput4(value);
     };
 
 

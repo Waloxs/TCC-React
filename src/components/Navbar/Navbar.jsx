@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -10,6 +10,8 @@ import UserEmpresa from '../../services/UserEmpresa.jsx';
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+
 
 
 const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, userData, userDataEmpresa}) => {  
@@ -320,5 +322,18 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
     </div>
   );
 }
+
+Navbar.propTypes = {
+  menu: PropTypes.string.isRequired,
+  setMenu: PropTypes.string.isRequired,
+  showDashnone: PropTypes.string,
+  link: PropTypes.string,
+  img: PropTypes.string,
+  criConta: PropTypes.string,
+  userTalento: PropTypes.string,
+  NavEmpresa: PropTypes.string,
+  userData: PropTypes.string,
+  userDataEmpresa: PropTypes.string,
+};
 
 export default Navbar;

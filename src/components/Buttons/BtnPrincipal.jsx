@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 const BtnPrincipal = ({ hover, hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding }) => {
@@ -31,6 +30,8 @@ BtnPrincipal.propTypes = {
     click: PropTypes.func,
     color: PropTypes.string,
     texto: PropTypes.string.isRequired,
+    borderRadius: PropTypes.string,
+    padding: PropTypes.string,
 };
 
 export default BtnPrincipal;

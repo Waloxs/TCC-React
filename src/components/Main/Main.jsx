@@ -1,4 +1,3 @@
-import React from 'react'
 import ImageSection from '../../assets/ImageSection.png'
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx'
 import { Link } from 'react-router-dom';

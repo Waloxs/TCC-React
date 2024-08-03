@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { HiOutlineMailOpen } from "react-icons/hi";
 import './Password.css';
@@ -42,7 +42,6 @@ const Password = () => {
         throw new Error('Erro na verificação de email');
       }
 
-      const data = await response.json();
       setMessage('Email de redefinição de senha enviado com sucesso!');
       setModal(false);
       setModal2(true);

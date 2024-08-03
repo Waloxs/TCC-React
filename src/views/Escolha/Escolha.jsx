@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import imgEscolha from '../../assets/imgEscolha.png';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
@@ -29,7 +29,7 @@ const Escolha = () => {
     }, 2000);
 
     return () => clearTimeout(timeout); 
-  }, []);
+  }, [isImageLoaded]);
 
   const ativaBtn = (option) => {
     setSelectedOption(option);
