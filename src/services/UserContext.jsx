@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { axiosInstance, setAuthToken } from '../utils/api'; 
 
 const UserContext = createContext();
 
@@ -15,14 +15,10 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('authToken');
-      const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
-
+      setAuthToken(token);  // Define o token globalmente
+      
       try {
-        const response = await axios.get('https://workzen.onrender.com/v1/me', config);
+        const response = await axiosInstance.get('/me');  
         setData(response.data);
       } catch (error) {
         setError(error);
