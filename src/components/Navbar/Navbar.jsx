@@ -5,16 +5,15 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
-import User from '../../services/UserProfile.jsx';
+import User from '../UserProfile/UserProfile.jsx';
 import UserEmpresa from '../../services/UserEmpresa.jsx';
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useUser } from '../../services/UserContext';
 
-
-
-const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, userData, userDataEmpresa}) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, userDataEmpresa }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
@@ -24,9 +23,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
 
-
-
-
+  const { data: user } = useUser();
 
   const sitModal = () => {
     setModal(!modal);
@@ -42,13 +39,10 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
     setBorder(false);
   }
 
-
   const ApagaToken = () => {
     localStorage.removeItem('authToken');
     window.location.href = '/Login'; 
   };
-
-
 
   const handleClick = () => {
     setMenu(!menu);
@@ -129,7 +123,6 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
             <div className='dnone'><Link to="/Escolha"><BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px" borderRadius="20px" padding="10px"/></Link></div>
             )}
 
-
             <div className='menuHamb' onClick={handleClick}>
               <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
               <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
@@ -139,201 +132,138 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
         )}
 
         {userTalento && (
+          <>
+            {img && user && user.image && (
+              <div className="imgCadas" onClick={sitModal}>
+                <img src={`${user.image}`} alt="User Avatar" className='imgUser' />
+              </div>
+            )}
 
-        <>
-        {img && userData && userData.image && (
-          <div className="imgCadas" onClick={sitModal}>
-            <img src={`${userData.image}`} alt="User Avatar" className='imgUser' />
-          </div>
-        )}
+            {img && user && !user.image && (
+              <div className="imgCadas" onClick={sitModal}>
+                <div className='imgUserNone'>
+                  <User prLet={true}/>
+                </div>
+              </div>
+            )}
 
-        {img && userData && !userData.image && (
-          <div className="imgCadas" onClick={sitModal}>
-            <div className='imgUserNone'>
-              <User prLet={true}/>
-            </div>
-          </div>
-        )}
-
-{modal && (
-  <>
-    <motion.div
-      className='flex flex-col justify-between modal'
-      ref={modalRef}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ ease: "easeOut", duration: 1 }}
-    >
-      <div className='flex flex-col items-center'>
-        {userData.image ? (
-          <img src={`${userData.image}`} alt="User Avatar" className='imgModal' />
-        ) : (
-          <div className='imgUserNone2'>
-            <User prLet={true} size={'2rem'} />
-          </div>
-        )}
-        <div>
-          <span>
-            <User nome={true} /> <User sobrenome={true} />
-          </span>
-        </div>
-      </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Link to="/Configura">
-          <div className='hv flex' style={{ cursor: 'pointer' }}>
-            <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-              <IoMdSettings className='conf' />
-              <h1>Configurações</h1>
-            </div>
-          </div>
-        </Link>
-        <div className='hv flex' style={{ cursor: 'pointer' }}>
-          <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
-            <CiLogout className='conf' />
-            <h1>Sair</h1>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  </>
-)}
-
-        </>
+            {modal && (
+              <motion.div
+                className='flex flex-col justify-between modal'
+                ref={modalRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1 }}
+              >
+                <div className='flex flex-col items-center'>
+                  {user.image ? (
+                    <img src={`${user.image}`} alt="User Avatar" className='imgModal' />
+                  ) : (
+                    <div className='imgUserNone2'>
+                      <User prLet={true} size={'2rem'} />
+                    </div>
+                  )}
+                  <div>
+                    <span>
+                      <User nome={true} /> <User sobrenome={true} />
+                    </span>
+                  </div>
+                </div>
+                <div style={{ marginBottom: '15px' }}>
+                  <Link to="/Configura">
+                    <div className='hv flex' style={{ cursor: 'pointer' }}>
+                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+                        <IoMdSettings className='conf' />
+                        <h1>Configurações</h1>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className='hv flex' style={{ cursor: 'pointer' }}>
+                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
+                      <CiLogout className='conf' />
+                      <h1>Sair</h1>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </>
         )}
 
         {NavEmpresa && (
+          <>
+            {img && userDataEmpresa && userDataEmpresa.image && (
+              <div className="imgCadas" onClick={sitModal2}>
+                <img src={`${userDataEmpresa.image}`} alt="User Avatar" className='imgUser' />
+              </div>
+            )}
 
-<>
-{userDataEmpresa && (
-  <>
-  <div className="imgCadas" onClick={sitModal2}>
-    <div className='imgUserNone'>
-      <UserEmpresa prLet={true}/>
-    </div>
-  </div>
-
-{modal2 && (
-    <motion.div
-      className='flex flex-col justify-between modal'
-      ref={modalRef}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ ease: "easeOut", duration: 1 }}
-    >
-      <div className='flex flex-col items-center'>
-        {userDataEmpresa.image ? (
-          <img src={`${userDataEmpresa.image}`} alt="User Avatar" className='imgModal' />
-        ) : (
-          <div className='imgUserNone2'>
-            <UserEmpresa prLet={true} size={'2rem'} />
-          </div>
-        )}
-        <div>
-          <span>
-            <UserEmpresa nome={true} />
-          </span>
-        </div>
-      </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Link to="/Configura2">
-          <div className='hv flex' style={{ cursor: 'pointer' }}>
-            <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-              <IoMdSettings className='conf' />
-              <h1>Configurações</h1>
-            </div>
-          </div>
-        </Link>
-        <div className='hv flex' style={{ cursor: 'pointer' }}>
-          <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
-            <CiLogout className='conf' />
-            <h1>Sair</h1>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-)}
-</>
-)}
-
-
-</>
-)}
-      </div>
-
-      {menuDrop1 && (
-        <div className="flex justify-center">
-          <div className="menuDrop flex gap-8 rounded-b-[0.9375rem] shadow-[0px_247px_69px_0px_rgba(0,0,0,0.00),_0px_158px_63px_0px_rgba(0,0,0,0.01),_0px_89px_53px_0px_rgba(0,0,0,0.05),_0px_40px_40px_0px_rgba(0,0,0,0.09),_0px_10px_22px_0px_rgba(0,0,0,0.10)]">
-            <div>
-              <h1 className='DropH1'>Maneiras de ganhar</h1>
-              <p className='DropP'>Saiba por que a workzen tem as oportunidades certas para você.</p>
-            </div>
-            <div>
-              <h1 className='DropH1'>Encontre o trabalho para as suas habilidades</h1>
-              <p className='DropP'>Explore o trabalho disponível para sua área</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {menuDrop2 && (
-        <div className="flex justify-center">
-          <div className="menuDrop flex gap-8 rounded-b-[0.9375rem] shadow-[0px_247px_69px_0px_rgba(0,0,0,0.00),_0px_158px_63px_0px_rgba(0,0,0,0.01),_0px_89px_53px_0px_rgba(0,0,0,0.05),_0px_40px_40px_0px_rgba(0,0,0,0.09),_0px_10px_22px_0px_rgba(0,0,0,0.10)]">
-            <div>
-              <h1 className='DropH1'>Maneiras de ganhar</h1>
-              <p className='DropP'>Saiba por que a workzen tem as oportunidades certas para você.</p>
-            </div>
-            <div>
-              <h1 className='DropH1'>Encontre o trabalho para as suas habilidades</h1>
-              <p className='DropP'>Explore o trabalho disponível para sua área</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-
-      {menu && (
-        <div className="menu flex flex-col justify-between" style={{width: '100vw'}}>
-          <div className="flex flex-col items-center gap-6" style={{marginTop: '2rem'}}>
-            <div className="link flex justify-between items-center" onClick={toggleMenuMobile1}  style={{width: '90vw'}}>
-              <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Buscar Trabalho</a>
-              {estiloSetaMobile1}
-            </div>
-              {menuDropMobile1 && (
-                <div className="flex justify-center">
-                  <h1>oi1</h1>
+            {img && userDataEmpresa && !userDataEmpresa.image && (
+              <div className="imgCadas" onClick={sitModal2}>
+                <div className='imgUserNone'>
+                  <UserEmpresa prLet={true} />
                 </div>
-              )}
-            <div className="link flex justify-between items-center" onClick={toggleMenuMobile2}  style={{width: '90vw'}}>
-              <a href="/" className="text-grey-text-light" style={{fontSize: '1.75rem', fontFamily: 'Lexend', color: 'var(--grey-text-light, #64748B)'}}>Anunciar Vaga</a>
-              {estiloSetaMobile2}
-            </div>
-          {menuDropMobile2 && (
-            <div className="flex justify-center">
-              <h1>oi2</h1>
-            </div>
-          )}
-          </div>
-          <div className="button flex flex-col mx-auto gap-5">
-            <Link to="/Login"><BtnPrincipal texto="Entrar" color="#000" width="90vw" back="#fff" border="1px solid" borderRadius="20px" padding="10px"/></Link>
-            <Link to="/Escolha"><BtnPrincipal texto="Criar Conta" color="#fff" width="90vw" back="#3B82F6" borderRadius="20px" padding="10px"/></Link> 
-          </div>
-        </div>
-      )}
+              </div>
+            )}
+
+            {modal2 && (
+              <motion.div
+                className='flex flex-col justify-between modal'
+                ref={modalRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1 }}
+              >
+                <div className='flex flex-col items-center'>
+                  {userDataEmpresa.image ? (
+                    <img src={`${userDataEmpresa.image}`} alt="User Avatar" className='imgModal' />
+                  ) : (
+                    <div className='imgUserNone2'>
+                      <UserEmpresa prLet={true} size={'2rem'} />
+                    </div>
+                  )}
+                  <div>
+                    <span>
+                      <UserEmpresa nome={true} /> <UserEmpresa sobrenome={true} />
+                    </span>
+                  </div>
+                </div>
+                <div style={{ marginBottom: '15px' }}>
+                  <Link to="/Configura">
+                    <div className='hv flex' style={{ cursor: 'pointer' }}>
+                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+                        <IoMdSettings className='conf' />
+                        <h1>Configurações</h1>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className='hv flex' style={{ cursor: 'pointer' }}>
+                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={ApagaToken}>
+                      <CiLogout className='conf' />
+                      <h1>Sair</h1>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 Navbar.propTypes = {
-  menu: PropTypes.string.isRequired,
-  setMenu: PropTypes.string.isRequired,
-  showDashnone: PropTypes.string,
-  link: PropTypes.string,
-  img: PropTypes.string,
-  criConta: PropTypes.string,
-  userTalento: PropTypes.string,
-  NavEmpresa: PropTypes.string,
-  userData: PropTypes.string,
-  userDataEmpresa: PropTypes.string,
+  menu: PropTypes.bool.isRequired,
+  setMenu: PropTypes.func.isRequired,
+  showDashnone: PropTypes.bool,
+  link: PropTypes.bool,
+  img: PropTypes.bool,
+  criConta: PropTypes.bool,
+  userTalento: PropTypes.bool,
+  NavEmpresa: PropTypes.bool,
+  userData: PropTypes.object,
+  userDataEmpresa: PropTypes.object,
 };
 
 export default Navbar;

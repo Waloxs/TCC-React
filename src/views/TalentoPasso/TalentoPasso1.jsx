@@ -8,7 +8,7 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import User from '../../services/UserProfile';
+import User from '../../components/UserProfile/UserProfile';
 
 
 const TalentoPasso1 = () => {

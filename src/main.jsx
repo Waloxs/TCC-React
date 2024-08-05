@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './views/Home/Home.jsx';
-import './assets/styles/index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './assets/styles/index.css';
 
+import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';
 import Escolha from './views/Escolha/Escolha.jsx';
 import Empresa from './views/Empresa/Empresa.jsx';
@@ -19,6 +19,8 @@ import VerificEmail from './views/VerificEmail/VerificEmail.jsx';
 import PasswordReset from './views/PasswordReset/PasswordReset.jsx';
 import Magic from './views/magic/magic.jsx';
 import DashboardEmpresa from './views/DashboardEmpresa/DashboardEmpresa.jsx';
+
+import { UserProvider } from './services/UserContext.jsx'; 
 
 const router = createBrowserRouter([
   {
@@ -89,6 +91,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <UserProvider> {/* Envolva a aplicação com UserProvider */}
+      <RouterProvider router={router}/>
+    </UserProvider>
   </React.StrictMode>,
 );
