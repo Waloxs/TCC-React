@@ -1,13 +1,16 @@
 import Navbar from '../../components/Navbar/Navbar';
-import UserEmpresa from '../../services/UserEmpresa';
+import UserEmpresa from '../../components/UserEmpresa/UserEmpresa';
 import './Configura.css';
 import { FaPen } from "react-icons/fa";
 import Footer from '../../components/Footer/Footer';
+import { useUser } from '../../services/UserContextEmpresa';
 
 
 
 const Configura2 = () => {
 
+
+    const { data, loading, error } = useUser();
 
 
     return (

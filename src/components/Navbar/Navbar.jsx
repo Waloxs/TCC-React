@@ -5,15 +5,16 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import './Navbar.css';
-import User from '../UserProfile/UserProfile.jsx';
-import UserEmpresa from '../../services/UserEmpresa.jsx';
+import User from '../../components/UserProfile/UserProfile.jsx';
+import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useUser } from '../../services/UserContext';
+import { useUser as useUserTalento } from '../../services/UserContext';
+import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 
-const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, userDataEmpresa }) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
@@ -23,7 +24,9 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
 
-  const { data: user } = useUser();
+
+  const { data: user } = useUserTalento();
+  const { data: userDataEmpresa } = useUserEmpresa();
 
   const sitModal = () => {
     setModal(!modal);
@@ -199,10 +202,10 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
             )}
 
             {img && userDataEmpresa && !userDataEmpresa.image && (
-              <div className="imgCadas" onClick={sitModal2}>
+              <div className="imgCadas">
                 <div className='imgUserNone'>
                   <UserEmpresa prLet={true} />
-                </div>
+                </div>                
               </div>
             )}
 
@@ -262,7 +265,6 @@ Navbar.propTypes = {
   criConta: PropTypes.bool,
   userTalento: PropTypes.bool,
   NavEmpresa: PropTypes.bool,
-  userData: PropTypes.object,
   userDataEmpresa: PropTypes.object,
 };
 
