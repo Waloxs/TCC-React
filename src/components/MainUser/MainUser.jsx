@@ -34,7 +34,7 @@ const MainUser = () => {
                     <UserEmpresa className='' prLet={true} size={'3rem'}  ></UserEmpresa>
                 </div>
 
-                <div className='flex flex-col'>
+                <div className='flex flex-col itens-center'>
                     <UserEmpresa nome={true}></UserEmpresa>
                     <span>Empresa</span>
                 </div>
