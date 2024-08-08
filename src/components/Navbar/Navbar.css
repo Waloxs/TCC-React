@@ -15,6 +15,18 @@
   color: #0866FF;
 }
 
+.pesquisa{
+  position: relative;
+}
+
+.icon-search{
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 10px;
+}
+
 
 .menuDrop{
   width: 90vw;

@@ -3,32 +3,50 @@
     grid-template-columns: 1fr 3fr 1fr;
     width: 90vw;
     margin: 0 auto;
+    margin-top: 60px;
 }
 
 .perEmp{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     background-color: #334155;
     border-radius: 50%;
 }
 
 .modalConfigura{
     display: flex;
-    gap: 7px;
+    gap: 16px;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
     border: 1px solid #E2E8F0;
-    padding: 1rem;
+    padding: 2rem 1rem;
     border-radius: 1rem;
+}
+
+.nomeEmp{
+    color: var(--grey-text-dark, #020617);
+font-family: Lexend;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 30px */
+text-transform: uppercase;
+font-family: Lexend;
+
 }
 
 
 .linha{
     background: #e2e2e2;
-    width: 90%;
+    width: 80%;
     height: 2px;
+}
+
+
+.content{
+    background-color: #020617;
 }

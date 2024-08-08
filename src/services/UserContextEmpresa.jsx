@@ -40,3 +40,4 @@ export const UserProvider = ({ children }) => {
     </UserContextEmpresa.Provider>
   );
 };
+

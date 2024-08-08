@@ -8,7 +8,8 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import User from '../../components/UserProfile/UserProfile';
+import User from '../../components/UserProfile/UserProfile.jsx';
+import { useUser as useUserTalento } from '../../services/UserContext';
 
 
 const TalentoPasso1 = () => {
@@ -35,6 +36,7 @@ const TalentoPasso1 = () => {
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [profissional, setProfissional] = useState('');
   const [biografia, setBiografia] = useState('');
+  const { data: user } = useUserTalento();
 
 
 
@@ -284,6 +286,8 @@ const token = localStorage.getItem('authToken');
 
 
   return (
+    <>
+    {user && (
     <div className={`${back ? 'back' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
       {modal && (
         <div className='containAdc' style={{ width: '35rem', height: '40rem' }}>
@@ -502,6 +506,8 @@ const token = localStorage.getItem('authToken');
         </div>
       </div>
     </div>
+  )}
+  </>
   );
 };
 

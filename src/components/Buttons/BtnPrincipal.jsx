@@ -7,7 +7,7 @@ const BtnPrincipal = ({ hover, hoverColor, class: className, width, back, border
             style={{
                 width: width,
                 backgroundColor: back,
-                borderColor: border,
+                border: `2px solid ${border}`,
                 color: color,
                 padding: padding,
                 borderRadius: borderRadius,

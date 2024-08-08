@@ -11,10 +11,12 @@ import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { FaRegBell } from "react-icons/fa6";
+import { IoIosSearch } from "react-icons/io";
 import { useUser as useUserTalento } from '../../services/UserContext';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 
-const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false }) => {  
+const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, barraPesquisa = false }) => {  
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
@@ -136,6 +138,18 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
 
         {userTalento && (
           <>
+          <div className='flex items-center gap-12'>
+          {barraPesquisa && (
+            <>
+            <div className='pesquisa'>
+              <input type="text" style={{ width: "300px" , height: "35px"}}/>
+              <IoIosSearch className='icon-search' size="25px"/>
+            </div>
+
+            <FaRegBell size="25px"/>
+            </>
+          )}
+
             {img && user && user.image && (
               <div className="imgCadas" onClick={sitModal}>
                 <img src={`${user.image}`} alt="User Avatar" className='imgUser' />
@@ -149,6 +163,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
                 </div>
               </div>
             )}
+          </div>
 
             {modal && (
               <motion.div

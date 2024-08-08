@@ -1,0 +1,73 @@
+.container2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.title {
+    color: var(--grey-text-light, #64748B);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 32px */
+}
+
+.container-vagas {
+    border-radius: 15px;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--white, #FFF);
+    padding: 18px 27px 18px 27px;
+}
+
+.span-title {
+    color: var(--blackclear, #202020);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%; /* 25.6px */
+}
+
+.span-empresa {
+    color: var(--primary-500, #3B82F6);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 19.2px */
+}
+
+.span-description {
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+}
+
+.span-req {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 30px;
+    width: 500px;
+    overflow-x: scroll; /* Permite rolagem horizontal */
+    -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em dispositivos de toque */
+    scrollbar-width: none; /* Oculta a barra de rolagem no Firefox */
+}
+
+.span-req::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem no Chrome, Safari e Opera */
+}
+
+.req {
+    border-radius: 20px;
+    background: var(--grey-100, #F1F5F9);
+    padding: 10px;
+    color: #94A3B8;
+}

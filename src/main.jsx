@@ -22,6 +22,9 @@ import DashboardEmpresa from './views/DashboardEmpresa/DashboardEmpresa.jsx';
 
 import { UserProvider as TalentoUserProvider } from './services/UserContext.jsx'; 
 import { UserProvider as EmpresaUserProvider } from './services/UserContextEmpresa.jsx'; 
+import { UserProvider as TodosTalentosVagasTag } from './services/UserContextVagasTag.jsx'; 
+
+
 
 const router = createBrowserRouter([
   {
@@ -92,10 +95,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <TodosTalentosVagasTag>
     <TalentoUserProvider> {/* Envolva a aplicação com TalentoUserProvider */}
       <EmpresaUserProvider> {/* Envolva a aplicação com EmpresaUserProvider */}
         <RouterProvider router={router}/>
       </EmpresaUserProvider>
     </TalentoUserProvider>
+    </TodosTalentosVagasTag>
   </React.StrictMode>,
 );

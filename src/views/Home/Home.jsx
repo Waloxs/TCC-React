@@ -7,7 +7,6 @@ import Footer from '../../components/Footer/Footer';
 import ImageSection from '../../assets/ImageSection.png';
 import ClipLoader from 'react-spinners/ClipLoader';
 import './Home.css'
-import { UserProvider } from '../../services/UserContext';
 
 const Home = () => {
   const [menu, setMenu] = useState(false);

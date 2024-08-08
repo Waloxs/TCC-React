@@ -15,6 +15,12 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('authToken');
+      
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       setAuthToken(token);  // Define o token globalmente
       
       try {
