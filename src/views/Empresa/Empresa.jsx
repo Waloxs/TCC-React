@@ -64,7 +64,7 @@ const Empresa = () => {
 
         const { token } = response.data;
         localStorage.setItem('authToken', token);
-        navigate('/DashboardEmpresa');
+        navigate('/EmpresaPasso');
         
       }
 

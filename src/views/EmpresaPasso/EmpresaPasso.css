@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 40ch;
+    max-width: 30ch;
 }
 
 
@@ -212,6 +212,20 @@
     max-width: 60ch;
 }
 
+.select-wrapper2{
+    position: relative;
+}
+
+
+.icondown{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 36px;
+}
 
 
 .PassPar{
@@ -224,14 +238,14 @@
     max-width: 60ch;
 }
 
-.PassTit3{
+.PassTitEmp{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 40ch;
+    max-width: 37ch;
 }
 
 
@@ -263,15 +277,15 @@
 
 
 .txArea{
-    width: 200px;
+    width: 300px;
     height: max-content;
     padding: 20px;
-    border-radius: 0.9375rem;
-    border: 1px solid var(--grey-disable-color, #94A3B8);
+    border-radius: 15px;
+    border: 1px solid var(--grey-border, #E2E8F0);
 }
 
 .titArea{
-    color: var(--grey-text-light, #64748B);
+    color: var(--grey-text-light, #3B82F6);
     font-family: Lexend;
     font-size: 0.75rem;
     font-style: normal;
@@ -279,10 +293,10 @@
     line-height: 130%; /* 0.975rem */
 }
 
-.subArea{
+.subAreaEmp{
     color: var(--grey-text-light, #64748B);
     font-family: Lexend;
-    font-size: 0.50rem;
+    font-size: 0.70rem;
     font-style: normal;
     font-weight: 300;
     line-height: 130%; /* 0.975rem */
@@ -303,7 +317,7 @@
 }
 
 
-.container2{
+.containerEmpresa{
     animation: animaCont 1s ease-out forwards;
 }
 
@@ -361,6 +375,7 @@ border: 2px solid var(--grey-300, #CBD5E1);
 }
 
 #cidade, #estado{
+    padding-left: 15px;
     height: 40px;
     width: 100%;
     padding-top: 0px;
@@ -372,10 +387,16 @@ border: 2px solid var(--grey-300, #CBD5E1);
     line-height: 130%; /* 1.625rem */   
     border-radius: 8px;
     border: 1px solid var(--grey-300, #CBD5E1);
+    
+
+  appearance: none; /* Remove the default dropdown arrow */
+  -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
+  -moz-appearance: none; /* Remove the default dropdown arrow for Firefox */
 }
 
 #inicio, #fim{
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 13px !important;
 }
 
 .data{
@@ -383,15 +404,15 @@ border: 2px solid var(--grey-300, #CBD5E1);
 }
 
 #area{
-    border: 1px solid #b3b3b3;
+    border: 1px solid #E2E8F0;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 #area2{
-    border: 1px solid #b3b3b3;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
+    border: 1px solid var(--grey-border, #E2E8F0);
 }
 
 @media(max-width: 940px){
@@ -550,7 +571,7 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
     .titAdc{
         font-size: 0.85rem;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .FormAdc{
