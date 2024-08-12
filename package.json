@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "framer-motion": "^11.2.13",
     "gsap": "^3.12.5",
+    "numeral": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",

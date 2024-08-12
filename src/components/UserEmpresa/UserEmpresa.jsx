@@ -9,7 +9,7 @@ const UserEmpresa = ({ nome, ramo, email, prLet, id, cnpj, className, size}) => 
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className={className}>
+    <div className={className} style={{display: 'inline'}}>
       {prLet && (
         <span style={{ color: '#fff', fontSize: size }}>{data.nome.charAt(0)}</span>
       )}

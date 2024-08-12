@@ -80,110 +80,186 @@
 }
 
 
-@keyframes growTo25 {
+@keyframes growTo16 {
     from {
         width: 0%;
     }
     to {
-        width: calc(100% - 75%);
+        width: 16.666666%;
     }
 }
 
-@keyframes growTo25antes {
+@keyframes growTo32 {
     from {
-        width: calc(100% - 50%)
+        width: 16.666666%;
     }
     to {
-        width: 25%;
+        width: 33.333333%;
     }
 }
 
-@keyframes growTo50 {
+@keyframes growTo32antes {
     from {
-        width: 25%;
+        width: 33.333333%;
     }
     to {
-        width: calc(100% - 50%);
+        width: 16.666666%;
     }
 }
 
-@keyframes growTo50antes {
+@keyframes growTo48 {
     from {
-        width: calc(100% - 25%)
+        width: 33.333333%;
     }
     to {
         width: 50%;
     }
 }
 
-@keyframes growTo75 {
+@keyframes growTo48antes {
     from {
         width: 50%;
     }
     to {
-        width: calc(100% - 25%);
+        width: 33.333333%;
     }
 }
 
-@keyframes growTo75antes {
+@keyframes growTo64 {
     from {
-        width: calc(100%)
+        width: 50%;
     }
     to {
-        width: 75%;
+        width: 66.666666%;
     }
 }
 
-@keyframes growTo100 {
+@keyframes growTo64antes {
     from {
-        width: 75%;
+        width: 66.666666%;
     }
     to {
-        width: calc(100%);
+        width: 50%;
     }
 }
 
-.Azul25 {
-    height: 2px;
-    background: #3B82F6;
-    animation: growTo25 1s ease-in-out forwards;
+@keyframes growTo80 {
+    from {
+        width: 66.666666%;
+    }
+    to {
+        width: 83.333333%;
+    }
 }
 
-.Azul25antes{
-    height: 2px;
-    background: #3B82F6;
-    animation: growTo25antes 1s ease-in-out forwards;
+@keyframes growTo80antes {
+    from {
+        width: 83.333333%;
+    }
+    to {
+        width: 66.666666%;
+    }
 }
 
-.Azul50antes{
-    height: 2px;
-    background: #3B82F6;
-    animation: growTo50antes 1s ease-in-out forwards;
+@keyframes growTo96 {
+    from {
+        width: 83.333333%;
+    }
+    to {
+        width: 100%;
+    }
 }
 
-.Azul75antes{
-    height: 2px;
-    background: #3B82F6;
-    animation: growTo75antes 1s ease-in-out forwards;
+@keyframes growTo96antes {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 83.333333%;
+    }
 }
 
-.Azul50 {
+
+
+.Azul16 {
     height: 2px;
     background: #3B82F6;
-    animation: growTo50 1s ease-in-out forwards;
+    animation: growTo16 1s ease-in-out forwards;
 }
 
-.Azul75 {
+.Azul16antes{
     height: 2px;
     background: #3B82F6;
-    animation: growTo75 1s ease-in-out forwards;
+    animation: growTo16antes 1s ease-in-out forwards;
 }
 
-.Azul100 {
+.Azul32 {
     height: 2px;
     background: #3B82F6;
-    animation: growTo100 1s ease-in-out forwards;
+    animation: growTo32 1s ease-in-out forwards;
 }
+
+
+.Azul32antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo32antes 1s ease-in-out forwards;
+}
+
+.Azul48 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo48 1s ease-in-out forwards;
+}
+
+.Azul48antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo48antes 1s ease-in-out forwards;
+}
+
+.Azul64 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo64 1s ease-in-out forwards;
+}
+
+
+.Azul64antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo64antes 1s ease-in-out forwards;
+}
+
+.Azul80 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo80 1s ease-in-out forwards;
+}
+
+
+.Azul80antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo80antes 1s ease-in-out forwards;
+}
+
+
+.Azul96 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo96 1s ease-in-out forwards;
+}
+
+
+.Azul96antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo96antes 1s ease-in-out forwards;
+}
+
+
+
 
 
 .animate{
@@ -245,21 +321,63 @@
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 37ch;
+    max-width: 42ch;
+}
+
+.PassTitEmp2{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 35ch;
 }
 
 
 
-.PassPar3{
+.PassPar3Empresa{
+    color: var(--primary-500, #3B82F6);
+    font-family: Lexend;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 32px */
+    margin-top: 10px;
+}
+
+.PassPar3Empresa2{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 0.90rem;
+font-style: normal;
+font-weight: 300;
+line-height: 130%; /* 26px */
+}
+
+.func2{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 26px */
+}
+
+.lista-emp{
+    margin-top: 20px;
+    list-style-type: disc;
+}
+
+.lista-emp li{
     color: var(--grey-text-light, #64748B);
     font-family: Lexend;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-style: normal;
     font-weight: 300;
-    line-height: 130%; /* 1.625rem */
-    max-width: 65ch;
+    line-height: 160%;
+    margin-left: 15px;
 }
-
 
 .PassTit2{
     color: var(--grey-text-dark, #020617);
@@ -276,13 +394,28 @@
 }
 
 
-.txArea{
-    width: 300px;
-    height: max-content;
+.txAreaEmp{
+    width: 380px;
     padding: 20px;
     border-radius: 15px;
     border: 1px solid var(--grey-border, #E2E8F0);
+    color: var(--grey-text-light, #000);
+    font-family: Lexend;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 22.4px */
 }
+
+.txAreaEmp::placeholder{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 22.4px */
+}
+
 
 .titArea{
     color: var(--grey-text-light, #3B82F6);
@@ -314,6 +447,34 @@
 
 .lin{
     width: calc(100% - 4rem) !important;
+    height: 40px !important;
+}
+
+
+.lin2{
+    width: 500px !important;
+    height: 40px !important;
+}
+
+.lin2edit{
+    width: 100%;
+    height: 40px !important;
+    
+}
+
+.lin2editarea{
+    width: 100%;
+    height: max-content;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    color: var(--grey-text-light, #000);
+    font-family: Lexend;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 22.4px */
+    
 }
 
 
@@ -413,6 +574,28 @@ border: 2px solid var(--grey-300, #CBD5E1);
     padding: 10px;
     border-radius: 15px;
     border: 1px solid var(--grey-border, #E2E8F0);
+}
+
+
+.input-editar{
+    position: relative;
+}
+
+.icon-pen{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+}
+
+.icon-pen2{
+    position: absolute;
+    bottom: 20%;
+    right: 20px;
+}
+
+.conteiner-editar span{
+    margin-bottom: -10px;
 }
 
 @media(max-width: 940px){
