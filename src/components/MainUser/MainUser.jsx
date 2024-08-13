@@ -1,12 +1,17 @@
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
+import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
+import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
+
 import './MainUser.css';
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
+  const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
 
-  if (loading) {
+
+  if (loading || loading2) {
     return <div>Loading...</div>;
   }
 
@@ -14,22 +19,28 @@ const MainUser = () => {
     return <div>Error: {error?.message}</div>;
   }
 
+
+  if (error2) {
+    return <div>Error: {error2?.message}</div>;
+  }
+
   return (
     userDataEmpresa && (
       <div className="Container">
         <div>Categoria</div>
-        <div>oi</div>
+        {userDataVagasEmpresa && (
+          <UserVagasEmpresa/>
+        )}
         <div className='modalConfigura'>
           <div className='perEmp'>
             <UserEmpresa className='' prLet={true} size={'3rem'} />
           </div>
           <div className='flex flex-col items-center'>
             <UserEmpresa nome={true} className='nomeEmp' />
-            <span>Empresa</span>
+            <span className='span-texto'>Empresa</span>
           </div>
           <div className="linha"></div>
-          <BtnPrincipal texto='Editar Perfil' back='#2563EB' padding='15px 55px' borderRadius='20px' color='#fff' width="100%"/>
-          <BtnPrincipal texto='Criar Vaga' back='#fff' padding='15px 55px' borderRadius='20px' color='#2563EB' width="100%" border="#2563EB"/>
+          <BtnPrincipal texto='Editar Perfil' back='#2563EB' padding='15px' borderRadius='25px' color='#fff' width="85%" />
         </div>
       </div>
     )

@@ -12,7 +12,7 @@ import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import Select from 'react-select';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import InputMask from 'react-input-mask';
-import { FaPen } from "react-icons/fa6";
+import { LuPen } from "react-icons/lu";
 
 
 const EmpresaPasso = () => {
@@ -33,6 +33,7 @@ const EmpresaPasso = () => {
   const { data: userEmpresa } = useUserEmpresa();
   const [telefone, setTelefone] = useState('')
   const [endereco, setEndereco] = useState('')
+  const [localizacao, setLocalizacao] = useState('')
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [salar, setSalar] = useState('');
   const [detVagas, setDatVag] = useState('');
@@ -260,7 +261,6 @@ const handleRegister5 = async () => {
 
 
 
-let idVaga;
 
 const criarVaga = async () => {
 
@@ -281,7 +281,7 @@ const criarVaga = async () => {
       description: descricao,
       salario: salar, 
       requirements: requisits,
-      localizacao: descricao,
+      localizacao,
       tags: requisits,
     }
 
@@ -289,18 +289,9 @@ const criarVaga = async () => {
   
       const response = await axios.post('https://workzen.onrender.com/v1/jobs/create',data, config);
 
+      console.log(response.data)
 
-      idVaga = response.data.job._id; 
-
-
-      const response2 = await axios.get(`https://workzen.onrender.com/v1/jobs/get/${idVaga}`, config);
-  
-    
-      console.log('Dados:', response2.data);
-
-      setDatVag(response2.data);
-
-
+      navigate('/DashboardEmpresa')
 
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
@@ -390,7 +381,7 @@ const handleSalaryChange = (e) => {
   const handleClick4 = (e) => {
     e.preventDefault();
 
-    if(telefone.trim() !== '' && endereco.trim() !== ''){
+    if(telefone.trim() !== '' && localizacao.trim() !== ''){
 
     handleRegister4();
     setBlock4(!block4);
@@ -409,12 +400,12 @@ const handleSalaryChange = (e) => {
     setBlock5(!block5);
     setBlock6(!block6);
     setValor('Azul96');
-    criarVaga();
   };
 
 
   const handleClick6 = (e) => {
     e.preventDefault();
+    criarVaga();
   };
 
 
@@ -558,11 +549,12 @@ const handleSalaryChange = (e) => {
                           placeholder="Telefone"
                           type="text"
                           className="lin2"
+                          pattern="[0-9]*"
                       />
                     )}
                   </InputMask>
 
-                  <Input type='text' placeholder='Localização' className='lin2' required value={endereco} onChange={(e) => setEndereco(e.target.value)}/>
+                  <Input type='text' placeholder='Localização' className='lin2' required value={localizacao} onChange={(e) => setLocalizacao(e.target.value)}/>
 
 
                 </div>
@@ -591,6 +583,7 @@ const handleSalaryChange = (e) => {
       onChange={handleSalaryChange}
       placeholder="Ex: R$ 2.500,00"
       className='lin'
+      pattern="[0-9]*"
     />
                 </div>
     </div>
@@ -606,7 +599,7 @@ const handleSalaryChange = (e) => {
           <span>Titulo</span>
             <div className='input-editar'>
              <Input type='text' placeholder='' className='lin2edit' required value={profissional} onChange={(e) => setProfissional(e.target.value)} disabled={!isEditable}/>
-             <FaPen className='icon-pen' onClick={handlePenClick}/>
+             <LuPen className='icon-pen' onClick={handlePenClick}/>
             </div>
 
           <span>Descrição</span>
@@ -623,33 +616,57 @@ const handleSalaryChange = (e) => {
                 style={{resize: 'none'}}
               />
 
-             <FaPen className='icon-pen2' onClick={handlePenClick}/>
+             <LuPen className='icon-pen2' onClick={handlePenClick}/>
             </div>
 
 
             <span>Habilidades</span>
             <div className='input-editar'>
              <Input type='text' placeholder='' className='lin2edit' required value={requisits} onChange={(e) => setRequisits(e.target.value)} disabled={!isEditable}/>
-             <FaPen className='icon-pen' onClick={handlePenClick}/>
+             <LuPen className='icon-pen' onClick={handlePenClick}/>
             </div>
 
 
             <span>Telefone</span>
             <div className='input-editar'>
-             <Input type='text' placeholder='' className='lin2edit' required value={telefone} onChange={(e) => setTelefone(e.target.value)} disabled={!isEditable}/>
-             <FaPen className='icon-pen' onClick={handlePenClick}/>
+            <InputMask
+                    mask="(99) 99999-9999"
+                    value={telefone}
+                    onChange={(e) => setTelefone(e.target.value)}
+                    disabled={!isEditable}
+                  >
+                    {(inputProps) => (
+                      <input
+                        {...inputProps}
+                          name="telefone"
+                          placeholder=""
+                          type="text"
+                          className="lin2edit"
+                          pattern="[0-9]*"
+                      />
+                    )}
+                  </InputMask>
+
+             <LuPen className='icon-pen' onClick={handlePenClick}/>
             </div>
 
             <span>Endereço</span>
             <div className='input-editar'>
-             <Input type='text' placeholder='' className='lin2edit' required value={endereco} onChange={(e) => setEndereco(e.target.value)} disabled={!isEditable}/>
-             <FaPen className='icon-pen' onClick={handlePenClick}/>
+             <Input type='text' placeholder='' className='lin2edit' required value={localizacao} onChange={(e) => setLocalizacao(e.target.value)} disabled={!isEditable}/>
+             <LuPen className='icon-pen' onClick={handlePenClick}/>
             </div>
 
             <span>Salário</span>
             <div className='input-editar'>
-             <Input type='text' placeholder='' className='lin2edit' required value={salar} onChange={(e) => setSalar(e.target.value)} disabled={!isEditable}/>
-             <FaPen className='icon-pen' onClick={handlePenClick}/>
+            <input
+              type="text"
+              value={salar}
+              onChange={handleSalaryChange}
+              placeholder="Ex: R$ 2.500,00"
+              className='lin2edit'
+              pattern="[0-9]*"
+    />
+             <LuPen className='icon-pen' onClick={handlePenClick}/>
             </div>
          </div>
       </div>

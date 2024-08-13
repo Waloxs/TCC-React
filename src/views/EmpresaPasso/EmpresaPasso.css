@@ -586,16 +586,27 @@ border: 2px solid var(--grey-300, #CBD5E1);
     top: 50%;
     transform: translateY(-50%);
     right: 20px;
+    color: #3B82F6;
 }
 
 .icon-pen2{
     position: absolute;
     bottom: 20%;
     right: 20px;
+    color: #3B82F6;
 }
 
 .conteiner-editar span{
     margin-bottom: -10px;
+}
+
+.conteiner-editar input {
+    color: var(--grey-disable-color, #94A3B8);
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 25.6px */
 }
 
 @media(max-width: 940px){

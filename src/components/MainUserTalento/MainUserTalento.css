@@ -39,15 +39,43 @@
     font-style: normal;
     font-weight: 400;
     line-height: 160%; /* 19.2px */
+    text-transform: uppercase;
 }
 
-.span-description {
+.span-description{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
+
+.caixa-tags{
+    display: flex;
+    gap: 5px;
+}
+
+.span-tag {
     color: var(--grey-text-light, #64748B);
     font-family: Lexend;
     font-size: 1rem;
     font-style: normal;
     font-weight: 300;
     line-height: 160%; /* 19.2px */
+    text-transform: capitalize;
+    border-radius: 20px;
+    background: var(--grey-100, #F1F5F9);
+    padding: 5px 15px;
+}
+
+.span-localiza{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
 }
 
 .span-req {

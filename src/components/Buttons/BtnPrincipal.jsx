@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const BtnPrincipal = ({ hover, hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding }) => {
+const BtnPrincipal = ({ hover, hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding, size }) => {
     return (
         <button
             className={className}
@@ -11,6 +11,7 @@ const BtnPrincipal = ({ hover, hoverColor, class: className, width, back, border
                 color: color,
                 padding: padding,
                 borderRadius: borderRadius,
+                fontSize: size,
             }}
             onMouseOver={hover ? () => hover(hoverColor) : null}
             onClick={click}
@@ -32,6 +33,7 @@ BtnPrincipal.propTypes = {
     texto: PropTypes.string.isRequired,
     borderRadius: PropTypes.string,
     padding: PropTypes.string,
+    size: PropTypes.string,
 };
 
 export default BtnPrincipal;
