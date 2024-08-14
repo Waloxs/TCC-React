@@ -5,31 +5,124 @@ import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 
 import './MainUser.css';
+import { useState } from 'react';
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
-
+  
+  const [selectedButton, setSelectedButton] = useState('home');
 
   if (loading || loading2) {
     return <div>Loading...</div>;
   }
-
+  <div>
+  <BtnPrincipal
+    texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
+    back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
+    padding='15px'
+    borderRadius='15px'
+    color={selectedButton === 'home' ? '#fff' : '#64748B'}
+    width="85%"
+    weig="500"
+    click={() => handleButtonClick('home')}
+  />
+  <BtnPrincipal
+    texto={<div className='flex justify-center gap-2'>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-adc.svg" alt="Minha Imagem"/> }</div>}
+    back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
+    padding='15px'
+    borderRadius='15px'
+    color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
+    width="85%"
+    click={() => handleButtonClick('criarVaga')}
+  />
+  <BtnPrincipal
+    texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-config.svg" alt="Minha Imagem"/> }</div>}
+    back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
+    padding='15px'
+    borderRadius='15px'
+    color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
+    width="85%"
+    click={() => handleButtonClick('configuracoes')}
+  />
+  <BtnPrincipal
+    texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-pergunta.svg" alt="Minha Imagem"/> }</div>}
+    back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
+    padding='15px'
+    borderRadius='15px'
+    color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
+    width="85%"
+    click={() => handleButtonClick('ajuda')}
+  />
+</div>
   if (error) {
     return <div>Error: {error?.message}</div>;
   }
-
 
   if (error2) {
     return <div>Error: {error2?.message}</div>;
   }
 
+  const handleButtonClick = (buttonName) => {
+    setSelectedButton(buttonName);
+  };
+
   return (
+    
     userDataEmpresa && (
       <div className="Container">
-        <div>Categoria</div>
+        <div>
+          <div>
+            <BtnPrincipal
+              texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
+              back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
+              padding='15px'
+              borderRadius='15px'
+              color={selectedButton === 'home' ? '#fff' : '#64748B'}
+              width="85%"
+              weig="500"
+              click={() => handleButtonClick('home')}
+            />
+            <BtnPrincipal
+              texto={<div className='flex justify-center gap-2'>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-adc.svg" alt="Minha Imagem"/> }</div>}
+              back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
+              padding='15px'
+              borderRadius='15px'
+              color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
+              width="85%"
+              click={() => handleButtonClick('criarVaga')}
+            />
+            <BtnPrincipal
+              texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-config.svg" alt="Minha Imagem"/> }</div>}
+              back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
+              padding='15px'
+              borderRadius='15px'
+              color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
+              width="85%"
+              click={() => handleButtonClick('configuracoes')}
+            />
+            <BtnPrincipal
+              texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-pergunta.svg" alt="Minha Imagem"/> }</div>}
+              back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
+              padding='15px'
+              borderRadius='15px'
+              color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
+              width="85%"
+              click={() => handleButtonClick('ajuda')}
+            />
+          </div>
+        </div>
         {userDataVagasEmpresa && (
-          <UserVagasEmpresa/>
+          <div className='central'>
+            <span className='vaga-tit'>Minhas Vagas</span>
+            <UserVagasEmpresa/>
+          </div>
+        )}
+        {!userDataVagasEmpresa && (
+          <div className='central'>
+            <span className='vaga-tit'>Minhas Vagas</span>
+            nnnnnn
+          </div>
         )}
         <div className='modalConfigura'>
           <div className='perEmp'>
@@ -40,7 +133,15 @@ const MainUser = () => {
             <span className='span-texto'>Empresa</span>
           </div>
           <div className="linha"></div>
-          <BtnPrincipal texto='Editar Perfil' back='#2563EB' padding='15px' borderRadius='25px' color='#fff' width="85%" />
+          <BtnPrincipal
+            texto='Editar Perfil'
+            back='#3B82F6'
+            padding='15px'
+            borderRadius='25px'
+            color='#fff'
+            width="85%"
+            weig="500"
+          />
         </div>
       </div>
     )

@@ -27,7 +27,6 @@ import { UserProvider as VagasEmpresa } from './services/UserContextVagasEmpresa
 
 
 
-
 const router = createBrowserRouter([
   {
     path: "",

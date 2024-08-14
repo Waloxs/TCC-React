@@ -4,7 +4,13 @@
     gap: 2rem;
     width: 90vw;
     margin: 0 auto;
-    margin-top: 60px;
+    margin-top: 100px;
+}
+
+
+.icons img{
+    width: 20px;
+    cursor: pointer;
 }
 
 .perEmp{
@@ -29,25 +35,39 @@
     height: max-content;
 }
 
+.central{
+    position: relative;
+}
+
+.vaga-tit{
+    position: absolute;
+    top: -40px;
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 25.6px */
+}
+
 .nomeEmp{
     color: var(--grey-text-dark, #020617);
-font-family: Lexend;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 150%; /* 30px */
-text-transform: uppercase;
-font-family: Lexend;
-
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30px */
+    text-transform: uppercase;
+    font-family: Lexend;
 }
 
 .span-texto{
     color: var(--grey-text-light, #64748B);
-font-family: Lexend;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; /* 21px */
+    font-family: Lexend;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
 }
 
 
@@ -61,3 +81,17 @@ line-height: 150%; /* 21px */
 .content{
     background-color: #020617;
 }
+
+
+.modalExcluir{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #E2E8F0;
+    padding: 30px 70px;
+    border-radius: 15px;
+    z-index: 9;
+}
+

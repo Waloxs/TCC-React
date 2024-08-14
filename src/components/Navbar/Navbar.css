@@ -27,6 +27,10 @@
   margin-right: 10px;
 }
 
+.navbar{
+  border: 1px solid var(--grey-border, #E2E8F0)
+}
+
 
 .menuDrop{
   width: 90vw;

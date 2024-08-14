@@ -8,8 +8,9 @@ import MainUser from '../../components/MainUser/MainUser';
 
 const DashboardEmpresa = () => {
 
+  
   return (
-    <div>
+    <div style={{height: '100vh'}}>
       <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash'/>
       <MainUser/>
     </div>
