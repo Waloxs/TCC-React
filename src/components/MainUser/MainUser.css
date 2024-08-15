@@ -95,3 +95,28 @@
     z-index: 9;
 }
 
+
+.modalEditar{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #E2E8F0;
+    padding: 30px 70px;
+    border-radius: 15px;
+    z-index: 9;
+    height: 750px;
+    width: 750px;
+}
+
+.titEdit{
+    color: var(--grey-text-dark, #020617);
+font-family: Lexend;
+font-size: 1.5rem;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 36px */
+}
+
+
