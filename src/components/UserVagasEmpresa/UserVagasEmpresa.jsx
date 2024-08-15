@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import axios from 'axios';
 
-
 const UserVagasEmpresa = () => {  
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
-  const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
+  const { data: initialVagas, loading2, error2 } = useUserVagasEmpresa();
   const [modal, setModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [error3, setError] = useState(null);
+  const [userDataVagasEmpresa, setUserDataVagasEmpresa] = useState(initialVagas);
+
+  useEffect(() => {
+    setUserDataVagasEmpresa(initialVagas);
+  }, [initialVagas]);
 
   if (loading2) return <div><p>Loading...</p></div>;
   if (error2) return <p>Error: {error2.message}</p>;
@@ -28,33 +32,29 @@ const UserVagasEmpresa = () => {
     setSelectedIndex(null);
   }
 
-  const excluirVaga = () => {
+  const excluirVaga = async () => {
     const id = userDataVagasEmpresa[selectedIndex]._id;
   
-    const fetchData = async () => {
-      const token = localStorage.getItem('authToken');
-      const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
-  
-      try {
-        const response = await axios.delete(`https://workzen.onrender.com/v1/jobs/delete/${id}`, config);
-        
-        console.log('Requisição bem-sucedida:', response);
-        
-      } catch (error) {
-        console.error('Erro na exclusão:', error);
-        setError(error);
-      } finally {
-        console.log('Finalizando a operação de exclusão');
+    const token = localStorage.getItem('authToken');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
     };
   
-    fetchData();
-  
-    cancelaVaga(); 
+    try {
+      const response = await axios.delete(`https://workzen.onrender.com/v1/jobs/delete/${id}`, config);
+      console.log('Requisição bem-sucedida:', response);
+
+      setUserDataVagasEmpresa(userDataVagasEmpresa.filter((_, i) => i !== selectedIndex));
+        
+    } catch (error) {
+      console.error('Erro na exclusão:', error);
+      setError(error);
+    } finally {
+      cancelaVaga();
+      console.log('Finalizando a operação de exclusão');
+    }
   }
   
 
