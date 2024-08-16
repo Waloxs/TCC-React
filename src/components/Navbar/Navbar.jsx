@@ -36,29 +36,55 @@ const Navbar = ({
   const { data: user } = useUserTalento();
   const { data: userDataEmpresa } = useUserEmpresa();
 
+  const sitModal = () => {
+    setModal(!modal);
+    setMenuDrop1(false);
+    setMenuDrop2(false);
+    setBorder(false);
+  }
+
+  const sitModal2 = () => {
+    setModal2(!modal2);
+    setMenuDrop1(false);
+    setMenuDrop2(false);
+    setBorder(false);
+  }
+
+  const ApagaToken = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/Login'; 
+  };
+
+  const handleClick = () => {
+    setMenu(!menu);
+    setClicked(!clicked);
+  };
+
+  const toggleMenu1 = (e) => {
+    e.preventDefault();
+    setMenuDrop1(!menuDrop1);
+    setMenuDrop2(false); 
+    setBorder(!menuDrop1);
+  };
+
+  const toggleMenu2 = (e) => {
+    e.preventDefault();
+    setMenuDrop2(!menuDrop2);
+    setMenuDrop1(false);
+    setBorder(!menuDrop2);
+  };
+
   const estiloBorder = border ? 'rounded-b-[0px]' : 'rounded-b-[0.9375rem]';
-  const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor' /> : <IoIosArrowDown className='dropList' />;
-  const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor' /> : <IoIosArrowDown className='dropList' />;
+  const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
+  const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
   const modalRef = useRef(null);
-
-  const handleToggleMenu = (setMenuDrop, currentState) => {
-    setMenuDrop(!currentState);
-    setMenuDrop1(setMenuDrop === setMenuDrop1 ? !currentState : false);
-    setMenuDrop2(setMenuDrop === setMenuDrop2 ? !currentState : false);
-    setBorder(!currentState);
-  };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setModal(false);
       setModal2(false);
     }
-  };
-
-  const handleClick = () => {
-    setClicked(!clicked);
-    setMenu(!menu);
   };
 
   useEffect(() => {
@@ -84,169 +110,169 @@ const Navbar = ({
         </Link>
         {link && (
           <div className="links flex gap-5">
-            <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={() => handleToggleMenu(setMenuDrop1, menuDrop1)}>
+            <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={(e) => toggleMenu1(e)}>
               Buscar Trabalho {estiloSeta1}
             </a>
-            <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={() => handleToggleMenu(setMenuDrop2, menuDrop2)}>
+            <a href="/" className="flex items-center text-sm text-grey-text-light" onClick={(e) => toggleMenu2(e)}>
               Anunciar Vaga {estiloSeta2}
             </a>
           </div>
         )}
-      </div>
 
-      {showDashnone && (
-        <div className="dashnone flex items-center gap-5 mr-[3rem]">
-          <div className='dnone'>
-            <Link to="/Login">
-              <BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px" borderRadius="20px" padding="10px" />
-            </Link>
-          </div>
-          {criConta && (
+        {showDashnone && (
+          <div className="dashnone flex items-center gap-5 mr-[3rem]">
             <div className='dnone'>
-              <Link to="/Escolha">
-                <BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px" borderRadius="20px" padding="10px" />
+              <Link to="/Login">
+                <BtnPrincipal texto="Entrar" back="#fff" hover="#f7f7f7" color="#000" width="80px" borderRadius="20px" padding="10px"/>
               </Link>
             </div>
-          )}
-          <div className='menuHamb' onClick={handleClick}>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
-            <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
-          </div>
-        </div>
-      )}
-
-      {userTalento && user && (
-        <>
-          <div className='flex items-center gap-12'>
-            {barraPesquisa && (
-              <>
-                <div className='pesquisa'>
-                  <input type="text" style={{ width: "300px", height: "35px" }} />
-                  <IoIosSearch className='icon-search' size="25px" />
-                </div>
-                <FaRegBell size="25px" />
-              </>
-            )}
-            {img && user && user.image && (
-              <div className="imgCadas" onClick={() => setModal(true)}>
-                <img src={user.image} alt="User Avatar" className='imgUser' />
+            {criConta && (
+              <div className='dnone'>
+                <Link to="/Escolha">
+                  <BtnPrincipal texto="Criar Conta" back="#22C55E" hover="#11C11F" color="#fff" width="140px" borderRadius="20px" padding="10px"/>
+                </Link>
               </div>
             )}
-            {img && user && !user.image && (
-              <div className="imgCadas" onClick={() => setModal(true)}>
+            <div className='menuHamb' onClick={handleClick}>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div>
+              <div className={`line ${clicked ? 'clicked' : 'unclicked'}`}></div> 
+            </div>
+          </div>
+        )}
+
+        {userTalento && user && (
+          <>
+            <div className='flex items-center gap-12'>
+              {barraPesquisa && (
+                <>
+                  <div className='pesquisa'>
+                    <input type="text" style={{ width: "300px", height: "35px" }} />
+                    <IoIosSearch className='icon-search' size="25px" />
+                  </div>
+                  <FaRegBell size="25px" />
+                </>
+              )}
+              {img && user && user.image && (
+                <div className="imgCadas" onClick={sitModal}>
+                  <img src={user.image} alt="User Avatar" className='imgUser' />
+                </div>
+              )}
+              {img && user && !user.image && (
+                <div className="imgCadas" onClick={sitModal}>
+                  <div className='imgUserNone'>
+                    <User prLet={true} />
+                  </div>
+                </div>
+              )}
+            </div>
+            {modal && user && (
+              <motion.div
+                className='flex flex-col justify-between modal'
+                ref={modalRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1 }}
+              >
+                <div className='flex flex-col items-center'>
+                  {user.image ? (
+                    <img src={user.image} alt="User Avatar" className='imgModal' />
+                  ) : (
+                    <div className='imgUserNone2'>
+                      <User prLet={true} size={'2rem'} />
+                    </div>
+                  )}
+                  <div>
+                    <span>
+                      <User nome={true} /> <User sobrenome={true} />
+                    </span>
+                  </div>
+                </div>
+                <div style={{ marginBottom: '15px' }}>
+                  <Link to="/Configura">
+                    <div className='hv flex' style={{ cursor: 'pointer' }}>
+                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+                        <IoMdSettings className='conf' />
+                        <h1>Configurações</h1>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className='hv flex' style={{ cursor: 'pointer' }}>
+                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
+                      <CiLogout className='conf' />
+                      <h1>Sair</h1>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+
+        {NavEmpresa && userDataEmpresa && (
+          <>
+            {img && userDataEmpresa && userDataEmpresa.image && (
+              <div className="imgCadas" onClick={sitModal2}>
+                <img src={userDataEmpresa.image} alt="User Avatar" className='imgUser' />
+              </div>
+            )}
+            {img && userDataEmpresa && !userDataEmpresa.image && (
+              <div className="imgCadas">
                 <div className='imgUserNone'>
-                  <User prLet={true} />
-                </div>
+                  <UserEmpresa prLet={true} />
+                </div>                
               </div>
             )}
-          </div>
-          {modal && user && (
-            <motion.div
-              className='flex flex-col justify-between modal'
-              ref={modalRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 1 }}
-            >
-              <div className='flex flex-col items-center'>
-                {user.image ? (
-                  <img src={user.image} alt="User Avatar" className='imgModal' />
-                ) : (
-                  <div className='imgUserNone2'>
-                    <User prLet={true} size={'2rem'} />
+            {modal2 && userDataEmpresa && (
+              <motion.div
+                className='flex flex-col justify-between modal'
+                ref={modalRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 1 }}
+              >
+                <div className='flex flex-col items-center'>
+                  {userDataEmpresa.image ? (
+                    <img src={userDataEmpresa.image} alt="User Avatar" className='imgModal' />
+                  ) : (
+                    <div className='imgUserNone2'>
+                      <UserEmpresa prLet={true} size={'2rem'} />
+                    </div>
+                  )}
+                  <div>
+                    <span>
+                      <UserEmpresa nome={true} /> <UserEmpresa sobrenome={true} />
+                    </span>
                   </div>
-                )}
-                <div>
-                  <span>
-                    <User nome={true} /> <User sobrenome={true} />
-                  </span>
                 </div>
-              </div>
-              <div style={{ marginBottom: '15px' }}>
-                <Link to="/Configura">
+                <div style={{ marginBottom: '15px' }}>
+                  <Link to="/Configura">
+                    <div className='hv flex' style={{ cursor: 'pointer' }}>
+                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
+                        <IoMdSettings className='conf' />
+                        <h1>Configurações</h1>
+                      </div>
+                    </div>
+                  </Link>
                   <div className='hv flex' style={{ cursor: 'pointer' }}>
-                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-                      <IoMdSettings className='conf' />
-                      <h1>Configurações</h1>
+                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
+                      <CiLogout className='conf' />
+                      <h1>Sair</h1>
                     </div>
                   </div>
-                </Link>
-                <div className='hv flex' style={{ cursor: 'pointer' }}>
-                  <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
-                    <CiLogout className='conf' />
-                    <h1>Sair</h1>
-                  </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </>
-      )}
-
-      {NavEmpresa && userDataEmpresa && (
-        <>
-          {img && userDataEmpresa && userDataEmpresa.image && (
-            <div className="imgCadas" onClick={() => setModal2(true)}>
-              <img src={userDataEmpresa.image} alt="User Avatar" className='imgUser' />
-            </div>
-          )}
-          {img && userDataEmpresa && !userDataEmpresa.image && (
-            <div className="imgCadas">
-              <div className='imgUserNone'>
-                <UserEmpresa prLet={true} />
-              </div>
-            </div>
-          )}
-          {modal2 && userDataEmpresa && (
-            <motion.div
-              className='flex flex-col justify-between modal'
-              ref={modalRef}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 1 }}
-            >
-              <div className='flex flex-col items-center'>
-                {userDataEmpresa.image ? (
-                  <img src={userDataEmpresa.image} alt="User Avatar" className='imgModal' />
-                ) : (
-                  <div className='imgUserNone2'>
-                    <UserEmpresa prLet={true} size={'2rem'} />
-                  </div>
-                )}
-                <div>
-                  <span>
-                    <UserEmpresa nome={true} /> <UserEmpresa sobrenome={true} />
-                  </span>
-                </div>
-              </div>
-              <div style={{ marginBottom: '15px' }}>
-                <Link to="/Configura">
-                  <div className='hv flex' style={{ cursor: 'pointer' }}>
-                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-                      <IoMdSettings className='conf' />
-                      <h1>Configurações</h1>
-                    </div>
-                  </div>
-                </Link>
-                <div className='hv flex' style={{ cursor: 'pointer' }}>
-                  <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
-                    <CiLogout className='conf' />
-                    <h1>Sair</h1>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </>
-      )}
+              </motion.div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
 Navbar.propTypes = {
-  menu: PropTypes.bool.isRequired,
-  setMenu: PropTypes.func.isRequired,
+  menu: PropTypes.bool,
+  setMenu: PropTypes.func,
   showDashnone: PropTypes.bool,
   link: PropTypes.bool,
   img: PropTypes.bool,

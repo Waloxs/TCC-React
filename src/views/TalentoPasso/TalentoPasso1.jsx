@@ -359,7 +359,7 @@ const token = localStorage.getItem('authToken');
           </form>
         </div>
       )}
-      <div className={`${sombra ? 'sombra' : ''} container2 flex flex-col justify-center items-center`} style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', padding: '20px' }}>
+      <div className={`${sombra ? 'sombra' : ''} containerPasso flex flex-col justify-center items-center`} style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', padding: '20px' }}>
         <div className="containerLogo2" style={{ width: '100%' }}>
           <Link to="/" style={{ width: '100%' }}>
             <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />

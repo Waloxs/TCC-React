@@ -77,7 +77,7 @@ const Login = () => {
 
   return (
     <div className='tudo flex justify-center items-center' style={{ background: '#fff', height: '100vh' }}>
-      <div className="anime flex justify-between" style={{ width: '65rem', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
+      <div className="anime flex justify-between" style={{ width: '65rem', height: 'auto', borderRadius: '1.25rem' }}>
         <form className="form flex flex-col items-center justify-center gap-5" style={{ width: '100%' }} onSubmit={handleSubmit}>
           <Link to='/'><img src={LogoResp} alt="Logo" style={{ width: '2rem', height: '1.10rem' }} className='logoResp' /></Link>
           <Link to='/'><img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} className='imageout' /></Link>
@@ -103,7 +103,7 @@ const Login = () => {
 
           <BtnPrincipal class="btnLogin" texto="Entrar" color="#fff" width="100%" back="#3B82F6" hover='#3A61D4' /> {/* Botão para salvar as mudanças */}
           
-          <div className="line"></div>
+          <div className="lineLogin"></div>
           <h3 className='cont'>Ou continuar com</h3>
 
           <a href='https://workzen.onrender.com/v1/auth/google' className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
@@ -111,7 +111,9 @@ const Login = () => {
               <h2 className='gog'>Google</h2>
           </a>
         </form>
-        <img className='imgLogin' src={img} alt="Login Visual" style={{ maxWidth: '34rem', height: '40rem' }} />
+        <div>
+        <img className='imgLogin' src={img} alt="Login Visual" style={{ maxWidth: '40rem', height: '40rem', transform: 'translateX(70px)' }} />
+        </div>
       </div>
     </div>
   );
