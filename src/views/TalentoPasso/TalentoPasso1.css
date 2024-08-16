@@ -9,6 +9,10 @@
     max-width: 30ch;
 }
 
+.containerPasso{
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+
+}
 
 .user{
     cursor: pointer;
