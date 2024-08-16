@@ -100,13 +100,13 @@ const Talento = () => {
   return (
     <div>
       <div className='tudo flex justify-center' style={{ width: '100vw' }}>
-        <div className='container flex flex-col justify-center items-center' style={{ maxWidth: '70rem', background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', padding: '20px' }}>
+        <div className='containerTalento flex flex-col justify-center items-center' style={{ maxWidth: '70rem', background: '#fff', height: '100vh', gap: '30px', padding: '20px' }}>
           <div className="containerLogo" style={{ width: '100%' }}>
             <Link to="/" style={{ width: '100%' }}>
               <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />
             </Link>
           </div>
-          <div className="conteudo flex justify-between" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
+          <div className="conteudo flex justify-between" style={{ width: '100%', height: 'auto', borderRadius: '1.25rem' }}>
             <div className='ui flex flex-col' style={{ height: '35rem', width: '46rem' }}>
               <Link to="/Escolha"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
               <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem' }}>
@@ -135,7 +135,8 @@ const Talento = () => {
                     <IoEyeSharp className='Eye2' onClick={togglePasswordVisibility2} />
                   )}
                 </div>
-                <BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#0866FF' color='#fff' hover='#3A61D4'/>
+                <BtnPrincipal type='submit' texto='Criar Conta' width='100%' back='#3B82F6' color='#fff' hover='#3A61D4' borderRadius='15px' font='Lexend' height='40px'/>
+
                 <div className="line2 flex self-center"></div>
               </form>
               <h3 className='cont2 flex self-center'>Ou continuar com</h3>
@@ -146,7 +147,7 @@ const Talento = () => {
                 </a>
               </div>
             </div>
-            <img className='imgTalento' src={imgTalento} alt="Login Visual" style={{ maxWidth: '30rem', height: '35rem' }} />
+            <img className='imgTalento' src={imgTalento} alt="Login Visual" style={{ maxWidth: '100%', height: '35rem', transform: 'translateX(40px)' }} />
           </div>
         </div>
       </div>

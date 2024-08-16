@@ -119,4 +119,13 @@ font-weight: 600;
 line-height: 150%; /* 36px */
 }
 
+.formCriar{
+    background-color: #fff;
+    border: 1px solid #E2E8F0;
+    padding: 30px 70px;
+    border-radius: 15px;
+    z-index: 9;
+    height: 750px;
+    width: 100%;
+}
 

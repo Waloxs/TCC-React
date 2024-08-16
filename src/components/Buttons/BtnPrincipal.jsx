@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding, size, weig, font }) => {
+const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding, size, weig, font, height }) => {
     const handleMouseOver = (e) => {
         if(hoverColor){
         e.currentTarget.style.backgroundColor = hoverColor;
@@ -29,6 +29,7 @@ const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click
                 fontWeight: weig,
                 fontFamily: font,
                 transition: 'background-color 0.3s, color 0.3s',
+                height: height,
             }}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
@@ -53,6 +54,7 @@ BtnPrincipal.propTypes = {
     size: PropTypes.string,
     weig: PropTypes.string,
     font: PropTypes.string,
+    height: PropTypes.string,
 };
 
 export default BtnPrincipal;

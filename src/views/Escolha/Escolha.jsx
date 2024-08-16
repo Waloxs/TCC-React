@@ -12,7 +12,7 @@ const Escolha = () => {
   const [btnProps, setBtnProps] = useState({
     color: '#CBD5E1',
     back: '#fff',
-    border: '2px solid #CBD5E1'
+    border: '#d7d7d7',
   });
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
@@ -36,7 +36,7 @@ const Escolha = () => {
     setBtnProps({
       color: '#fff',
       back: '#0866FF', 
-      border: '2px solid #0866FF',
+      border: 'transparent',
       hover: '#3A61D4'
     });
   };
@@ -70,13 +70,14 @@ const Escolha = () => {
 
   return (
     <div className='tudo flex justify-center' style={{width: '100vw'}}>
-      <div className='containerEscolha flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', marginTop: '10px', maxWidth: '65rem', padding: '20px'}}>
+      <div className='containerEscolha flex flex-col justify-center items-center' style={{ background: '#fff', height: '100vh', gap: '30px', maxWidth: '65rem', padding: '20px'}}>
         <div className="flex self-start" style={{ maxWidth: '65rem' }}>
           <Link to="/">
             <img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} />
           </Link>
         </div>
-        <div className="flex justify-between" style={{ maxWidth: '65rem', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
+        <div className="conteudo flex gap-2" >
+        <div style={{ maxWidth: '65rem', height: 'auto', background: '#fff', borderRadius: '1.25rem', border: '2px solid #E2E8F0'}}>
           <div className='flex flex-col' style={{height: '35rem'}}>
             <Link to="/"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
             <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem'}}>
@@ -105,9 +106,12 @@ const Escolha = () => {
                 </div>
               </div>
             </div>
+           </div>
           </div>
-          <img className='imgEscolha' src={imgEscolha} alt="Login Visual" style={{ maxWidth: '34rem', height: '35rem' }} />
-        </div>
+              <div className='container-img'>
+                <img className='imgEscolha' src={imgEscolha} alt="Login Visual" style={{ maxWidth: '50rem', height: '35rem', transform: 'translateX(50px)' }} />
+              </div>
+           </div>
         <div className='flex self-end' style={{ marginTop: '-20px', maxWidth: '65rem' }}>
           <Link to={getLinkPath()}><BtnPrincipal texto="Continuar" color={btnProps.color} width="160px" back={btnProps.back} border={btnProps.border} hover={btnProps.hover} borderRadius="20px" padding="10px"/></Link>
         </div>

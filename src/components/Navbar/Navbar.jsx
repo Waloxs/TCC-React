@@ -15,6 +15,7 @@ import { FaRegBell } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { useUser as useUserTalento } from '../../services/UserContext';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
+import { Navigate } from 'react-router-dom';
 
 const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, criConta = true, userTalento = false, NavEmpresa = false, barraPesquisa = false }) => {  
   const [clicked, setClicked] = useState(false);
@@ -267,6 +268,47 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           </>
         )}
       </div>
+
+
+      {menu && (
+          <div className='flex flex-col justify-between' style={{height: 'calc(100vh - 100px)', width: '100%', padding: '0px 40px 0px 40px'}}>
+          <div className='link-resp flex flex-col gap-4' style={{marginTop: '30px'}}>
+          <div>
+            <span>Anunciar Vaga</span>
+          </div>
+
+          <div>
+            <span>Buscar Trabalho</span>
+          </div>
+          </div>
+
+          <div className="flex gap-4 items-center flex-col btnResp">
+          <BtnPrincipal
+        texto="Entrar"
+        back='#fff'
+        padding='10px'
+        borderRadius='15px'
+        color='#64748B'
+        font='Lexend'
+        width='100%'
+        border='#64748B'
+        click={(Navigate('/Login'))}
+          />
+
+<BtnPrincipal
+        texto="Criar Conta"
+        back='#3B82F6'
+        padding='10px'
+        borderRadius='15px'
+        color='#fff'
+        font='Lexend'
+        width='100%'
+        click={(Navigate('/Escolha'))}
+          />
+          </div>
+        </div>
+        )}
+
     </div>
   );
 };

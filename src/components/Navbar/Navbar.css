@@ -179,6 +179,15 @@
 
   }
 
+.link-resp span{
+  color: var(--grey-text-light, #64748B);
+  font-family: Lexend;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 22.4px */
+}
+
   
   @media (max-width: 630px) {
     .dropList{

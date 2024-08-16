@@ -3,6 +3,8 @@ import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
+import CriarVaga from '../CriarVaga/CriarVaga.jsx'
+
 
 import './MainUser.css';
 import { useState } from 'react';
@@ -13,136 +15,104 @@ const MainUser = () => {
   
   const [selectedButton, setSelectedButton] = useState('home');
 
-  if (loading || loading2) {
-    return <div>Loading...</div>;
-  }
-  <div>
-  <BtnPrincipal
-    texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
-    back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
-    padding='15px'
-    borderRadius='15px'
-    color={selectedButton === 'home' ? '#fff' : '#64748B'}
-    width="85%"
-    weig="500"
-    click={() => handleButtonClick('home')}
-  />
-  <BtnPrincipal
-    texto={<div className='flex justify-center gap-2'>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-adc.svg" alt="Minha Imagem"/> }</div>}
-    back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
-    padding='15px'
-    borderRadius='15px'
-    color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
-    width="85%"
-    click={() => handleButtonClick('criarVaga')}
-  />
-  <BtnPrincipal
-    texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-config.svg" alt="Minha Imagem"/> }</div>}
-    back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
-    padding='15px'
-    borderRadius='15px'
-    color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
-    width="85%"
-    click={() => handleButtonClick('configuracoes')}
-  />
-  <BtnPrincipal
-    texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-pergunta.svg" alt="Minha Imagem"/> }</div>}
-    back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
-    padding='15px'
-    borderRadius='15px'
-    color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
-    width="85%"
-    click={() => handleButtonClick('ajuda')}
-  />
-</div>
-  if (error) {
-    return <div>Error: {error?.message}</div>;
-  }
-
-  if (error2) {
-    return <div>Error: {error2?.message}</div>;
-  }
-
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
   };
 
+  if (loading || loading2) {
+    return <div>Loading...</div>;
+  }
+
+  if (error || error2) {
+    return <div>Error: {error?.message || error2?.message}</div>;
+  }
+
   return (
-    
     userDataEmpresa && (
-      <div className="Container">
+      <div className="Container" style={{ gridTemplateColumns: selectedButton !== 'home' ? '1fr 4fr' : '1fr 3fr 1fr' }}>
         <div>
-          <div>
-            <BtnPrincipal
-              texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
-              back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
-              padding='15px'
-              borderRadius='15px'
-              color={selectedButton === 'home' ? '#fff' : '#64748B'}
-              width="85%"
-              weig="500"
-              click={() => handleButtonClick('home')}
-            />
-            <BtnPrincipal
-              texto={<div className='flex justify-center gap-2'>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-adc.svg" alt="Minha Imagem"/> }</div>}
-              back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
-              padding='15px'
-              borderRadius='15px'
-              color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
-              width="85%"
-              click={() => handleButtonClick('criarVaga')}
-            />
-            <BtnPrincipal
-              texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-config.svg" alt="Minha Imagem"/> }</div>}
-              back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
-              padding='15px'
-              borderRadius='15px'
-              color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
-              width="85%"
-              click={() => handleButtonClick('configuracoes')}
-            />
-            <BtnPrincipal
-              texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-pergunta.svg" alt="Minha Imagem"/> }</div>}
-              back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
-              padding='15px'
-              borderRadius='15px'
-              color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
-              width="85%"
-              click={() => handleButtonClick('ajuda')}
-            />
-          </div>
+          <BtnPrincipal
+            texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
+            back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
+            padding='15px'
+            borderRadius='15px'
+            color={selectedButton === 'home' ? '#fff' : '#64748B'}
+            width="85%"
+            weig="500"
+            click={() => handleButtonClick('home')}
+          />
+          <BtnPrincipal
+            texto={<div className='flex justify-center gap-2'>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-adc.svg" alt="Minha Imagem"/> }</div>}
+            back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
+            padding='15px'
+            borderRadius='15px'
+            color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
+            width="85%"
+            click={() => handleButtonClick('criarVaga')}
+          />
+          <BtnPrincipal
+            texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-config.svg" alt="Minha Imagem"/> }</div>}
+            back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
+            padding='15px'
+            borderRadius='15px'
+            color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
+            width="85%"
+            click={() => handleButtonClick('configuracoes')}
+          />
+          <BtnPrincipal
+            texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Minha Imagem"/> : <img src="icons/icon-pergunta.svg" alt="Minha Imagem"/> }</div>}
+            back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
+            padding='15px'
+            borderRadius='15px'
+            color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
+            width="85%"
+            click={() => handleButtonClick('ajuda')}
+          />
         </div>
-        {userDataVagasEmpresa && (
+
+        <div>
+        {userDataVagasEmpresa && selectedButton === 'home' && (
           <div className='central'>
             <span className='vaga-tit'>Minhas Vagas</span>
-            <UserVagasEmpresa/>
+            <UserVagasEmpresa />
           </div>
         )}
+
+        {userDataVagasEmpresa && selectedButton === 'criarVaga' && (
+          <div className='central'>
+            <CriarVaga></CriarVaga>
+          </div>
+        )}
+
         {!userDataVagasEmpresa && (
           <div className='central'>
             <span className='vaga-tit'>Minhas Vagas</span>
-            nnnnnn
+            <p>Você ainda não tem vagas criadas.</p>
           </div>
         )}
-        <div className='modalConfigura'>
-          <div className='perEmp'>
-            <UserEmpresa className='' prLet={true} size={'3rem'} />
-          </div>
-          <div className='flex flex-col items-center'>
-            <UserEmpresa nome={true} className='nomeEmp' />
-            <span className='span-texto'>Empresa</span>
-          </div>
-          <div className="linha"></div>
-          <BtnPrincipal
-            texto='Editar Perfil'
-            back='#3B82F6'
-            padding='15px'
-            borderRadius='25px'
-            color='#fff'
-            width="85%"
-            weig="500"
-          />
         </div>
+
+        {selectedButton === 'home' && (
+          <div className='modalConfigura'>
+            <div className='perEmp'>
+              <UserEmpresa className='' prLet={true} size={'3rem'} />
+            </div>
+            <div className='flex flex-col items-center'>
+              <UserEmpresa nome={true} className='nomeEmp' />
+              <span className='span-texto'>Empresa</span>
+            </div>
+            <div className="linha"></div>
+            <BtnPrincipal
+              texto='Editar Perfil'
+              back='#3B82F6'
+              padding='15px'
+              borderRadius='25px'
+              color='#fff'
+              width="85%"
+              weig="500"
+            />
+          </div>
+        )}
       </div>
     )
   );

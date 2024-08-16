@@ -1,6 +1,9 @@
-.tudo{
+.tudo {
     overflow-y: hidden;
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%);
+    height: 100vh; /* Certifique-se de que a altura esteja definida para visualizar o efeito */
 }
+
 
 
 .EscTit{
@@ -69,7 +72,11 @@
 
 .containerEscolha{
 animation: animaCont 1s ease-out forwards;
+background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+
 }
+
+
 
 @keyframes animaCont {
     from {
@@ -83,7 +90,7 @@ animation: animaCont 1s ease-out forwards;
 }
 
 
-@media(max-width: 900px){
+@media(max-width: 1065px){
     .imgEscolha{
         display: none;
     }

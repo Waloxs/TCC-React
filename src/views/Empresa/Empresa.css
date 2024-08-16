@@ -9,6 +9,17 @@
     text-align: center;
 }
 
+.containerEmpresa{
+background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+}
+
+.form-empresa{
+        background-color: #fff;
+        border: 2px solid #E2E8F0;
+        border-radius: 20px;
+        height: 600px !important;
+        width: 550px !important;
+}
 
 .gri{
     display: grid;
@@ -36,10 +47,10 @@
     font-weight: 300;
     line-height: 140%; /* 1.75rem */
     position: absolute;
-    background: #f7f7f7;
+    background: #fff;
     padding-left: 10px;
     padding-right: 10px;
-    bottom: 17.5%;
+    bottom: 16.5%;
 }
 
 
@@ -104,12 +115,12 @@
     }
 
     .conteudo{
-        
         height: 40rem !important;
     }
 
-    .container{
+    .containerEmpresa{
         max-width: 34rem !important;
+        gap: 0px !important;
     }
 
     .containerLogo{
@@ -118,16 +129,26 @@
 }
 
 
+@media(max-width: 730px){
+    .containerEmpresa{
+        max-width: 27rem !important;
+    }
+}
 
 @media(max-width: 500px){
+
+    .containerEmpresa{
+        max-width: 24rem !important;
+    }
+
     .gri{
         display: grid;
         grid-template-columns: 1fr !important;
         gap: 10px;
     }
 
-    .cont3{
-        top: 79.5%;
+    #inputEmpresa, #areaDeAtuacao{
+        font-size: 0.85rem;
     }
 
     .ui{
@@ -143,14 +164,6 @@
     }    
 
     
-.cont3{
-    top: 85%;
-}
-
-#areaDeAtuacao{
-    font-size: 0.85rem;
-}
-
 }
 
 
