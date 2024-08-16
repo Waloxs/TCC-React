@@ -4,6 +4,7 @@
 
 .tudo{
     overflow-y: hidden;
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
 }
 
 .sub:hover{
@@ -42,9 +43,19 @@ font-weight: 300;
 line-height: 140%; /* 1.75rem */
 }
 
+.lineLogin{
+
+    width: 100%;
+    height: 1px;
+    background: #d7d7d7;
+}
+
 .form{
     padding: 2rem;
     position: relative;
+    background: #fff;
+    border: 2px solid #E2E8F0;
+    border-radius: 20px;
 }
 
 input{
@@ -95,8 +106,8 @@ input::placeholder{
     line-height: 160%; /* 1.4rem */
     font-style: normal;
     position: absolute;
-    top: 460px;
-    background: #f7f7f7;
+    top: 450px;
+    background: #fff;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -149,7 +160,7 @@ input::placeholder{
     bottom: 10px;
 }
 
-@media(max-width: 1024px){
+@media(max-width: 1200px){
     .imgLogin{
         display: none;
     }
@@ -173,8 +184,31 @@ input::placeholder{
         display: none;
     }
 
-    .btnLogin{
-        box-shadow: 0px 28px 11px 0px rgba(0, 0, 0, 0.02), 0px 16px 9px 0px rgba(0, 0, 0, 0.08), 0px 7px 7px 0px rgba(0, 0, 0, 0.13), 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+   
+}
+
+
+@media(max-width: 500px){
+    .anime{
+    width: 25rem !important;
     }
 }
 
+
+
+
+@media(max-width: 425px){
+    .anime{
+    width: 20rem !important;
+    }
+
+    .subLogin{
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .cont{
+        top: 445px;
+    }
+}

@@ -21,8 +21,6 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
-  const [menuDropMobile1, setMenuDropMobile1] = useState(false);
-  const [menuDropMobile2, setMenuDropMobile2] = useState(false);
   const [border, setBorder] = useState(false);
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
@@ -30,6 +28,8 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
 
   const { data: user } = useUserTalento();
   const { data: userDataEmpresa } = useUserEmpresa();
+
+  
 
   const sitModal = () => {
     setModal(!modal);
@@ -69,24 +69,11 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
     setBorder(!menuDrop2);
   };
 
-  const toggleMenuMobile1 = (e) => {
-    e.preventDefault();
-    setMenuDropMobile1(!menuDropMobile1);
-    setMenuDropMobile2(false); 
-  };
-
-  const toggleMenuMobile2 = (e) => {
-    e.preventDefault();
-    setMenuDropMobile2(!menuDropMobile2);
-    setMenuDropMobile1(false); 
-  };
 
   const estiloBorder = border ? 'rounded-b-[0px]' : 'rounded-b-[0.9375rem]';
   const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
   const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
-  const estiloSetaMobile1 = menuDropMobile1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
-  const estiloSetaMobile2 = menuDropMobile2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
   const modalRef = useRef(null);
 
@@ -137,7 +124,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           </div>
         )}
 
-        {userTalento && (
+        {userTalento && user &&(
           <>
           <div className='flex items-center gap-12'>
           {barraPesquisa && (
@@ -166,7 +153,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
             )}
           </div>
 
-            {modal && (
+            {modal && user &&(
               <motion.div
                 className='flex flex-col justify-between modal'
                 ref={modalRef}
@@ -209,7 +196,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
           </>
         )}
 
-        {NavEmpresa && (
+        {NavEmpresa && userDataEmpresa &&(
           <>
             {img && userDataEmpresa && userDataEmpresa.image && (
               <div className="imgCadas" onClick={sitModal2}>
@@ -225,7 +212,7 @@ const Navbar = ({ menu, setMenu, showDashnone = true, link = true, img = false, 
               </div>
             )}
 
-            {modal2 && (
+            {modal2 && userDataEmpresa &&(
               <motion.div
                 className='flex flex-col justify-between modal'
                 ref={modalRef}
