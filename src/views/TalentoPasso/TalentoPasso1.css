@@ -45,9 +45,8 @@
     top: 50%;
     left: 50%;
     position: absolute;
-    z-index: 1;
     animation: animeAdc 1s ease-in-out forwards;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%); ;
 }
 
 .FormAdc{
@@ -448,6 +447,21 @@ font-style: normal;
 font-weight: 400;
 line-height: 150%; /* 21px */
 }
+
+
+
+.span-erro{
+    color: var(--error-500, #EF4444);
+font-family: Lexend;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 16.9px */
+}
+
+
+
+
 @media(max-width: 940px){
     .txArea{
         display: none;

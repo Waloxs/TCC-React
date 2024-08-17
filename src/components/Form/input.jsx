@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Input = ({tipo, id, ...props}) => {
+const Input = ({tipo, id, border, ...props}) => {
   return (
     <div>
       <input 
@@ -12,7 +12,9 @@ const Input = ({tipo, id, ...props}) => {
           width: '100%', 
           paddingTop: '0px', 
           paddingBottom: '0px', 
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          border: `2px solid ${border}`,
+          outline: 'none',
         }}
       />
     </div>

@@ -181,7 +181,7 @@ const Navbar = ({
                     <img src={user.image} alt="User Avatar" className='imgModal' />
                   ) : (
                     <div className='imgUserNone2'>
-                      <User prLet={true} size={'2rem'} />
+                      <User prLet={true} />
                     </div>
                   )}
                   <div>

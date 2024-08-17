@@ -38,7 +38,9 @@ const TalentoPasso1 = () => {
   const { data: user } = useUserTalento();
   const [modalExp, setModalExp] = useState(false);
   const [experiência, setExperiencia] = useState(null);
-
+  const [dados, setDados] = useState(null);
+  const [border, setBorder] = useState(null);
+  const [texto, setTexto] = useState(null);
 
   const data = {
     titulo: '',
@@ -47,11 +49,13 @@ const TalentoPasso1 = () => {
 
 
   const handleRegister = () => {
-    data.titulo = profissional;  // Modifica a propriedade 'titulo'
+    data.titulo = profissional;
+    setDados(prevDados => ({ ...prevDados, titulo: data.titulo }));
   };
   
   const handleRegister2 = () => {
-    data.bio = biografia;  // Modifica a propriedade 'bio'
+    data.bio = biografia;  
+    setDados(prevDados => ({ ...prevDados, bio: data.bio }));
   };
   
   
@@ -112,13 +116,20 @@ const TalentoPasso1 = () => {
   };
 
   const handleClick = (e) => {
-    e.preventDefault();
+    
     handleRegister();
-    setBlock(!block);
-    setBlock2(!block2);
-    setValor('Azul50');
-  };
 
+    if (profissional.trim() === '') {
+      setBorder('#EF4444');
+      setTexto('Adicione uma função para continuar');
+    } else {  
+      e.preventDefault();
+      setBlock(!block);
+      setBlock2(!block2);
+      setValor('Azul50');
+    }
+  };
+  
   const handleClick2 = (e) => {
     e.preventDefault();
     setBlock2(!block2);
@@ -128,11 +139,17 @@ const TalentoPasso1 = () => {
   };
 
   const handleClick3 = (e) => {
-    e.preventDefault();
     handleRegister2();
+    
+    if (biografia.trim() === '') {
+      setBorder('#EF4444');
+      setTexto('Adicione uma função para continuar');
+    } else {
+    e.preventDefault();
     setBlock3(!block3);
     setBlock4(!block4);
     setValor('Azul100');
+    }
   };
 
 
@@ -144,27 +161,37 @@ const TalentoPasso1 = () => {
 
 
     const novaExp = {
-      titulo: titulo,
+      title: titulo,
       empresa: empresa,
       localizacao: localizacao,
       estado: estado,
-      inicio: inicio,
-      fim: fim,
-      descricao: descricao
+      dataInicio: inicio,
+      dataTermino: fim,
+      description: descricao,
+      company: descricao,
+    }
+
+    if(titulo.trim() === '' || empresa.trim() === '' || localizacao.trim() === '' || estado.trim() === '' || inicio.trim() === '' || fim.trim() === '' || descricao.trim() === ''){
+      setModalExp(false);
+    }else{
+      setModalExp(true);
     }
 
     setExperiencia(novaExp);
 
 
-    setModalExp(true);
 
 
   };
+
+
 
   
 
   const handleBackClick = (e) => {
     e.preventDefault();
+
+    setModalExp(false);
     if (block == true) {
       navigate('/talento');
     } else if (!block2 == true){
@@ -217,14 +244,70 @@ const token = localStorage.getItem('authToken');
 };
 
 
+const conta = () => {
 
+  const atualizandoDados = () => {  
+
+  const token = localStorage.getItem('authToken');
+
+  if (token) {
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+  
+    // Usando async/await para lidar com a promessa
+    const updateDados = async () => {
+      try {
+        const response = await axios.put('https://workzen.onrender.com/v1/me', dados, config);
+        console.log('Dados atualizados com sucesso:', response.data);
+      } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+      }
+    };
+  
+    updateDados();
+  } else {
+    console.error('Token não encontrado no localStorage');
+  }
+}
+atualizandoDados();
+
+
+const token = localStorage.getItem('authToken');
+
+if (token) {
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  };
+
+  // Usando async/await para lidar com a promessa
+  const updateDados = async () => {
+    try {
+      const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experiência, config);
+      console.log('Dados atualizados com sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error);
+    }
+  };
+
+  updateDados();
+} else {
+  console.error('Token não encontrado no localStorage');
+}
+
+
+}
 
   return (
     <>
     {user && (
-    <div className={`${back ? 'back' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
+    <div className={`${sombra ? 'sombra' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
       {modal && (
-        <div className='containAdc' style={{ width: '35rem', height: '40rem' }}>
+        <div className='containAdc' style={{ width: '35rem', height: '40rem', zIndex: '1' }}>
           <form action="" className='FormAdc' onSubmit={handleSave}>
             <IoIosArrowBack onClick={click} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF', marginLeft: '-10px', marginBottom: '-10px', cursor: 'pointer' }} />
             <h1 className='titAdc'>Adicione sua experiência profissional</h1>
@@ -293,7 +376,7 @@ const token = localStorage.getItem('authToken');
           </form>
         </div>
       )}
-      <div className={`${sombra ? 'sombra' : ''} containerPasso flex flex-col justify-center items-center`} style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', padding: '20px' }}>
+      <div className={`containerPasso flex flex-col justify-center items-center`} style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', padding: '20px' }}>
         <div className="containerLogo2" style={{ width: '100%' }}>
           <Link to="/" style={{ width: '100%' }}>
             <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />
@@ -315,7 +398,14 @@ const token = localStorage.getItem('authToken');
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
                   <p className='func'>Sua função Profissional</p>
-                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' required value={profissional} onChange={(e) => setProfissional(e.target.value)}/>
+                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' border={border} required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+
+                  {texto && (
+                    <span className='flex gap-2 items-center span-erro'>
+                      <img src="icons/icon-erro.svg" alt="" />
+                      {texto}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
@@ -334,7 +424,7 @@ const token = localStorage.getItem('authToken');
                         <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' borderRadius="20px" padding="10px"/>
                       </div>
                       <div onClick={handleClick2} style={{cursor: 'pointer'}}>
-                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' hoverColor="#3A61D4" borderRadius="20px" padding="10px"/>
+                        <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#fff" className='fontbtn' border="#3B82F6" borderRadius="20px" padding="10px"/>
                       </div>
                     </div>
                     </>
@@ -347,36 +437,36 @@ const token = localStorage.getItem('authToken');
                         <div className='flex flex-col justify-between'>
                         <div>
                           <span>Titulo</span>
-                          <Input id='titulo' className='pdl' placeholder='' value={experiência.titulo} required onChange={(e) => setTitulo(e.target.value)}/>
+                          <Input id='titulo' className='pdl' placeholder='' value={titulo} required onChange={(e) => setTitulo(e.target.value)} readOnly/>
                         </div>
 
 
                         <div>
                           <span>Empresa</span>
-                          <Input id='titulo' className='pdl' placeholder='' value={experiência.empresa} required onChange={(e) => setEmpresa(e.target.value)}/>
+                          <Input id='titulo' className='pdl' placeholder='' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} readOnly/>
                         </div>
 
 
                         <div>
                           <span>Localização</span>
-                          <Input id='titulo' className='pdl' placeholder='' value={experiência.localizacao} required onChange={(e) => setLocalizacao(e.target.value)}/>
+                          <Input id='titulo' className='pdl' placeholder='' value={localizacao} required onChange={(e) => setLocalizacao(e.target.value)} readOnly/>
                         </div>
 
 
                         <div>
                           <span>Data de Inicio</span>
-                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={experiência.inicio} required onChange={(e) => setInicio(e.target.value)}/>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={inicio} required onChange={(e) => setInicio(e.target.value)} readOnly/>
                         </div>
 
                         <div>
                           <span>Data de Término</span>
-                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={experiência.fim} required onChange={(e) => setFim(e.target.value)}/>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={fim} required onChange={(e) => setFim(e.target.value)} readOnly/>
                         </div>
 
                         </div>
                         <div className='descExp'>
                           <span>Descrição</span>
-                          <textarea id="areaExp" style={{ resize: 'none', height: 'calc(100% - 24px)' }} value={experiência.descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200}></textarea>
+                          <textarea id="areaExp" style={{ resize: 'none', height: 'calc(100% - 24px)', outline: 'none' }} value={descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200} readOnly></textarea>
                         </div>
 
 
@@ -391,28 +481,36 @@ const token = localStorage.getItem('authToken');
                   </div>
             )}
             {!block3 && (
-                  <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
-                    <div className='pd flex flex-row justify-between' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                      <div className="m flex flex-col gap-2" style={{ marginRight: '30px' }}>
-                        <h1 className='PassTit3'>Perfeito. Agora escreva uma biografia para contar ao mundo sobre você.</h1>
-                        <p className='PassPar3'>Ajude as empresas a conhecer você rapidamente. Qual trabalho você faz melhor? Diga-lhes claramente, usando parágrafos ou marcadores. Você sempre pode editar mais tarde; apenas certifique-se de revisar agora.</p>
-                      </div>
-                      <div className='txArea flex flex-col gap-2'>
-                        <span className='titArea'>Exemplo</span>
-                        <h3 className='subArea'>Sou desenvolvedor front-end especializado em criar interfaces intuitivas para aplicativos web e móveis. Utilizo HTML5, CSS3 e JavaScript para transformar conceitos complexos em designs funcionais. Reconhecido por minha dedicação em superar expectativas, estou sempre em busca de desafios para aplicar minha paixão pela tecnologia em soluções impactantes.</h3>
-                      </div>
-                    </div>
-                    <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
-                      <p className='PassPar2'>Sua Biografia</p>
-                      <label htmlFor="area2">Biografia</label>
-                    <textarea
-                      id="area2"
-                      style={{ height: '120px', maxWidth: '600px', resize: 'none' }}
-                      value={biografia}
-                      onChange={(e) => setBiografia(e.target.value)}
-                    />
-                    </div>
-                  </div>
+              <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
+  <div className='pd flex flex-row justify-between' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+    <div className="m flex flex-col gap-2" style={{ marginRight: '30px' }}>
+      <h1 className='PassTit3'>Perfeito. Agora escreva uma biografia para contar ao mundo sobre você.</h1>
+      <p className='PassPar3'>Ajude as empresas a conhecer você rapidamente. Qual trabalho você faz melhor? Diga-lhes claramente, usando parágrafos ou marcadores. Você sempre pode editar mais tarde; apenas certifique-se de revisar agora.</p>
+    </div>
+    <div className='txArea flex flex-col gap-2'>
+      <span className='titArea'>Exemplo</span>
+      <h3 className='subArea'>
+        Sou desenvolvedor front-end especializado em criar interfaces intuitivas para aplicativos web e móveis. Utilizo HTML5, CSS3 e JavaScript para transformar conceitos complexos em designs funcionais. Reconhecido por minha dedicação em superar expectativas, estou sempre em busca de desafios para aplicar minha paixão pela tecnologia em soluções impactantes.
+      </h3>
+    </div>
+  </div>
+  <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
+    <p className='PassPar2'>Sua Biografia</p>
+    <textarea
+      id="area2"
+      style={{ height: '120px', maxWidth: '600px', resize: 'none', border: `2px solid ${border}`, outline: 'none' }}
+      value={biografia}
+      onChange={(e) => setBiografia(e.target.value)}
+    />
+    {texto && (
+      <span className='flex gap-1 items-center span-erro'>
+        <img src="icons/icon-erro.svg" alt="" />
+        Adicione uma biografia para continuar
+      </span>
+    )}
+  </div>
+</div>
+
                 )}
             {!block4 && (
     <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
@@ -431,11 +529,11 @@ const token = localStorage.getItem('authToken');
       <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
     </div>
     <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
-      <label htmlFor="file-upload" className='user'>
-        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" back="#fff" border="1px solid #3B82F6" borderRadius="20px" padding="10px"></BtnPrincipal>
+      <label htmlFor="file-upload">
+        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" height='40px' back="#fff" border="#3B82F6" borderRadius="20px"></BtnPrincipal>
       </label>
       <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-      <Link to='/Dashboard'><BtnPrincipal texto="Continuar" color="#fff" width="260px" back="#3B82F6" hover='#3A61D4' border="1px solid #3B82F6" /></Link>
+      <Link to='/Dashboard'><BtnPrincipal texto="Continuar" color="#fff" width="260px" height='40px' back="#3B82F6" hover='#3A61D4' border="#3B82F6" borderRadius="20px" click={conta}/></Link>
     </div>
   </div>
                )}

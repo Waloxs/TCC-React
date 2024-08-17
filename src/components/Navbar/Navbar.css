@@ -31,6 +31,13 @@
   border: 1px solid var(--grey-border, #E2E8F0)
 }
 
+.imgUserNone, .imgUserNone2{
+  color: #fff;
+}
+
+.imgUserNone2{
+  font-size: 2rem;
+}
 
 .menuDrop{
   width: 90vw;
