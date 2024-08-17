@@ -192,6 +192,7 @@ const TalentoPasso1 = () => {
   
       setExperiencia(novaExp);
       setModal(false);
+      setSombra(false);
     }
   };
   
@@ -335,134 +336,166 @@ const handleFimChange = (date) => {
 
   return (
     <>
-    {user && (
-    <div className={`${sombra ? 'sombra' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
-      {modal && (
-        <div className='containAdc' style={{ width: '40rem', height: '45rem', zIndex: '1' }}>
-          <form action="" className='FormAdc' onSubmit={handleSave}>
-            <IoIosArrowBack onClick={click} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF', marginLeft: '-10px', marginBottom: '-10px', cursor: 'pointer' }} />
-            <h1 className='titAdc'>Adicione sua experiência profissional</h1>
-            <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
-              <div>
-                <label htmlFor='titulo'>Título</label>
-                <Input id='titulo' className='pdl' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)} />
-              </div>
-              <div>
-                <label htmlFor='empresa'>Empresa</label>
-                <Input id='empresa' className='pdl' placeholder='Ex: Hexalab' value={empresa} required onChange={(e) => setEmpresa(e.target.value)} />
-              </div>
-              <div>
-                <div className='gr1'>
-                  <div>
-                  <label htmlFor="cidade">Cidade:</label><br/>
-                  <div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
-  <select 
-    id="cidade" 
-    value={localizacao}  
-    required 
-    onChange={(e) => setLocalizacao(e.target.value)} 
-    style={{
-      width: '100%',
-      paddingRight: '30px',
-      position: 'relative',
-    }} 
-  >
-    <option value=""></option>
-    {cidades.map((cidade, index) => (
-      <option key={index} value={cidade}>
-        {cidade}
-      </option>
-    ))}
-  </select>
-  <img className='icon-drop' src='icons/icon-drop.svg' 
-    style={{
-      position: 'absolute',
-      right: '10px',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      pointerEvents: 'none', 
-    }} 
-  />
-</div>
-                  </div>
-
-                  <div>        
-                    <label htmlFor="estado">Estado:
-                    </label><br/>
-                
-<div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
-  <select 
-    id="estado" 
-    onChange={e => {setEstadoSelecionado(e.target.value); setEstado(e.target.value)}} 
-    value={estado} 
-    style={{
-      width: '100%',
-      paddingRight: '30px', 
-      position: 'relative',
-    }} 
-    required
-  >
-    <option value="" disabled></option>
-    {estados.map(estado => (
-      <option key={estado.codigo} value={estado.codigo}>
-        {estado.nome}
-      </option>
-    ))}
-  </select>
-  <img className='icon-drop'  src='icons/icon-drop.svg' 
-    style={{
-      position: 'absolute',
-      right: '10px',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      pointerEvents: 'none', // Evita que o ícone interfira no clique do select
-    }} 
-  />
-</div>
-                  </div>
-                </div>
-              </div>
-              <div className='gr1'>
-                <div className='flex flex-col' style={{position: 'relative'}}>
-                    <label htmlFor='inicio'>Data de Início</label>
-                    <DatePicker 
-                    className='data' 
-        id='inicio' 
-        selected={inicio} 
-        onChange={handleInicioChange} 
-        dateFormat="yyyy-MM-dd" 
-        required
-      />
-
-    <img className='icon-drop' src='icons/icon-drop.svg' alt="" style={{position: 'absolute', bottom: '15px', right: '10px'}}/>
-      
-</div>
-                  <div className='flex flex-col' style={{position: 'relative'}}>
-                    <label htmlFor='fim'>Data de Termino</label>
-                    <DatePicker 
-                    className='data' 
-        id='fim' 
-        selected={fim} 
-        onChange={handleFimChange} 
-        dateFormat="yyyy-MM-dd" 
-        required
-      />
-
-    <img className='icon-drop'  src='icons/icon-drop.svg' alt="" style={{position: 'absolute', bottom: '15px', right: '10px'}}/>
-
-                  </div>
-              </div>
-              <div className='flex flex-col'>
-                <label htmlFor="area">Descrição</label>
-                <textarea id="area" style={{ height: '120px', resize: 'none' }} value={descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200}></textarea>
-              </div>
-              <div className='ct flex self-end'  onClick={handleSave} >
-                <BtnPrincipal texto="Salvar" color="#fff" width="200px" back="#3B82F6" className='fontbtn' borderRadius="20px" padding="10px"/>
+{user && modal && (
+  <div className='ddd' style={{ position: 'absolute', width: '100vw', background: 'red' }}>
+    <div className='containAdc' style={{ width: '40rem', height: '45rem' }}>
+      <form action="" className='FormAdc' onSubmit={handleSave}>
+        <IoIosArrowBack 
+          onClick={click} 
+          className='m-6' 
+          style={{ fontSize: '1.5rem', color: '#0866FF', marginLeft: '-10px', marginBottom: '-10px', cursor: 'pointer' }} 
+        />
+        <h1 className='titAdc'>Adicione sua experiência profissional</h1>
+        <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
+          <div>
+            <label htmlFor='titulo'>Título</label>
+            <Input 
+              id='titulo' 
+              className='pdl' 
+              placeholder='Ex: Desenvolvedor Back-end' 
+              value={titulo} 
+              required 
+              onChange={(e) => setTitulo(e.target.value)} 
+            />
+          </div>
+          <div>
+            <label htmlFor='empresa'>Empresa</label>
+            <Input 
+              id='empresa' 
+              className='pdl' 
+              placeholder='Ex: Hexalab' 
+              value={empresa} 
+              required 
+              onChange={(e) => setEmpresa(e.target.value)} 
+            />
+          </div>
+          <div className='gr1'>
+            <div>
+              <label htmlFor="cidade">Cidade:</label><br />
+              <div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
+                <select 
+                  id="cidade" 
+                  value={localizacao}  
+                  required 
+                  onChange={(e) => setLocalizacao(e.target.value)} 
+                  style={{ width: '100%', paddingRight: '30px', position: 'relative' }} 
+                >
+                  <option value=""></option>
+                  {cidades.map((cidade, index) => (
+                    <option key={index} value={cidade}>
+                      {cidade}
+                    </option>
+                  ))}
+                </select>
+                <img 
+                  className='icon-drop' 
+                  src='icons/icon-drop.svg' 
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none',
+                  }} 
+                />
               </div>
             </div>
-          </form>
+            <div>        
+              <label htmlFor="estado">Estado:</label><br />
+              <div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
+                <select 
+                  id="estado" 
+                  onChange={e => { setEstadoSelecionado(e.target.value); setEstado(e.target.value) }} 
+                  value={estado} 
+                  required
+                  style={{ width: '100%', paddingRight: '30px', position: 'relative' }} 
+                >
+                  <option value="" disabled></option>
+                  {estados.map(estado => (
+                    <option key={estado.codigo} value={estado.codigo}>
+                      {estado.nome}
+                    </option>
+                  ))}
+                </select>
+                <img 
+                  className='icon-drop'  
+                  src='icons/icon-drop.svg' 
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none',
+                  }} 
+                />
+              </div>
+            </div>
+          </div>
+          <div className='gr1'>
+            <div className='flex flex-col' style={{ position: 'relative' }}>
+              <label htmlFor='inicio'>Data de Início</label>
+              <DatePicker 
+                className='data' 
+                id='inicio' 
+                selected={inicio} 
+                onChange={handleInicioChange} 
+                dateFormat="yyyy-MM-dd" 
+                required
+              />
+              <img 
+                className='icon-drop' 
+                src='icons/icon-drop.svg' 
+                alt="" 
+                style={{ position: 'absolute', bottom: '15px', right: '10px' }} 
+              />
+            </div>
+            <div className='flex flex-col' style={{ position: 'relative' }}>
+              <label htmlFor='fim'>Data de Termino</label>
+              <DatePicker 
+                className='data' 
+                id='fim' 
+                selected={fim} 
+                onChange={handleFimChange} 
+                dateFormat="yyyy-MM-dd" 
+                required
+              />
+              <img 
+                className='icon-drop'  
+                src='icons/icon-drop.svg' 
+                alt="" 
+                style={{ position: 'absolute', bottom: '15px', right: '10px' }} 
+              />
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor="area">Descrição</label>
+            <textarea 
+              id="area" 
+              style={{ height: '120px', resize: 'none' }} 
+              value={descricao} 
+              required 
+              onChange={(e) => setDescricao(e.target.value)} 
+              maxLength={200}
+            />
+          </div>
+          <div className='ct flex self-end' onClick={handleSave}>
+            <BtnPrincipal 
+              texto="Salvar" 
+              color="#fff" 
+              width="200px" 
+              back="#3B82F6" 
+              className='fontbtn' 
+              borderRadius="20px" 
+              padding="10px" 
+            />
+          </div>
         </div>
-      )}
+      </form>
+    </div>
+  </div>
+)}
+{user && (            
+    <div className={`${sombra ? 'sombra' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
       <div className={`containerPasso flex flex-col justify-center items-center`} style={{ width: '70rem', background: '#fff', height: '100vh', gap: '30px', padding: '20px' }}>
         <div className="containerLogo2" style={{ width: '100%' }}>
           <Link to="/" style={{ width: '100%' }}>
@@ -648,17 +681,17 @@ const handleFimChange = (date) => {
               
                 {block && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
-                      <BtnPrincipal texto="Continuar1" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block2 && (
                     <div className="btnProximo2" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
-                      <BtnPrincipal texto="Continuar2" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
-                      <BtnPrincipal texto="Continuar3" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
           </div>
