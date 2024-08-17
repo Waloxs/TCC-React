@@ -11,6 +11,9 @@ import axios from 'axios';
 import User from '../../components/UserProfile/UserProfile.jsx'
 import { useUser as useUserTalento } from '../../services/UserContext';
 import { MdArrowDropDown } from 'react-icons/md';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
@@ -161,31 +164,37 @@ const TalentoPasso1 = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-
-
-    const novaExp = {
-      title: titulo,
-      empresa: empresa,
-      localizacao: localizacao,
-      estado: estado,
-      dataInicio: inicio,
-      dataTermino: fim,
-      description: descricao,
-      company: descricao,
-    }
-
-    if(titulo.trim() === '' || empresa.trim() === '' || localizacao.trim() === '' || estado.trim() === '' || inicio.trim() === '' || fim.trim() === '' || descricao.trim() === ''){
+  
+    // Verifica se todos os campos estão preenchidos
+    if (
+      titulo.trim() === '' ||
+      empresa.trim() === '' ||
+      localizacao.trim() === '' ||
+      estado.trim() === '' ||
+      !inicio || // Verifica se `inicio` não é null ou undefined
+      !fim || // Verifica se `fim` não é null ou undefined
+      descricao.trim() === ''
+    ) {
       setModalExp(false);
-    }else{
+    } else {
       setModalExp(true);
+  
+      const novaExp = {
+        title: titulo,
+        empresa: empresa,
+        localizacao: localizacao,
+        estado: estado,
+        dataInicio: inicio,
+        dataTermino: fim,
+        description: descricao,
+        company: descricao,
+      };
+  
+      setExperiencia(novaExp);
+      setModal(false);
     }
-
-    setExperiencia(novaExp);
-
-
-
-
   };
+  
 
 
 
@@ -394,17 +403,32 @@ if (token) {
                   </div>
                 </div>
               </div>
-              <div>
-                <div className='gr2'>
-                  <div>
+              <div className='gr1'>
+                <div className='flex flex-col'>
                     <label htmlFor='inicio'>Data de Início</label>
-                    <Input className='data' id='inicio' type='date' value={inicio} required onChange={(e) => setInicio(e.target.value)} />
-                  </div>
-                  <div>
+                    <DatePicker 
+                    className='data' 
+        id='inicio' 
+        selected={inicio} 
+        onChange={(date) => setInicio(date)} 
+        dateFormat="yyyy-MM-dd" 
+        placeholderText="Selecione uma data"
+        required
+      />
+
+</div>
+                  <div className='flex flex-col'>
                     <label htmlFor='fim'>Data de Termino</label>
-                    <Input className='data' id='fim' type='date' value={fim} required onChange={(e) => setFim(e.target.value)} />
+                    <DatePicker 
+                    className='data' 
+        id='fim' 
+        selected={fim} 
+        onChange={(date) => setFim(date)} 
+        dateFormat="yyyy-MM-dd" 
+        placeholderText="Selecione uma data"
+        required
+      />
                   </div>
-                </div>
               </div>
               <div className='flex flex-col'>
                 <label htmlFor="area">Descrição</label>
@@ -496,12 +520,12 @@ if (token) {
 
                         <div>
                           <span>Data de Inicio</span>
-                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={inicio} required onChange={(e) => setInicio(e.target.value)} readOnly/>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={inicio ? format(inicio, 'yyyy-MM-dd') : ''} required onChange={(e) => setInicio(e.target.value)} readOnly/>
                         </div>
 
                         <div>
                           <span>Data de Término</span>
-                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={fim} required onChange={(e) => setFim(e.target.value)} readOnly/>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={fim ? format(fim, 'yyyy-MM-dd') : ''} required onChange={(e) => setFim(e.target.value)} readOnly/>
                         </div>
 
                         </div>

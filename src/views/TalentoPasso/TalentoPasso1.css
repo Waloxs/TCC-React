@@ -432,9 +432,18 @@ border: 2px solid var(--grey-300, #CBD5E1);
     font-style: normal;
     font-weight: 300;
     line-height: 160%; /* 19.2px */
-    outline: none;
     background-color: #fff;
+
+    height: 40px;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    outline: none;
 }
+
+
+
 
 #area{
     border: 1px solid #b3b3b3;
@@ -662,6 +671,13 @@ line-height: 130%; /* 16.9px */
 
 .form-modalExp{
     flex-direction: column;
+    gap: 0px;
+}
+
+.btnProximo{
+    right: -0.75rem !important;
+    bottom: -2rem !important;
+    position: absolute;
 }
 
 .descExp{
