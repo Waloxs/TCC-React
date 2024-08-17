@@ -101,7 +101,8 @@ const Navbar = ({
 
   return (
     <div className={`navbar font-lexend h-16 w-[90vw] max-w-full mx-auto flex justify-between items-center md:text-center ${estiloBorder}`}>
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 items-center justify-between" style={{width: '100%'}}>
+        <div className='flex gap-4'>
         <Link to="/">
           <img src={Logo} alt="Logo" className="Logo w-[6.5625rem] ml-[2rem]" />
         </Link>
@@ -117,8 +118,9 @@ const Navbar = ({
               Anunciar Vaga {estiloSeta2}
             </a>
           </div>
-        )}
-
+        )}  
+        </div>
+        
         {showDashnone && (
           <div className="dashnone flex items-center gap-5 mr-[3rem]">
             <div className='dnone'>

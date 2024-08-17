@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { useUser } from '../../services/UserContext';
 
 const User = ({ nome, sobrenome, email, id, titulo, ...props }) => {
-  const { userData, loading2, error2 } = useUser();
+  const { data, loading, error } = useUser();
 
-  if (loading2) return <div><p>Loading...</p></div>;
-  if (error2) return <p>Error: {error2.message}</p>;
+  if (loading) return <div><p>Loading...</p></div>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
-      {nome && <>{userData?.firstName}</>}
-      {sobrenome && <>{userData?.lastName}</>}
-      {email && <>{userData?.email}</>}
-      {id && <>{userData?._id}</>}
-      {titulo && <>{userData?.titulo}</>}
+      {nome && <>{data?.firstName}</>}
+      {sobrenome && <>{data?.lastName}</>}
+      {email && <>{data?.email}</>}
+      {id && <>{data?._id}</>}
+      {titulo && <>{data?.titulo}</>}
     </>
   );
 };

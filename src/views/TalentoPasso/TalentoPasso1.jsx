@@ -8,7 +8,7 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import User from '../../components/UserProfile/UserProfile.jsx';
+import User from '../../components/UserProfile/UserProfile.jsx'
 import { useUser as useUserTalento } from '../../services/UserContext';
 
 
@@ -29,7 +29,6 @@ const TalentoPasso1 = () => {
   const [inicio, setInicio] = useState('');
   const [fim, setFim] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [experiencia, setExperiencia] = useState(null);
   const navigate = useNavigate();
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
@@ -37,65 +36,25 @@ const TalentoPasso1 = () => {
   const [profissional, setProfissional] = useState('');
   const [biografia, setBiografia] = useState('');
   const { data: user } = useUserTalento();
+  const [modalExp, setModalExp] = useState(false);
+  const [experiência, setExperiencia] = useState(null);
 
 
+  const data = {
+    titulo: '',
+    bio: '',
+  }
 
-  const handleRegister = async () => {
-    const token = localStorage.getItem('authToken');
-    
-    if (token) {
-      try {
-        const config = {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        };
-  
-        const data = {
-         titulo: profissional,
-        };
-  
-        const response = await axios.put('https://workzen.onrender.com/v1/me', data, config);
-        console.log('Dados enviados com sucesso:', response.data);
-      } catch (error) {
-        console.error('Erro ao enviar dados:', error);
-      }
-    } else {
-      console.error('Token não encontrado no localStorage');
-    }
+
+  const handleRegister = () => {
+    data.titulo = profissional;  // Modifica a propriedade 'titulo'
   };
   
-
-  const handleRegister2 = async () => {
-    const token = localStorage.getItem('authToken');
-    
-    if (token) {
-      try {
-        const config = {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        };
-  
-        const data = {
-         bio: biografia,
-        };
-  
-        const response = await axios.put('https://workzen.onrender.com/v1/me', data, config);
-        console.log('Dados enviados com sucesso:', response.data);
-        // Aqui você pode adicionar lógica adicional após enviar os dados
-      } catch (error) {
-        console.error('Erro ao enviar dados:', error);
-        // Aqui você pode lidar com erros de requisição
-      }
-    } else {
-      console.error('Token não encontrado no localStorage');
-    }
+  const handleRegister2 = () => {
+    data.bio = biografia;  // Modifica a propriedade 'bio'
   };
   
-
+  
   useEffect(() => {
     // Lista de estados com os códigos de UF
     const estadosBrasil = [
@@ -182,55 +141,28 @@ const TalentoPasso1 = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    const form = e.target.closest('form');
-    
-    if (form.checkValidity()) {
-      const experienciaData = {
-        title: titulo,
-        company: empresa,
-        localizacao,
-        dataInicio: inicio,
-        dataTermino: fim,
-        description: descricao
-      };
-  
-  // Obter o token do localStorage
-const token = localStorage.getItem('authToken');
 
-// Verificar se o token existe
-if (token) {
-  try {
-    // Configurar o header de autorização com o token
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    };
 
-    // Fazer a requisição POST usando Axios
-    const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experienciaData, config);
-    const dados = await axios.get('https://workzen.onrender.com/v1/me/xp', config)
-
-  
-
-    setExperiencia(dados.data)
-
-    console.log(dados);
-    // Processar a resposta
-    console.log('Dados enviados com sucesso:', response.data);
-    // Aqui você pode adicionar lógica adicional após enviar os dados
-  } catch (error) {
-    console.error('Erro ao enviar dados:', error);
-    // Aqui você pode lidar com erros de requisição
-  }
-} else {
-  console.error('Token não encontrado no localStorage');
-}
-
-    } else {
-      form.reportValidity();
+    const novaExp = {
+      titulo: titulo,
+      empresa: empresa,
+      localizacao: localizacao,
+      estado: estado,
+      inicio: inicio,
+      fim: fim,
+      descricao: descricao
     }
+
+    setExperiencia(novaExp);
+
+
+    setModalExp(true);
+
+
   };
+
+  
+
   const handleBackClick = (e) => {
     e.preventDefault();
     if (block == true) {
@@ -283,6 +215,8 @@ const token = localStorage.getItem('authToken');
     // Trata o erro conforme necessário
   });
 };
+
+
 
 
   return (
@@ -365,7 +299,7 @@ const token = localStorage.getItem('authToken');
             <img src={Logo} alt="Logo" style={{ height: '1.10rem' }} />
           </Link>
         </div>
-        <div className="conteudo flex" style={{ width: '100%', height: 'auto', background: '#f7f7f7', borderRadius: '1.25rem' }}>
+    <div className="conteudo flex" style={{ width: '100%', height: 'auto', background: '#fff', borderRadius: '1.25rem', border: '2px solid #E2E8F0'}}>
           <div className='flex flex-col' style={{ height: '35rem', width: '100%' }}>
             <div className='flex items-center'>
               <IoIosArrowBack onClick={handleBackClick} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF', cursor: 'pointer' }} />
@@ -376,7 +310,7 @@ const token = localStorage.getItem('authToken');
             {block && (
               <div className='animate flex flex-col' style={{ height: '100%', gap: '5rem' }}>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-                <h1 className='PassTit'>Muito bem <User nome={true} />, agora, adicione um título para contar ao mundo o que você faz.</h1>
+                <h1 className='PassTit'>Muito bem <User nome={true}/>, agora, adicione um título para contar ao mundo o que você faz.</h1>
                   <p className='PassPar'>É a primeira coisa que as Empresas veem, então faça valer a pena. Destaque-se descrevendo sua experiência com suas próprias palavras.</p>
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
@@ -387,45 +321,13 @@ const token = localStorage.getItem('authToken');
             )}
             {!block2 && (
                   <div className='animate flex flex-col justify-between' style={{ height: '100%', gap: '5rem' }}>
+
+                  {!modalExp &&(
+                    <>
                     <div className='pd2 flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                       <h1 className='PassTit2'>Ótimo, agora, se você tiver experiência profissional relevante, adicione-a aqui.</h1>
                       <p className='PassPar2'>Talentos que colocam sua experiência têm duas vezes mais chances de ganhar trabalho. Mas se você está apenas começando, ainda pode criar um ótimo perfil. Basta ir para a próxima página.</p>
                     </div>
-                    {experiencia && experiencia.length > 0 && (
-  <div className='tudoExp flex flex-col gap-3' style={{paddingLeft: '4rem', paddingRight: '4rem', width: '100%'}}>
-    <h1 className='expTitPr'>Sua Primeira Experiência</h1>
-    <div className="flex gap-5">
-      <div className='bord flex flex-col p-5 gap-2' style={{width: '250px'}}>
-        <div className='flex flex-col'>
-          <h1 className='expTit'>Título</h1>
-          <span className='PassPar2'>{experiencia[0].title}</span>
-        </div>
-
-        <div className='flex flex-col'>
-          <h1 className='expTit'>Empresa</h1>
-          <span className='PassPar2'>{experiencia[0].company}</span>
-        </div>
-
-        <div className='flex flex-col'>
-          <h1 className='expTit'>Localização</h1>
-          <span className='PassPar2'>{experiencia[0].localizacao}</span>
-        </div>
-
-        <div className='flex flex-col'>
-          <h1 className='expTit'>Data de Início e Término</h1>
-          <span className='PassPar2'>{experiencia[0].dataInicio} - {experiencia[0].dataTermino}</span>
-        </div>
-      </div>
-
-      <div className="bord p-5" style={{width: '250px'}}>
-        <div className="flex flex-col">
-          <h1 className='expTit'>Descrição</h1>
-          <span className='descAdc'>{experiencia[0].description}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
 
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
@@ -435,6 +337,57 @@ const token = localStorage.getItem('authToken');
                         <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#f7f7f7" className='fontbtn' hoverColor="#3A61D4" borderRadius="20px" padding="10px"/>
                       </div>
                     </div>
+                    </>
+                    )}
+
+                    {modalExp && (
+                      <div style={{maxWidth: '500px', marginLeft: '40px'}}>
+                      <span className='modalexpTit'>Experiências</span>
+                      <form className='form-modalExp flex gap-4' style={{height: '100%'}}>
+                        <div className='flex flex-col justify-between'>
+                        <div>
+                          <span>Titulo</span>
+                          <Input id='titulo' className='pdl' placeholder='' value={experiência.titulo} required onChange={(e) => setTitulo(e.target.value)}/>
+                        </div>
+
+
+                        <div>
+                          <span>Empresa</span>
+                          <Input id='titulo' className='pdl' placeholder='' value={experiência.empresa} required onChange={(e) => setEmpresa(e.target.value)}/>
+                        </div>
+
+
+                        <div>
+                          <span>Localização</span>
+                          <Input id='titulo' className='pdl' placeholder='' value={experiência.localizacao} required onChange={(e) => setLocalizacao(e.target.value)}/>
+                        </div>
+
+
+                        <div>
+                          <span>Data de Inicio</span>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={experiência.inicio} required onChange={(e) => setInicio(e.target.value)}/>
+                        </div>
+
+                        <div>
+                          <span>Data de Término</span>
+                          <Input id='titulo' tipo='date' className='pdl' placeholder='' value={experiência.fim} required onChange={(e) => setFim(e.target.value)}/>
+                        </div>
+
+                        </div>
+                        <div className='descExp'>
+                          <span>Descrição</span>
+                          <textarea id="areaExp" style={{ resize: 'none', height: 'calc(100% - 24px)' }} value={experiência.descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200}></textarea>
+                        </div>
+
+
+                      </form>
+
+
+
+                      </div>
+
+                      
+                    )}
                   </div>
             )}
             {!block3 && (
