@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import User from '../../components/UserProfile/UserProfile.jsx'
 import { useUser as useUserTalento } from '../../services/UserContext';
-
+import { MdArrowDropDown } from 'react-icons/md';
 
 const TalentoPasso1 = () => {
   const [block, setBlock] = useState(true);
@@ -40,7 +40,10 @@ const TalentoPasso1 = () => {
   const [experiência, setExperiencia] = useState(null);
   const [dados, setDados] = useState(null);
   const [border, setBorder] = useState(null);
+  const [border2, setBorder2] = useState(null);
   const [texto, setTexto] = useState(null);
+  const [texto2, setTexto2] = useState(false);
+
 
   const data = {
     titulo: '',
@@ -142,8 +145,8 @@ const TalentoPasso1 = () => {
     handleRegister2();
     
     if (biografia.trim() === '') {
-      setBorder('#EF4444');
-      setTexto('Adicione uma função para continuar');
+      setBorder2('#EF4444');
+      setTexto2(true);
     } else {
     e.preventDefault();
     setBlock3(!block3);
@@ -307,14 +310,14 @@ if (token) {
     {user && (
     <div className={`${sombra ? 'sombra' : ''} tudo flex justify-center`} style={{ width: '100vw' }}>
       {modal && (
-        <div className='containAdc' style={{ width: '35rem', height: '40rem', zIndex: '1' }}>
+        <div className='containAdc' style={{ width: '40rem', height: '45rem', zIndex: '1' }}>
           <form action="" className='FormAdc' onSubmit={handleSave}>
             <IoIosArrowBack onClick={click} className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF', marginLeft: '-10px', marginBottom: '-10px', cursor: 'pointer' }} />
             <h1 className='titAdc'>Adicione sua experiência profissional</h1>
             <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
               <div>
                 <label htmlFor='titulo'>Título</label>
-                <Input id='titulo' className='pdl' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)}/>
+                <Input id='titulo' className='pdl' placeholder='Ex: Desenvolvedor Back-end' value={titulo} required onChange={(e) => setTitulo(e.target.value)} />
               </div>
               <div>
                 <label htmlFor='empresa'>Empresa</label>
@@ -324,32 +327,70 @@ if (token) {
                 <div className='gr1'>
                   <div>
                   <label htmlFor="cidade">Cidade:</label><br/>
-                  <div className='select-wrapper2'>
-                      <select id="cidade" value={localizacao}  required onChange={(e) => setLocalizacao(e.target.value)} style={{width: '100%'}} >
-                        <option value="">Selecione uma cidade</option>
-                            {cidades.map((cidade, index) => (
-                              <option key={index} value={cidade}>
-                        {cidade}
-                    </option>
-                      ))}
-                  </select>
-
-                  
-                  </div>
+                  <div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
+  <select 
+    id="cidade" 
+    value={localizacao}  
+    required 
+    onChange={(e) => setLocalizacao(e.target.value)} 
+    style={{
+      width: '100%',
+      paddingRight: '30px',
+      position: 'relative',
+    }} 
+  >
+    <option value="">Selecione uma cidade</option>
+    {cidades.map((cidade, index) => (
+      <option key={index} value={cidade}>
+        {cidade}
+      </option>
+    ))}
+  </select>
+  <MdArrowDropDown 
+    style={{
+      position: 'absolute',
+      right: '10px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      pointerEvents: 'none', 
+    }} 
+  />
+</div>
                   </div>
 
                   <div>        
-                    <label htmlFor="estado">Estado:</label><br/>
-                  <div className='select-wrapper2'>
-                    <select id="estado" onChange={e => {setEstadoSelecionado(e.target.value) , setEstado(e.target.value)}} value={estado} style={{width: '100%'}} required>
-                    <option value="" style={{marginLeft: '10px'}}>Selecione um estado</option>
-                    {estados.map(estado => (
-                    <option key={estado.codigo} value={estado.codigo}>
-                    {estado.nome}
-                    </option>
-                    ))}
-                    </select>
-                  </div>
+                    <label htmlFor="estado">Estado:
+                    </label><br/>
+                
+<div className='select-wrapper2' style={{ position: 'relative', width: '100%' }}>
+  <select 
+    id="estado" 
+    onChange={e => {setEstadoSelecionado(e.target.value); setEstado(e.target.value)}} 
+    value={estado} 
+    style={{
+      width: '100%',
+      paddingRight: '30px', 
+      position: 'relative',
+    }} 
+    required
+  >
+    <option value="" disabled>Selecione um estado</option>
+    {estados.map(estado => (
+      <option key={estado.codigo} value={estado.codigo}>
+        {estado.nome}
+      </option>
+    ))}
+  </select>
+  <MdArrowDropDown 
+    style={{
+      position: 'absolute',
+      right: '10px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      pointerEvents: 'none', // Evita que o ícone interfira no clique do select
+    }} 
+  />
+</div>
                   </div>
                 </div>
               </div>
@@ -464,7 +505,7 @@ if (token) {
                         </div>
 
                         </div>
-                        <div className='descExp'>
+                        <div className='flex flex-col gap-1 descExp'>
                           <span>Descrição</span>
                           <textarea id="areaExp" style={{ resize: 'none', height: 'calc(100% - 24px)', outline: 'none' }} value={descricao} required onChange={(e) => setDescricao(e.target.value)} maxLength={200} readOnly></textarea>
                         </div>
@@ -498,11 +539,11 @@ if (token) {
     <p className='PassPar2'>Sua Biografia</p>
     <textarea
       id="area2"
-      style={{ height: '120px', maxWidth: '600px', resize: 'none', border: `2px solid ${border}`, outline: 'none' }}
+      style={{ height: '120px', maxWidth: '600px', resize: 'none', border: `2px solid ${border2}`, outline: 'none' }}
       value={biografia}
       onChange={(e) => setBiografia(e.target.value)}
     />
-    {texto && (
+    {texto2 && (
       <span className='flex gap-1 items-center span-erro'>
         <img src="icons/icon-erro.svg" alt="" />
         Adicione uma biografia para continuar
@@ -513,29 +554,50 @@ if (token) {
 
                 )}
             {!block4 && (
-    <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
-    <div className='pd flex flex-col text-center gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
-      <h1 className='PassTit3'>Últimos detalhes, agora, você pode verificar e publicar seu perfil.</h1>
-      <p className='PassPar3 self-center'>Uma foto profissional ajuda você a construir a confiança das empresas.</p>
-    </div>
-    <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
-      <label htmlFor="file-upload" className='user'>
-        {image ? (
-          <img src={image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
-        ) : (
-          <FaUserPlus />
-        )}
-      </label>
-      <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-    </div>
-    <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
-      <label htmlFor="file-upload">
-        <BtnPrincipal texto="Carregar Foto" color="#3B82F6" width="260px" height='40px' back="#fff" border="#3B82F6" borderRadius="20px"></BtnPrincipal>
-      </label>
-      <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-      <Link to='/Dashboard'><BtnPrincipal texto="Continuar" color="#fff" width="260px" height='40px' back="#3B82F6" hover='#3A61D4' border="#3B82F6" borderRadius="20px" click={conta}/></Link>
-    </div>
-  </div>
+   <div className='animate flex flex-col items-center' style={{ height: '100%', gap: '5rem' }}>
+   <div className='pd flex flex-col text-center gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+     <h1 className='PassTit3'>Últimos detalhes, agora, você pode verificar e publicar seu perfil.</h1>
+     <p className='PassPar3 self-center'>Uma foto profissional ajuda você a construir a confiança das empresas.</p>
+   </div>
+   <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '5rem' }}>
+     <label htmlFor="file-upload" className='user'>
+       {image ? (
+         <img src={image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
+       ) : (
+         <FaUserPlus />
+       )}
+     </label>
+   </div>
+   <div className='flex flex-col gap-2' style={{ marginTop: '-100px' }}>
+     <BtnPrincipal
+       texto="Carregar Foto"
+       color="#3B82F6"
+       width="260px"
+       height='40px'
+       back="#fff"
+       border="#3B82F6"
+       borderRadius="20px"
+       click={() => document.getElementById('file-upload').click()}  // Adicionando onClick para acionar o upload
+     />
+     <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+     <Link to='/Dashboard'>
+       <BtnPrincipal
+         texto="Continuar"
+         color="#fff"
+         width="260px"
+         height='40px'
+         back="#3B82F6"
+         hover='#3A61D4'
+         border="#3B82F6"
+         borderRadius="20px"
+         click={conta}
+       />
+     </Link>
+   </div>
+ </div>
+ 
+            
+
                )}
               
                 {block && (

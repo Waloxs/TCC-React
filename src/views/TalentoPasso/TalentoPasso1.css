@@ -19,6 +19,24 @@
     font-size: 5rem;
 }
 
+.pdl{
+    height: 50px !important;
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
+
+.pdl::placeholder{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
 
 .tudo{
     position: relative;
@@ -382,20 +400,24 @@ border: 2px solid var(--grey-300, #CBD5E1);
     height: 40px;
     width: 100%;
     padding-top: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 0px;  
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    color: var(--grey-text-light, #64748B);
     font-family: Lexend;
-    font-size: 1rem;
+    font-size: 12px !important;
     font-style: normal;
     font-weight: 300;
-    line-height: 130%; /* 1.625rem */   
-    border-radius: 8px;
-    border: 1px solid var(--grey-300, #CBD5E1);
-    
+    line-height: 160%; /* 19.2px */
+    outline: none;
+    background-color: #fff;
 
-  appearance: none; /* Remove the default dropdown arrow */
-  -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
-  -moz-appearance: none; /* Remove the default dropdown arrow for Firefox */
+    appearance: none; /* Remove o estilo padrão do dropdown */
+    -webkit-appearance: none; /* Remove o estilo padrão do dropdown no WebKit */
+    -moz-appearance: none; /* Remove o estilo padrão do dropdown no Firefox */
 }
+
+
 
 #inicio, #fim{
     padding-left: 15px;
@@ -404,12 +426,27 @@ border: 2px solid var(--grey-300, #CBD5E1);
 
 .data{
     width: 100%;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+    outline: none;
+    background-color: #fff;
 }
 
 #area{
     border: 1px solid #b3b3b3;
     padding: 10px;
     border-radius: 5px;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+    outline: none;
 }
 
 #area2{
@@ -419,13 +456,14 @@ border: 2px solid var(--grey-300, #CBD5E1);
 }
 
 #areaExp{
-
-border-radius: 0.5rem;
-border: 1px solid var(--grey-border, #E2E8F0);
-background: var(--white, #FFF);
-padding: 10px;
-font-family: 'Lexend';
-font-weight: 100;
+    font-size: 12px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--white, #FFF);
+    padding: 10px;
+    font-family: Lexend;
+    font-weight: 100;
+    color: var(--grey-text-light, #64748B);
 }
 
 .modalexpTit{
@@ -561,7 +599,7 @@ line-height: 130%; /* 16.9px */
 
 
 
-@media(max-width: 620px){
+@media(max-width: 800px){
 
     .FormAdc{
         height: 100%;
