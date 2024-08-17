@@ -312,7 +312,26 @@ if (token) {
 }
 
 
+
+
+
 }
+
+const handleInicioChange = (date) => {
+  setInicio(date);
+  if (fim && date > fim) {
+    setFim(null); // Reseta a data de término se for anterior à data de início
+  }
+};
+
+const handleFimChange = (date) => {
+  if (inicio && date < inicio) {
+    alert('A data de término não pode ser anterior à data de início.');
+    return;
+  }
+  setFim(date);
+};
+
 
   return (
     <>
@@ -410,7 +429,7 @@ if (token) {
                     className='data' 
         id='inicio' 
         selected={inicio} 
-        onChange={(date) => setInicio(date)} 
+        onChange={handleInicioChange} 
         dateFormat="yyyy-MM-dd" 
         required
       />
@@ -424,7 +443,7 @@ if (token) {
                     className='data' 
         id='fim' 
         selected={fim} 
-        onChange={(date) => setFim(date)} 
+        onChange={handleFimChange} 
         dateFormat="yyyy-MM-dd" 
         required
       />
@@ -629,17 +648,17 @@ if (token) {
               
                 {block && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                      <BtnPrincipal texto="Continuar1" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block2 && (
-                    <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                    <div className="btnProximo2" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick2}>
+                      <BtnPrincipal texto="Continuar2" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
                 {!block3 && (
                     <div className="btnProximo" style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={handleClick3}>
-                      <BtnPrincipal texto="Continuar" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                      <BtnPrincipal texto="Continuar3" color="#fff" width="160px" back="#3B82F6" hover='#3A61D4' borderRadius="20px" padding="10px"/>
                     </div>
                 )}
           </div>

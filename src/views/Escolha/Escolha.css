@@ -120,3 +120,44 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
         font-size: 0.75rem;
     }
 }
+
+
+@media(max-width: 390px){
+
+
+    .camph2{
+        font-size: 0.65rem;
+    }
+
+.EscTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 100%;
+}
+
+
+
+.EscPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+}
+
+
+
+@media(max-width: 360px){
+
+
+    .camph2{
+        font-size: 0.60rem;
+    }
+}

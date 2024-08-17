@@ -343,7 +343,7 @@ line-height: 160%; /* 19.2px */
 }
 
 
-.btnProximo{
+.btnProximo, .btnProximo2{
     right: 0px;
     bottom: 0px;
     position: absolute;
@@ -677,7 +677,7 @@ line-height: 130%; /* 16.9px */
     gap: 0px;
 }
 
-.btnProximo{
+.btnProximo2{
     right: -0.75rem !important;
     bottom: -2rem !important;
     position: absolute;
@@ -794,6 +794,43 @@ line-height: 130%; /* 16.9px */
         bottom: 0px;
         position: absolute;
     }
+}
+
+
+@media(max-width: 410px){
+
+
+    .PassTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 30ch;
+    }
+
+    .PassPar{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.60rem !important;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+
+
+    .PassTit2{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+
 }
 
 @media(max-width: 370px){

@@ -107,7 +107,7 @@ const Talento = () => {
             </Link>
           </div>
           <div className="conteudo flex justify-between" style={{ width: '100%', height: 'auto', borderRadius: '1.25rem' }}>
-            <div className='ui flex flex-col' style={{ height: '35rem', width: '46rem' }}>
+            <div className='ui flex flex-col' style={{ height: '35rem' }}>
               <Link to="/Escolha"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
               <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem' }}>
                 <h1 className='EscTit self-center'>Olá seja Bem-vindo!</h1>

@@ -142,3 +142,10 @@
 }
 
 
+@media(max-width: 390px){
+
+    .cont2{
+        top: 73%;
+    }
+
+}
