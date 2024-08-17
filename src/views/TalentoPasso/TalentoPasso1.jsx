@@ -348,14 +348,14 @@ if (token) {
       position: 'relative',
     }} 
   >
-    <option value="">Selecione uma cidade</option>
+    <option value=""></option>
     {cidades.map((cidade, index) => (
       <option key={index} value={cidade}>
         {cidade}
       </option>
     ))}
   </select>
-  <MdArrowDropDown 
+  <img className='icon-drop' src='icons/icon-drop.svg' 
     style={{
       position: 'absolute',
       right: '10px',
@@ -383,14 +383,14 @@ if (token) {
     }} 
     required
   >
-    <option value="" disabled>Selecione um estado</option>
+    <option value="" disabled></option>
     {estados.map(estado => (
       <option key={estado.codigo} value={estado.codigo}>
         {estado.nome}
       </option>
     ))}
   </select>
-  <MdArrowDropDown 
+  <img className='icon-drop'  src='icons/icon-drop.svg' 
     style={{
       position: 'absolute',
       right: '10px',
@@ -404,7 +404,7 @@ if (token) {
                 </div>
               </div>
               <div className='gr1'>
-                <div className='flex flex-col'>
+                <div className='flex flex-col' style={{position: 'relative'}}>
                     <label htmlFor='inicio'>Data de Início</label>
                     <DatePicker 
                     className='data' 
@@ -412,12 +412,13 @@ if (token) {
         selected={inicio} 
         onChange={(date) => setInicio(date)} 
         dateFormat="yyyy-MM-dd" 
-        placeholderText="Selecione uma data"
         required
       />
 
+    <img className='icon-drop' src='icons/icon-drop.svg' alt="" style={{position: 'absolute', bottom: '15px', right: '10px'}}/>
+      
 </div>
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col' style={{position: 'relative'}}>
                     <label htmlFor='fim'>Data de Termino</label>
                     <DatePicker 
                     className='data' 
@@ -425,9 +426,11 @@ if (token) {
         selected={fim} 
         onChange={(date) => setFim(date)} 
         dateFormat="yyyy-MM-dd" 
-        placeholderText="Selecione uma data"
         required
       />
+
+    <img className='icon-drop'  src='icons/icon-drop.svg' alt="" style={{position: 'absolute', bottom: '15px', right: '10px'}}/>
+
                   </div>
               </div>
               <div className='flex flex-col'>
