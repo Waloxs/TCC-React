@@ -72,7 +72,7 @@ line-height: 160%; /* 19.2px */
     transform: translate(-50%, -50%); ;
 }
 
-.FormAdc{
+.FormAdc2{
     height: 100%;
     width: 100%;
     background: #fff;
@@ -80,7 +80,7 @@ line-height: 160%; /* 19.2px */
     padding: 10px 40px;
 }
 
-.FormAdc label{
+.FormAdc2 label{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;
     font-size: 1rem;
@@ -615,7 +615,7 @@ line-height: 130%; /* 16.9px */
 
 @media(max-width: 800px){
 
-    .FormAdc{
+    .FormAdc2{
         height: 100%;
         width: 500px !important;
         background: #fff;
@@ -637,7 +637,7 @@ line-height: 130%; /* 16.9px */
         font-size: 1.25rem;
     }
 
-    .FormAdc{
+    .FormAdc2{
         height: 100%;
         width: 400px !important;
         background: #fff;
@@ -730,7 +730,7 @@ line-height: 130%; /* 16.9px */
         margin-top: 10px;
     }
 
-    .FormAdc{
+    .FormAdc2{
         margin-top: 0px !important;
         height: 100% !important;
         width: 350px !important;
@@ -759,7 +759,7 @@ line-height: 130%; /* 16.9px */
         place-self: center;
     }
 
-    .FormAdc label{
+    .FormAdc2 label{
         font-size: 0.75rem !important;
     }
 
@@ -781,7 +781,7 @@ line-height: 130%; /* 16.9px */
         font-size: 0.75rem; 
     }
 
-    .FormAdc{
+    .FormAdc2{
         width: 300px !important;
     }
 }

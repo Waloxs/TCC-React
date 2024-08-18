@@ -339,7 +339,7 @@ const handleFimChange = (date) => {
 {user && modal && (
   <div className='ddd' style={{ position: 'absolute', width: '100vw', background: 'red' }}>
     <div className='containAdc' style={{ width: '40rem', height: '45rem' }}>
-      <form action="" className='FormAdc' onSubmit={handleSave}>
+      <form action="" className='FormAdc2' onSubmit={handleSave}>
         <IoIosArrowBack 
           onClick={click} 
           className='m-6' 
