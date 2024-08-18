@@ -346,7 +346,7 @@ const handleFimChange = (date) => {
           style={{ fontSize: '1.5rem', color: '#0866FF', marginLeft: '-10px', marginBottom: '-10px', cursor: 'pointer' }} 
         />
         <h1 className='titAdc'>Adicione sua experiência profissional</h1>
-        <div className='flex flex-col gap-3' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
+        <div className='flex flex-col justify-between' style={{ height: '80%', width: '100%', marginTop: '20px' }}>
           <div>
             <label htmlFor='titulo'>Título</label>
             <Input 

@@ -731,8 +731,8 @@ line-height: 130%; /* 16.9px */
     }
 
     .FormAdc{
-        margin-top: -20px !important;
-        height: 650px;
+        margin-top: 0px !important;
+        height: 100% !important;
         width: 350px !important;
         background: #fff;
         border-radius: 0.9375rem;
@@ -772,6 +772,18 @@ line-height: 130%; /* 16.9px */
     }
     
 
+}
+
+
+@media(max-width: 370px){
+    #area2{
+        height: 80px !important;
+        font-size: 0.75rem; 
+    }
+
+    .FormAdc{
+        width: 300px !important;
+    }
 }
 
 @media(max-width: 500px){
@@ -836,11 +848,4 @@ line-height: 130%; /* 16.9px */
         max-width: 40ch;
     }
 
-}
-
-@media(max-width: 370px){
-    #area2{
-        height: 80px !important;
-        font-size: 0.75rem; 
-    }
 }
