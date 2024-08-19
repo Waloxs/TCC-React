@@ -13,6 +13,8 @@ import { useUser as useUserEmpresa } from "../../services/UserContextEmpresa.jsx
 import InputMask from "react-input-mask";
 import { LuPen } from "react-icons/lu";
 import "antd/dist/reset.css";
+import CurrencyInput from 'react-currency-input-field';
+
 import { Select } from "antd";
 
 const { Option } = Select;
@@ -42,7 +44,15 @@ const EmpresaPasso = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [border, setBorder] = useState(null);
   const [border2, setBorder2] = useState(null);
+  const [border3, setBorder3] = useState('#E2E8F0');
   const [texto, setTexto] = useState(null);
+  const [textoLoca, setTextoLoca] = useState(null);
+  const [textoTel, setTextoTel] = useState(null);
+  const [borderLoca ,setBorderLoca] = useState('#E2E8F0');
+  const [borderTel ,setBorderTel] = useState('#E2E8F0');
+  const [borderSalar ,setBorderSalar] = useState('#E2E8F0');
+
+
 
   const handlePenClick = () => {
     setIsEditable(true);
@@ -202,7 +212,7 @@ const EmpresaPasso = () => {
     const data = {
       profissional,
       descricao,
-      requirements: selectedOptions.map((option) => option.value),
+      requirements: selectedOptions,
       salar,
     };
 
@@ -224,7 +234,7 @@ const EmpresaPasso = () => {
           title: profissional,
           description: descricao,
           salario: salar,
-          requirements: requisits,
+          requirements: selectedOptions,
           localizacao,
           tags: requisits,
         };
@@ -243,6 +253,14 @@ const EmpresaPasso = () => {
       }
     } else {
       console.error("Token não encontrado no localStorage");
+    }
+  };
+
+  const handleValueChange = (value) => {
+    // Converte o valor para número e verifica se é menor que um milhão
+    const numericValue = value ? parseFloat(value.replace(/\D/g, "")) : 0;
+    if (numericValue <= 1000000) {
+      setSalar(value); // Atualiza o estado somente se o valor for válido
     }
   };
 
@@ -315,8 +333,11 @@ const EmpresaPasso = () => {
       setBlock3(!block3);
       setBlock4(!block4);
       setValor("Azul64");
+      setBorder3('#E2E8F0');
+      setTexto(false);
     } else {
-      alert("opa");
+      setBorder3("#EF4444");
+      setTexto(true);
     }
   };
 
@@ -328,17 +349,40 @@ const EmpresaPasso = () => {
       setBlock4(!block4);
       setBlock5(!block5);
       setValor("Azul80");
-    } else {
-      alert("opa");
-    }
-  };
+      setTextoLoca(null);
+      setBorderLoca('#E2E8F0');
+      setTextoTel(null);
+      setBorderTel('#E2E8F0');
+    } else if (telefone.trim() !== "" && localizacao.trim() === ""){
+      setTextoLoca(true);
+      setBorderLoca('#EF4444');
+  } else if (telefone.trim() === "" && localizacao.trim() !== ""){
+      setTextoTel(true);
+      setBorderTel('#EF4444');
+  } else if (telefone.trim() === "" && localizacao.trim() === ""){
+      setTextoLoca(true);
+      setBorderLoca('#EF4444');
+      setTextoTel(true);
+      setBorderTel('#EF4444');
+}
+
+
+}
 
   const handleClick5 = (e) => {
     e.preventDefault();
-    handleRegister5();
-    setBlock5(!block5);
-    setBlock6(!block6);
-    setValor("Azul96");
+
+    if(salar.trim() !== ""){
+     handleRegister5();
+     setBlock5(!block5);
+     setBlock6(!block6);
+     setValor("Azul96");
+     setTexto(false);
+     setBorderSalar("#E2E8F0");
+   }else if(salar.trim() === ""){
+      setTexto(true);
+      setBorderSalar("#EF4444");
+   }
   };
 
   const handleClick6 = (e) => {
@@ -597,7 +641,7 @@ const EmpresaPasso = () => {
     scrollSnapType: "x mandatory",
     borderRadius: '15px', 
     outline: 'none',
-    border: '2px solid #E2E8F0'
+    border: `2px solid ${border3}`
   }}
 
   className="cx-sel"
@@ -636,6 +680,21 @@ const EmpresaPasso = () => {
   />
 </div>
 
+{texto && (
+            <div className="flex items-center gap-1">
+            <img src="icons/icon-erro.svg" alt="" />
+            <span
+              style={{
+                color: "#EF4444",
+                fontSize: "0.70rem",
+                fontFamily: "Lexend",
+              }}
+            >
+              Adicione pelo menos uma habilidade!
+            </span>
+          </div>
+  )}
+
 
                       </div>
                     </div>
@@ -673,7 +732,7 @@ const EmpresaPasso = () => {
                     >
                       <div
                         className="pd flex flex-col gap-2"
-                        style={{ paddingLeft: "4rem" }}
+                        style={{ paddingLeft: "4rem", paddingRight: '4rem' }}
                       >
                         <p className="func2">Informações de contato</p>
                         <InputMask
@@ -689,9 +748,25 @@ const EmpresaPasso = () => {
                               type="text"
                               className="lin2"
                               pattern="[0-9]*"
+                              style={{ border: `2px solid ${borderTel}`, outline: 'none' }}
                             />
                           )}
                         </InputMask>
+                        
+                        {textoTel && (
+                          <div className="flex gap-1">
+                            <img src="icons/icon-erro.svg" alt="" />
+                            <span
+                              style={{
+                                color: "#EF4444",
+                                fontSize: "0.70rem",
+                                fontFamily: "Lexend",
+                              }}
+                            >
+                              Número de Telefone para continuar!
+                            </span>
+                          </div>
+                        )}
 
                         <Input
                           type="text"
@@ -700,7 +775,24 @@ const EmpresaPasso = () => {
                           required
                           value={localizacao}
                           onChange={(e) => setLocalizacao(e.target.value)}
+                          border = {borderLoca}
                         />
+
+                        {textoLoca && (
+                          <div className="flex gap-1">
+                            <img src="icons/icon-erro.svg" alt="" />
+                            <span
+                              style={{
+                                color: "#EF4444",
+                                fontSize: "0.70rem",
+                                fontFamily: "Lexend",
+                              }}
+                            >
+                              Adicione o Endereço para continuar!
+                            </span>
+                          </div>
+                        )}
+
                       </div>
                     </div>
                   </div>
@@ -715,11 +807,11 @@ const EmpresaPasso = () => {
                       className="pd flex flex-col gap-2"
                       style={{ paddingLeft: "4rem", paddingRight: "4rem" }}
                     >
-                      <h1 className="PassTit3" style={{ maxWidth: "40ch" }}>
+                      <h1 className="PassTit4" style={{ maxWidth: "40ch" }}>
                         Ótimo, agora infome o salário da vaga de emprego que
                         você está oferecendo.
                       </h1>
-                      <p className="PassPar3">É bom informar ao talento.</p>
+                      <p className="PassPar4">É bom informar ao talento.</p>
                     </div>
                     <div
                       className="pd flex flex-col gap-2"
@@ -739,14 +831,30 @@ const EmpresaPasso = () => {
                       >
                         <p className="func">Salário</p>
 
-                        <input
-                          type="text"
-                          value={salar}
-                          onChange={handleSalaryChange}
-                          placeholder="Ex: R$ 2.500,00"
-                          className="lin"
-                          pattern="[0-9]*"
-                        />
+                        <CurrencyInput
+    value={salar}
+    onValueChange={handleValueChange}
+    decimalSeparator=","
+    groupSeparator="."
+    prefix="R$ "
+    placeholder="Ex: R$ 2.500,00"
+    className="lin"
+    style={{ border: `2px solid ${borderSalar}`, outline: 'none' }}
+  />
+                        {texto && (
+                                  <div className="flex gap-1">
+                                  <img src="icons/icon-erro.svg" alt="" />
+                                  <span
+                                    style={{
+                                      color: "#EF4444",
+                                      fontSize: "0.70rem",
+                                      fontFamily: "Lexend",
+                                    }}
+                                  >
+                                    Adicione o Salário para continuar!
+                                  </span>
+                                </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -808,7 +916,7 @@ const EmpresaPasso = () => {
                             placeholder=""
                             className="lin2edit"
                             required
-                            value={requisits}
+                            value={selectedOptions}
                             onChange={(e) => setRequisits(e.target.value)}
                             disabled={!isEditable}
                           />
@@ -865,7 +973,7 @@ const EmpresaPasso = () => {
                         <div className="input-editar">
                           <input
                             type="text"
-                            value={salar}
+                            value={`R$ ${salar}`} 
                             onChange={handleSalaryChange}
                             placeholder="Ex: R$ 2.500,00"
                             className="lin2edit"
@@ -885,7 +993,7 @@ const EmpresaPasso = () => {
                   <div
                     className="flex gap-4 justify-end contProx"
                     style={{
-                      marginTop: "200px",
+                      marginTop: "100px",
                       width: "100%",
                       paddingLeft: "65px",
                       paddingRight: "65px",

@@ -89,7 +89,7 @@ const Escolha = () => {
               <div className='Empresa flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou uma Empresa</h1>
                 <div className='camph2 flex justify-between' onClick={() => ativaBtn('empresa')} style={{cursor: 'pointer'}}>
-                  <h2>Em busca de um Talento</h2>
+                  <h2 className='buscarTal'>Em busca de um Talento</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'empresa' ? 'selected' : ''}`}></div>
                   </div>
@@ -99,7 +99,7 @@ const Escolha = () => {
               <div className='Talento flex flex-col gap-3'>
                 <h1 className='titEnt'>Sou um Talento</h1>
                 <div className='camph2 flex justify-between' onClick={() => ativaBtn('talento')} style={{cursor: 'pointer'}}>
-                  <h2>Em busca de um Emprego</h2>
+                  <h2 className='buscarEmp'>Em busca de um Emprego</h2>
                   <div className='radio'>
                     <div className={`azul ${selectedOption === 'talento' ? 'selected' : ''}`}></div>
                   </div>

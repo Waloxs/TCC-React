@@ -464,7 +464,7 @@ line-height: 130%; /* 26px */
 }
 
 .lin2{
-    width: 500px !important;
+    max-width: 500px !important;
     height: 40px !important;
 }
 
@@ -651,6 +651,28 @@ line-height: 160%; /* 25.6px */
     grid-template-columns: 1fr 1fr;
 }
 
+.PassTit4{
+   color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.20rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    
+}
+
+
+
+.PassPar4{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.70rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
 
 @media(max-width: 1110px){
     .lista-emp li{
@@ -741,7 +763,7 @@ line-height: 160%; /* 25.6px */
     margin-right: 0px !important;
 }
 
-.PassTit3{
+.PassTit3, .PassTit4{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;
     font-size: 1.20rem;
@@ -753,7 +775,7 @@ line-height: 160%; /* 25.6px */
 
 
 
-.PassPar3{
+.PassPar3, .PassPar4{
     color: var(--grey-text-light, #64748B);
     font-family: Lexend;
     font-size: 0.70rem;
@@ -1003,6 +1025,19 @@ line-height: 160%; /* 25.6px */
     }
 }
 
+
+@media(max-width: 380px){
+    .PassTit4{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+}
+
 @media(max-width: 365px){
     .PassTit3{
         color: var(--grey-text-dark, #020617);
@@ -1012,6 +1047,10 @@ line-height: 160%; /* 25.6px */
         font-weight: 500;
         line-height: 130%; /* 2.6rem */
         max-width: 40ch;
+    }
+
+    .PassPar3Empresa2{
+        font-size: 0.80rem;
     }
 }
 

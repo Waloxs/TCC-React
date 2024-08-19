@@ -26,6 +26,16 @@
     line-height: 130%; /* 1.625rem */
 }
 
+.buscarTal{
+    margin-bottom: 0px !important;
+    font-weight: 300;
+}
+
+.buscarEmp{
+    margin-bottom: 0px !important;
+    font-weight: 300;
+}
+
 .titEnt{
     color: var(--primary-500, #3B82F6);
     font-family: Lexend;
@@ -103,7 +113,11 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 100%;
+    max-width: 30ch;
+}
+
+.EscPar{
+    max-width: 30ch;
 }
 
 }

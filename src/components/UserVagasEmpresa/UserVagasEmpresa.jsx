@@ -289,7 +289,7 @@ const UserVagasEmpresa = () => {
             </div>
             <div className='flex justify-between caixa-tags' style={{ width: '100%' }}>
               <div className='flex gap-3'>
-                {item.tags.map((tag, index) => (
+                {item.requirements.map((tag, index) => (
                   <span className='span-tag' key={index}>{tag}</span>
                 ))}
               </div>
