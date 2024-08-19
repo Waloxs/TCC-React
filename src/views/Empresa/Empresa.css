@@ -18,7 +18,11 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
         border: 2px solid #E2E8F0;
         border-radius: 20px;
         height: 600px !important;
-        width: 550px !important;
+        max-width: 550px !important;
+}
+
+.in input{
+    height: 3rem !important;
 }
 
 .gri{
@@ -54,8 +58,11 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
 }
 
 
+
+
+
 #areaDeAtuacao {
-    height: 40px;
+    height: 3rem;
     width: 100%;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -66,8 +73,17 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
     line-height: 130%;
     border-radius: 8px;
     border: 1px solid var(--grey-300, #CBD5E1);
-    color: var(--grey-text-light, #64748B) !important;
+    color: var(--grey-text-light, #8C9FB4) !important;
     padding-left: 15px;
+    background-color: #fff;
+
+    width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grey-border, #E2E8F0);
+  background: var(--white, #FFF);
+  padding-left: 15px;
+  font-family: 'Lexend';
+  font-weight: 100;
 
   appearance: none; /* Remove the default dropdown arrow */
   -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
@@ -96,10 +112,10 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
 }
 
 
-.Eye2{
+.EyeEmp{
     cursor: pointer;
     font-size: 1.25rem;
-    top: 10px;
+    top: 13px;
     right: 20px;
     position: absolute;
     color: rgb(198, 198, 198);
@@ -118,28 +134,13 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
         height: 40rem !important;
     }
 
-    .containerEmpresa{
-        max-width: 34rem !important;
-        gap: 0px !important;
-    }
-
     .containerLogo{
         max-width: 34rem !important;
     }
 }
 
-
-@media(max-width: 730px){
-    .containerEmpresa{
-        max-width: 27rem !important;
-    }
-}
-
 @media(max-width: 500px){
 
-    .containerEmpresa{
-        max-width: 24rem !important;
-    }
 
     .gri{
         display: grid;

@@ -395,7 +395,7 @@ line-height: 130%; /* 26px */
 
 
 .txAreaEmp{
-    width: 380px;
+    max-width: 380px;
     padding: 20px;
     border-radius: 15px;
     border: 1px solid var(--grey-border, #E2E8F0);
@@ -445,11 +445,12 @@ line-height: 130%; /* 26px */
     max-width: 65ch;
 }
 
+
+
 .lin{
     width: calc(100% - 4rem) !important;
     height: 40px !important;
 }
-
 
 .lin2{
     width: 500px !important;
@@ -460,6 +461,15 @@ line-height: 130%; /* 26px */
     width: 100%;
     height: 40px !important;
     
+}
+
+.tagSelect{
+    color: var(--grey-disable-color, #94A3B8);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
 }
 
 .lin2editarea{
@@ -576,6 +586,10 @@ border: 2px solid var(--grey-300, #CBD5E1);
     border: 1px solid var(--grey-border, #E2E8F0);
 }
 
+#area3{
+    padding: 10px;
+    border-radius: 15px;
+}
 
 .input-editar{
     position: relative;
@@ -609,6 +623,85 @@ font-weight: 300;
 line-height: 160%; /* 25.6px */
 }
 
+
+.PassParEmp{
+
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
+.pd2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+@media(max-width: 1110px){
+    .lista-emp li{
+        font-size: 0.85rem;
+    }
+}
+
+@media(max-width: 1065px){
+    .lista-emp li{
+        font-size: 0.75rem;
+    }
+}
+
+@media(max-width: 1015px){
+    .ctnLista{
+        display: none;
+    }   
+
+    .pd2{
+        grid-template-columns: auto;
+    }
+
+    .ctnArea{
+        margin-top: 40px;
+    }
+
+}
+
+@media(max-width: 610px){
+    .PassTitEmp{
+        font-size: 1.25rem;
+    }
+
+    .PassParEmp{
+        font-size: 0.65rem;
+    }
+
+    .PassTitEmp2{
+        font-size: 1.25rem;
+        max-width: 22ch !important;
+    }
+}
+
+
+@media(max-width: 375px){
+    .PassTitEmp2{
+        font-size: 1.12rem;
+    }
+}
+
+@media(max-width: 535px){
+
+    .PassTitEmp{
+        max-width: 20ch;
+    }
+
+    .PassParEmp{
+        font-size: 0.65rem;
+    }
+}
+
+
 @media(max-width: 940px){
     .txArea{
         display: none;
@@ -640,11 +733,11 @@ line-height: 160%; /* 25.6px */
 .PassTit3{
     color: var(--grey-text-dark, #020617);
     font-family: Lexend;
-    font-size: 1.25rem;
+    font-size: 1.20rem;
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 2.6rem */
-    max-width: 40ch;
+    
 }
 
 
@@ -760,6 +853,56 @@ line-height: 160%; /* 25.6px */
 
 }
 
+@media(max-width: 580px){
+
+.contProx{
+    flex-direction: column;
+    align-items: center;
+}
+
+.order1{
+    order: 2;
+}
+
+
+.order2{
+    order: 1;
+}
+
+.btnRespEmp{
+    width: 100% !important;
+}
+
+.proxEmp{
+    width: 100%;
+}
+
+
+}
+
+
+@media(max-width: 536px){
+
+    .contProx{
+        margin-top: 100px !important;
+    }
+
+
+.proxEmp{
+    width: 100%;
+}
+
+    
+}
+
+
+
+@media(max-width: 470px){
+    .contProx{
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
 
 @media(max-width: 430px){
 
@@ -823,8 +966,12 @@ line-height: 160%; /* 25.6px */
         padding-right: 2rem !important;
     }
 
+    .cx-sel{
+        max-width: 100% !important;
+    }
+
     .lin{
-        width: calc(100% - 2rem) !important;
+        width: 100% !important;
     }
 
     .lin::placeholder{
@@ -844,3 +991,18 @@ line-height: 160%; /* 25.6px */
         font-size: 0.75rem; 
     }
 }
+
+@media(max-width: 365px){
+    .PassTit3{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+}
+
+
+
