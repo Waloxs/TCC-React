@@ -104,7 +104,7 @@ const Login = () => {
           <BtnPrincipal class="btnLogin" texto="Entrar" color="#fff" width="100%" back="#3B82F6" hover='#3A61D4' /> {/* Botão para salvar as mudanças */}
           
           <div className="lineLogin"></div>
-          <h3 className='cont'>Ou continuar com</h3>
+          <span className='cont'>Ou continuar com</span>
 
           <a href='https://workzen.onrender.com/v1/auth/google' className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
               <FcGoogle style={{ width: '20px', height: '20px' }} />

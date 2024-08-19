@@ -139,7 +139,7 @@ const Talento = () => {
 
                 <div className="line2 flex self-center"></div>
               </form>
-              <h3 className='cont2 flex self-center'>Ou continuar com</h3>
+              <span className='cont2 flex self-center'>Ou continuar com</span>
               <div className='flex justify-center items-center'>
                 <a href='https://workzen.onrender.com/v1/auth/google' className="top mid flex justify-center gap-2" style={{ maxWidth: '85%' }}>
                   <FcGoogle style={{ width: '20px', height: '20px' }} />

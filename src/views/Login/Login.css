@@ -106,7 +106,7 @@ input::placeholder{
     line-height: 160%; /* 1.4rem */
     font-style: normal;
     position: absolute;
-    top: 450px;
+    top: 455px;
     background: #fff;
     padding-left: 20px;
     padding-right: 20px;
@@ -209,6 +209,6 @@ input::placeholder{
     }
 
     .cont{
-        top: 445px;
+        top: 449px;
     }
 }

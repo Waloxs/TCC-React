@@ -15,12 +15,19 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('authToken');
+  
+      if (!token) {
+        setError(new Error('Token de autenticação não encontrado.'));
+        setLoading(false);
+        return;
+      }
+  
       const config = {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       };
-
+  
       try {
         const response = await axios.get('https://workzen.onrender.com/v1/empresa/profile', config);
         setData(response.data);
@@ -30,9 +37,10 @@ export const UserProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   return (
     <UserContextEmpresa.Provider value={{ data, loading, error }}>

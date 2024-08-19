@@ -34,7 +34,7 @@ const EmpresaPasso = () => {
   const navigate = useNavigate();
   const [profissional, setProfissional] = useState("");
   const [requisits, setRequisits] = useState("Digite aqui");
-  const { data: userEmpresa } = useUserEmpresa();
+  const { data: userEmpresa, loading, error } = useUserEmpresa();
   const [telefone, setTelefone] = useState("");
   const [endereco, setEndereco] = useState("");
   const [localizacao, setLocalizacao] = useState("");
@@ -52,6 +52,14 @@ const EmpresaPasso = () => {
   const [borderTel ,setBorderTel] = useState('#E2E8F0');
   const [borderSalar ,setBorderSalar] = useState('#E2E8F0');
 
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (error) {
+    return <p>Erro ao carregar os dados: {error.message}</p>;
+  }
 
 
   const handlePenClick = () => {
