@@ -140,10 +140,10 @@ const Talento = () => {
                 <div className="line2 flex self-center"></div>
               </form>
               <h3 className='cont2 flex self-center'>Ou continuar com</h3>
-              <div className='flex justify-center'>
-                <a href='https://workzen.onrender.com/v1/auth/google' className="top mid flex justify-center gap-2 items-center" style={{ maxWidth: '85%' }}>
+              <div className='flex justify-center items-center'>
+                <a href='https://workzen.onrender.com/v1/auth/google' className="top mid flex justify-center gap-2" style={{ maxWidth: '85%' }}>
                   <FcGoogle style={{ width: '20px', height: '20px' }} />
-                  <h2 className='gog'>Google</h2>
+                  <span className='gog'>Google</span>
                 </a>
               </div>
             </div>

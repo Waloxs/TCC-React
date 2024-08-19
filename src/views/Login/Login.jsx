@@ -108,7 +108,7 @@ const Login = () => {
 
           <a href='https://workzen.onrender.com/v1/auth/google' className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
               <FcGoogle style={{ width: '20px', height: '20px' }} />
-              <h2 className='gog'>Google</h2>
+              <span className='gog'>Google</span>
           </a>
         </form>
         <div>
