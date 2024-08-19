@@ -70,8 +70,8 @@ input{
 }
 
 input::placeholder{
-    font-family: 'Lexend';
-    font-weight: 100;
+    font-family: 'Lexend' !important;
+    font-weight: 100 !important;
 }
 
 

@@ -14,7 +14,8 @@ const Input = ({tipo, id, border, ...props}) => {
           paddingBottom: '0px', 
           boxSizing: 'border-box',
           border: `2px solid ${border}`,
-          outline: 'none'
+          outline: 'none',
+          fontFamily: 'Lexend'
         }}
       />
     </div>

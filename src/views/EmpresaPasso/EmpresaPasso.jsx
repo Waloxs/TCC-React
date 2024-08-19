@@ -161,7 +161,7 @@ const EmpresaPasso = () => {
     const data = {
       profissional,
       descricao,
-      requirements: selectedOptions.map((option) => option.value),
+      requirements: selectedOptions,
     };
 
     console.log(data);
@@ -594,7 +594,10 @@ const EmpresaPasso = () => {
     overflowX: "auto",
     display: "flex",
     alignItems: "center",
-    scrollSnapType: "x mandatory" // Habilita o scroll snapping
+    scrollSnapType: "x mandatory",
+    borderRadius: '15px', 
+    outline: 'none',
+    border: '2px solid #E2E8F0'
   }}
 
   className="cx-sel"
@@ -605,8 +608,9 @@ const EmpresaPasso = () => {
     value={selectedOptions}
     onChange={handleChange}
     placeholder="Selecione as opções..."
-    style={{ minHeight: "40px", flex: 1 , maxWidth: 'auto' }}
+    style={{ minHeight: "40px", flex: 1 , maxWidth: 'auto'}}
     dropdownStyle={{ maxHeight: 200, overflow: 'hidden' }}
+    suffixIcon={null}
     tagRender={(props) => {
       const { label, closable, onClose } = props;
 
@@ -617,7 +621,7 @@ const EmpresaPasso = () => {
             whiteSpace: 'nowrap',
             marginRight: '8px',
             overflow: 'hidden',
-            maxWidth: '100px',
+            maxWidth: '100px'
           }}
         >
           <span className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>

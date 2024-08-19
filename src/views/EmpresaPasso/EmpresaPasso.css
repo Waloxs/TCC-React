@@ -1,3 +1,14 @@
+/* No seu arquivo CSS */
+.ant-select-multiple .ant-select-selection-overflow {
+    position: relative;
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap; /* Altera o comportamento de flex-wrap */
+    max-width: 100%;
+    padding: 10px; /* Altera o padding */
+  }
+  
+ 
 
 .PassTit{
     color: var(--grey-text-dark, #020617);
