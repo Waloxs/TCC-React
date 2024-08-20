@@ -19,8 +19,8 @@ export const UserProvider = ({ children }) => {
       const token = localStorage.getItem('authToken');
 
       if (!token) {
-        setError(new Error('Token de autenticação não encontrado.'));
-        setLoading(false);
+        setError2(new Error('Token de autenticação não encontrado.'));
+        setLoading2(false);
         return;
       }
 

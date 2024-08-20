@@ -46,37 +46,45 @@ const Empresa = () => {
     return () => clearTimeout(timeout); 
   }, [isImageLoaded]);
 
-  const HandleSave = async (e) => {
-    e.preventDefault();
-    const form = e.target.closest('form');
+// Empresa.js
+const HandleSave = async (e) => {
+  e.preventDefault();
+  const form = e.target.closest('form');
 
-    if (form.checkValidity()) {
-      let dados = {
-        email: email,
-        password: senha,
-        cnpj: cnpj,
-        ramo_atividade: ramo_atividade,
-        nome: nome
-      };
+  if (form.checkValidity()) {
+    const dados = {
+      email,
+      password: senha,
+      cnpj,
+      ramo_atividade,
+      nome
+    };
 
-      try {
-        const response = await axios.post('https://workzen.onrender.com/v1/empresa/register', dados);
+    try {
+      const response = await axios.post('https://workzen.onrender.com/v1/empresa/register', dados);
+      const { token } = response.data;
 
-        const { token } = response.data;
-        localStorage.setItem('authToken', token);
-        navigate('/EmpresaPasso');
-        
-      }
 
+      localStorage.setItem('authToken', token);
+
+      navigate('/EmpresaPasso');    
       
-      catch (error) {
-        console.error('Erro ao enviar os dados:', error);
-    } 
-  }
-  else {
+      // Aguarda a navegação antes de recarregar
+      setTimeout(() => {
+        window.location.reload();
+      }, 100); // O delay pode ser ajustado conforme necessário
+
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+    }
+  } else {
     form.reportValidity();
   }
-}
+};
+
+
+
+
   if (showLoader) {
     return (
       <div className='flex justify-center items-center' style={{background: '#fff', height: '100vh'}}>

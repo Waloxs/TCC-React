@@ -15,6 +15,7 @@ import { LuPen } from "react-icons/lu";
 import "antd/dist/reset.css";
 import CurrencyInput from 'react-currency-input-field';
 
+
 import { Select } from "antd";
 
 const { Option } = Select;
@@ -170,6 +171,8 @@ const EmpresaPasso = () => {
     { value: "bibliotecario", label: "Bibliotecário" },
   ];
 
+
+
   const handleChange = (selected) => {
     setSelectedOptions(selected);
     setRequisits(selected.map((option) => option.value));
@@ -229,7 +232,7 @@ const EmpresaPasso = () => {
 
   const criarVaga = async () => {
     const token = localStorage.getItem("authToken");
-
+  
     if (token) {
       try {
         const config = {
@@ -237,7 +240,7 @@ const EmpresaPasso = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-
+  
         const data = {
           title: profissional,
           description: descricao,
@@ -246,16 +249,23 @@ const EmpresaPasso = () => {
           localizacao,
           tags: requisits,
         };
-
+  
         const response = await axios.post(
           "https://workzen.onrender.com/v1/jobs/create",
           data,
           config
         );
-
+  
         console.log(response.data);
-
+  
+        // Navega para a página /DashboardEmpresa
         navigate("/DashboardEmpresa");
+        
+        // Aguarda a navegação antes de recarregar a página
+        setTimeout(() => {
+          window.location.reload();
+        }, 100); // O delay pode ser ajustado conforme necessário
+  
       } catch (error) {
         console.error("Erro ao enviar dados:", error);
       }
@@ -263,6 +273,7 @@ const EmpresaPasso = () => {
       console.error("Token não encontrado no localStorage");
     }
   };
+  
 
   const handleValueChange = (value) => {
     // Converte o valor para número e verifica se é menor que um milhão

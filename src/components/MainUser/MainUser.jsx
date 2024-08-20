@@ -1,19 +1,18 @@
+import { useEffect, useState } from 'react';
+import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
+import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
-import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
-import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
-import CriarVaga from '../CriarVaga/CriarVaga.jsx'
-
-
+import CriarVaga from '../CriarVaga/CriarVaga.jsx';
 import './MainUser.css';
-import { useState } from 'react';
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
-  
+
   const [selectedButton, setSelectedButton] = useState('home');
+ 
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
@@ -78,13 +77,13 @@ const MainUser = () => {
           </div>
         )}
 
-        {userDataVagasEmpresa && selectedButton === 'criarVaga' && (
+        {selectedButton === 'criarVaga' && (
           <div className='central'>
-            <CriarVaga></CriarVaga>
+            <CriarVaga />
           </div>
         )}
 
-        {!userDataVagasEmpresa && (
+        {!userDataVagasEmpresa && selectedButton === 'home' && (
           <div className='central'>
             <span className='vaga-tit'>Minhas Vagas</span>
             <p>Você ainda não tem vagas criadas.</p>
