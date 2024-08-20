@@ -72,7 +72,7 @@ const HandleSave = async (e) => {
       // Aguarda a navegação antes de recarregar
       setTimeout(() => {
         window.location.reload();
-      }, 100); // O delay pode ser ajustado conforme necessário
+      }, 600); // O delay pode ser ajustado conforme necessário
 
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);

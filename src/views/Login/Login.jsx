@@ -17,30 +17,43 @@ const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const navigate = useNavigate();
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     const userData = {
       email: event.target.email.value,
       password: event.target.senha.value
     };
-    
+
+
     try {
       const response = await axios.post('https://workzen.onrender.com/v1/user/login', userData);
       localStorage.setItem('authToken', response.data.token);
+
       navigate('/Dashboard');
+
+        window.location.reload();
+ 
+
     } catch (error) {
       console.error('Erro ao tentar login de usuário:', error);
       try {
         const responseEmpresa = await axios.post('https://workzen.onrender.com/v1/empresa/login', userData);
         localStorage.setItem('authToken', responseEmpresa.data.token);
         navigate('/DashboardEmpresa');
+
+          window.location.reload();
+        
+
       } catch (empresaError) {
         console.error('Erro ao tentar login de empresa:', empresaError);
       }
+    } finally {
+      console.log('certo'); 
     }
-  }
+  };
 
   const [password, setPassword] = useState(false);
 
