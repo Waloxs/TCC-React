@@ -4,9 +4,15 @@ import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 import Input from '../Form/input.jsx';
-import Select from 'react-select';
 import { useState } from 'react';
 import axios from 'axios';
+import './CriarVaga.css'
+import { Select } from "antd";
+import CurrencyInput from 'react-currency-input-field';
+
+
+const { Option } = Select;
+
 
 const CriarVaga = () => {
   const [profissional, setProfissional] = useState('');
@@ -17,6 +23,7 @@ const CriarVaga = () => {
   const [tel, setTel] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [texto, setTexto] = useState(false);
+  const [border3, setBorder3] = useState('#E2E8F0');
 
 
   const options = [
@@ -124,7 +131,7 @@ const CriarVaga = () => {
           title: profissional,
           description: desc, // Corrigi de `descricao` para `desc`
           salario: salar,
-          requirements: requisits,
+          requirements: selectedOptions,
           localizacao: local,
           tags: requisits,
         };
@@ -142,23 +149,31 @@ const CriarVaga = () => {
     }
   };
 
+  const handleValueChange = (value) => {
+    // Converte o valor para número e verifica se é menor que um milhão
+    const numericValue = value ? parseFloat(value.replace(/\D/g, "")) : 0;
+    if (numericValue <= 1000000) {
+      setSalar(value); // Atualiza o estado somente se o valor for válido
+    }
+  };
+
   return (
     <div className='formCriar flex flex-col'>
       <div className='flex flex-col justify-between' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
-        <div>
+        <div className='flex flex-col gap-2'>
           <span>Título</span>
-          <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+          <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)}/>
         </div>
 
-        <div>
+        <div className='flex flex-col gap-2'>
           <span>Localização</span>
           <Input type='text' required value={local} onChange={(e) => setLocal(e.target.value)} />
         </div>
 
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-2'>
           <span>Descrição</span>
           <textarea
-            className='txAreaEmp'
+            className='txAreaEmpCr'
             id="area2"
             style={{ height: '200px', width: '100%', resize: 'none', borderRadius: '10px' }}
             onChange={(e) => setDesc(e.target.value)}
@@ -166,26 +181,74 @@ const CriarVaga = () => {
           />
         </div>
 
-        <div>
+        <div className='flex flex-col gap-2'>
           <span>Habilidades</span>
-          <Select
-            isMulti
-            className='lin'
-            options={options}
-            value={selectedOptions}
-            onChange={handleChange}
-          />
+<div
+  style={{
+    maxWidth: '100%',
+    height: "40px",
+    overflowX: "auto",
+    display: "flex",
+    alignItems: "center",
+    scrollSnapType: "x mandatory",
+    borderRadius: '10px', 
+    outline: 'none',
+    border: `1px solid ${border3}`
+  }}
+
+  className="cx-sel"
+>
+  <Select
+    mode="multiple"
+    options={options}
+    value={selectedOptions}
+    onChange={handleChange}
+    style={{ minHeight: "40px", flex: 1 , width: 'auto'}}
+    dropdownStyle={{ maxHeight: 200, overflow: 'hidden' }}
+    suffixIcon={null}
+    tagRender={(props) => {
+      const { label, closable, onClose } = props;
+
+      return (
+        <div
+          style={{
+            display: 'inline',
+            whiteSpace: 'nowrap',
+            marginRight: '8px',
+            overflow: 'hidden',
+            maxWidth: '100px'
+          }}
+        >
+          <h1 className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</h1>
+          {closable && (
+            <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}>
+              
+            </span>
+          )}
+        </div>
+      );
+    }}
+  />
+</div>
+
         </div>
 
-        <div>
+        <div className='flex flex-col gap-2'>
           <span>Salário</span>
-          <Input type='text' value={salar} required onChange={(e) => setSalar(e.target.value)} />
+          <CurrencyInput
+    value={salar}
+    onValueChange={handleValueChange}
+    decimalSeparator=","
+    groupSeparator="."
+    prefix="R$ "
+    style={{ border: `1px solid ${border3}`, outline: 'none', height: '40px' }}
+  />
         </div>
       </div>
 
-      <div style={{ marginTop: '50px' }}>
+      <div className='flex self-end' style={{ marginTop: '40px', marginBottom: '40px' }}>
         <BtnPrincipal
-          texto="Salvar"
+          texto="Publicar Vaga"
           back='#3B82F6'
           padding='10px'
           borderRadius='15px'

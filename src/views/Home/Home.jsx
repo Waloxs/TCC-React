@@ -48,10 +48,13 @@ const Home = () => {
         if (decodedToken.exp > currentTime) {
           // Token válido, redirecionar para o DashboardEmpresa
           navigate('/DashboardEmpresa');
+        }else{
+          navigate('/Login');
         }
+
+
       } catch (error) {
         console.error('Token inválido:', error);
-        // Token inválido ou erro na decodificação, permanecer na Home ou redirecionar para login se necessário
       }
     }
   }, [navigate]);
