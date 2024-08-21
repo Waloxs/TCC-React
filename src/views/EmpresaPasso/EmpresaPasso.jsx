@@ -8,12 +8,12 @@ import BtnPrincipal from "../../components/Buttons/BtnPrincipal";
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import UserEmpresa from "../../components/UserEmpresa/UserEmpresa.jsx";
 import { useUser as useUserEmpresa } from "../../services/UserContextEmpresa.jsx";
 import InputMask from "react-input-mask";
 import { LuPen } from "react-icons/lu";
 import "antd/dist/reset.css";
 import CurrencyInput from 'react-currency-input-field';
+import ClipLoader from "react-spinners/ClipLoader.js";
 
 
 import { Select } from "antd";
@@ -55,11 +55,15 @@ const EmpresaPasso = () => {
 
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return (
+      <div className='flex justify-center items-center' style={{ background: '#fff', height: '100vh' }}>
+        <ClipLoader color="#123abc" loading={true} size={100} />
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Erro ao carregar os dados: {error.message}</p>;
+    return <p></p>;
   }
 
 

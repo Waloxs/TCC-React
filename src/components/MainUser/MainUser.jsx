@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
 import CriarVaga from '../CriarVaga/CriarVaga.jsx';
+import ClipLoader from 'react-spinners/ClipLoader.js';
 import './MainUser.css';
 
 const MainUser = () => {
+
+
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
 
@@ -19,11 +22,15 @@ const MainUser = () => {
   };
 
   if (loading || loading2) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center' style={{ background: '#fff', height: '100vh' }}>
+        <ClipLoader color="#123abc" loading={true} size={100} />
+      </div>
+    );
   }
 
   if (error || error2) {
-    return <div>Error: {error?.message || error2?.message}</div>;
+    return <div></div>;
   }
 
   return (

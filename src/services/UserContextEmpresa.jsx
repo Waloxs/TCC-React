@@ -13,10 +13,12 @@ export const UserProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
+
+
     const token = localStorage.getItem('authToken');
 
     if (!token) {
-      setError(new Error('Token de autenticação não encontrado.'));
+      window.location('./Login')
       setLoading(false);
       return;
     }
@@ -38,21 +40,17 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  
   useEffect(() => {
-    const initialFetch = async () => {
-      await fetchData(); 
-
-      const intervalId = setInterval(() => {
-        fetchData();
-      }, 60000); 
-
-      
-
-      return () => clearInterval(intervalId);
+    const intervalId = setInterval(() => {
+      fetchData(); // Fetch data every 60 seconds
+    }, 400); 
+  
+    return () => {
+      clearInterval(intervalId);
     };
-
-    initialFetch();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
+  
 
   return (
     <UserContextEmpresa.Provider value={{ data, loading, error }}>

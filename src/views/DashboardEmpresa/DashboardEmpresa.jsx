@@ -1,18 +1,22 @@
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Select from 'react-select';
-import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
-import axios from 'axios';
 import MainUser from '../../components/MainUser/MainUser';
+import { UserProvider as UserProviderEmpresa } from '../../services/UserContextEmpresa';
+import { UserProvider as UserProviderVagas } from '../../services/UserContextVagasEmpresa';
+import { UserProvider as UserProviderTalento} from '../../services/UserContext.jsx';
+
 
 const DashboardEmpresa = () => {
-
-  
   return (
-    <div style={{height: '100vh'}}>
-      <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash'/>
-      <MainUser/>
+    <div style={{ height: '100vh' }}>
+      <UserProviderTalento>
+      <UserProviderEmpresa>
+        <UserProviderVagas>
+          <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash' />
+          <MainUser />
+        </UserProviderVagas>
+      </UserProviderEmpresa>
+      </UserProviderTalento>
     </div>
   );
 }

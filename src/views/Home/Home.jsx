@@ -6,7 +6,11 @@ import Section from '../../components/Section/Section';
 import Footer from '../../components/Footer/Footer';
 import ImageSection from '../../assets/ImageSection.png';
 import ClipLoader from 'react-spinners/ClipLoader';
-import './Home.css'
+import './Home.css';
+import { UserProvider as ProviderTalento } from '../../services/UserContext';
+import { UserProvider as ProviderEmpresa} from '../../services/UserContextEmpresa';
+
+
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -45,7 +49,11 @@ const Home = () => {
   
   return (
     <>
-      <Navbar menu={menu} setMenu={setMenu} />
+       <ProviderTalento>
+        <ProviderEmpresa>
+          <Navbar menu={menu} setMenu={setMenu} />
+          </ProviderEmpresa>
+       </ProviderTalento>
       {!menu && <Main />}
       {!menu && <Carousel />}
       {!menu && <Section />}
