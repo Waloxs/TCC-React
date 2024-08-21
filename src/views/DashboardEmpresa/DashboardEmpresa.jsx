@@ -15,7 +15,7 @@ const DashboardEmpresa = () => {
 
     if (!token) {
       // Se o token não existe, redirecionar para login
-      navigate('/login');
+      navigate('/Login');
     } else {
       try {
         const decodedToken = jwtDecode(token); // Decodifica o token
@@ -24,11 +24,11 @@ const DashboardEmpresa = () => {
         // Se o token expirou, redirecionar para login
         if (decodedToken.exp < currentTime) {
           localStorage.removeItem('authToken'); // Remove o token expirado
-          navigate('/login');
+          navigate('/Login');
         }
       } catch (error) {
         console.error('Token inválido:', error);
-        navigate('/login'); // Em caso de erro ao decodificar, redirecionar para login
+        navigate('/Login'); // Em caso de erro ao decodificar, redirecionar para login
       }
     }
   }, [navigate]);

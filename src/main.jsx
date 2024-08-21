@@ -29,7 +29,7 @@ import { UserProvider as TodosTalentosVagasTag } from './services/UserContextVag
 import { UserProvider as VagasEmpresa } from './services/UserContextVagasEmpresa.jsx'; 
 
 const router = createBrowserRouter([
-  { path: "", element: <Home /> },
+  { path: "/", element: <Home /> },
   { path: "Login", element: <Login /> },
   { path: "Escolha", element: <Escolha /> },
   { path: "Empresa", element: <Empresa /> },

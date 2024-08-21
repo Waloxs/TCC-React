@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
       const token = localStorage.getItem('authToken');
   
       if (!token) {
-        navigate('./Login');
         setLoading(false);
         return;
       }
