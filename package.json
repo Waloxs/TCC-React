@@ -16,6 +16,7 @@
     "date-fns": "^3.6.0",
     "framer-motion": "^11.2.13",
     "gsap": "^3.12.5",
+    "jwt-decode": "^4.0.0",
     "numeral": "^2.0.6",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.8.0",

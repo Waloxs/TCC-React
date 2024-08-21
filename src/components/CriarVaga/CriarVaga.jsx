@@ -16,7 +16,7 @@ const CriarVaga = () => {
   const [local, setLocal] = useState('');
   const [tel, setTel] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  const [texto, setTexto] = useState(false);
 
 
   const options = [
@@ -132,6 +132,8 @@ const CriarVaga = () => {
         const response = await axios.post('https://workzen.onrender.com/v1/jobs/create', data, config);
 
         console.log(response.data);
+
+        setTexto(true);
       } catch (error) {
         console.error('Erro ao enviar dados:', error);
       }
@@ -193,6 +195,10 @@ const CriarVaga = () => {
           click={criarVaga}
         />
       </div>
+
+      {texto && (
+        <div>oi</div>
+      )}
     </div>
   );
 };

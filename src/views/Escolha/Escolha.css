@@ -1,5 +1,5 @@
 .tudo {
-    overflow-y: hidden;
+    overflow-x: hidden;
     background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%);
     height: 100vh; /* Certifique-se de que a altura esteja definida para visualizar o efeito */
 }
@@ -173,5 +173,17 @@ background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
 
     .camph2{
         font-size: 0.60rem;
+    }
+}
+
+@media(max-width: 330px){
+    .EscTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 100%;
     }
 }

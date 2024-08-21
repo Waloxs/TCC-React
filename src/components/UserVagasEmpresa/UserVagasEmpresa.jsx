@@ -22,9 +22,11 @@ const UserVagasEmpresa = () => {
   const [tit, setTit] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
 
+
   useEffect(() => {
     setUserDataVagasEmpresa(initialVagas);
-  }, [initialVagas]);
+    console.log(initialVagas);
+  }, []);
 
   useEffect(() => {
     if (selectedIndex !== null) {
@@ -107,8 +109,6 @@ const UserVagasEmpresa = () => {
   
     try {
       const response = await axios.put(`https://workzen.onrender.com/v1/jobs/update/${id}`, dados, config);
-     
-  
       const updatedVaga = response.data;
   
       const updatedVagas = [...userDataVagasEmpresa];
@@ -120,7 +120,6 @@ const UserVagasEmpresa = () => {
 
       console.log('Dados da vaga atualizados:', response.data);
 
-  
       setModal2(false);
   
     } catch (error) {
@@ -268,6 +267,7 @@ const UserVagasEmpresa = () => {
               />
             </div>
           </div>
+     
         </div>
       )}
 

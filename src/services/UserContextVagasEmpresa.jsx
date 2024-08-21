@@ -41,8 +41,12 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []); // Executa apenas uma vez, na montagem do componente
+    fetchData(); // Buscar os dados inicialmente
+
+    const intervalId = setInterval(fetchData, 60000); // Atualiza a cada 60 segundos
+
+    return () => clearInterval(intervalId); // Limpa o intervalo quando o componente for desmontado
+  }, [data]); 
 
   return (
     <UserContextVagaEmpresa.Provider value={{ data, loading2, error2 }}>
