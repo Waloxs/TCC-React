@@ -4,8 +4,9 @@ import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasE
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import axios from 'axios';
 import Input from '../Form/input.jsx';
-import Select from 'react-select';
+import { Select } from "antd";
 
+const { Option } = Select;
 
 const UserVagasEmpresa = () => {  
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
@@ -17,28 +18,33 @@ const UserVagasEmpresa = () => {
   const [userDataVagasEmpresa, setUserDataVagasEmpresa] = useState(initialVagas);
   const [desc, setDesc] = useState('');
   const [local, setLocal] = useState('');
-  const [tag, setTag] = useState([]);
+  const [requisits, setRequisits] = useState('');
   const [salar, setSalar] = useState('');
   const [tit, setTit] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [border3, setBorder3] = useState('#E2E8F0');
+
 
 
   useEffect(() => {
     setUserDataVagasEmpresa(initialVagas);
-    console.log(initialVagas);
   }, []);
 
   useEffect(() => {
     if (selectedIndex !== null) {
       const vaga = userDataVagasEmpresa[selectedIndex];
+    
       setTit(vaga.title);
       setDesc(vaga.description);
       setLocal(vaga.localizacao);
       setSalar(vaga.salario);
-      const updatedTags = vaga.tags.length ? vaga.tags : [];
-      setSelectedOptions(updatedTags.map(tag => ({ value: tag, label: tag })));
+  
+      // Verifique se as tags estão presentes e mapeie
+      const updatedTags = vaga.requirements?.length ? vaga.requirements.map(tag => ({ value: tag, label: tag })) : [];
+      setSelectedOptions(updatedTags);
     }
   }, [selectedIndex, userDataVagasEmpresa]);
+  
   
 
   if (loading2) return <div><p>Loading...</p></div>;
@@ -88,7 +94,11 @@ const UserVagasEmpresa = () => {
     }
   };
 
+
   const salvarEdicao = async () => {
+
+  console.log('Valor de salario antes de salvar:', salar);
+  
     const id = userDataVagasEmpresa[selectedIndex]._id;
   
     const token = localStorage.getItem('authToken');
@@ -98,30 +108,56 @@ const UserVagasEmpresa = () => {
       },
     };
   
+    console.log('Valor de selectedOptions:', selectedOptions);
+  
+    // Validar e limpar selectedOptions
+    if (!Array.isArray(selectedOptions)) {
+      console.error('selectedOptions não é um array', selectedOptions);
+      return;
+    }
+  
+    // Verificar se é um array de objetos ou um array de strings
+    const isArrayOfObjects = selectedOptions.every(option => typeof option === 'object' && option.hasOwnProperty('value'));
+    const isArrayOfStrings = selectedOptions.every(option => typeof option === 'string');
+  
+    if (!isArrayOfObjects && !isArrayOfStrings) {
+      console.error('selectedOptions não está no formato esperado', selectedOptions);
+      return;
+    }
+  
+    // Converter para o formato necessário
+    const validSelectedOptions = isArrayOfObjects
+      ? selectedOptions.filter(option => option && option.value).map(option => option.value)
+      : selectedOptions.filter(option => option).map(option => option);
+  
     const dados = {
       description: desc,
       localizacao: local,
-      tags: selectedOptions.map(option => option.value),
+      requirements: validSelectedOptions,
       salario: salar,
       title: tit,
     };
   
+    console.log('Dados enviados para atualização:', dados);
   
     try {
       const response = await axios.put(`https://workzen.onrender.com/v1/jobs/update/${id}`, dados, config);
-      const updatedVaga = response.data;
+      console.log('Resposta da API:', response.data);
+  
+      const updatedVaga = response.data.job;
+      console.log('Vaga atualizada:', updatedVaga);
   
       const updatedVagas = [...userDataVagasEmpresa];
       updatedVagas[selectedIndex] = updatedVaga;
+      console.log('Vagas atualizadas:', updatedVagas);
       setUserDataVagasEmpresa(updatedVagas);
   
       const updatedTags = updatedVaga.tags.length ? updatedVaga.tags : [];
       setSelectedOptions(updatedTags.map(tag => ({ value: tag, label: tag })));
-
+  
       console.log('Dados da vaga atualizados:', response.data);
 
       setModal2(false);
-  
     } catch (error) {
       console.error('Erro na edição:', error);
       setError(error);
@@ -129,13 +165,97 @@ const UserVagasEmpresa = () => {
   };
   
   
+ 
   const options = [
-    // Suas opções aqui...
-  ];
+    // Tecnologia
+    { value: 'designer', label: 'Designer' },
+    { value: 'front-end', label: 'Front-End' },
+    { value: 'back-end', label: 'Back-End' },
+    { value: 'full-stack', label: 'Full-Stack' },
+    { value: 'ux-ui', label: 'UX/UI Designer' },
+    { value: 'mobile', label: 'Desenvolvedor Mobile' },
+    { value: 'devops', label: 'DevOps' },
+    { value: 'qa', label: 'Quality Assurance (QA)' },
+    { value: 'data-science', label: 'Data Science' },
+    { value: 'machine-learning', label: 'Machine Learning' },
+    { value: 'cyber-security', label: 'Cyber Security' },
+    { value: 'cloud', label: 'Cloud Computing' },
+
+    // Saúde
+    { value: 'enfermeiro', label: 'Enfermeiro' },
+    { value: 'medico', label: 'Médico' },
+    { value: 'fisioterapeuta', label: 'Fisioterapeuta' },
+    { value: 'nutricionista', label: 'Nutricionista' },
+    { value: 'psicologo', label: 'Psicólogo' },
+    { value: 'dentista', label: 'Dentista' },
+    { value: 'farmaceutico', label: 'Farmacêutico' },
+    { value: 'biomedico', label: 'Biomédico' },
+    { value: 'veterinario', label: 'Veterinário' },
+
+    // Educação
+    { value: 'professor', label: 'Professor' },
+    { value: 'coordenador-pedagogico', label: 'Coordenador Pedagógico' },
+    { value: 'orientador-educacional', label: 'Orientador Educacional' },
+    { value: 'diretor-escolar', label: 'Diretor Escolar' },
+    { value: 'assistente-educacional', label: 'Assistente Educacional' },
+
+    // Marketing e Comunicação
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'publicidade', label: 'Publicidade' },
+    { value: 'relações-públicas', label: 'Relações Públicas' },
+    { value: 'jornalista', label: 'Jornalista' },
+    { value: 'redator', label: 'Redator' },
+    { value: 'social-media', label: 'Social Media Manager' },
+    { value: 'seo', label: 'SEO Specialist' },
+    { value: 'content-creator', label: 'Content Creator' },
+
+    // Finanças e Administração
+    { value: 'financeiro', label: 'Financeiro' },
+    { value: 'contabilista', label: 'Contabilista' },
+    { value: 'auditor', label: 'Auditor' },
+    { value: 'analista-financeiro', label: 'Analista Financeiro' },
+    { value: 'gestor-de-recursos-humanos', label: 'Gestor de Recursos Humanos' },
+    { value: 'administrador', label: 'Administrador' },
+    { value: 'secretario', label: 'Secretário' },
+
+    // Vendas e Atendimento ao Cliente
+    { value: 'vendedor', label: 'Vendedor' },
+    { value: 'representante-comercial', label: 'Representante Comercial' },
+    { value: 'caixa', label: 'Operador de Caixa' },
+    { value: 'gerente-de-loja', label: 'Gerente de Loja' },
+    { value: 'atendente', label: 'Atendente' },
+
+    // Engenharia e Construção
+    { value: 'engenheiro-civil', label: 'Engenheiro Civil' },
+    { value: 'engenheiro-eletrico', label: 'Engenheiro Elétrico' },
+    { value: 'engenheiro-mecanico', label: 'Engenheiro Mecânico' },
+    { value: 'arquiteto', label: 'Arquiteto' },
+    { value: 'mestre-de-obras', label: 'Mestre de Obras' },
+    { value: 'pedreiro', label: 'Pedreiro' },
+
+    // Logística e Transporte
+    { value: 'motorista', label: 'Motorista' },
+    { value: 'entregador', label: 'Entregador' },
+    { value: 'coordenador-de-logistica', label: 'Coordenador de Logística' },
+    { value: 'operador-de-empilhadeira', label: 'Operador de Empilhadeira' },
+
+    // Outros
+    { value: 'advogado', label: 'Advogado' },
+    { value: 'secretaria', label: 'Secretária' },
+    { value: 'garcom', label: 'Garçom' },
+    { value: 'cozinheiro', label: 'Cozinheiro' },
+    { value: 'artista', label: 'Artista' },
+    { value: 'fotografo', label: 'Fotógrafo' },
+    { value: 'tradutor', label: 'Tradutor' },
+    { value: 'bibliotecario', label: 'Bibliotecário' },
+];
+
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
+    setRequisits(selected.map((option) => option.value));
   };
+
 
   return (
     <>
@@ -218,7 +338,7 @@ const UserVagasEmpresa = () => {
               <div className='flex flex-col'>
                 <span>Descrição</span>
                 <textarea
-                  className='txAreaEmp'
+                  className='txAreaEm'
                   id="area2"
                   style={{ height: '200px', width: '100%',  resize: 'none', borderRadius: '10px' }}
                   value={desc}
@@ -228,13 +348,55 @@ const UserVagasEmpresa = () => {
 
               <div>
                 <span>Habilidades</span>
-                <Select
-                  isMulti
-                  options={options}
-                  value={selectedOptions}
-                  onChange={handleChange}
-                  className='lin'
-                />
+               
+                <div
+  style={{
+    maxWidth: 'calc(100% - 4rem)',
+    height: "max-content",
+    overflowX: "auto",
+    display: "flex",
+    alignItems: "center",
+    scrollSnapType: "x mandatory",
+    borderRadius: '15px', 
+    outline: 'none',
+    border: `2px solid ${border3}`
+  }}
+
+  className="cx-sel"
+>
+  <Select
+    mode="multiple"
+    options={options}
+    value={selectedOptions}
+    onChange={handleChange}
+    placeholder="Selecione as opções..."
+    style={{ minHeight: "40px", flex: 1 , maxWidth: 'auto'}}
+    dropdownStyle={{ maxHeight: 200, overflow: 'hidden' }}
+    suffixIcon={null}
+    tagRender={(props) => {
+      const { label, closable, onClose } = props;
+
+      return (
+        <div
+          style={{
+            display: 'inline',
+            whiteSpace: 'nowrap',
+            marginRight: '8px',
+            overflow: 'hidden',
+            maxWidth: '100px'
+          }}
+        >
+          <span className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>
+          {closable && (
+            <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}>
+              
+            </span>
+          )}
+        </div>
+      );
+    }}
+  />
+</div>
               </div>
 
               <div>

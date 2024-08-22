@@ -20,6 +20,7 @@ const Empresa = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [localizacao, setLocalizacao] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [ramo_atividade, setRamo_atividade] = useState('');
   const navigate = useNavigate();
@@ -57,8 +58,11 @@ const HandleSave = async (e) => {
       password: senha,
       cnpj,
       ramo_atividade,
-      nome
+      nome,
+      localizacao,
     };
+
+    console.log(dados);
 
     try {
       const response = await axios.post('https://workzen.onrender.com/v1/empresa/register', dados);
@@ -120,6 +124,9 @@ const HandleSave = async (e) => {
                   <Input name='nome' placeholder='Nome da Empresa' type='text' className='s' value={nome} onChange={(e) => {setNome(e.target.value)}} id="inputEmpresa"/>
                   
                   <Input name='email' placeholder='Email Comercial' type='email' className='s' value={email} onChange={(e) => {setEmail(e.target.value)}} id="inputEmpresa"/>
+
+                  <Input name='localizacao' placeholder='Localização da Sede' type='text' className='s' value={localizacao} onChange={(e) => {setLocalizacao(e.target.value)}} id="inputEmpresa"/>
+
 
                   <InputMask
                     mask="99.999.999/9999-99"

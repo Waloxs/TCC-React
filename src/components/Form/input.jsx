@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Input = ({tipo, id, border, ...props}) => {
+const Input = ({ type, id, border, size, ...props }) => {
   return (
     <div>
       <input 
-        type={tipo} 
+        type={type} 
         id={id} 
         {...props} 
         style={{
@@ -15,16 +15,19 @@ const Input = ({tipo, id, border, ...props}) => {
           boxSizing: 'border-box',
           border: `2px solid ${border}`,
           outline: 'none',
-          fontFamily: 'Lexend'
+          fontFamily: 'Lexend',
+          fontSize: size,
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 Input.propTypes = {
-  tipo: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  border: PropTypes.string,
+  size: PropTypes.string,
 };
 
 export default Input;

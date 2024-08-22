@@ -35,7 +35,11 @@ const router = createBrowserRouter([
   { path: "Empresa", element: <Empresa /> },
   { path: "Talento", element: <Talento /> },
   { path: "teste", element: <ProtectedPage /> },
-  { path: "TalentoPasso1", element: <TalentoPasso1 /> },
+  { path: "TalentoPasso1", element: (
+    <TalentoUserProvider>
+      <TalentoPasso1 /> 
+    </TalentoUserProvider>
+  )},
   { path: "EmpresaPasso", element: (
     <EmpresaUserProvider>
       <EmpresaPasso />
@@ -56,9 +60,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router}>
       <VagasEmpresa>
         <TodosTalentosVagasTag>
-          <TalentoUserProvider>
-            {/* Todos os provedores de contexto são aplicados aqui */}
-          </TalentoUserProvider>
         </TodosTalentosVagasTag>
       </VagasEmpresa>
     </RouterProvider>

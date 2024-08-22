@@ -5,6 +5,7 @@ import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
 import UserVagasEmpresa from '../UserVagasEmpresa/UserVagasEmpresa.jsx';
 import CriarVaga from '../CriarVaga/CriarVaga.jsx';
+import EditEmpresa from '../EditarPerfilEmpresa/EditEmpresa.jsx'
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import './MainUser.css';
 
@@ -15,6 +16,13 @@ const MainUser = () => {
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
 
   const [selectedButton, setSelectedButton] = useState('home');
+  const [containerPerfil, setContainerPerfil] = useState (false);
+  const [suma, setSuma] = useState(true);
+
+  const editarPerfil = () => {
+    setContainerPerfil(true);
+    setSuma('none')
+  }
  
 
   const handleButtonClick = (buttonName) => {
@@ -35,7 +43,9 @@ const MainUser = () => {
 
   return (
     userDataEmpresa && (
-      <div className="Container" style={{ gridTemplateColumns: selectedButton !== 'home' ? '1fr 4fr' : '1fr 3fr 1fr' }}>
+      <>
+      <div className={''}>
+      <div className='Container' style={{ gridTemplateColumns: selectedButton !== 'home' ? '1fr 4fr' : '1fr 3fr 1fr' }}>
         <div>
           <BtnPrincipal
             texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Minha Imagem"/> : <img src="icons/icon-home-cinza.svg" alt="Minha Imagem"/> }</div>}
@@ -79,14 +89,21 @@ const MainUser = () => {
         <div>
         {userDataVagasEmpresa && selectedButton === 'home' && (
           <div className='central'>
-            <span className='vaga-tit'>Minhas Vagas</span>
+            {!containerPerfil && ( <span className='vaga-tit'>Minhas Vagas</span> )}
             <UserVagasEmpresa />
           </div>
         )}
 
         {selectedButton === 'criarVaga' && (
           <div className='central'>
-            <CriarVaga />
+            <CriarVaga />            
+          </div>
+        )}
+
+
+        {containerPerfil &&(
+          <div className='central'>  
+            <EditEmpresa />
           </div>
         )}
 
@@ -116,10 +133,17 @@ const MainUser = () => {
               color='#fff'
               width="85%"
               weig="500"
+              click={editarPerfil}
             />
           </div>
         )}
       </div>
+      </div>
+
+      <div>
+
+       </div>
+      </>
     )
   );
 };

@@ -128,3 +128,11 @@ line-height: 150%; /* 36px */
     height: 750px;
     width: 100%;
 }
+
+.containEdPerfil{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 4rem;
+    margin: 0 auto;
+    margin-top: 4rem;
+}

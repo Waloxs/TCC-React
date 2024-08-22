@@ -534,7 +534,7 @@ const handleFimChange = (date) => {
 
                   {!modalExp &&(
                     <>
-                    <div className='pd2 flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+                    <div className='pd2Talento flex flex-col gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                       <h1 className='PassTit2'>Ótimo, agora, se você tiver experiência profissional relevante, adicione-a aqui.</h1>
                       <p className='PassPar2'>Talentos que colocam sua experiência têm duas vezes mais chances de ganhar trabalho. Mas se você está apenas começando, ainda pode criar um ótimo perfil. Basta ir para a próxima página.</p>
                     </div>

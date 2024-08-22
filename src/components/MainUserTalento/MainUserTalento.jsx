@@ -1,15 +1,19 @@
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserVagasTag from '../UserVagasTag/UserVagasTag.jsx';
 import { useUser as UsersVagasTag } from '../../services/UserContextVagasTag.jsx';
+import ClipLoader from 'react-spinners/ClipLoader.js';
 import './MainUserTalento.css'
 
 const MainUser = () => {
   const { data2: userDataVagas, loading2, error2 } = UsersVagasTag();
 
   if (loading2) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center' style={{ background: '#fff', height: '100vh' }}>
+        <ClipLoader color="#123abc" loading={true} size={100} />
+      </div>
+    );
   }
-
   if (error2) {
     return <div>Error: {error2.message}</div>;
   }

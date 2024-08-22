@@ -44,7 +44,7 @@ export const UserProvider = ({ children }) => {
   
     const intervalId = setInterval(() => {
       fetchData(); // Fetch data every 60 seconds
-    }, 60000); // 60 seconds
+    }, 10000); // 60 seconds
   
     return () => {
       clearInterval(intervalId);
