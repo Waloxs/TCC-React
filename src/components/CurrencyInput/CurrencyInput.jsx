@@ -1,4 +1,3 @@
-// CurrencyInput.jsx
 import React from 'react';
 
 const CurrencyInput = ({ value, onChange }) => {
@@ -6,24 +5,34 @@ const CurrencyInput = ({ value, onChange }) => {
     // Remove qualquer caractere não numérico
     let numericValue = value.replace(/[^\d]/g, '');
 
-    // Adiciona os pontos de milhar e vírgula decimal
-    if (numericValue.length > 2) {
-      // Separa a parte inteira e a parte decimal
-      const integerPart = numericValue.slice(0, -2);
-      const decimalPart = numericValue.slice(-2);
-
-      // Adiciona os pontos de milhar
-      const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-      return `${formattedIntegerPart},${decimalPart}`;
+    // Se a string for vazia, retorna um valor padrão
+    if (numericValue.length === 0) {
+      return '0,00';
     }
 
-    // Caso o valor tenha 2 ou menos dígitos
-    return `0,${numericValue.padStart(2, '0')}`;
+    // Define a parte inteira e decimal
+    const integerPart = numericValue.slice(0, -2) || '0';
+    const decimalPart = numericValue.slice(-2).padEnd(2, '0');
+
+    // Adiciona os pontos de milhar
+    const formattedIntegerPart = integerPart
+      .split('')
+      .reverse()
+      .reduce((acc, char, index) => {
+        return char + (index && index % 3 === 0 ? '.' : '') + acc;
+      }, '');
+
+    // Remove zeros à esquerda na parte inteira
+    const finalIntegerPart = formattedIntegerPart.replace(/^0+/, '') || '0';
+
+    // Garante que a parte inteira não fique vazia e a parte decimal tenha dois dígitos
+    return `${finalIntegerPart},${decimalPart}`;
   };
 
   const handleChange = (e) => {
-    const formattedValue = formatValue(e.target.value);
+    const inputValue = e.target.value;
+    const numericValue = inputValue.replace(/[^\d]/g, '');
+    const formattedValue = formatValue(numericValue);
     onChange(formattedValue);
   };
 
