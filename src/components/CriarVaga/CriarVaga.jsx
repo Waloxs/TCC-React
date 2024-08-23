@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import './CriarVaga.css';
 import { Select } from "antd";
-import Inputmask from 'react-input-mask'; 
+import {NumericFormat} from 'react-number-format'; 
 
 const { Option } = Select;
 
@@ -164,17 +164,18 @@ const CriarVaga = () => {
 
         <div className='flex flex-col gap-2'>
           <span>Salário</span>
-          <Inputmask
-      value={salar}
-      thousandSeparator="."
-      decimalSeparator=","
-      prefix="R$ "
-      decimalScale={2}
-      fixedDecimalScale
-      onValueChange={handleValueChange}
-      customInput={(props) => <input {...props} className="nubank-input" />}
-      style={{ border: `1px solid ${border3}`, outline: 'none', height: '40px' }}
-    />
+          <NumericFormat
+        value={salar}
+        thousandSeparator="."
+        decimalSeparator=","
+        prefix="R$ "
+        decimalScale={2}
+        fixedDecimalScale
+        allowNegative={false}
+        onValueChange={handleValueChange}
+        customInput={(inputProps) => <input {...inputProps} className="nubank-input" />}
+        style={{ border: '1px solid #ddd', outline: 'none', height: '40px' }}
+      />
         </div>
       </div>
 
