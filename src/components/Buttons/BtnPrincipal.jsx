@@ -1,18 +1,23 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding, size, weig, font, height }) => {
+const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click, color, texto, borderRadius, padding, size, weig, font, height, showIcon }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     const handleMouseOver = (e) => {
-        if(hoverColor){
-        e.currentTarget.style.backgroundColor = hoverColor;
-        e.currentTarget.style.color = back;
+        if (hoverColor) {
+            e.currentTarget.style.backgroundColor = hoverColor;
+            e.currentTarget.style.color = hoverColor === back ? color : '#fff';
         }
+        setIsHovered(true);
     };
 
     const handleMouseOut = (e) => {
-        if(hoverColor){
-        e.currentTarget.style.backgroundColor = back;
-        e.currentTarget.style.color = color;
-    }
+        if (hoverColor) {
+            e.currentTarget.style.backgroundColor = back;
+            e.currentTarget.style.color = color;
+        }
+        setIsHovered(false);
     };
 
     return (
@@ -29,13 +34,21 @@ const BtnPrincipal = ({ hoverColor, class: className, width, back, border, click
                 fontWeight: weig,
                 fontFamily: font,
                 transition: 'background-color 0.3s, color 0.3s',
-                height: height,
+                height: '45px',
             }}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
             onClick={click}
         >
-            {texto}
+            <div className='flex justify-center gap-2'>
+                {texto}
+                {showIcon && (
+                    <img
+                        src={isHovered ? "icons/iconWhite-block.svg" : "icons/icon-block.svg"}
+                        alt="Icone"
+                    />
+                )}
+            </div>
         </button>
     );
 };
@@ -55,6 +68,7 @@ BtnPrincipal.propTypes = {
     weig: PropTypes.string,
     font: PropTypes.string,
     height: PropTypes.string,
+    showIcon: PropTypes.bool, // Adicionando nova prop
 };
 
 export default BtnPrincipal;

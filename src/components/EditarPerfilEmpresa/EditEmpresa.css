@@ -9,3 +9,29 @@
 .ant-select-selector{
     border: 0px !important;
 }
+
+#areaDeAtuacao2 {
+    height: 3rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 130%;
+    border-radius: 8px;
+    border: 1px solid var(--grey-300, #CBD5E1);
+    color: #000 !important;
+    background-color: #fff;
+
+    width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grey-border, #E2E8F0);
+  background: var(--white, #FFF);
+  padding-left: 15px;
+  font-family: 'Lexend';
+  font-weight: 100;
+
+  appearance: none; /* Remove the default dropdown arrow */
+  -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
+  -moz-appearance: none; /* Remove the default dropdown arrow for Firefox */
+}

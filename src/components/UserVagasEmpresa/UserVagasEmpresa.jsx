@@ -280,16 +280,17 @@ const UserVagasEmpresa = () => {
             <div className='buttons flex self-center gap-5' style={{ marginTop: '30px' }}>
               <BtnPrincipal
                 texto={<div className='flex justify-center gap-2'>Cancelar</div>}
-                back='#3B82F6'
+                back='#93BBFD'
                 padding='10px'
                 borderRadius='25px'
                 color='#fff'
                 width='180px'
                 click={cancelaVaga}
+                hoverColor='#3B82F6'
               />
 
               <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Excluir <img src="icons/icon-block.svg" alt="Minha Imagem"/> </div>} 
+                texto={<div className='flex justify-center gap-2'>Deletar Vaga </div>} 
                 back='#fff'
                 padding='10px'
                 borderRadius='25px'
@@ -297,6 +298,8 @@ const UserVagasEmpresa = () => {
                 width='180px'
                 border='#EF4444'
                 click={excluirVaga}
+                showIcon={true}
+                hoverColor='#EF4444'
               />
             </div>
           </div>
@@ -351,15 +354,15 @@ const UserVagasEmpresa = () => {
                
                 <div
   style={{
-    maxWidth: 'calc(100% - 4rem)',
+    maxWidth: '100%',
     height: "max-content",
     overflowX: "auto",
     display: "flex",
     alignItems: "center",
     scrollSnapType: "x mandatory",
-    borderRadius: '15px', 
+    borderRadius: '10px', 
     outline: 'none',
-    border: `2px solid ${border3}`
+    border: `1px solid ${border3}`
   }}
 
   className="cx-sel"
@@ -408,24 +411,27 @@ const UserVagasEmpresa = () => {
             <div className='flex gap-4 self-end' style={{marginTop: '50px'}}>
               <BtnPrincipal
                 texto="Cancelar"
-                back='#3B82F6'
+                back='#fff'
                 padding='10px'
                 borderRadius='15px'
-                color='#fff'
+                border='#EF4444'
+                color='#EF4444'
                 font='Lexend'
                 width='180px'
                 click={cancelaVaga}
+                hoverColor='#EF4444'
               />
 
               <BtnPrincipal
                 texto="Salvar"
-                back='#3B82F6'
+                back='#93BBFD'
                 padding='10px'
                 borderRadius='15px'
                 color='#fff'
                 font='Lexend'
                 width='180px'
                 click={salvarEdicao}
+                hoverColor='#3B82F6'
               />
             </div>
           </div>

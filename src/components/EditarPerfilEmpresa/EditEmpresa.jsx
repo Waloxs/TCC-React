@@ -78,7 +78,7 @@ const EditEmpresa = () => {
             <span>Área de Atuação</span>
 
             <div className="select-wrapper">
-                  <select id="areaDeAtuacao" style={{width: '100%'}} value={ramo_atividade} onChange={(e) => {setRamoAtividade(e.target.value)}}>
+                  <select id="areaDeAtuacao2" style={{width: '100%'}} value={ramo_atividade} onChange={(e) => {setRamoAtividade(e.target.value)}}>
   <option value="" hidden>Área de Atuação</option>
   <option value="Administracao">Administração</option>
   <option value="Agricultura">Agricultura</option>
