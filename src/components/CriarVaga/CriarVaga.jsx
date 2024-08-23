@@ -1,25 +1,27 @@
-import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
-import Input from '../Form/input.jsx';
-import { useState } from 'react';
+// CriarVaga.jsx
+import React, { useState } from 'react';
 import axios from 'axios';
 import './CriarVaga.css';
 import { Select } from "antd";
-import {NumericFormat} from 'react-number-format'; 
+import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; // Importe o componente CurrencyInput
+import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
+import Input from '../Form/input.jsx';
+import { useForm, Controller } from 'react-hook-form';
 
 const { Option } = Select;
 
 const CriarVaga = () => {
   const [profissional, setProfissional] = useState('');
   const [desc, setDesc] = useState('');
-  const [salar, setSalar] = useState('');
   const [requisits, setRequisits] = useState('');
   const [local, setLocal] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [border3, setBorder3] = useState('#E2E8F0');
   const [textoVaga, setTextoVaga] = useState('Publicar Vaga');
-  const [imagemVaga, setImagemVaga] = useState(null); 
+  const [imagemVaga, setImagemVaga] = useState(null);
   const [backVaga, setBackVaga] = useState('#93BBFD');
   const [errorMessage, setErrorMessage] = useState('');
+  const { handleSubmit, setValue, watch } = useForm();
 
   const options = [
     { value: 'designer', label: 'Designer' },
@@ -33,7 +35,7 @@ const CriarVaga = () => {
   };
 
   const validarCampos = () => {
-    if (!profissional || !desc || !salar || !local || selectedOptions.length === 0) {
+    if (!profissional || !desc || !local || selectedOptions.length === 0) {
       setErrorMessage('Por favor, preencha todos os campos obrigatórios.');
       return false;
     }
@@ -41,9 +43,9 @@ const CriarVaga = () => {
     return true;
   };
 
-  const criarVaga = async () => {
+  const criarVaga = async (data) => {
     if (!validarCampos()) {
-      return; 
+      return;
     }
 
     const token = localStorage.getItem('authToken');
@@ -56,22 +58,22 @@ const CriarVaga = () => {
           },
         };
 
-        const data = {
+        const postData = {
           title: profissional,
           description: desc,
-          salario: salar,
+          salario: data.salary.replace(/\./g, '').replace(',', '.'), // Corrige o valor armazenado
           requirements: selectedOptions,
           localizacao: local,
           tags: requisits,
         };
 
-        const response = await axios.post('https://workzen.onrender.com/v1/jobs/create', data, config);
+        const response = await axios.post('https://workzen.onrender.com/v1/jobs/create', postData, config);
 
         console.log(response.data);
 
-        if(response.data){ 
+        if (response.data) {
           setImagemVaga(<img src="icons/correct.svg" alt="" />);
-          setTextoVaga(<span style={{whiteSpace: 'nowrap'}}>Vaga publicada</span>);
+          setTextoVaga(<span style={{ whiteSpace: 'nowrap' }}>Vaga publicada</span>);
           setBackVaga('#4ADA3D');
         }
 
@@ -83,8 +85,25 @@ const CriarVaga = () => {
     }
   };
 
-  const handleValueChange = (values) => {
-    setSalar(values.salar);
+  // Função para formatar o valor para o formato monetário
+  const formatCurrencyValue = (value) => {
+    if (!value) return '0,00';
+
+    // Remove qualquer caractere não numérico
+    let numericValue = value.replace(/[^\d]/g, '');
+
+    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
+    if (numericValue.length <= 2) {
+      return `0,${numericValue.padStart(2, '0')}`;
+    }
+
+    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
+    const integerPart = numericValue.slice(0, -2);
+    const decimalPart = numericValue.slice(-2);
+
+    // Adiciona os pontos de milhar e formata a parte decimal
+    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return `${formattedIntegerPart},${decimalPart}`;
   };
 
   return (
@@ -92,7 +111,7 @@ const CriarVaga = () => {
       <div className='flex flex-col justify-between' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
         <div className='flex flex-col gap-2'>
           <span>Título</span>
-          <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)}/>
+          <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
         </div>
 
         <div className='flex flex-col gap-2'>
@@ -122,7 +141,7 @@ const CriarVaga = () => {
               display: "flex",
               alignItems: 'center',
               scrollSnapType: "x mandatory",
-              borderRadius: '10px', 
+              borderRadius: '10px',
               outline: 'none',
               border: `1px solid ${border3}`,
             }}
@@ -149,11 +168,9 @@ const CriarVaga = () => {
                       maxWidth: '100%'
                     }}
                   >
-                    <span className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>
+                    <span className="tagSelect" style={{ background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px' }}>{label}</span>
                     {closable && (
-                      <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}>
-                        
-                      </span>
+                      <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}></span>
                     )}
                   </div>
                 );
@@ -164,26 +181,22 @@ const CriarVaga = () => {
 
         <div className='flex flex-col gap-2'>
           <span>Salário</span>
-          <NumericFormat
-        value={salar}
-        thousandSeparator="."
-        decimalSeparator=","
-        prefix="R$ "
-        decimalScale={2}
-        fixedDecimalScale
-        allowNegative={false}
-        onValueChange={handleValueChange}
-        customInput={(inputProps) => <input {...inputProps} className="nubank-input" />}
-        style={{ border: '1px solid #ddd', outline: 'none', height: '40px' }}
-      />
+          <CurrencyInput
+            value={formatCurrencyValue(watch('salary'))}
+            onChange={(formattedValue) => {
+              // Remove pontos e vírgulas para armazenar apenas números
+              const numericValue = formattedValue.replace(/\./g, '').replace(',', '.');
+              setValue('salary', numericValue);
+            }}
+          />
         </div>
       </div>
 
-      {errorMessage && <div className="error-message">{errorMessage}</div>} 
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
 
       <div className='flex self-end' style={{ marginTop: '40px', marginBottom: '40px' }}>
         <BtnPrincipal
-          texto={textoVaga === 'Publicar Vaga' ? <>Publicar Vaga</> : <span className='flex gap-2' style={{marginLeft: '6px'}}>{textoVaga} {imagemVaga}</span>}
+          texto={textoVaga === 'Publicar Vaga' ? <>Publicar Vaga</> : <span className='flex gap-2' style={{ marginLeft: '6px' }}>{textoVaga} {imagemVaga}</span>}
           back={backVaga}
           padding='10px'
           borderRadius='15px'
@@ -192,7 +205,7 @@ const CriarVaga = () => {
           width='180px'
           click={() => {
             if (backVaga === '#93BBFD') {
-              criarVaga(); 
+              handleSubmit(criarVaga)();
             }
           }}
         />
