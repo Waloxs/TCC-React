@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance, { setAuthToken } from '../../utils/api'; 
+import { axiosInstance, setAuthToken } from '../../utils/api'; 
 import ApplicantCard from '../ApplicantCard/ApplicantCard';
 import './ApplicantsList.css'; 
 
