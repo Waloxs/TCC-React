@@ -1,0 +1,63 @@
+/* ConfiguracaoConta.css */
+.formConfiguracao {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .input, .txAreaEmpCr {
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    padding: 10px;
+  }
+  
+  .input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .txAreaEmpCr {
+    height: 100px;
+    resize: none;
+    width: 100%;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .self-end {
+    align-self: flex-end;
+  }
+  
+  .btnPrincipal {
+    display: inline-block;
+    background-color: #93BBFD;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    font-family: Lexend, sans-serif;
+    width: 180px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btnPrincipal:hover {
+    background-color: #4ADA3D;
+  }
+  
