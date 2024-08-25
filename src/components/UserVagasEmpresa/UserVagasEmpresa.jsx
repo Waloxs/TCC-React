@@ -5,6 +5,7 @@ import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import axios from 'axios';
 import Input from '../Form/input.jsx';
 import { Select } from "antd";
+import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
 
 const { Option } = Select;
 
@@ -23,8 +24,15 @@ const UserVagasEmpresa = () => {
   const [tit, setTit] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [border3, setBorder3] = useState('#E2E8F0');
+  const [showApplicants, setShowApplicants] = useState(false);
+  const [jobId, setJobId] = useState('');
 
-
+  const handleShowApplicants = (index) => {
+    const selectedJobId = userDataVagasEmpresa[index]._id; // Obtém o ID da vaga selecionada
+    setJobId(selectedJobId); // Define o ID da vaga no estado
+    setShowApplicants(true); // Abre o modal de candidatos
+  };
+  
 
   useEffect(() => {
     setUserDataVagasEmpresa(initialVagas);
@@ -305,6 +313,9 @@ const UserVagasEmpresa = () => {
           </div>
         </div>
       )}
+ {showApplicants && (
+  <ApplicantsList jobId={jobId} onClose={() => setShowApplicants(false)} />
+ )}
 
 {modal2 && (
         <div>
@@ -465,7 +476,7 @@ const UserVagasEmpresa = () => {
               <div className='icons flex gap-4'>
                 <img src='icons/icon-lixo.svg' alt='Minha Imagem' onClick={() => apagaVaga(index)} />
                 <img src='icons/icon-pen.svg' alt='Minha Imagem' onClick={() => editaVaga(index)} />
-                <img src='icons/icon-pessoa.svg' alt='Minha Imagem' />
+                <img src='icons/icon-pessoa.svg' alt='Minha Imagem' onClick={() => handleShowApplicants(index)}/>
               </div>
             </div>
           </div>

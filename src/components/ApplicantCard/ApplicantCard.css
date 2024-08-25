@@ -1,0 +1,50 @@
+.applicant-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 16px;
+  }
+  
+  .banner {
+    background-color: #f0f0f0;
+    padding: 16px;
+    display: flex;
+    justify-content: center; 
+    height: 80px; 
+  }
+  
+  .applicant-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background-color: #fff;
+    object-fit: cover; 
+  }
+  
+  .applicant-info {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .applicant-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .applicant-email {
+    font-size: 1em;
+    color: #555;
+    margin: 4px 0;
+  }
+  
+  .applicant-bio {
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  
