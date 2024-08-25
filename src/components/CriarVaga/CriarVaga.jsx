@@ -26,8 +26,19 @@ const CriarVaga = () => {
   const options = [
     { value: 'designer', label: 'Designer' },
     { value: 'front-end', label: 'Front-End' },
-    // Adicione outras opções aqui...
-  ];
+    { value: 'back-end', label: 'Back-End' },
+    { value: 'full-stack', label: 'Full-Stack' },
+    { value: 'project-manager', label: 'Project Manager' },
+    { value: 'qa', label: 'Quality Assurance (QA)' },
+    { value: 'devops', label: 'DevOps' },
+    { value: 'data-scientist', label: 'Data Scientist' },
+    { value: 'product-manager', label: 'Product Manager' },
+    { value: 'ui-ux-designer', label: 'UI/UX Designer' },
+    { value: 'mobile-developer', label: 'Mobile Developer' },
+    { value: 'cloud-engineer', label: 'Cloud Engineer' },
+    { value: 'security-analyst', label: 'Security Analyst' },
+];
+
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
@@ -184,9 +195,8 @@ const CriarVaga = () => {
           <CurrencyInput
             value={formatCurrencyValue(watch('salary'))}
             onChange={(formattedValue) => {
-              // Remove pontos e vírgulas para armazenar apenas números
-              const numericValue = formattedValue.replace(/\./g, '').replace(',', '.');
-              setValue('salary', numericValue);
+              setValue('salary', formattedValue);
+              console.log(formattedValue);
             }}
           />
         </div>
