@@ -72,7 +72,7 @@ const CriarVaga = () => {
         const postData = {
           title: profissional,
           description: desc,
-          salario: data.salary.replace(/\./g, '').replace(',', '.'), // Corrige o valor armazenado
+          salario: data.salary + "R$",
           requirements: selectedOptions,
           localizacao: local,
           tags: requisits,
