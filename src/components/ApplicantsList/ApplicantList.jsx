@@ -8,6 +8,14 @@ const ApplicantsList = ({ jobId, onClose }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const AceitarCandidato = (applicant, index) => {
+    console.log('Candidato Aceito:', applicant, 'Index:', index);
+  };
+
+  const VerPerfil = (applicant, index) => {
+    console.log('Ver Perfil do Candidato:', applicant, 'Index:', index);
+  };
+
   useEffect(() => {
     const fetchApplicants = async () => {
       const token = localStorage.getItem('authToken');
@@ -32,13 +40,7 @@ const ApplicantsList = ({ jobId, onClose }) => {
       <div className='modal-overlay' onClick={onClose}></div>
 
       <div className='modalApplicants'>
-        <span className='modal-title'>Aplicações</span>
-        <button 
-          className='close-button'
-          onClick={onClose}
-        >
-          Fechar
-        </button>
+  
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
@@ -46,10 +48,23 @@ const ApplicantsList = ({ jobId, onClose }) => {
         ) : applicants.length === 0 ? (
           <div className='no-candidates'>Não há candidatos.</div>
         ) : (
-          <div className='applicants-container'>
+          <div className='flex flex-col' style={{width: 'max-content', height: 'max-content'}}>
+             <div onClick={onClose} style={{cursor: 'pointer', marginBottom: '25px', marginLeft: '0px', marginTop: '20px'}}>
+             <img src="icons/arrowLeft.svg" alt="" width='11px'/>
+          </div>
+             <span className='modal-title flex gap-2 self-start' style={{marginLeft: '16px'}}>Aplicações <img src="icons/icon-pessoa.svg" alt="" width='20px'/></span>
+             <div className='applicants-container'>
             {applicants.map((applicant, index) => (
-              <ApplicantCard key={index} applicant={applicant} />
-            ))}
+              <div key={index}> 
+              <ApplicantCard 
+              applicant={applicant} 
+              onAceitarClick={() => AceitarCandidato(applicant, index)} 
+              onVerPerfilClick={() => VerPerfil(applicant, index)}
+            />
+          </div>
+  ))}
+</div>
+
           </div>
         )}
       </div>
