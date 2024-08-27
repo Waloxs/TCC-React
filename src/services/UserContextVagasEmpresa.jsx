@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     fetchData(); // Buscar os dados inicialmente
 
-    const intervalId = setInterval(fetchData, 60000); // Atualiza a cada 60 segundos
+    const intervalId = setInterval(fetchData, 9000); // Atualiza a cada 60 segundos
 
     return () => clearInterval(intervalId); // Limpa o intervalo quando o componente for desmontado
   }, [data]); 

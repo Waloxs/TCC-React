@@ -61,69 +61,75 @@ const EditEmpresa = () => {
 
 
   return (
-    userDataEmpresa && (
-      <div className='formCriar flex flex-col'>
-        <div className='flex flex-col gap-4' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
-          <div className='flex flex-col gap-2'>
-            <span>Nome da Empresa</span>
-            <Input type='text' required value={nome} onChange={(e) => setNome(e.target.value)} />
+    <>
+      <h1 className='tituloPerfil'>Perfil</h1>
+      {userDataEmpresa && (
+        <div className='formCriar flex flex-col'>
+          <div className='flex flex-col gap-4' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
+            <div className='flex flex-col gap-2'>
+              <span>Nome da Empresa</span>
+              <Input type='text' required value={nome} onChange={(e) => setNome(e.target.value)} />
+            </div>
+  
+            <div className='flex flex-col gap-2'>
+              <span>Localização</span>
+              <Input type='text' required value={localizacao} onChange={(e) => setLocalizacao(e.target.value)} />
+            </div>
+  
+            <div className='flex flex-col gap-2'>
+              <span>Área de Atuação</span>
+              <div className="select-wrapper">
+                <select
+                  id="areaDeAtuacao2"
+                  style={{ width: '100%' }}
+                  value={ramo_atividade}
+                  onChange={(e) => setRamoAtividade(e.target.value)}
+                >
+                  <option value="" hidden>Área de Atuação</option>
+                  <option value="Administracao">Administração</option>
+                  <option value="Agricultura">Agricultura</option>
+                  <option value="AlimentosEBebidas">Alimentos e Bebidas</option>
+                  <option value="Automobilistica">Automobilística</option>
+                  <option value="ConstrucaoCivil">Construção Civil</option>
+                  <option value="Consultoria">Consultoria</option>
+                  <option value="Educacao">Educação</option>
+                  <option value="Energia">Energia</option>
+                  <option value="Financeiro">Financeiro</option>
+                  <option value="Industria">Indústria</option>
+                  <option value="Logistica">Logística</option>
+                  <option value="MarketingEPublicidade">Marketing e Publicidade</option>
+                  <option value="Saude">Saúde</option>
+                  <option value="TecnologiaDaInformacao">Tecnologia da Informação</option>
+                  <option value="Telecomunicacoes">Telecomunicações</option>
+                  <option value="Varejo">Varejo</option>
+                </select>
+                <RiArrowDropDownLine className="select-icon" />
+              </div>
+            </div>
           </div>
-
-          <div className='flex flex-col gap-2'>
-            <span>Localização</span>
-            <Input type='text' required value={localizacao} onChange={(e) => setLocalizacao(e.target.value)} />
+  
+          <div className='flex self-end' style={{ marginTop: '40px', marginBottom: '40px' }}>
+            <BtnPrincipal
+              texto="Salvar"
+              back='#3B82F6'
+              padding='7px 10px'
+              borderRadius='20px'
+              color='#fff'
+              font='Lexend'
+              width='180px'
+              click={editarEmpresa}
+              hoverColor='#609AFA'
+            />
           </div>
-
-          <div className='flex flex-col gap-2'>
-            <span>Área de Atuação</span>
-
-            <div className="select-wrapper">
-                  <select id="areaDeAtuacao2" style={{width: '100%'}} value={ramo_atividade} onChange={(e) => {setRamoAtividade(e.target.value)}}>
-  <option value="" hidden>Área de Atuação</option>
-  <option value="Administracao">Administração</option>
-  <option value="Agricultura">Agricultura</option>
-  <option value="AlimentosEBebidas">Alimentos e Bebidas</option>
-  <option value="Automobilistica">Automobilística</option>
-  <option value="ConstrucaoCivil">Construção Civil</option>
-  <option value="Consultoria">Consultoria</option>
-  <option value="Educacao">Educação</option>
-  <option value="Energia">Energia</option>
-  <option value="Financeiro">Financeiro</option>
-  <option value="Industria">Indústria</option>
-  <option value="Logistica">Logística</option>
-  <option value="MarketingEPublicidade">Marketing e Publicidade</option>
-  <option value="Saude">Saúde</option>
-  <option value="TecnologiaDaInformacao">Tecnologia da Informação</option>
-  <option value="Telecomunicacoes">Telecomunicações</option>
-  <option value="Varejo">Varejo</option>
-</select>
-
-<RiArrowDropDownLine className="select-icon" />
-
-</div>
-          
-          </div>
+  
+          {texto && (
+            <div>Perfil atualizado com sucesso!</div>
+          )}
         </div>
-
-        <div className='flex self-end' style={{ marginTop: '40px', marginBottom: '40px' }}>
-          <BtnPrincipal
-            texto="Editar Perfil"
-            back='#3B82F6'
-            padding='10px'
-            borderRadius='15px'
-            color='#fff'
-            font='Lexend'
-            width='180px'
-            click={editarEmpresa}
-          />
-        </div>
-
-        {texto && (
-          <div>Perfil atualizado com sucesso!</div>
-        )}
-      </div>
-    )
+      )}
+    </>
   );
+  
 };
 
 export default EditEmpresa;

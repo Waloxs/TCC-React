@@ -6,7 +6,7 @@ import { Select } from "antd";
 import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; // Importe o componente CurrencyInput
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import Input from '../Form/input.jsx';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const { Option } = Select;
 
@@ -19,7 +19,7 @@ const CriarVaga = () => {
   const [border3, setBorder3] = useState('#E2E8F0');
   const [textoVaga, setTextoVaga] = useState('Publicar Vaga');
   const [imagemVaga, setImagemVaga] = useState(null);
-  const [backVaga, setBackVaga] = useState('#93BBFD');
+  const [backVaga, setBackVaga] = useState('#3B82F6');
   const [errorMessage, setErrorMessage] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
 
@@ -73,9 +73,9 @@ const CriarVaga = () => {
           title: profissional,
           description: desc,
           salario: data.salary + "R$",
-          requirements: selectedOptions,
+          tags: selectedOptions,
           localizacao: local,
-          tags: requisits,
+          requirements: requisits,
         };
 
         const response = await axios.post('https://workzen.onrender.com/v1/jobs/create', postData, config);
@@ -97,29 +97,31 @@ const CriarVaga = () => {
   };
 
   // Função para formatar o valor para o formato monetário
-  const formatCurrencyValue = (value) => {
-    if (!value) return '0,00';
 
-    // Remove qualquer caractere não numérico
-    let numericValue = value.replace(/[^\d]/g, '');
+const formatCurrencyValue = (value) => {
+  if (!value) return '0,00';
 
-    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
-    if (numericValue.length <= 2) {
-      return `0,${numericValue.padStart(2, '0')}`;
-    }
+  // Remove qualquer caractere não numérico
+  let numericValue = value.replace(/[^\d]/g, '');
 
-    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
-    const integerPart = numericValue.slice(0, -2);
-    const decimalPart = numericValue.slice(-2);
+  // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
+  if (numericValue.length <= 2) {
+    return `0,${numericValue.padStart(2, '0')}`;
+  }
 
-    // Adiciona os pontos de milhar e formata a parte decimal
-    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    return `${formattedIntegerPart},${decimalPart}`;
-  };
+  // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
+  const integerPart = numericValue.slice(0, -2);
+  const decimalPart = numericValue.slice(-2);
+
+  // Adiciona os pontos de milhar e formata a parte decimal
+  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${formattedIntegerPart},${decimalPart}`;
+};
+
 
   return (
     <div className='formCriar flex flex-col'>
-      <div className='flex flex-col justify-between' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
+      <div className='flex flex-col gap-1' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
         <div className='flex flex-col gap-2'>
           <span>Título</span>
           <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
@@ -196,7 +198,6 @@ const CriarVaga = () => {
             value={formatCurrencyValue(watch('salary'))}
             onChange={(formattedValue) => {
               setValue('salary', formattedValue);
-              console.log(formattedValue);
             }}
           />
         </div>
@@ -208,16 +209,17 @@ const CriarVaga = () => {
         <BtnPrincipal
           texto={textoVaga === 'Publicar Vaga' ? <>Publicar Vaga</> : <span className='flex gap-2' style={{ marginLeft: '6px' }}>{textoVaga} {imagemVaga}</span>}
           back={backVaga}
-          padding='10px'
-          borderRadius='15px'
+          padding='7px 10px'
+          borderRadius='20px'
           color='#fff'
           font='Lexend'
           width='180px'
           click={() => {
-            if (backVaga === '#93BBFD') {
+            if (backVaga === '#3B82F6') {
               handleSubmit(criarVaga)();
             }
           }}
+          hoverColor='#609AFA'
         />
       </div>
     </div>

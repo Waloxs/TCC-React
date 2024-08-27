@@ -6,6 +6,9 @@ import axios from 'axios';
 import Input from '../Form/input.jsx';
 import { Select } from "antd";
 import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
+import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; 
+import { useForm } from 'react-hook-form';
+
 
 const { Option } = Select;
 
@@ -26,6 +29,10 @@ const UserVagasEmpresa = () => {
   const [border3, setBorder3] = useState('#E2E8F0');
   const [showApplicants, setShowApplicants] = useState(false);
   const [jobId, setJobId] = useState('');
+  const { handleSubmit, setValue, watch } = useForm();
+  const [backVaga, setBackVaga] = useState('#93BBFD');
+
+
 
   const handleShowApplicants = (index) => {
     const selectedJobId = userDataVagasEmpresa[index]._id; // Obtém o ID da vaga selecionada
@@ -48,7 +55,7 @@ const UserVagasEmpresa = () => {
       setSalar(vaga.salario);
   
       // Verifique se as tags estão presentes e mapeie
-      const updatedTags = vaga.requirements?.length ? vaga.requirements.map(tag => ({ value: tag, label: tag })) : [];
+      const updatedTags = vaga.tags?.length ? vaga.tags.map(tag => ({ value: tag, label: tag })) : [];
       setSelectedOptions(updatedTags);
     }
   }, [selectedIndex, userDataVagasEmpresa]);
@@ -103,7 +110,7 @@ const UserVagasEmpresa = () => {
   };
 
 
-  const salvarEdicao = async () => {
+  const salvarEdicao = async (data) => {
 
   console.log('Valor de salario antes de salvar:', salar);
   
@@ -141,8 +148,8 @@ const UserVagasEmpresa = () => {
     const dados = {
       description: desc,
       localizacao: local,
-      requirements: validSelectedOptions,
-      salario: salar,
+      tags: validSelectedOptions,
+      salario: data.salary + "R$",
       title: tit,
     };
   
@@ -264,6 +271,39 @@ const UserVagasEmpresa = () => {
     setRequisits(selected.map((option) => option.value));
   };
 
+  
+
+  const formatCurrencyValue = (value) => {
+    if (!value) return 'R$ 0,00';
+  
+    // Verifica se o valor termina com "R$"
+    if (value.endsWith('R$')) {
+      // Remove "R$" do final e adiciona no início
+      value = 'R$ ' + value.slice(0, -2).trim();
+      return value;
+    }
+  
+    // Remove qualquer caractere não numérico
+    let numericValue = value.replace(/[^\d]/g, '');
+  
+    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
+    if (numericValue.length <= 2) {
+      return `R$ 0,${numericValue.padStart(2, '0')}`;
+    }
+  
+    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
+    const integerPart = numericValue.slice(0, -2);
+    const decimalPart = numericValue.slice(-2);
+  
+    // Adiciona os pontos de milhar e formata a parte decimal
+    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    
+    // Retorna o valor formatado com o símbolo "R$"
+    return `R$ ${formattedIntegerPart},${decimalPart}`;
+  };
+  
+
+  
 
   return (
     <>
@@ -287,21 +327,21 @@ const UserVagasEmpresa = () => {
             <span>Deseja excluir vaga?</span>
             <div className='buttons flex self-center gap-5' style={{ marginTop: '30px' }}>
               <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Cancelar</div>}
-                back='#93BBFD'
-                padding='10px'
-                borderRadius='25px'
+                texto='Cancelar'
+                back='#3B82F6'
+                padding='7px 10px'
+                borderRadius='20px'
                 color='#fff'
                 width='180px'
                 click={cancelaVaga}
-                hoverColor='#3B82F6'
+                hoverColor='#609AFA'
               />
 
               <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Deletar Vaga </div>} 
+                texto={<div className='flex justify-center items-center gap-2'>Deletar Vaga </div>} 
                 back='#fff'
-                padding='10px'
-                borderRadius='25px'
+                padding='7px 10px'
+                borderRadius='20px'
                 color='#EF4444'
                 width='180px'
                 border='#EF4444'
@@ -339,17 +379,17 @@ const UserVagasEmpresa = () => {
               <img src="icons/icon-pen.svg" alt="" style={{width: '20px'}}/>
             </div>
             <div className='flex flex-col justify-between' style={{ marginTop: '30px', width: '100%', height: '100%'}}>
-              <div>
+              <div className='flex flex-col gap-2'>
                 <span>Título</span>
                 <Input type='text' required value={tit} onChange={(e) => setTit(e.target.value)}/>
               </div>
 
-              <div>
+              <div className='flex flex-col gap-2'>
                 <span>Localização</span>
                 <Input type='text' required value={local} onChange={(e) => setLocal(e.target.value)}/>
               </div>
 
-              <div className='flex flex-col'>
+              <div className='flex flex-col gap-2'>
                 <span>Descrição</span>
                 <textarea
                   className='txAreaEm'
@@ -360,10 +400,10 @@ const UserVagasEmpresa = () => {
                 />
               </div>
 
-              <div>
+              <div className='flex flex-col gap-2'>
                 <span>Habilidades</span>
                
-                <div
+                <div 
   style={{
     maxWidth: '100%',
     height: "max-content",
@@ -376,7 +416,7 @@ const UserVagasEmpresa = () => {
     border: `1px solid ${border3}`
   }}
 
-  className="cx-sel"
+  className="cx-sel "
 >
   <Select
     mode="multiple"
@@ -413,9 +453,14 @@ const UserVagasEmpresa = () => {
 </div>
               </div>
 
-              <div>
+              <div className='flex flex-col gap-2'>
                 <span>Salário</span>
-                <Input type='text' required value={salar} onChange={(e) => setSalar(e.target.value)}/>
+                <CurrencyInput
+                  value={formatCurrencyValue(watch('salary'))}
+                  onChange={(formattedValue) => {
+                  setValue('salary', formattedValue);
+                }}
+            />
               </div>
             </div>
 
@@ -423,8 +468,8 @@ const UserVagasEmpresa = () => {
               <BtnPrincipal
                 texto="Cancelar"
                 back='#fff'
-                padding='10px'
-                borderRadius='15px'
+                padding='7px 10px'
+                borderRadius='20px'
                 border='#EF4444'
                 color='#EF4444'
                 font='Lexend'
@@ -435,14 +480,18 @@ const UserVagasEmpresa = () => {
 
               <BtnPrincipal
                 texto="Salvar"
-                back='#93BBFD'
-                padding='10px'
-                borderRadius='15px'
+                back='#3B82F6'
+                padding='7px 10px'
+                borderRadius='20px'
                 color='#fff'
                 font='Lexend'
                 width='180px'
-                click={salvarEdicao}
-                hoverColor='#3B82F6'
+                hoverColor='#609AFA'
+                click={() => {
+                  if (backVaga === '#93BBFD') {
+                    handleSubmit(salvarEdicao)();
+                  }
+                }} 
               />
             </div>
           </div>
@@ -468,7 +517,7 @@ const UserVagasEmpresa = () => {
             </div>
             <div className='flex justify-between caixa-tags' style={{ width: '100%' }}>
               <div className='flex gap-3'>
-                {item.requirements.map((tag, index) => (
+                {item.tags.map((tag, index) => (
                   <span className='span-tag' key={index}>{tag}</span>
                 ))}
               </div>

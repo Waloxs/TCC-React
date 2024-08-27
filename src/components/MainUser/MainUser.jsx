@@ -20,8 +20,8 @@ const MainUser = () => {
 
   useEffect(() => {
     // Carregar a imagem de perfil da API no momento da montagem do componente
-    if (userDataEmpresa && userDataEmpresa.profileImage) {
-      setImage(userDataEmpresa.profileImage);
+    if (userDataEmpresa && userDataEmpresa.image) {
+      setImage(userDataEmpresa.image);
     }
   }, [userDataEmpresa]);
 
@@ -62,8 +62,8 @@ const MainUser = () => {
       console.log(response);
   
       const data = response.data;
-      if (data.profileImage) {
-        setImage(data.profileImage);
+      if (data.image) {
+        setImage(data.image);
       }
     } catch (error) {
       console.error('Erro ao enviar imagem:', error);
@@ -78,9 +78,9 @@ const MainUser = () => {
           <div
             className='Container'
             style={{
-              gridTemplateColumns: selectedButton !== 'home' && selectedButton !== 'criarVaga'
-                ? '1fr 4fr'
-                : '1fr 3fr 1fr'
+              gridTemplateColumns: selectedButton !== 'home' && selectedButton !== 'criarVaga' && selectedButton !== 'configuracoes' 
+                ? '1fr 5fr'
+                : '1fr 4fr 1fr'
             }}
           >
             <div>
@@ -112,20 +112,11 @@ const MainUser = () => {
                 width="85%"
                 click={() => handleButtonClick('configuracoes')}
               />
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Ajuda {selectedButton === 'ajuda' ? <img src="icons/icon-pergunta-branco.svg" alt="Ícone Ajuda" /> : <img src="icons/icon-pergunta.svg" alt="Ícone Ajuda" />}</div>}
-                back={selectedButton === 'ajuda' ? '#3B82F6' : '#fff'}
-                padding='15px'
-                borderRadius='15px'
-                color={selectedButton === 'ajuda' ? '#fff' : '#64748B'}
-                width="85%"
-                click={() => handleButtonClick('ajuda')}
-              />
             </div>
 
             <div>
               {userDataVagasEmpresa && selectedButton === 'home' && (
-                <div className='central'>
+                <div className='central' style={{paddingRight: '70px'}}>
                   <span className='vaga-tit'>Minhas Vagas</span>
                   <UserVagasEmpresa />
                 </div>
@@ -138,34 +129,42 @@ const MainUser = () => {
               )}
 
               {selectedButton === 'configuracoes' && (
-                <div className='central'>
+                <div className='central' style={{paddingRight: '70px'}}>
                   <ConfiguracaoConta />
                 </div>
               )}
 
               {selectedButton === 'Edit' && (
-                <div className='centralEditVaga'>
+                <div className='centralEditVaga' style={{marginTop: '-40px'}}>
                   <EditEmpresa />
-                  <div className='modalConfigura'>
-                    <div className='perEmp'>
+                  <div className='modalConfigura' style={{marginTop: '0px'}}>
+                <div className='perEmp'>
+                  <label htmlFor="file-upload">
+                    {image ? (
+                      <img src={image} alt="Profile" style={{ width: '100%', height: '120px', borderRadius: '50%', objectFit: 'cover' }} />
+                    ) : (
                       <UserEmpresa className='' prLet={true} size={'3rem'} />
-                    </div>
-                    <div className='flex flex-col items-center'>
-                      <UserEmpresa nome={true} className='nomeEmp' />
-                      <span className='span-texto'>Empresa</span>
-                    </div>
-                    <div className="linha"></div>
-                    <BtnPrincipal
-                      texto={<div className='flex justify-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
-                      back='#3B82F6'
-                      padding='15px'
-                      borderRadius='25px'
-                      color='#fff'
-                      width="85%"
-                      weig="500"
-                      click={() => handleButtonClick('Edit')}
-                    />
-                  </div>
+                    )}
+                  </label>
+                  <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+                </div>
+                <div className='flex flex-col items-center'>
+                  <UserEmpresa nome={true} className='nomeEmp' />
+                  <span className='span-texto'>Empresa</span>
+                </div>
+                <div className="linha"></div>
+                <BtnPrincipal
+                  texto={<div className='flex justify-center items-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
+                  back='#3B82F6'
+                  padding='10px 24px'
+                  borderRadius='20px'
+                  color='#fff'
+                  width="85%"
+                  weig="500"
+                  click={() => handleButtonClick('Edit')}
+                  hoverColor='#609AFA'
+                />
+              </div>
                 </div>
               )}
 
@@ -177,7 +176,7 @@ const MainUser = () => {
               )}
             </div>
 
-            {(selectedButton === 'home' || selectedButton === 'criarVaga') && (
+            {(selectedButton === 'home' || selectedButton === 'criarVaga' || selectedButton === 'configuracoes') && (
               <div className='modalConfigura'>
                 <div className='perEmp'>
                   <label htmlFor="file-upload">
@@ -195,14 +194,15 @@ const MainUser = () => {
                 </div>
                 <div className="linha"></div>
                 <BtnPrincipal
-                  texto={<div className='flex justify-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
+                  texto={<div className='flex justify-center items-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
                   back='#3B82F6'
-                  padding='15px'
-                  borderRadius='25px'
+                  padding='10px 24px'
+                  borderRadius='20px'
                   color='#fff'
                   width="85%"
                   weig="500"
                   click={() => handleButtonClick('Edit')}
+                  hoverColor='#609AFA'
                 />
               </div>
             )}

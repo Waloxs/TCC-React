@@ -3,7 +3,7 @@ import BtnPrincipal from '../Buttons/BtnPrincipal';
 
 
 const PerfilCandidato = ({applicant, volta}) => (
-<div className='flex flex-col'>
+<div className='flex flex-col' style={{width: '100%'}}>
             <div onClick={volta} style={{cursor: 'pointer', marginBottom: '25px', marginLeft: '0px', marginTop: '20px'}}>
               <img src="icons/arrowLeft.svg" alt="" width='11px'/>
             </div>
@@ -19,7 +19,7 @@ const PerfilCandidato = ({applicant, volta}) => (
     <div className='flex flex-col gap-5'>
     <div>
         <h1>Biografia</h1>
-        <p className='applicant-titulo'>{applicant.bio}</p>
+        <p className='applicant-titulo' style={{textAlign: 'justify'}}>{applicant.bio}</p>
     </div>
 
 
