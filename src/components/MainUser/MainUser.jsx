@@ -1,5 +1,5 @@
 // MainUser.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { useUser as useUserVagasEmpresa } from '../../services/UserContextVagasEmpresa.jsx';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
@@ -9,12 +9,21 @@ import CriarVaga from '../CriarVaga/CriarVaga.jsx';
 import EditEmpresa from '../EditarPerfilEmpresa/EditEmpresa.jsx';
 import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx';
 import ClipLoader from 'react-spinners/ClipLoader.js';
+import axios from 'axios';
 import './MainUser.css';
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
   const [selectedButton, setSelectedButton] = useState('home');
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    // Carregar a imagem de perfil da API no momento da montagem do componente
+    if (userDataEmpresa && userDataEmpresa.profileImage) {
+      setImage(userDataEmpresa.profileImage);
+    }
+  }, [userDataEmpresa]);
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
@@ -31,6 +40,36 @@ const MainUser = () => {
   if (error || error2) {
     return <div></div>;
   }
+
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    setImage(URL.createObjectURL(file));
+  
+    const formData = new FormData();
+    formData.append('image', file);
+  
+    const token = localStorage.getItem('authToken');
+  
+    try {
+      const response = await axios.put('https://workzen.onrender.com/v1/empresa/profile', formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      console.log(response);
+  
+      const data = response.data;
+      if (data.profileImage) {
+        setImage(data.profileImage);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar imagem:', error);
+    }
+  };
+  
 
   return (
     userDataEmpresa && (
@@ -141,7 +180,14 @@ const MainUser = () => {
             {(selectedButton === 'home' || selectedButton === 'criarVaga') && (
               <div className='modalConfigura'>
                 <div className='perEmp'>
-                  <UserEmpresa className='' prLet={true} size={'3rem'} />
+                  <label htmlFor="file-upload">
+                    {image ? (
+                      <img src={image} alt="Profile" style={{ width: '100%', height: '120px', borderRadius: '50%', objectFit: 'cover' }} />
+                    ) : (
+                      <UserEmpresa className='' prLet={true} size={'3rem'} />
+                    )}
+                  </label>
+                  <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
                 </div>
                 <div className='flex flex-col items-center'>
                   <UserEmpresa nome={true} className='nomeEmp' />
