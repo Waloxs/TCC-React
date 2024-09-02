@@ -7,6 +7,7 @@ import { UserProvider as VagasTag } from '../../services/UserContextVagasTag.jsx
 
 const Dashboard = () => {
 
+
   return (
     <div>
       <UserDados>

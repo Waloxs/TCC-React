@@ -29,7 +29,6 @@ const Navbar = ({
   userTalento = false,
   NavEmpresa = false,
   barraPesquisa = false,
-  dadostag,
 }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
