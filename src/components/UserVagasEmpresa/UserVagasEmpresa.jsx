@@ -6,8 +6,8 @@ import axios from 'axios';
 import Input from '../Form/input.jsx';
 import { Select } from "antd";
 import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
-import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; 
 import { useForm } from 'react-hook-form';
+import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; // Importe o componente CurrencyInput
 
 
 const { Option } = Select;
@@ -30,8 +30,7 @@ const UserVagasEmpresa = () => {
   const [showApplicants, setShowApplicants] = useState(false);
   const [jobId, setJobId] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
-  const [backVaga, setBackVaga] = useState('#93BBFD');
-
+  const [backVaga, setBackVaga] = useState('#3B82F6');
 
 
   const handleShowApplicants = (index) => {
@@ -149,7 +148,7 @@ const UserVagasEmpresa = () => {
       description: desc,
       localizacao: local,
       tags: validSelectedOptions,
-      salario: data.salary + "R$",
+      salario: data.salary || salar ,
       title: tit,
     };
   
@@ -271,24 +270,15 @@ const UserVagasEmpresa = () => {
     setRequisits(selected.map((option) => option.value));
   };
 
-  
-
   const formatCurrencyValue = (value) => {
-    if (!value) return 'R$ 0,00';
-  
-    // Verifica se o valor termina com "R$"
-    if (value.endsWith('R$')) {
-      // Remove "R$" do final e adiciona no início
-      value = 'R$ ' + value.slice(0, -2).trim();
-      return value;
-    }
+    if (!value) return salar;
   
     // Remove qualquer caractere não numérico
     let numericValue = value.replace(/[^\d]/g, '');
   
     // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
     if (numericValue.length <= 2) {
-      return `R$ 0,${numericValue.padStart(2, '0')}`;
+      return `0,${numericValue.padStart(2, '0')}`;
     }
   
     // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
@@ -297,13 +287,10 @@ const UserVagasEmpresa = () => {
   
     // Adiciona os pontos de milhar e formata a parte decimal
     const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    
-    // Retorna o valor formatado com o símbolo "R$"
-    return `R$ ${formattedIntegerPart},${decimalPart}`;
+    return `${formattedIntegerPart},${decimalPart}`;
   };
   
 
-  
 
   return (
     <>
@@ -327,21 +314,21 @@ const UserVagasEmpresa = () => {
             <span>Deseja excluir vaga?</span>
             <div className='buttons flex self-center gap-5' style={{ marginTop: '30px' }}>
               <BtnPrincipal
-                texto='Cancelar'
-                back='#3B82F6'
-                padding='7px 10px'
-                borderRadius='20px'
+                texto={<div className='flex justify-center gap-2'>Cancelar</div>}
+                back='#93BBFD'
+                padding='10px'
+                borderRadius='25px'
                 color='#fff'
                 width='180px'
                 click={cancelaVaga}
-                hoverColor='#609AFA'
+                hoverColor='#3B82F6'
               />
 
               <BtnPrincipal
-                texto={<div className='flex justify-center items-center gap-2'>Deletar Vaga </div>} 
+                texto={<div className='flex justify-center gap-2'>Deletar Vaga </div>} 
                 back='#fff'
-                padding='7px 10px'
-                borderRadius='20px'
+                padding='10px'
+                borderRadius='25px'
                 color='#EF4444'
                 width='180px'
                 border='#EF4444'
@@ -379,17 +366,17 @@ const UserVagasEmpresa = () => {
               <img src="icons/icon-pen.svg" alt="" style={{width: '20px'}}/>
             </div>
             <div className='flex flex-col justify-between' style={{ marginTop: '30px', width: '100%', height: '100%'}}>
-              <div className='flex flex-col gap-2'>
+              <div>
                 <span>Título</span>
                 <Input type='text' required value={tit} onChange={(e) => setTit(e.target.value)}/>
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div>
                 <span>Localização</span>
                 <Input type='text' required value={local} onChange={(e) => setLocal(e.target.value)}/>
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col'>
                 <span>Descrição</span>
                 <textarea
                   className='txAreaEm'
@@ -400,10 +387,10 @@ const UserVagasEmpresa = () => {
                 />
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div>
                 <span>Habilidades</span>
                
-                <div 
+                <div
   style={{
     maxWidth: '100%',
     height: "max-content",
@@ -416,7 +403,7 @@ const UserVagasEmpresa = () => {
     border: `1px solid ${border3}`
   }}
 
-  className="cx-sel "
+  className="cx-sel"
 >
   <Select
     mode="multiple"
@@ -453,14 +440,14 @@ const UserVagasEmpresa = () => {
 </div>
               </div>
 
-              <div className='flex flex-col gap-2'>
+              <div>
                 <span>Salário</span>
                 <CurrencyInput
-                  value={formatCurrencyValue(watch('salary'))}
-                  onChange={(formattedValue) => {
-                  setValue('salary', formattedValue);
-                }}
-            />
+            value={formatCurrencyValue(watch('salary'))}
+            onChange={(formattedValue) => {
+              setValue('salary', formattedValue);
+            }}
+          />
               </div>
             </div>
 
@@ -468,8 +455,8 @@ const UserVagasEmpresa = () => {
               <BtnPrincipal
                 texto="Cancelar"
                 back='#fff'
-                padding='7px 10px'
-                borderRadius='20px'
+                padding='10px'
+                borderRadius='15px'
                 border='#EF4444'
                 color='#EF4444'
                 font='Lexend'
@@ -480,18 +467,18 @@ const UserVagasEmpresa = () => {
 
               <BtnPrincipal
                 texto="Salvar"
-                back='#3B82F6'
-                padding='7px 10px'
-                borderRadius='20px'
+                back={backVaga}
+                padding='10px'
+                borderRadius='15px'
                 color='#fff'
                 font='Lexend'
                 width='180px'
-                hoverColor='#609AFA'
                 click={() => {
-                  if (backVaga === '#93BBFD') {
+                  if (backVaga === '#3B82F6') {
                     handleSubmit(salvarEdicao)();
                   }
-                }} 
+                }}
+                hoverColor='#3B82F6'
               />
             </div>
           </div>

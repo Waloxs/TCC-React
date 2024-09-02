@@ -64,6 +64,16 @@ line-height: 160%; /* 19.2px */
   }
 
 
+  .applicant-bio button{
+    color: var(--Primary-Color-500, #3B82F6);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%;
+  }
+
+
   .listaTag {
     display: flex;
     width: 100%;

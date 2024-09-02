@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 const UserContextEmpresa = createContext();
@@ -17,40 +18,52 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('authToken');
-  
+
       if (!token) {
         setLoading(false);
         return;
       }
-  
+
+      // Decodificar o token
+      const decodedToken = jwt_decode(token);
+      
+      // Verificar se o token é de talento e não de empresa
+      if (decodedToken.role === 'talento') {
+        setLoading(false); // Parar o loading, pois não iremos buscar dados da empresa
+        return;
+      }
+
       const config = {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       };
-  
+
       try {
         const response = await axios.get('https://workzen.onrender.com/v1/empresa/profile', config);
         setData(response.data);
       } catch (error) {
-        console.error('API Error:', error); // Debug API error
+        if (error.response && error.response.status === 404) {
+          console.warn('Empresa não encontrada.');
+        } else {
+          console.error('Erro na API:', error); // Debug API error
+        }
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-  
-    fetchData(); // Fetch data immediately on mount
-  
+
+    fetchData(); // Buscar dados imediatamente ao montar o componente
+
     const intervalId = setInterval(() => {
-      fetchData(); // Fetch data every 60 seconds
-    }, 10000); // 60 seconds
-  
+      fetchData(); // Buscar dados a cada 60 segundos
+    }, 60000); // 60 segundos
+
     return () => {
       clearInterval(intervalId);
     };
-  }, [navigate]); // Add `navigate` to the dependency array
-  
+  }, [navigate]);
 
   return (
     <UserContextEmpresa.Provider value={{ data, loading, error }}>

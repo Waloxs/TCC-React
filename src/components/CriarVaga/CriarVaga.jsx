@@ -25,6 +25,7 @@ const CriarVaga = () => {
 
   const options = [
     { value: 'designer', label: 'Designer' },
+    { value: 'design', label: 'Design' },
     { value: 'front-end', label: 'Front-End' },
     { value: 'back-end', label: 'Back-End' },
     { value: 'full-stack', label: 'Full-Stack' },
@@ -140,6 +141,7 @@ const formatCurrencyValue = (value) => {
             style={{ height: '200px', width: '100%', resize: 'none', borderRadius: '10px' }}
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
+            maxLength={500}
           />
         </div>
 

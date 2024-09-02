@@ -15,16 +15,17 @@ export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    
     const fetchUserData = async () => {
       const token = localStorage.getItem('authToken');
-
+  
       if (!token) {
         setLoading2(false);
         return;
       }
-
+  
       setAuthToken(token);  // Define o token globalmente
-
+  
       try {
         const response = await axiosInstance.get('/me');
         setUserData(response.data);
@@ -36,21 +37,25 @@ export const UserProvider = ({ children }) => {
         setLoading2(false);
       }
     };
-
+  
+    // Fetch initial data
     fetchUserData();
+
   }, []);
+
 
   useEffect(() => {
     const fetchJobsData = async () => {
-      if (!userData) return;
 
-      const params = new URLSearchParams({
-        tag: userData.titulo,
-      }).toString();
+
+      if (!userData || !userData.tags) return;
+  
+      // Junte as tags diretamente com '&'
+      const params = userData.tags.join('&');
       console.log("Parâmetros de consulta:", params);
-
+  
       try {
-        const response = await axiosInstance.get(`/jobs/search?${params}`);
+        const response = await axiosInstance.get(`/jobs/search?tag=${params}`);
         setData2(response.data);
         console.log("Dados recebidos:", response.data); 
       } catch (error) {
@@ -58,9 +63,11 @@ export const UserProvider = ({ children }) => {
         setError2(error);
       }
     };
-
+  
     fetchJobsData();
   }, [userData]);
+  
+  
 
   return (
     <UserContext.Provider value={{ data2, loading2, error2, userData }}>

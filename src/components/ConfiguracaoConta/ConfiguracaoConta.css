@@ -60,3 +60,24 @@
     background-color: #4ADA3D;
   }
   
+
+  .input-password-container {
+    position: relative;
+  }
+  
+  .toggle-password {
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+
+    position: absolute;
+  color: rgb(198, 198, 198);
+  cursor: pointer;
+  font-size: 1.25rem;
+  right: 20px;
+  }
+
+  
+
+  

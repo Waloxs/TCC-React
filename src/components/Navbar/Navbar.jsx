@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { IoIosArrowDown, IoIosArrowUp, IoIosSearch } from "react-icons/io";
 import { IoMdSettings } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
-import { FaRegBell } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
@@ -14,6 +13,11 @@ import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
 import './Navbar.css';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'https://workzen.onrender.com/v1'
+});
 
 const Navbar = ({
   menu,
@@ -24,7 +28,8 @@ const Navbar = ({
   criConta = true,
   userTalento = false,
   NavEmpresa = false,
-  barraPesquisa = false
+  barraPesquisa = false,
+  dadostag,
 }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
@@ -32,11 +37,12 @@ const Navbar = ({
   const [border, setBorder] = useState(false);
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
+  const [dadostag, setDadosTag] = useState([]);
+
+  const [searchText, setSearchText] = useState(''); // Novo estado para controlar o texto de pesquisa
 
   const { data: user } = useUserTalento();
   const { data: userDataEmpresa } = useUserEmpresa();
-
-
 
   const sitModal = () => {
     setModal(!modal);
@@ -101,9 +107,36 @@ const Navbar = ({
     window.location.href = '/Login';
   };
 
-
   const location = useLocation();
   const isHome = location.pathname === '/';
+
+
+
+  useEffect(() => {
+    const fetchFavoritas = async () => {
+      const token = localStorage.getItem('authToken');
+
+      try {
+        console.log(encodeURIComponent(searchText));
+        const response = await api.get(`/jobs/search?tag=${encodeURIComponent(searchText)}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        setDadosTag(response.data);
+        console.log(response.data); 
+      } catch (error) {
+        console.error("Erro ao buscar vagas favoritas:", error);
+      }
+    };
+
+    if (searchText !== '') {
+      fetchFavoritas();
+    }
+  }, [searchText]);
+
 
   return (
     (userDataEmpresa || user || isHome) && (
@@ -155,12 +188,21 @@ const Navbar = ({
             <div className='flex items-center gap-12'>
               {barraPesquisa && (
                 <>
-                  <div className='pesquisa'>
-                    <input type="text" style={{ width: "300px", height: "35px" }} />
-                    <IoIosSearch className='icon-search' size="25px" />
-                  </div>
-                  <FaRegBell size="25px" />
-                </>
+                <div className='pesquisa' style={{position: 'relative'}}>
+                  <input 
+                    type="text" 
+                    style={{ width: "300px", height: "35px" }} 
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)} 
+                    placeholder={searchText === '' ? 'Procurar' : ''} 
+                  />
+                  <img src="icons/Search.svg" alt="" style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)'}}/>
+                </div>
+
+                <img src='icons/bell.svg' style={{width: '18px'}}/>
+
+
+              </>
               )}
               {img && user && user.image && (
                 <div className="imgCadas" onClick={sitModal}>
@@ -220,18 +262,32 @@ const Navbar = ({
 
         {NavEmpresa && userDataEmpresa && (
           <>
-            {img && userDataEmpresa && userDataEmpresa.image && (
-              <div className="imgCadas" onClick={sitModal2}>
-                <img src={userDataEmpresa.image} alt="User Avatar" className='imgUser' />
-              </div>
-            )}
-            {img && userDataEmpresa && !userDataEmpresa.image && (
-              <div className="imgCadas">
-                <div className='imgUserNone'>
-                  <UserEmpresa prLet={true} />
-                </div>                
-              </div>
-            )}
+            <div className='flex items-center gap-12'>
+              {barraPesquisa && (
+                <div className='pesquisa'>
+                  <input 
+                    type="text" 
+                    style={{ width: "300px", height: "35px" }} 
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)} // Atualiza o estado ao digitar
+                    placeholder={searchText === '' ? 'Procurar' : ''} // Placeholder dinâmico
+                  />
+                  <IoIosSearch className='icon-search' size="25px" />
+                </div>
+              )}
+              {img && userDataEmpresa && userDataEmpresa.logo && (
+                <div className="imgCadas" onClick={sitModal2}>
+                  <img src={userDataEmpresa.logo} alt="Company Logo" className='imgUser' />
+                </div>
+              )}
+              {img && userDataEmpresa && !userDataEmpresa.logo && (
+                <div className="imgCadas" onClick={sitModal2}>
+                  <div className='imgUserNone'>
+                    <UserEmpresa prLet={true} />
+                  </div>
+                </div>
+              )}
+            </div>
             {modal2 && userDataEmpresa && (
               <motion.div
                 className='flex flex-col justify-between modal'
@@ -241,16 +297,16 @@ const Navbar = ({
                 transition={{ ease: "easeOut", duration: 1 }}
               >
                 <div className='flex flex-col items-center'>
-                  {userDataEmpresa.image ? (
-                    <img src={userDataEmpresa.image} alt="User Avatar" className='imgModal' />
+                  {userDataEmpresa.logo ? (
+                    <img src={userDataEmpresa.logo} alt="Company Logo" className='imgModal' />
                   ) : (
                     <div className='imgUserNone2'>
-                      <UserEmpresa prLet={true} size={'2rem'} />
+                      <UserEmpresa prLet={true} />
                     </div>
                   )}
                   <div>
                     <span>
-                      <UserEmpresa nome={true} /> <UserEmpresa sobrenome={true} />
+                      <UserEmpresa nome={true} />
                     </span>
                   </div>
                 </div>
@@ -276,9 +332,8 @@ const Navbar = ({
         )}
       </div>
     </div>
-   )
+    )
   );
-
 };
 
 Navbar.propTypes = {

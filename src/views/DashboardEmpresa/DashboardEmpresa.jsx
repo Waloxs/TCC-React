@@ -5,7 +5,7 @@ import MainUser from '../../components/MainUser/MainUser';
 import { UserProvider as UserProviderEmpresa } from '../../services/UserContextEmpresa';
 import { UserProvider as UserProviderVagas } from '../../services/UserContextVagasEmpresa';
 import { UserProvider as UserProviderTalento } from '../../services/UserContext.jsx';
-import { jwtDecode } from 'jwt-decode'; // Corrigi o import de jwt-decode
+import jwtDecode from 'jwt-decode'; // Corrigi o import de jwt-decode
 import axios from 'axios'; // Para fazer a requisição de renovação do token
 
 const DashboardEmpresa = () => {

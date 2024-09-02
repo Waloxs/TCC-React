@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
 import { IoIosArrowBack } from "react-icons/io";
+import { Select } from "antd";
 import './TalentoPasso1.css';
 import { Link } from 'react-router-dom';
 import Input from '../../components/Form/input';
@@ -16,7 +17,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 
 const TalentoPasso1 = () => {
+  const [border3, setBorder3] = useState('#E2E8F0');
   const [block, setBlock] = useState(true);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [block2, setBlock2] = useState(true);
   const [block3, setBlock3] = useState(true);
   const [block4, setBlock4] = useState(true);
@@ -41,27 +44,59 @@ const TalentoPasso1 = () => {
   const { data: user } = useUserTalento();
   const [modalExp, setModalExp] = useState(false);
   const [experiência, setExperiencia] = useState(null);
-  const [dados, setDados] = useState(null);
+  const [dados, setDados] = useState([]);
   const [border, setBorder] = useState(null);
   const [border2, setBorder2] = useState(null);
   const [texto, setTexto] = useState(null);
   const [texto2, setTexto2] = useState(false);
 
+  const options = [
+    { value: 'designer', label: 'Designer' },
+    { value: 'design', label: 'Design' },
+    { value: 'react', label: 'React' },
+    { value: 'front-end', label: 'Front-End' },
+    { value: 'back-end', label: 'Back-End' },
+    { value: 'full-stack', label: 'Full-Stack' },
+    { value: 'project-manager', label: 'Project Manager' },
+    { value: 'qa', label: 'Quality Assurance (QA)' },
+    { value: 'devops', label: 'DevOps' },
+    { value: 'data-scientist', label: 'Data Scientist' },
+    { value: 'product-manager', label: 'Product Manager' },
+    { value: 'ui-ux-designer', label: 'UI/UX Designer' },
+    { value: 'mobile-developer', label: 'Mobile Developer' },
+    { value: 'cloud-engineer', label: 'Cloud Engineer' },
+    { value: 'security-analyst', label: 'Security Analyst' },
+];
+
+const handleChange = (selected) => {
+  setSelectedOptions(selected);
+};
 
   const data = {
     titulo: '',
     bio: '',
+    tags: []
   }
 
 
   const handleRegister = () => {
-    data.titulo = profissional;
-    setDados(prevDados => ({ ...prevDados, titulo: data.titulo }));
+    setDados(prevDados => ({
+      ...prevDados,
+      titulo: profissional,
+      tags: selectedOptions
+    }));
+  
+    console.log(profissional);
+    console.log(selectedOptions);
   };
   
   const handleRegister2 = () => {
-    data.bio = biografia;  
-    setDados(prevDados => ({ ...prevDados, bio: data.bio }));
+    setDados(prevDados => ({
+      ...prevDados,
+      bio: biografia
+    }));
+  
+    console.log(biografia);
   };
   
   
@@ -259,8 +294,8 @@ const token = localStorage.getItem('authToken');
 
 const conta = () => {
 
-  const atualizandoDados = () => {  
-
+const atualizandoDados = async () => {
+  
   const token = localStorage.getItem('authToken');
 
   if (token) {
@@ -269,24 +304,39 @@ const conta = () => {
         'Authorization': `Bearer ${token}`
       }
     };
-  
-    // Usando async/await para lidar com a promessa
-    const updateDados = async () => {
-      try {
-        const response = await axios.put('https://workzen.onrender.com/v1/me', dados, config);
-        console.log('Dados atualizados com sucesso:', response.data);
-      } catch (error) {
-        console.error('Erro ao enviar dados:', error);
-      }
+
+    // Prepare os dados para enviar
+    const dados = {
+      titulo: profissional,
+      bio: biografia,
+      tags: selectedOptions 
     };
-  
-    updateDados();
+
+    console.log('Dados que serão enviados:', dados);
+
+    try {
+      const response = await axios.put('https://workzen.onrender.com/v1/me', dados, config);
+      console.log('Dados atualizados com sucesso:', response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error('Erro ao enviar dados:', error.response.data);
+        console.error('Status do erro:', error.response.status);
+      } else if (error.request) {
+        console.error('Nenhuma resposta recebida:', error.request);
+      } else {
+        console.error('Erro ao configurar a requisição:', error.message);
+      }
+    }
   } else {
     console.error('Token não encontrado no localStorage');
   }
-}
+};
+
+// Chame a função em algum lugar apropriado
 atualizandoDados();
 
+  
+  
 
 const token = localStorage.getItem('authToken');
 
@@ -518,7 +568,56 @@ const handleFimChange = (date) => {
                 </div>
                 <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
                   <p className='func'>Sua função Profissional</p>
-                  <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' border={border} required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+                     <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' border={border} required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+
+                     <div className='flex flex-col gap-2'>
+          <span>Habilidades</span>
+          <div
+            style={{
+              maxWidth: '100%',
+              height: "40px",
+              overflowX: "auto",
+              overflowY: "hidden",
+              display: "flex",
+              alignItems: 'center',
+              scrollSnapType: "x mandatory",
+              borderRadius: '10px',
+              outline: 'none',
+              border: `1px solid ${border3}`,
+            }}
+            className="cx-selCr"
+          >
+            <Select
+              mode="multiple"
+              options={options}
+              value={selectedOptions}
+              onChange={handleChange}
+              style={{ width: '100%', display: 'flex', alignItems: 'center' }}
+              suffixIcon={null}
+              tagRender={(props) => {
+                const { label, closable, onClose } = props;
+
+                return (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      whiteSpace: 'nowrap',
+                      marginRight: '8px',
+                      overflow: 'hidden',
+                      maxWidth: '100%'
+                    }}
+                  >
+                    <span className="tagSelect" style={{ background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px' }}>{label}</span>
+                    {closable && (
+                      <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}></span>
+                    )}
+                  </div>
+                );
+              }}
+            />
+          </div>
+        </div>
 
                   {texto && (
                     <span className='flex gap-2 items-center span-erro'>
@@ -527,6 +626,8 @@ const handleFimChange = (date) => {
                     </span>
                   )}
                 </div>
+
+                
               </div>
             )}
             {!block2 && (

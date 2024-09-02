@@ -9,3 +9,161 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
+
+
+.span-re{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        margin-top: 30px;
+        width: 100%;
+        overflow-x: scroll; /* Permite rolagem horizontal */
+        -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em dispositivos de toque */
+        scrollbar-width: none; /* Oculta a barra de rolagem no Firefox */
+}
+
+
+.span-re .re{
+    white-space: nowrap;
+    border-radius: 20px;
+    background: var(--grey-100, #F1F5F9);
+    padding: 10px;
+    color: #94A3B8;
+}
+body {
+    position: relative;
+  }
+  
+  .moda {
+    position: fixed; /* Corrige o modal na tela inteira */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o modal */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Coloca o modal acima de outros elementos */
+  }
+
+  .moda-content{
+    background-color: #fff;
+    width: 850px;
+    border-radius: 8px;
+    height: 760px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 100px;
+  }
+
+
+.apl-title{
+  color: var(--blackclear, #202020);
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 160%; /* 25.6px */
+}
+
+
+.apl-localizacao{
+  color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
+}
+
+.apl-description{
+  color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+max-width: 60ch;
+text-align: justify;
+}
+
+.item-req{
+  color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
+
+
+
+.icone-circulo{
+  margin-right: 5px;
+  width: 4px;
+  height: 4px;
+  background-color: #64748B;
+  border-radius: 50%;
+}
+
+.items-tags{
+  color: var(--grey-disable-color, #94A3B8);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
+border-radius: 20px;
+background: var(--grey-100, #F1F5F9);
+padding: 5px 25px;
+white-space: nowrap;
+}
+
+
+.apl-title-empresa{
+  color: var(--grey-text-dark, #020617);
+font-family: Lexend;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 30px */
+}
+
+
+.apl-description-empresa{
+  color: var(--grey-700, #334155);
+font-family: Lexend;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 21px */
+}
+
+.apl-dados-empresa{
+  border-radius: 16px;
+border: 1px solid var(--grey-border, #E2E8F0);
+background: var(--Color, #FFF);
+padding: 40px 0px;
+}
+
+
+.apl-buttons{
+  color: var(--white, var(--Color, #FFF));
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+}
+
+.apl-tags{
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer e Edge */
+}
+
+.apl-tags::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
+}

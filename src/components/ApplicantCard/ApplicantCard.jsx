@@ -28,7 +28,7 @@ const ApplicantCard = ({ applicant, onAceitarClick, onVerPerfilClick }) => (
   <p className='applicant-bio'>
     {applicant.bio.length > 150 ? (
       <>
-        {applicant.bio.substring(0, 150)}... <a href="">Ver Mais</a>
+        {applicant.bio.substring(0, 150)}... <button onClick={onVerPerfilClick}>Ver Mais</button>
       </>
     ) : (
       applicant.bio
