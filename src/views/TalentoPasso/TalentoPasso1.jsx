@@ -52,6 +52,7 @@ const TalentoPasso1 = () => {
 
   const options = [
     { value: 'designer', label: 'Designer' },
+    { value: 'express', label: 'Express' },
     { value: 'design', label: 'Design' },
     { value: 'react', label: 'React' },
     { value: 'front-end', label: 'Front-End' },

@@ -12,7 +12,6 @@ export const UserProvider = ({ children }) => {
   const [loading2, setLoading2] = useState(true);
   const [error2, setError2] = useState(null);
 
-  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     
@@ -27,8 +26,8 @@ export const UserProvider = ({ children }) => {
       setAuthToken(token);  // Define o token globalmente
   
       try {
-        const response = await axiosInstance.get('/me');
-        setUserData(response.data);
+        const response = await axiosInstance.get('/me/recommended');
+        setData2(response.data);
         console.log("Dados do usuário recebidos:", response.data); 
       } catch (error) {
         console.error("Erro na requisição /me:", error);
@@ -44,33 +43,10 @@ export const UserProvider = ({ children }) => {
   }, []);
 
 
-  useEffect(() => {
-    const fetchJobsData = async () => {
-
-
-      if (!userData || !userData.tags) return;
-  
-      // Junte as tags diretamente com '&'
-      const params = userData.tags.join('&');
-      console.log("Parâmetros de consulta:", params);
-  
-      try {
-        const response = await axiosInstance.get(`/jobs/search?tag=${params}`);
-        setData2(response.data);
-        console.log("Dados recebidos:", response.data); 
-      } catch (error) {
-        console.error("Erro na requisição /jobs/search:", error);
-        setError2(error);
-      }
-    };
-  
-    fetchJobsData();
-  }, [userData]);
-  
   
 
   return (
-    <UserContext.Provider value={{ data2, loading2, error2, userData }}>
+    <UserContext.Provider value={{ data2, loading2, error2}}>
       {children}
     </UserContext.Provider>
   );

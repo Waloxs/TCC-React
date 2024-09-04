@@ -15,7 +15,6 @@
         display: flex;
         flex-direction: row;
         gap: 20px;
-        margin-top: 30px;
         width: 100%;
         overflow-x: scroll; /* Permite rolagem horizontal */
         -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em dispositivos de toque */

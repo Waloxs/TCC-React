@@ -29,6 +29,7 @@ const Navbar = ({
   userTalento = false,
   NavEmpresa = false,
   barraPesquisa = false,
+  setSearchText,
 }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
@@ -37,9 +38,17 @@ const Navbar = ({
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [dadostag, setDadosTag] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
-  const [searchText, setSearchText] = useState(''); // Novo estado para controlar o texto de pesquisa
-
+  // Debounce para pesquisa em tempo real
+  useEffect(() => {
+    if (inputValue.trim() !== '') {
+      setSearchText(inputValue); // Atualiza o texto da pesquisa imediatamente
+    }else{
+      setSearchText(null);
+    }
+  }, [inputValue, setSearchText]);
+  
   const { data: user } = useUserTalento();
   const { data: userDataEmpresa } = useUserEmpresa();
 
@@ -109,34 +118,6 @@ const Navbar = ({
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-
-
-  useEffect(() => {
-    const fetchFavoritas = async () => {
-      const token = localStorage.getItem('authToken');
-
-      try {
-        console.log(encodeURIComponent(searchText));
-        const response = await api.get(`/jobs/search?tag=${encodeURIComponent(searchText)}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        setDadosTag(response.data);
-        console.log(response.data); 
-      } catch (error) {
-        console.error("Erro ao buscar vagas favoritas:", error);
-      }
-    };
-
-    if (searchText !== '') {
-      fetchFavoritas();
-    }
-  }, [searchText]);
-
-
   return (
     (userDataEmpresa || user || isHome) && (
     <div className={`navbar font-lexend h-16 w-[90vw] max-w-full mx-auto flex justify-between items-center md:text-center ${estiloBorder}`}>
@@ -186,23 +167,20 @@ const Navbar = ({
           <>
             <div className='flex items-center gap-12'>
               {barraPesquisa && (
-                <>
                 <div className='pesquisa' style={{position: 'relative'}}>
                   <input 
                     type="text" 
                     style={{ width: "300px", height: "35px" }} 
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)} 
-                    placeholder={searchText === '' ? 'Procurar' : ''} 
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)} 
+                    placeholder={'Procurar'} 
                   />
-                  <img src="icons/Search.svg" alt="" style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)'}}/>
+                  <img src="icons/Search.svg" alt="Search Icon" style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', cursor: 'pointer'}}/>
                 </div>
-
-                <img src='icons/bell.svg' style={{width: '18px'}}/>
-
-
-              </>
               )}
+
+              <img src='icons/bell.svg' style={{width: '15px'}}/>
+
               {img && user && user.image && (
                 <div className="imgCadas" onClick={sitModal}>
                   <img src={user.image} alt="User Avatar" className='imgUser' />
@@ -234,25 +212,19 @@ const Navbar = ({
                   )}
                   <div>
                     <span>
-                      <User nome={true} /> <User sobrenome={true} />
+                      <strong>{user.name}</strong>
                     </span>
                   </div>
                 </div>
-                <div style={{ marginBottom: '15px' }}>
-                  <Link to="/Configura">
-                    <div className='hv flex' style={{ cursor: 'pointer' }}>
-                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-                        <IoMdSettings className='conf' />
-                        <h1>Configurações</h1>
-                      </div>
-                    </div>
+                <div className='flex flex-col items-start justify-around ml-[1.5rem] mt-[1rem] text-black'>
+                  <Link to="/Configuracao">
+                    <span className='cursor-pointer'>
+                      <IoMdSettings className='mr-[0.3rem]'/> Configurações
+                    </span>
                   </Link>
-                  <div className='hv flex' style={{ cursor: 'pointer' }}>
-                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
-                      <CiLogout className='conf' />
-                      <h1>Sair</h1>
-                    </div>
-                  </div>
+                  <span className='cursor-pointer' onClick={handleLogout}>
+                    <CiLogout className='mr-[0.3rem]'/> Sair
+                  </span>
                 </div>
               </motion.div>
             )}
@@ -261,25 +233,25 @@ const Navbar = ({
 
         {NavEmpresa && userDataEmpresa && (
           <>
-            <div className='flex items-center gap-12'>
+            <div className='flex items-center gap-10'>
               {barraPesquisa && (
-                <div className='pesquisa'>
+                <div className='pesquisa' style={{position: 'relative'}}>
                   <input 
                     type="text" 
                     style={{ width: "300px", height: "35px" }} 
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)} // Atualiza o estado ao digitar
-                    placeholder={searchText === '' ? 'Procurar' : ''} // Placeholder dinâmico
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)} 
+                    placeholder={'Procurar'} 
                   />
-                  <IoIosSearch className='icon-search' size="25px" />
+                  <img src="icons/Search.svg" alt="Search Icon" style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', cursor: 'pointer'}}/>
                 </div>
               )}
-              {img && userDataEmpresa && userDataEmpresa.logo && (
+              {img && userDataEmpresa && userDataEmpresa.image && (
                 <div className="imgCadas" onClick={sitModal2}>
-                  <img src={userDataEmpresa.logo} alt="Company Logo" className='imgUser' />
+                  <img src={userDataEmpresa.image} alt="Company Avatar" className='imgUser' />
                 </div>
               )}
-              {img && userDataEmpresa && !userDataEmpresa.logo && (
+              {img && userDataEmpresa && !userDataEmpresa.image && (
                 <div className="imgCadas" onClick={sitModal2}>
                   <div className='imgUserNone'>
                     <UserEmpresa prLet={true} />
@@ -296,8 +268,8 @@ const Navbar = ({
                 transition={{ ease: "easeOut", duration: 1 }}
               >
                 <div className='flex flex-col items-center'>
-                  {userDataEmpresa.logo ? (
-                    <img src={userDataEmpresa.logo} alt="Company Logo" className='imgModal' />
+                  {userDataEmpresa.image ? (
+                    <img src={userDataEmpresa.image} alt="Company Avatar" className='imgModal' />
                   ) : (
                     <div className='imgUserNone2'>
                       <UserEmpresa prLet={true} />
@@ -305,25 +277,19 @@ const Navbar = ({
                   )}
                   <div>
                     <span>
-                      <UserEmpresa nome={true} />
+                      <strong>{userDataEmpresa.name}</strong>
                     </span>
                   </div>
                 </div>
-                <div style={{ marginBottom: '15px' }}>
-                  <Link to="/Configura">
-                    <div className='hv flex' style={{ cursor: 'pointer' }}>
-                      <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }}>
-                        <IoMdSettings className='conf' />
-                        <h1>Configurações</h1>
-                      </div>
-                    </div>
+                <div className='flex flex-col items-start justify-around ml-[1.5rem] mt-[1rem] text-black'>
+                  <Link to="/ConfiguracaoEmpresa">
+                    <span className='cursor-pointer'>
+                      <IoMdSettings className='mr-[0.3rem]'/> Configurações
+                    </span>
                   </Link>
-                  <div className='hv flex' style={{ cursor: 'pointer' }}>
-                    <div className='flex gap-2 items-center' style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={handleLogout}>
-                      <CiLogout className='conf' />
-                      <h1>Sair</h1>
-                    </div>
-                  </div>
+                  <span className='cursor-pointer' onClick={handleLogout}>
+                    <CiLogout className='mr-[0.3rem]'/> Sair
+                  </span>
                 </div>
               </motion.div>
             )}
@@ -344,7 +310,8 @@ Navbar.propTypes = {
   criConta: PropTypes.bool,
   userTalento: PropTypes.bool,
   NavEmpresa: PropTypes.bool,
-  barraPesquisa: PropTypes.bool
+  barraPesquisa: PropTypes.bool,
+  setSearchText: PropTypes.func,
 };
 
 export default Navbar;

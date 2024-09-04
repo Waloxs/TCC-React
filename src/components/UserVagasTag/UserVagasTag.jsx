@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../../services/UserContextVagasTag.jsx';
-import { useUser as UserContext } from '../../services/UserContext.jsx';
 import './UserVagasTag.css';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 
 const UserVagasTag = () => {
   const { data2, loading2, error2 } = useUser();
-  const { data } = UserContext();
-  const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); // Inicializado como objeto com array vazio
+  const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
   const [modalIndex, setModalIndex] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +23,6 @@ const UserVagasTag = () => {
           },
         });
 
-        // Verifica se o objeto retornado contém o array 'favoritedJobs'
         const favoritas = response.data.favoritedJobs || [];
         setVagasCurtidas({ favoritedJobs: favoritas });
       } catch (error) {
