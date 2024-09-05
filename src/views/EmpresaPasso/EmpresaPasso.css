@@ -673,6 +673,38 @@ line-height: 160%; /* 25.6px */
     max-width: 60ch;
 }
 
+.input-requisits{
+    border: 2px solid rgb(226, 232, 240);
+    border-radius: 14px;
+    outline: none;
+}
+
+.span-requirements{
+    color: var(--grey-disable-color, #94A3B8);
+  font-family: Lexend;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.caixa-input{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-right: 4rem;
+}
+
+
+/* Estilizando o placeholder do Select */
+.ant-select-selection-placeholder {
+    color: var(--grey-disable-color, #9ca3af);
+    font-family: 'Lexend';
+    font-size: 1rem;
+    font-weight: 350;
+    line-height: 160%;
+  }
+  
 
 @media(max-width: 1110px){
     .lista-emp li{

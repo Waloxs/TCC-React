@@ -38,7 +38,6 @@ const DashboardEmpresa = () => {
               });
               const newToken = response.data.token;
 
-              // Armazena o novo token e redefine o processo de renovação
               localStorage.setItem('authToken', newToken);
               scheduleTokenRenewal(newToken);
             } catch (error) {
@@ -70,7 +69,7 @@ const DashboardEmpresa = () => {
       <UserProviderTalento>
         <UserProviderEmpresa>
           <UserProviderVagas>
-            <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash' />
+            <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash' setSearchText={false}/>
             <MainUser />
           </UserProviderVagas>
         </UserProviderEmpresa>

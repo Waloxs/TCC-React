@@ -24,7 +24,7 @@ const UserVagasApl = () => {
       } catch (error) {
         console.error("Erro ao buscar vagas aplicadas:", error);
       } finally {
-        setLoading(false); // Define carregamento como false após a resposta
+        setLoading(false); 
       }
     };
 

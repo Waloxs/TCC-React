@@ -51,7 +51,46 @@ const EmpresaPasso = () => {
   const [textoTel, setTextoTel] = useState(null);
   const [borderLoca ,setBorderLoca] = useState('#E2E8F0');
   const [borderTel ,setBorderTel] = useState('#E2E8F0');
+  const [options, setOptions] = useState([]); 
   const [borderSalar ,setBorderSalar] = useState('#E2E8F0');
+  const [tags, setTags] = useState([]);
+  const [input, setInput] = useState('');
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && input.trim()) {
+      setTags([...tags, input]);
+      setInput('');
+    }
+  };
+
+  const handleRemoveTag = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
+  };
+
+  useEffect(() => {
+    const fetchProfessions = async () => {
+      try {
+        const response = await axios.get("https://gist.githubusercontent.com/wallacemaxters/7863699e750a48fc2e283892738f8ca5/raw/01c7748c4e1f2e1471ea73423b8e49fec6b23eab/lista_cargos.json");
+        const data = response.data;
+
+        if (Array.isArray(data)) {
+          const formattedOptions = data.map(profession => ({
+            value: profession,
+            label: profession
+          }));
+          setOptions(formattedOptions);
+          console.log(data);
+        } else {
+          console.error("Dados recebidos da API não são um array:", data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar as profissões:", error);
+      }
+    };
+
+    fetchProfessions(); // Executa apenas na montagem do componente
+  }, []); 
+  
 
 
   if (loading) {
@@ -88,93 +127,9 @@ const EmpresaPasso = () => {
     console.log(data);
   };
 
-  const options = [
-    // Tecnologia
-    { value: "designer", label: "Designer" },
-    { value: "front-end", label: "Front-End" },
-    { value: "back-end", label: "Back-End" },
-    { value: "full-stack", label: "Full-Stack" },
-    { value: "ux-ui", label: "UX/UI Designer" },
-    { value: "mobile", label: "Desenvolvedor Mobile" },
-    { value: "devops", label: "DevOps" },
-    { value: "qa", label: "Quality Assurance (QA)" },
-    { value: "data-science", label: "Data Science" },
-    { value: "machine-learning", label: "Machine Learning" },
-    { value: "cyber-security", label: "Cyber Security" },
-    { value: "cloud", label: "Cloud Computing" },
 
-    // Saúde
-    { value: "enfermeiro", label: "Enfermeiro" },
-    { value: "medico", label: "Médico" },
-    { value: "fisioterapeuta", label: "Fisioterapeuta" },
-    { value: "nutricionista", label: "Nutricionista" },
-    { value: "psicologo", label: "Psicólogo" },
-    { value: "dentista", label: "Dentista" },
-    { value: "farmaceutico", label: "Farmacêutico" },
-    { value: "biomedico", label: "Biomédico" },
-    { value: "veterinario", label: "Veterinário" },
 
-    // Educação
-    { value: "professor", label: "Professor" },
-    { value: "coordenador-pedagogico", label: "Coordenador Pedagógico" },
-    { value: "orientador-educacional", label: "Orientador Educacional" },
-    { value: "diretor-escolar", label: "Diretor Escolar" },
-    { value: "assistente-educacional", label: "Assistente Educacional" },
-
-    // Marketing e Comunicação
-    { value: "marketing", label: "Marketing" },
-    { value: "publicidade", label: "Publicidade" },
-    { value: "relações-públicas", label: "Relações Públicas" },
-    { value: "jornalista", label: "Jornalista" },
-    { value: "redator", label: "Redator" },
-    { value: "social-media", label: "Social Media Manager" },
-    { value: "seo", label: "SEO Specialist" },
-    { value: "content-creator", label: "Content Creator" },
-
-    // Finanças e Administração
-    { value: "financeiro", label: "Financeiro" },
-    { value: "contabilista", label: "Contabilista" },
-    { value: "auditor", label: "Auditor" },
-    { value: "analista-financeiro", label: "Analista Financeiro" },
-    {
-      value: "gestor-de-recursos-humanos",
-      label: "Gestor de Recursos Humanos",
-    },
-    { value: "administrador", label: "Administrador" },
-    { value: "secretario", label: "Secretário" },
-
-    // Vendas e Atendimento ao Cliente
-    { value: "vendedor", label: "Vendedor" },
-    { value: "representante-comercial", label: "Representante Comercial" },
-    { value: "caixa", label: "Operador de Caixa" },
-    { value: "gerente-de-loja", label: "Gerente de Loja" },
-    { value: "atendente", label: "Atendente" },
-
-    // Engenharia e Construção
-    { value: "engenheiro-civil", label: "Engenheiro Civil" },
-    { value: "engenheiro-eletrico", label: "Engenheiro Elétrico" },
-    { value: "engenheiro-mecanico", label: "Engenheiro Mecânico" },
-    { value: "arquiteto", label: "Arquiteto" },
-    { value: "mestre-de-obras", label: "Mestre de Obras" },
-    { value: "pedreiro", label: "Pedreiro" },
-
-    // Logística e Transporte
-    { value: "motorista", label: "Motorista" },
-    { value: "entregador", label: "Entregador" },
-    { value: "coordenador-de-logistica", label: "Coordenador de Logística" },
-    { value: "operador-de-empilhadeira", label: "Operador de Empilhadeira" },
-
-    // Outros
-    { value: "advogado", label: "Advogado" },
-    { value: "secretaria", label: "Secretária" },
-    { value: "garcom", label: "Garçom" },
-    { value: "cozinheiro", label: "Cozinheiro" },
-    { value: "artista", label: "Artista" },
-    { value: "fotografo", label: "Fotógrafo" },
-    { value: "tradutor", label: "Tradutor" },
-    { value: "bibliotecario", label: "Bibliotecário" },
-  ];
-
+  
 
 
   const handleChange = (selected) => {
@@ -186,7 +141,7 @@ const EmpresaPasso = () => {
     const data = {
       profissional,
       descricao,
-      requirements: selectedOptions,
+      tags: selectedOptions,
     };
 
     console.log(data);
@@ -227,7 +182,7 @@ const EmpresaPasso = () => {
     const data = {
       profissional,
       descricao,
-      requirements: selectedOptions,
+      tags: selectedOptions,
       salar,
     };
 
@@ -249,9 +204,9 @@ const EmpresaPasso = () => {
           title: profissional,
           description: descricao,
           salario: salar,
-          requirements: selectedOptions,
+          tags: selectedOptions,
           localizacao,
-          tags: requisits,
+          requirements: requisits,
         };
   
         const response = await axios.post(
@@ -654,53 +609,76 @@ const EmpresaPasso = () => {
                       >
                         <p className="func">Habilidades</p>
                         
-                        <div
-  style={{
-    maxWidth: 'calc(100% - 4rem)',
-    height: "max-content",
-    overflowX: "auto",
-    display: "flex",
-    alignItems: "center",
-    scrollSnapType: "x mandatory",
-    borderRadius: '15px', 
-    outline: 'none',
-    border: `2px solid ${border3}`
-  }}
+    <div className="caixa-input">
 
-  className="cx-sel"
->
-  <Select
-    mode="multiple"
-    options={options}
-    value={selectedOptions}
-    onChange={handleChange}
-    placeholder="Selecione as opções..."
-    style={{ minHeight: "40px", flex: 1 , maxWidth: 'auto'}}
-    dropdownStyle={{ maxHeight: 200, overflow: 'hidden' }}
-    suffixIcon={null}
-    tagRender={(props) => {
-      const { label, closable, onClose } = props;
+    <div
+      style={{
+        maxWidth: '100%',
+        height: "max-content",
+        overflowX: "auto",
+        display: "flex",
+        alignItems: "center",
+        scrollSnapType: "x mandatory",
+        borderRadius: '15px', 
+        outline: 'none',
+        border: `2px solid ${border3}`
+      }}
+      className="cx-sel"
+    >
+      <Select
+        mode="multiple"
+        options={options} // Agora as opções vêm da API
+        value={selectedOptions}
+        onChange={handleChange}
+        placeholder="Selecione as opções..."
+        style={{ minHeight: "40px", flex: 1 , maxWidth: 'auto'}}
+        dropdownStyle={{ maxHeight: 200, overflow: 'hidden' }}
+        suffixIcon={null}
+        tagRender={(props) => {
+          const { label, closable, onClose } = props;
 
-      return (
-        <div
-          style={{
-            display: 'inline',
-            whiteSpace: 'nowrap',
-            marginRight: '8px',
-            overflow: 'hidden',
-            maxWidth: '100px'
-          }}
-        >
-          <span className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>
-          {closable && (
-            <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}>
-              
-            </span>
-          )}
-        </div>
-      );
-    }}
-  />
+          return (
+            <div
+              style={{
+                display: 'inline',
+                whiteSpace: 'nowrap',
+                marginRight: '8px',
+                overflow: 'hidden',
+                maxWidth: '100px'
+              }}
+            >
+              <span className="tagSelect" style={{background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>
+              {closable && (
+                <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}>
+                  
+                </span>
+              )}
+            </div>
+          );
+        }}
+      />
+    </div>
+
+    <div className="container-inputs" style={{ position: 'relative', width: '100%' }}>
+  <div className="flex gap-4 container-items" style={{position: 'relative', display: 'flex', flexWrap: 'wrap', flexDirection: 'column-reverse' , width: '100%' }}>
+    {tags.map((tag, index) => (
+      <span key={index} className="span-requirements" style={{ padding: '3px 15px', borderRadius: '10px', whiteSpace: 'nowrap', background: '#F1F5F9', width: 'max-content' }}>
+        {tag}
+        <button onClick={() => handleRemoveTag(index)} style={{ marginLeft: '5px' }}>x</button>
+      </span>
+    ))}
+    <input
+      type="text"
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      onKeyDown={handleKeyDown}
+      placeholder={input === '' ? 'Insira um requisito...' : ''}
+      className="input-requisits"
+      style={{ flex: '1 0 auto', minWidth: '200px'}} 
+    />
+  </div>
+</div>
+
 </div>
 
 {texto && (
@@ -800,6 +778,8 @@ const EmpresaPasso = () => {
                           onChange={(e) => setLocalizacao(e.target.value)}
                           border = {borderLoca}
                         />
+
+
 
                         {textoLoca && (
                           <div className="flex gap-1">

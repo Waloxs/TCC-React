@@ -33,6 +33,30 @@ const ApplicantsList = ({ jobId, onClose }) => {
     setSelectedApplicant(applicant); 
   };
 
+  const AceitarCandidato = (applicant) => {
+
+    
+      const aceptUser = async () => {
+        const token = localStorage.getItem('authToken');
+        setAuthToken(token); 
+  
+        try {
+          const response = await axiosInstance.post(`/jobs/${jobId}/accept/${applicant._id}`);
+          console.log(response);
+        } catch (error) {
+          console.error('Erro ao buscar candidatos:', error);
+          setError('Erro ao carregar candidatos.');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      aceptUser();
+
+
+
+  }
+
   const handleClosePerfil = () => {
     setSelectedApplicant(null); 
   };

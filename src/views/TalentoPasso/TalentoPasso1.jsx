@@ -49,25 +49,34 @@ const TalentoPasso1 = () => {
   const [border2, setBorder2] = useState(null);
   const [texto, setTexto] = useState(null);
   const [texto2, setTexto2] = useState(false);
+  const [options, setOptions] = useState([]); 
 
-  const options = [
-    { value: 'designer', label: 'Designer' },
-    { value: 'express', label: 'Express' },
-    { value: 'design', label: 'Design' },
-    { value: 'react', label: 'React' },
-    { value: 'front-end', label: 'Front-End' },
-    { value: 'back-end', label: 'Back-End' },
-    { value: 'full-stack', label: 'Full-Stack' },
-    { value: 'project-manager', label: 'Project Manager' },
-    { value: 'qa', label: 'Quality Assurance (QA)' },
-    { value: 'devops', label: 'DevOps' },
-    { value: 'data-scientist', label: 'Data Scientist' },
-    { value: 'product-manager', label: 'Product Manager' },
-    { value: 'ui-ux-designer', label: 'UI/UX Designer' },
-    { value: 'mobile-developer', label: 'Mobile Developer' },
-    { value: 'cloud-engineer', label: 'Cloud Engineer' },
-    { value: 'security-analyst', label: 'Security Analyst' },
-];
+
+
+  useEffect(() => {
+    // Função para buscar dados da API
+    const fetchProfessions = async () => {
+      try {
+        const response = await axios.get("https://gist.githubusercontent.com/wallacemaxters/7863699e750a48fc2e283892738f8ca5/raw/01c7748c4e1f2e1471ea73423b8e49fec6b23eab/lista_cargos.json");
+        const data = response.data;
+
+        // Transforme o array de strings em um array de objetos
+        if (Array.isArray(data)) {
+          const formattedOptions = data.map(profession => ({
+            value: profession,
+            label: profession
+          }));
+          setOptions(formattedOptions);
+        } else {
+          console.error("Dados recebidos da API não são um array:", data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar as profissões:", error);
+      }
+    };
+
+    fetchProfessions(); // Chama a função de busca na montagem do componente
+  }, []);
 
 const handleChange = (selected) => {
   setSelectedOptions(selected);
@@ -593,7 +602,7 @@ const handleFimChange = (date) => {
               options={options}
               value={selectedOptions}
               onChange={handleChange}
-              style={{ width: '100%', display: 'flex', alignItems: 'center' }}
+              style={{ width: '100%', display: 'flex', alignItems: 'center', height: 'max-content', overflowX: 'auto' }}
               suffixIcon={null}
               tagRender={(props) => {
                 const { label, closable, onClose } = props;
@@ -605,11 +614,11 @@ const handleFimChange = (date) => {
                       alignItems: 'center',
                       whiteSpace: 'nowrap',
                       marginRight: '8px',
-                      overflow: 'hidden',
                       maxWidth: '100%'
                     }}
+
                   >
-                    <span className="tagSelect" style={{ background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px' }}>{label}</span>
+                    <span className="tagSelect" style={{ background: '#F1F5F9', borderRadius: '10px', padding: '3px 15px'}}>{label}</span>
                     {closable && (
                       <span onClick={onClose} style={{ cursor: 'pointer', marginLeft: '4px' }}></span>
                     )}

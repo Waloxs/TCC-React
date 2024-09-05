@@ -29,7 +29,7 @@ const Navbar = ({
   userTalento = false,
   NavEmpresa = false,
   barraPesquisa = false,
-  setSearchText,
+  setSearchText 
 }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
@@ -44,8 +44,6 @@ const Navbar = ({
   useEffect(() => {
     if (inputValue.trim() !== '') {
       setSearchText(inputValue); // Atualiza o texto da pesquisa imediatamente
-    }else{
-      setSearchText(null);
     }
   }, [inputValue, setSearchText]);
   
