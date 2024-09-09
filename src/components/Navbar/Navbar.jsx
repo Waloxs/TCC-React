@@ -14,6 +14,7 @@ import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
 import './Navbar.css';
 import axios from 'axios';
+import Notify from '../Notify/Notify.jsx';
 
 const api = axios.create({
   baseURL: 'https://workzen.onrender.com/v1'
@@ -39,6 +40,8 @@ const Navbar = ({
   const [modal2, setModal2] = useState(false);
   const [dadostag, setDadosTag] = useState([]);
   const [inputValue, setInputValue] = useState('');
+
+  const [showNotify, setShowNotify] = useState(false);
 
   // Debounce para pesquisa em tempo real
   useEffect(() => {
@@ -116,6 +119,10 @@ const Navbar = ({
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  const teste = () => {
+    setShowNotify(!showNotify);
+  };
+
   return (
     (userDataEmpresa || user || isHome) && (
     <div className={`navbar font-lexend h-16 w-[90vw] max-w-full mx-auto flex justify-between items-center md:text-center ${estiloBorder}`}>
@@ -177,7 +184,9 @@ const Navbar = ({
                 </div>
               )}
 
-              <img src='icons/bell.svg' style={{width: '15px'}}/>
+              <img src='icons/bell.svg' onClick={teste} style={{width: '20px'}}/>
+
+      {showNotify && <Notify />} 
 
               {img && user && user.image && (
                 <div className="imgCadas" onClick={sitModal}>
@@ -245,52 +254,26 @@ const Navbar = ({
                 </div>
               )}
               {img && userDataEmpresa && userDataEmpresa.image && (
+                <div className='flex items-center gap-6'>
+              <img src='icons/bell.svg' style={{width: '20px'}}/>
+
                 <div className="imgCadas" onClick={sitModal2}>
                   <img src={userDataEmpresa.image} alt="Company Avatar" className='imgUser' />
                 </div>
+                </div>
               )}
               {img && userDataEmpresa && !userDataEmpresa.image && (
+                
+              <div className='flex items-center'>  
+              <img src='icons/bell.svg' style={{width: '15px'}}/>
                 <div className="imgCadas" onClick={sitModal2}>
                   <div className='imgUserNone'>
                     <UserEmpresa prLet={true} />
                   </div>
                 </div>
+                </div>
               )}
             </div>
-            {modal2 && userDataEmpresa && (
-              <motion.div
-                className='flex flex-col justify-between modal'
-                ref={modalRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1 }}
-              >
-                <div className='flex flex-col items-center'>
-                  {userDataEmpresa.image ? (
-                    <img src={userDataEmpresa.image} alt="Company Avatar" className='imgModal' />
-                  ) : (
-                    <div className='imgUserNone2'>
-                      <UserEmpresa prLet={true} />
-                    </div>
-                  )}
-                  <div>
-                    <span>
-                      <strong>{userDataEmpresa.name}</strong>
-                    </span>
-                  </div>
-                </div>
-                <div className='flex flex-col items-start justify-around ml-[1.5rem] mt-[1rem] text-black'>
-                  <Link to="/ConfiguracaoEmpresa">
-                    <span className='cursor-pointer'>
-                      <IoMdSettings className='mr-[0.3rem]'/> Configurações
-                    </span>
-                  </Link>
-                  <span className='cursor-pointer' onClick={handleLogout}>
-                    <CiLogout className='mr-[0.3rem]'/> Sair
-                  </span>
-                </div>
-              </motion.div>
-            )}
           </>
         )}
       </div>

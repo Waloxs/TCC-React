@@ -55,16 +55,24 @@ const EmpresaPasso = () => {
   const [borderSalar ,setBorderSalar] = useState('#E2E8F0');
   const [tags, setTags] = useState([]);
   const [input, setInput] = useState('');
+  const [requirements, setRequirements] = useState([]);
+  const [warning, setWarning] = useState('');
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && input.trim()) {
-      setTags([...tags, input]);
-      setInput('');
+    if (e.key === 'Enter' && input.trim() !== '') {
+      if (requirements.length < 7) {
+        setRequirements([...requirements, input.trim()]);
+        setInput(''); 
+        setWarning(''); 
+      } else {
+        setWarning('Você atingiu o limite de 7 requisitos.');
+      }
     }
   };
 
   const handleRemoveTag = (index) => {
-    setTags(tags.filter((_, i) => i !== index));
+    setRequirements(requirements.filter((_, i) => i !== index));
+    setWarning('');
   };
 
   useEffect(() => {
@@ -142,6 +150,7 @@ const EmpresaPasso = () => {
       profissional,
       descricao,
       tags: selectedOptions,
+      requirements,
     };
 
     console.log(data);
@@ -183,7 +192,8 @@ const EmpresaPasso = () => {
       profissional,
       descricao,
       tags: selectedOptions,
-      salar,
+      requirements,
+      salar
     };
 
     console.log(data);
@@ -206,7 +216,7 @@ const EmpresaPasso = () => {
           salario: salar,
           tags: selectedOptions,
           localizacao,
-          requirements: requisits,
+          requirements,
         };
   
         const response = await axios.post(
@@ -659,14 +669,17 @@ const EmpresaPasso = () => {
       />
     </div>
 
-    <div className="container-inputs" style={{ position: 'relative', width: '100%' }}>
-  <div className="flex gap-4 container-items" style={{position: 'relative', display: 'flex', flexWrap: 'wrap', flexDirection: 'column-reverse' , width: '100%' }}>
-    {tags.map((tag, index) => (
+    <div className="container-inputs" style={{ position: 'relative' }}>
+  <div className="flex gap-4 container-items" style={{position: 'relative', display: 'flex', flexWrap: 'wrap', flexDirection: 'column-reverse' }}>
+    
+    <div className="flex gap-3" style={{overflowX: 'auto', whiteSpace: 'nowrap', maxWidth: '100%'}}>
+    {requirements.map((tag, index) => (
       <span key={index} className="span-requirements" style={{ padding: '3px 15px', borderRadius: '10px', whiteSpace: 'nowrap', background: '#F1F5F9', width: 'max-content' }}>
         {tag}
         <button onClick={() => handleRemoveTag(index)} style={{ marginLeft: '5px' }}>x</button>
       </span>
     ))}
+    </div>
     <input
       type="text"
       value={input}
@@ -677,6 +690,8 @@ const EmpresaPasso = () => {
       style={{ flex: '1 0 auto', minWidth: '200px'}} 
     />
   </div>
+
+  {warning && <p style={{ color: 'red', marginTop: '10px' }}>{warning}</p>}
 </div>
 
 </div>

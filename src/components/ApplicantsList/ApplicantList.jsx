@@ -3,6 +3,7 @@ import { axiosInstance, setAuthToken } from '../../utils/api';
 import ApplicantCard from '../ApplicantCard/ApplicantCard';
 import PerfilCandidato from '../PerfilCandidato/PerfilCandidato';
 import './ApplicantsList.css'; 
+import Notify from '../Notify/Notify';
 
 const ApplicantsList = ({ jobId, onClose }) => {
   const [applicants, setApplicants] = useState([]);
@@ -53,6 +54,7 @@ const ApplicantsList = ({ jobId, onClose }) => {
   
       aceptUser();
 
+      <Notify/>
 
 
   }
