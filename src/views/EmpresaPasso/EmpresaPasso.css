@@ -690,7 +690,7 @@ line-height: 160%; /* 25.6px */
 
 .caixa-input{
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     padding-right: 4rem;
 }

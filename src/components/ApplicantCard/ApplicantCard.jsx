@@ -23,6 +23,7 @@ const ApplicantCard = ({ applicant, onAceitarClick, onVerPerfilClick }) => (
 
 
 
+
     {applicant.bio && (
   <p className='applicant-bio'>
     {applicant.bio.length > 150 ? (

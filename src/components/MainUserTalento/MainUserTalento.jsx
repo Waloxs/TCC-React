@@ -97,37 +97,41 @@ const MainUser = ({dadosTag}) => {
 
   {dadosTag.length !== 0 &&(
   <div className='flex flex-col'>
-    {Array.isArray(dadosTag) && dadosTag.length > 0 ? (
-  dadosTag.map((item, id) => (
-    <div className='flex flex-col container-vagas' style={{ width: '100%' }} key={item._id}>
-      <div>
-        <span className='span-title'>{item.title}</span>
-      </div>
-      <div>
-        <span className='span-description'>{item.localizacao}</span>
-      </div>
-      <div>
-        <span className="span-empresa">{item.company.nome}</span>
-      </div>
-      <div onClick={() => apareceModal(id)}>
-        <span className="span-description">{item.description}</span>
-      </div>
-      <div className='flex items-end'>
-        <span className="span-re">
-          {item.tags.map((req, tagIndex) => (
-            <span key={tagIndex} className='re'>{req}</span>
-          ))}
-        </span>
-        <div className='flex flex-col items-center'>
-          <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
-        </div>
-      </div>
-    </div>
-  ))
-) : (
-  <p>Sem dados disponíveis</p>
-)}
+    {dadosTag.map((item, id) => (
 
+
+
+<div className='flex flex-col container-vagas' style={{ width: '100%' }} key={item._id}>
+<div>
+  <span className='span-title'>{item.title}</span>
+</div>
+<div>
+  <span className='span-description'>{item.localizacao}</span>
+</div>
+<div>
+  <span className="span-empresa">{item.company.nome}</span>
+</div>
+<div onClick={() => apareceModal(index)}>
+  <span className="span-description">{item.description}</span>
+</div>
+<div className='flex items-end'>
+  <span className="span-re">
+    {item.tags.map((req, tagIndex) => (
+      <span key={tagIndex} className='re'>{req}</span>
+    ))}
+  </span>
+  <div className='flex flex-col items-center'>
+    <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+    ))}
   </div>
   )}
 
