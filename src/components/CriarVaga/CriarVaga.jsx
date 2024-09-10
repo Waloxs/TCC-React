@@ -38,6 +38,7 @@ const CriarVaga = () => {
     { value: 'mobile-developer', label: 'Mobile Developer' },
     { value: 'cloud-engineer', label: 'Cloud Engineer' },
     { value: 'security-analyst', label: 'Security Analyst' },
+    { value: 'acrilista', label: 'Acrilista'}
 ];
 
 

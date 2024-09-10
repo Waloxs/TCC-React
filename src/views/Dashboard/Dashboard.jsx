@@ -13,6 +13,10 @@ const Dashboard = () => {
 
   const [dadosTag, setDadosTag] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [notify, setNotify] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -20,10 +24,9 @@ const Dashboard = () => {
       setAuthToken(token);
 
       try {
-        const response = await axiosInstance.get(`/jobs/search?query=${encodeURIComponent(searchText)}`);
+        const response = await axiosInstance.get(`/jobs/search?query=${encodeURIComponent(searchText)}&page=1`);
 
-        setDadosTag(response.data);
-        console.log(response.data);
+        setDadosTag(response.data.jobs);
       } catch (error) {
         console.error("Erro ao buscar vagas favoritas:", error);
       }
@@ -36,13 +39,43 @@ const Dashboard = () => {
     }
   }, [searchText]);
 
+
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      const token = localStorage.getItem('authToken');
+      setAuthToken(token); 
+
+      try {
+        const response = await axiosInstance.get('/notify');
+        setNotify(response.data);
+        console.log(response);
+      } catch (error) {
+        console.error('Erro ao buscar candidatos:', error);
+        setError('Erro ao carregar candidatos.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApplicants();
+  }, [notify]);
+
+  if (loading) {
+    return <div></div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+
   return (
     <div>
       <UserDados>
         <VagasTag>
         <UserDadosEmpresa>
-        <Navbar showDashnone={false} img={true} userTalento={true} className='navDash' userData={true} barraPesquisa={true} setSearchText={setSearchText}/>
-        <MainUserTalento dadosTag={dadosTag}/>
+        <Navbar showDashnone={false} img={true} userTalento={true} className='navDash' userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify}/>
+        <MainUserTalento dadosTag={dadosTag} notify={notify}/>
         </UserDadosEmpresa>
         </VagasTag>
       </UserDados>

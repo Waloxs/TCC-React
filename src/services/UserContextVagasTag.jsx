@@ -13,6 +13,9 @@ export const UserProvider = ({ children }) => {
   const [error2, setError2] = useState(null);
 
 
+
+  console.log('data2', data2);
+
   useEffect(() => {
     
     const fetchUserData = async () => {

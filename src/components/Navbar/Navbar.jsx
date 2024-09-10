@@ -12,8 +12,12 @@ import { useUser as useUserTalento } from '../../services/UserContext';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
+import { axiosInstance, setAuthToken } from '../../utils/api';
 import './Navbar.css';
 import axios from 'axios';
+import Notify from '../Notify/Notify.jsx';
+
+
 
 const api = axios.create({
   baseURL: 'https://workzen.onrender.com/v1'
@@ -29,7 +33,8 @@ const Navbar = ({
   userTalento = false,
   NavEmpresa = false,
   barraPesquisa = false,
-  setSearchText 
+  setSearchText, 
+  notify
 }) => {
   const [clicked, setClicked] = useState(false);
   const [menuDrop1, setMenuDrop1] = useState(false);
@@ -39,6 +44,7 @@ const Navbar = ({
   const [modal2, setModal2] = useState(false);
   const [dadostag, setDadosTag] = useState([]);
   const [inputValue, setInputValue] = useState('');
+ 
 
   // Debounce para pesquisa em tempo real
   useEffect(() => {
@@ -116,6 +122,8 @@ const Navbar = ({
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+
+
   return (
     (userDataEmpresa || user || isHome) && (
     <div className={`navbar font-lexend h-16 w-[90vw] max-w-full mx-auto flex justify-between items-center md:text-center ${estiloBorder}`}>
@@ -177,7 +185,15 @@ const Navbar = ({
                 </div>
               )}
 
-              <img src='icons/bell.svg' style={{width: '15px'}}/>
+              <div style={{position: 'relative', cursor: 'pointer'}}>
+              <img src='icons/bell.svg' style={{width: '20px'}}/>
+              {notify && (
+                <div style={{position: 'absolute', top: '0px', right: '0px'}}>
+                  <Notify notify={notify}/>
+                </div>
+
+              )}
+              </div>
 
               {img && user && user.image && (
                 <div className="imgCadas" onClick={sitModal}>

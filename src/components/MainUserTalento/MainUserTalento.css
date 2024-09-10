@@ -43,6 +43,39 @@ font-weight: 400;
 line-height: 160%; /* 19.2px */
 }
 
+.span-notify{
+    color: var(--System-Color-Blackclear, #202020);
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 160%; /* 25.6px */
+}
+
+.span-hora{
+    color: var(--Grey-Color-Text-light, #64748B);
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 160%; /* 19.2px */
+}
+
+.caixa-notify{
+    border-radius: 15px 0px 15px 15px;
+border: 1px solid var(--grey-border, #E2E8F0);
+background: var(--Color, #FFF);
+}
+
+.toast-container {
+    width: 500px !important; /* Usa !important para garantir que a largura seja aplicada */
+  }
+
+.Toastify__toast-icon{
+    display: none !important;
+}
+  
+
 .span-empresa {
     color: var(--primary-500, #3B82F6);
     font-family: Lexend;
