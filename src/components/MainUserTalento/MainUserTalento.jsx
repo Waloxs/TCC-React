@@ -27,6 +27,8 @@ const MainUserTalento = ({ dadosTag, notify }) => {
   const { data, loading, error } = useUser(); // Adicionado carregamento e erro
   const [selectedButton, setSelectedButton] = useState('home');
   const [imagePerfil, setImagePerfil] = useState(null);
+  const [shownNotifications, setShownNotifications] = useState([]);
+
 
   console.log(dadosTag);
   console.log(notify);
@@ -45,10 +47,13 @@ const MainUserTalento = ({ dadosTag, notify }) => {
   useEffect(() => {
     if (notify.length > 0) {
       notify.forEach(notification => {
-        showNotification(notification);
+        if (!shownNotifications.includes(notification._id)) {
+          showNotification(notification);
+          setShownNotifications(prev => [...prev, notification._id]);
+        }
       });
     }
-  }, []);
+  }, [notify]); 
   
 
   if (loading || loading2) {
@@ -194,7 +199,7 @@ const MainUserTalento = ({ dadosTag, notify }) => {
  
          <ToastContainer
         position="top-right"
-        autoClose={50000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick

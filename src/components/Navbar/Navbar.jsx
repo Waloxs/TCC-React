@@ -191,8 +191,8 @@ const Navbar = ({
                 <div style={{position: 'absolute', top: '0px', right: '0px'}}>
                   <Notify notify={notify}/>
                 </div>
-
               )}
+              
               </div>
 
               {img && user && user.image && (
