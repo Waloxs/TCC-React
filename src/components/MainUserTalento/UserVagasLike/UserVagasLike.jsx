@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { axiosInstance, setAuthToken } from '../../../utils/api.js';
-import { Bars } from 'react-loader-spinner'; // Exemplo de loader
+import { Bars } from 'react-loader-spinner'; 
 
 const UserVagasLike = () => {
   const [vagasCurtidas, setVagasCurtidas] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -19,6 +19,7 @@ const UserVagasLike = () => {
           },
         });
         setVagasCurtidas(response.data.favoritedJobs);
+        console.log('ttt:', response.data.favoritedJobs);
       } catch (error) {
         console.error("Erro ao buscar vagas curtidas:", error);
       } finally {
@@ -34,7 +35,6 @@ const UserVagasLike = () => {
     setAuthToken(token);
 
     if (vagasCurtidas.some((vaga) => vaga._id === vagaId)) {
-      // Se a vaga já está curtida, desfavoritar (DELETE)
       try {
         await axiosInstance.delete(`/jobs/favorite/${vagaId}`, {
           headers: {
@@ -67,12 +67,22 @@ const UserVagasLike = () => {
               <span className='span-description'>{vaga.localizacao}</span>
             </div>
             <div>
-              <span className="span-empresa">{vaga.nome}</span>
+              <span className="span-empresa">{vaga.company.nome}</span>
             </div>
             <div className='' style={{ marginBottom: '30px' }}>
               <span className="span-description">{vaga.description}</span>
             </div>
             <div className='flex items-center'>
+            <span className="span-re">
+              {vaga.tags && vaga.tags.length > 0 ? (
+                vaga.tags.map((req, tagIndex) => (
+                  <span key={tagIndex} className='re'>{req}</span>
+                ))
+              ) : (
+                <span>Tags não disponíveis</span>
+              )}
+            </span>
+            <div className='flex flex-col items-center'>
               <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{vaga.salario}</span>
               <div onClick={() => toggleLike(vaga._id)}>
                 {vagasCurtidas.some((v) => v._id === vaga._id) ? (
@@ -81,6 +91,7 @@ const UserVagasLike = () => {
                   <img src="icons/heart.svg" alt="not marked" style={{ width: '20px' }} />
                 )}
               </div>
+            </div>
             </div>
           </div>
         ))

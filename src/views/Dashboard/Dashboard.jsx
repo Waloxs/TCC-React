@@ -1,23 +1,20 @@
 import MainUserTalento from '../../components/MainUserTalento/MainUserTalento.jsx';
 import Navbar from '../../components/Navbar/Navbar';
-import './Dashboard.css'
+import './Dashboard.css';
 import { useState, useEffect } from 'react';
-import { UserProvider as UserDados} from '../../services/UserContext.jsx';
-import { UserProvider as UserDadosEmpresa} from '../../services/UserContextEmpresa.jsx';
+import { UserProvider as UserDados } from '../../services/UserContext.jsx';
+import { UserProvider as UserDadosEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { UserProvider as VagasTag } from '../../services/UserContextVagasTag.jsx';
-
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 
 const Dashboard = () => {
-
-
   const [dadosTag, setDadosTag] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [notify, setNotify] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingNotify, setLoadingNotify] = useState(true); // Carregamento só das notificações
 
-
+  // Função para buscar as vagas favoritas
   useEffect(() => {
     const fetchFavoritas = async () => {
       const token = localStorage.getItem('authToken');
@@ -25,58 +22,53 @@ const Dashboard = () => {
 
       try {
         const response = await axiosInstance.get(`/jobs/search?query=${encodeURIComponent(searchText)}&page=1`);
-
         setDadosTag(response.data.jobs);
       } catch (error) {
-        console.error("Erro ao buscar vagas favoritas:", error);
+        console.error('Erro ao buscar vagas favoritas:', error);
       }
     };
 
     if (searchText !== '') {
       fetchFavoritas();
-    }else{
+    } else {
       setSearchText(null);
     }
   }, [searchText]);
 
-
+  // Função para buscar notificações 3 segundos após montagem
   useEffect(() => {
     const fetchApplicants = async () => {
       const token = localStorage.getItem('authToken');
-      setAuthToken(token); 
+      setAuthToken(token);
 
       try {
         const response = await axiosInstance.get('/notify');
         setNotify(response.data);
-        console.log(response);
       } catch (error) {
-        console.error('Erro ao buscar candidatos:', error);
-        setError('Erro ao carregar candidatos.');
+        console.error('Erro ao buscar notificações:', error);
+        setError('Erro ao carregar notificações.');
       } finally {
-        setLoading(false);
+        setLoadingNotify(false);
       }
     };
 
-    fetchApplicants();
-  }, [notify]);
+    // Definir o delay de 3 segundos
+    const timer = setTimeout(() => {
+      fetchApplicants();
+    }, 3000); // Espera de 3 segundos
 
-  if (loading) {
-    return <div></div>;
-  }
+    return () => clearTimeout(timer); // Limpar o timeout ao desmontar
+  }, []);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-
+  // Exibição do dashboard sem esperar pelas notificações
   return (
     <div>
       <UserDados>
         <VagasTag>
-        <UserDadosEmpresa>
-        <Navbar showDashnone={false} img={true} userTalento={true} className='navDash' userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify}/>
-        <MainUserTalento dadosTag={dadosTag} notify={notify}/>
-        </UserDadosEmpresa>
+          <UserDadosEmpresa>
+            <Navbar showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} />
+            <MainUserTalento dadosTag={dadosTag} notify={notify} loadingNotify={loadingNotify} />
+          </UserDadosEmpresa>
         </VagasTag>
       </UserDados>
     </div>

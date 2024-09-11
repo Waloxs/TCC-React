@@ -14,7 +14,6 @@ export const UserProvider = ({ children }) => {
 
 
 
-  console.log('data2', data2);
 
   useEffect(() => {
     

@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx'
 import PerfilCandidato from '../PerfilCandidato/PerfilCandidato.jsx';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 
 const showNotification = (notification) => {
@@ -28,10 +30,9 @@ const MainUserTalento = ({ dadosTag, notify }) => {
   const [selectedButton, setSelectedButton] = useState('home');
   const [imagePerfil, setImagePerfil] = useState(null);
   const [shownNotifications, setShownNotifications] = useState([]);
+  const [modalIndex, setModalIndex] = useState(null);
 
 
-  console.log(dadosTag);
-  console.log(notify);
 
   useEffect(() => {
     if (data) {
@@ -44,17 +45,17 @@ const MainUserTalento = ({ dadosTag, notify }) => {
   }, [data]);
 
 
+
   useEffect(() => {
     if (notify.length > 0) {
       notify.forEach(notification => {
         if (!shownNotifications.includes(notification._id)) {
-          showNotification(notification);
-          setShownNotifications(prev => [...prev, notification._id]);
+          showNotification(notification); 
+          setShownNotifications(prev => [...prev, notification._id]); 
         }
       });
     }
-  }, [notify]); 
-  
+  }, [notify]);
 
   if (loading || loading2) {
     return (
@@ -71,6 +72,41 @@ const MainUserTalento = ({ dadosTag, notify }) => {
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
   };
+
+  const apareceModal = (index) => {
+    setModalIndex(index);
+  };
+
+  const fechaModal = () => {
+    setModalIndex(null);
+  };
+
+
+  const aplicarVaga = async (vaga) => {
+    const token = localStorage.getItem('authToken');
+    setAuthToken(token);
+
+  
+    try {
+
+      console.log(vaga._id);
+
+      const response = await axiosInstance.post(`/jobs/${vaga._id}/apply`, {}, {
+
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+  
+      // Exibindo o console de sucesso
+      console.log('Sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao atualizar vaga:', error);
+      throw new Error('Erro ao atualizar vaga');
+    }
+  };
+  
 
   return (
     userDataVagas && data && (
@@ -130,7 +166,7 @@ const MainUserTalento = ({ dadosTag, notify }) => {
               {/* Verifique se dadosTag é um array e contém elementos */}
               {Array.isArray(dadosTag) && dadosTag.length > 0 && (
                 <div className='flex flex-col'>
-                  {dadosTag.map((item, id) => (
+                  {dadosTag.map((item, index) => (
                     <div className='flex flex-col container-vagas' style={{ width: '100%' }} key={item._id}>
                       <div>
                         <span className='span-title'>{item.title}</span>
@@ -141,7 +177,7 @@ const MainUserTalento = ({ dadosTag, notify }) => {
                       <div>
                         <span className="span-empresa">{item.company.nome}</span>
                       </div>
-                      <div onClick={() => apareceModal(id)}>
+                      <div onClick={() => apareceModal(index)}>
                         <span className="span-description">{item.description}</span>
                       </div>
                       <div className='flex items-end'>
@@ -210,6 +246,77 @@ const MainUserTalento = ({ dadosTag, notify }) => {
         theme="light"
         className='toast-container'
       />
+
+    
+    {dadosTag.map((item, index) => (
+      <>
+      {modalIndex === index && (
+            <div className='moda'>
+              <div className="moda-content">
+                <div className='flex flex-col gap-12' style={{height: '100%', paddingTop: '0px'}}>
+
+                <button onClick={fechaModal}><img src="icons/arrowLeft.svg" alt="" /></button>
+
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>{dadosTag[index].title}</span>
+                  <span className='apl-localizacao'>{dadosTag[index].localizacao}</span>
+              </div>
+
+                  <span className='apl-description'>{dadosTag[index].description}</span>
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Responsabilidades</span>
+                  <span className='flex flex-col'>
+                    {dadosTag[index].requirements.map((req, i) => (
+                    <span key={i} className='flex items-center item-req'>{i < dadosTag[index].requirements.length ? <div className='icone-circulo'></div> : ''}{req}</span>
+                    ))}
+                  </span>
+              </div>
+
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Preço</span>
+                  <span className='item-req'>{dadosTag[index].salario}</span>
+              </div>
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Habilidades e Expêriencias</span>
+                  <span className='apl-tags flex gap-2' style={{maxWidth: '500px', overflowX: 'auto'}}>{dadosTag[index].tags.map((tag, i ) => (
+                    <span className='items-tags' key={i}>{tag}</span>
+                  ))}</span>
+              </div>
+
+
+
+                </div>
+
+
+                <div className='flex flex-col justify-between'>
+                  <div className='apl-dados-empresa flex flex-col items-center'>
+                    <span className=''><img src={dadosTag[index].company.image} alt="" style={{borderRadius: '50%', width: '100px'}}/></span>
+                    <span className='apl-title-empresa'>{dadosTag[index].company.nome}</span>
+                    <span className='apl-description-empresa'>Empresa</span> 
+                  </div>
+
+
+                  <div className='apl-buttons'>
+                    <BtnPrincipal
+                    texto={'Aplique agora'}
+                    back={'#3B82F6'}
+                    padding='15px'
+                    borderRadius='20px'
+                    color={'#fff'}
+                    width="100%"
+                    click={() => aplicarVaga(dadosTag[index])}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          </>
+        ))}
        </div>
      )
    );

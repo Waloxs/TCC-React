@@ -1,7 +1,6 @@
 const Notify = ({notify}) => {
 
 
-  console.log(notify);
 
   return (
     <>

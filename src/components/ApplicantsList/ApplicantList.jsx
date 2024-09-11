@@ -19,6 +19,7 @@ const ApplicantsList = ({ jobId, onClose }) => {
       try {
         const response = await axiosInstance.get(`/jobs/${jobId}/applicants`);
         setApplicants(response.data.applicants);
+        console.log(response.data.applicants)
       } catch (error) {
         console.error('Erro ao buscar candidatos:', error);
         setError('Erro ao carregar candidatos.');
