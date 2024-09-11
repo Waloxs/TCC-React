@@ -43,7 +43,17 @@ const Dashboard = () => {
 
       try {
         const response = await axiosInstance.get('/notify');
-        setNotify(response.data);
+        const newNotifications = response.data;
+
+        // Obter as notificações armazenadas anteriormente no localStorage
+        const storedNotifications = JSON.parse(localStorage.getItem('storedNotify')) || [];
+
+        // Comparar para verificar se existem novas notificações
+        if (JSON.stringify(storedNotifications) !== JSON.stringify(newNotifications)) {
+          setNotify(newNotifications);
+          localStorage.setItem('storedNotify', JSON.stringify(newNotifications)); // Armazenar novas notificações
+        }
+
       } catch (error) {
         console.error('Erro ao buscar notificações:', error);
         setError('Erro ao carregar notificações.');
@@ -52,12 +62,20 @@ const Dashboard = () => {
       }
     };
 
-    // Definir o delay de 3 segundos
-    const timer = setTimeout(() => {
-      fetchApplicants();
-    }, 3000); // Espera de 3 segundos
+    // Verificar se já temos notificações salvas
+    const savedNotifications = JSON.parse(localStorage.getItem('storedNotify'));
+    if (!savedNotifications || savedNotifications.length === 0) {
+      // Se não houver notificações salvas, definir o delay de 3 segundos para buscar notificações
+      const timer = setTimeout(() => {
+        fetchApplicants();
+      }, 3000); // Espera de 3 segundos
 
-    return () => clearTimeout(timer); // Limpar o timeout ao desmontar
+      return () => clearTimeout(timer); // Limpar o timeout ao desmontar
+    } else {
+      // Se já houver notificações salvas, exibir essas notificações diretamente
+      setNotify(savedNotifications);
+      setLoadingNotify(false);
+    }
   }, []);
 
   // Exibição do dashboard sem esperar pelas notificações
