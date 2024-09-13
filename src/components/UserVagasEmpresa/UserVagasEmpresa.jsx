@@ -7,7 +7,8 @@ import Input from '../Form/input.jsx';
 import { Select } from "antd";
 import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
 import { useForm } from 'react-hook-form';
-import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; // Importe o componente CurrencyInput
+import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx';
+import './UserVagasEmpresa.css'
 
 
 const { Option } = Select;
@@ -34,9 +35,9 @@ const UserVagasEmpresa = () => {
 
 
   const handleShowApplicants = (index) => {
-    const selectedJobId = userDataVagasEmpresa[index]._id; // Obtém o ID da vaga selecionada
-    setJobId(selectedJobId); // Define o ID da vaga no estado
-    setShowApplicants(true); // Abre o modal de candidatos
+    const selectedJobId = userDataVagasEmpresa[index]._id; 
+    setJobId(selectedJobId); 
+    setShowApplicants(true); 
   };
   
 
@@ -293,7 +294,7 @@ const UserVagasEmpresa = () => {
 
 
   return (
-    <>
+    <div className='container-central'>
       {modal && (
         <div>
           <div
@@ -518,7 +519,7 @@ const UserVagasEmpresa = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

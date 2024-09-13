@@ -1,0 +1,9 @@
+.container-central{
+    overflow-y: auto;
+    height: 700px;
+    scrollbar-width: none; /* Para Firefox */
+}
+
+.container-central::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari e Edge */
+}
