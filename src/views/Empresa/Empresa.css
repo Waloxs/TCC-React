@@ -9,16 +9,16 @@
     text-align: center;
 }
 
-.containerEmpresa{
-background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+.containerEmpresaInicial{
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+    width: 100%;
 }
 
 .form-empresa{
         background-color: #fff;
         border: 2px solid #E2E8F0;
         border-radius: 20px;
-        height: 600px !important;
-        max-width: 550px !important;
+        width: 600px;
 }
 
 .in input{

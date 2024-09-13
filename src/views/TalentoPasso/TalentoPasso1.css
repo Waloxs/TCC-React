@@ -38,6 +38,11 @@ font-weight: 300;
 line-height: 160%; /* 19.2px */
 }
 
+.ctx-input{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
 .tudo{
     position: relative;
 }

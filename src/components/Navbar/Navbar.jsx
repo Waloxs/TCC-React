@@ -12,16 +12,11 @@ import { useUser as useUserTalento } from '../../services/UserContext';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
-import { axiosInstance, setAuthToken } from '../../utils/api';
 import './Navbar.css';
-import axios from 'axios';
 import Notify from '../Notify/Notify.jsx';
 
 
 
-const api = axios.create({
-  baseURL: 'https://workzen.onrender.com/v1'
-});
 
 const Navbar = ({
   menu,
@@ -33,6 +28,8 @@ const Navbar = ({
   userTalento = false,
   NavEmpresa = false,
   barraPesquisa = false,
+  configUser = false,
+  setConfigUser,
   setSearchText, 
   notify
 }) => {
@@ -40,10 +37,15 @@ const Navbar = ({
   const [menuDrop1, setMenuDrop1] = useState(false);
   const [menuDrop2, setMenuDrop2] = useState(false);
   const [border, setBorder] = useState(false);
-  const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
-  const [dadostag, setDadosTag] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [modalNotify, setModalNotify] = useState(false);
+
+
+  const handleModal = () => {
+    setModalNotify(!modalNotify);
+    console.log(notify);
+  }
  
 
   // Debounce para pesquisa em tempo real
@@ -57,7 +59,7 @@ const Navbar = ({
   const { data: userDataEmpresa } = useUserEmpresa();
 
   const sitModal = () => {
-    setModal(!modal);
+    setConfigUser(!configUser);
     setMenuDrop1(false);
     setMenuDrop2(false);
     setBorder(false);
@@ -100,19 +102,9 @@ const Navbar = ({
 
   const modalRef = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setModal(false);
-      setModal2(false);
-    }
-  };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -185,11 +177,15 @@ const Navbar = ({
                 </div>
               )}
 
-              <div style={{position: 'relative', cursor: 'pointer'}}>
+              <div style={{position: 'relative', cursor: 'pointer'}} onClick={handleModal}>
               <img src='icons/bell.svg' style={{width: '20px'}}/>
               {notify && (
                 <div style={{position: 'absolute', top: '0px', right: '0px'}}>
                   <Notify notify={notify}/>
+
+                  {modalNotify && (
+                    <div style={{position: 'absolute'}}>asdsa</div>
+                  )}
                 </div>
               )}
               
@@ -208,40 +204,6 @@ const Navbar = ({
                 </div>
               )}
             </div>
-            {modal && user && (
-              <motion.div
-                className='flex flex-col justify-between modal'
-                ref={modalRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1 }}
-              >
-                <div className='flex flex-col items-center'>
-                  {user.image ? (
-                    <img src={user.image} alt="User Avatar" className='imgModal' />
-                  ) : (
-                    <div className='imgUserNone2'>
-                      <User prLet={true} />
-                    </div>
-                  )}
-                  <div>
-                    <span>
-                      <strong>{user.name}</strong>
-                    </span>
-                  </div>
-                </div>
-                <div className='flex flex-col items-start justify-around ml-[1.5rem] mt-[1rem] text-black'>
-                  <Link to="/Configuracao">
-                    <span className='cursor-pointer'>
-                      <IoMdSettings className='mr-[0.3rem]'/> Configurações
-                    </span>
-                  </Link>
-                  <span className='cursor-pointer' onClick={handleLogout}>
-                    <CiLogout className='mr-[0.3rem]'/> Sair
-                  </span>
-                </div>
-              </motion.div>
-            )}
           </>
         )}
 

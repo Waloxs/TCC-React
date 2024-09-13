@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/Logo.png';
 import imgEmpresa from '../../assets/imgEmpresa.png';
 import { IoIosArrowBack } from "react-icons/io";
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal'
 import './Empresa.css';
 import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +45,7 @@ const Empresa = () => {
     return () => clearTimeout(timeout); 
   }, [isImageLoaded]);
 
-// Empresa.js
+
 const HandleSave = async (e) => {
   e.preventDefault();
   const form = e.target.closest('form');
@@ -73,10 +71,9 @@ const HandleSave = async (e) => {
 
       navigate('/EmpresaPasso');    
       
-      // Aguarda a navegação antes de recarregar
       setTimeout(() => {
         window.location.reload();
-      }, 600); // O delay pode ser ajustado conforme necessário
+      }, 600); 
 
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);
@@ -110,10 +107,10 @@ const HandleSave = async (e) => {
   return (
     <div>
             <div className='tudo flex justify-center' style={{ width: '100vw' }}>
-        <div className='containerEmpresa flex flex-col justify-center items-center' style={{ maxWidth: '70rem', height: '100vh', gap: '30px', padding: '20px' }}>
+        <div className='containerEmpresaInicial flex flex-col justify-center items-center' style={{ height: '100vh', gap: '30px', padding: '20px' }}>
   
-          <div className="conteudo flex justify-between" style={{ width: '100%', height: 'auto', borderRadius: '1.25rem' }}>
-            <div className='form-empresa flex flex-col' style={{ height: '35rem' }}>
+          <div className="conteudo flex justify-between" style={{ width: 'max-content', height: 'auto', borderRadius: '1.25rem' }}>
+            <div className='form-empresa flex flex-col' style={{ height: 'max-content' }}>
               <Link to="/Escolha"><IoIosArrowBack className='m-6' style={{ fontSize: '1.5rem', color: '#0866FF' }} /></Link>
               <div className='flex flex-col gap-3' style={{ marginTop: '-20px', padding: '2rem' }}>
                 <h1 className='EscTit self-center'>Olá seja Bem-vindo!</h1>

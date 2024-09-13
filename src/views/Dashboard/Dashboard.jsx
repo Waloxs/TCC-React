@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [notify, setNotify] = useState([]);
   const [error, setError] = useState(null);
   const [loadingNotify, setLoadingNotify] = useState(true); // Carregamento só das notificações
+  const [configUser, setConfigUser] = useState(false);
 
   // Função para buscar as vagas favoritas
   useEffect(() => {
@@ -43,17 +44,7 @@ const Dashboard = () => {
 
       try {
         const response = await axiosInstance.get('/notify');
-        const newNotifications = response.data;
-
-        // Obter as notificações armazenadas anteriormente no localStorage
-        const storedNotifications = JSON.parse(localStorage.getItem('storedNotify')) || [];
-
-        // Comparar para verificar se existem novas notificações
-        if (JSON.stringify(storedNotifications) !== JSON.stringify(newNotifications)) {
-          setNotify(newNotifications);
-          localStorage.setItem('storedNotify', JSON.stringify(newNotifications)); // Armazenar novas notificações
-        }
-
+        setNotify(response.data);
       } catch (error) {
         console.error('Erro ao buscar notificações:', error);
         setError('Erro ao carregar notificações.');
@@ -62,20 +53,12 @@ const Dashboard = () => {
       }
     };
 
-    // Verificar se já temos notificações salvas
-    const savedNotifications = JSON.parse(localStorage.getItem('storedNotify'));
-    if (!savedNotifications || savedNotifications.length === 0) {
-      // Se não houver notificações salvas, definir o delay de 3 segundos para buscar notificações
-      const timer = setTimeout(() => {
-        fetchApplicants();
-      }, 3000); // Espera de 3 segundos
+    // Definir o delay de 3 segundos
+    const timer = setTimeout(() => {
+      fetchApplicants();
+    }, 3000); // Espera de 3 segundos
 
-      return () => clearTimeout(timer); // Limpar o timeout ao desmontar
-    } else {
-      // Se já houver notificações salvas, exibir essas notificações diretamente
-      setNotify(savedNotifications);
-      setLoadingNotify(false);
-    }
+    return () => clearTimeout(timer); // Limpar o timeout ao desmontar
   }, []);
 
   // Exibição do dashboard sem esperar pelas notificações
@@ -84,8 +67,8 @@ const Dashboard = () => {
       <UserDados>
         <VagasTag>
           <UserDadosEmpresa>
-            <Navbar showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} />
-            <MainUserTalento dadosTag={dadosTag} notify={notify} loadingNotify={loadingNotify} />
+            <Navbar showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} configUser={configUser} setConfigUser={setConfigUser}/>
+            <MainUserTalento dadosTag={dadosTag} notify={notify} loadingNotify={loadingNotify} configUser={configUser}/>
           </UserDadosEmpresa>
         </VagasTag>
       </UserDados>

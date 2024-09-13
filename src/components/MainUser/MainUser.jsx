@@ -19,7 +19,6 @@ const MainUser = () => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    // Carregar a imagem de perfil da API no momento da montagem do componente
     if (userDataEmpresa && userDataEmpresa.image) {
       setImage(userDataEmpresa.image);
     }

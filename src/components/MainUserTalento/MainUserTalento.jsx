@@ -12,27 +12,80 @@ import 'react-toastify/dist/ReactToastify.css';
 import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx'
 import PerfilCandidato from '../PerfilCandidato/PerfilCandidato.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
+import { motion } from 'framer-motion';
 
 
 
-const showNotification = (notification) => {
-  toast.success(
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <img src='icons/check.svg' alt='check icon' style={{ width: '20px', marginRight: '10px' }} />
-      {`${notification.message} - ${new Date(notification.createdAt).toLocaleTimeString()}`}
-    </div>
-  );
-};
 
-const MainUserTalento = ({ dadosTag, notify }) => {
+
+
+const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   const { data2: userDataVagas, loading2, error2 } = UsersVagasTag();
-  const { data, loading, error } = useUser(); // Adicionado carregamento e erro
+  const { data, loading, error } = useUser(); 
   const [selectedButton, setSelectedButton] = useState('home');
   const [imagePerfil, setImagePerfil] = useState(null);
   const [shownNotifications, setShownNotifications] = useState([]);
   const [modalIndex, setModalIndex] = useState(null);
+  const [mudaborder, setmudaborder] = useState(null);
+  const [selectedNotification, setSelectedNotification] = useState(null);
 
+  const VerDetalhes = (notification, index) => {
+    setSelectedNotification(notification); 
+    setmudaborder(index);
+  }
+  
+  const teste = (notification) => {
 
+    return(
+      <motion.div 
+       initial={{y: '-10px'}}
+       animate={{ y: 0 }}
+       transition={{ duration: 2, ease: 'easeOut' }}
+       className='notification-container'
+      >
+
+          <h1>{notification.message}</h1>
+
+      </motion.div>
+    )
+  }
+  
+  const getHoursDifference = (createdAt) => {
+    const currentTime = new Date();
+    const notificationTime = new Date(createdAt);
+    const differenceInMs = currentTime - notificationTime; 
+    const differenceInHours = Math.floor(differenceInMs / (1000 * 60 * 60)); 
+    return differenceInHours + 'h atrás';
+  }
+  
+  const showNotification = (notification, index) => {
+    return (
+      <>
+      <motion.div
+        key={index}
+        onClick={() => VerDetalhes(notification, index)} 
+        className='notify-sucess'
+        style={{ position: 'relative', marginBottom: '10px', borderRadius: mudaborder === index ? '15px 0px 0px 0px' : '15px 0px 15px 15px'  }}
+        initial={{x: '100vw'}}
+        animate={{ x: 0 }}
+        transition={{ duration: 2, ease: 'easeOut' }}
+      >
+        <div className='flex justify-between'>
+          <div className='flex gap-2'>
+            <span className='notify-message'>{notification.message}</span>
+            <img src='icons/check.svg' alt='check icon' style={{ width: '20px', marginRight: '10px' }} />
+          </div>
+
+          <span className='notify-message'>{getHoursDifference(notification.createdAt)}</span>
+        </div>
+  
+      </motion.div>
+
+      
+      {selectedNotification === notification && teste(notification)}
+      </>
+    );
+  };
 
   useEffect(() => {
     if (data) {
@@ -48,14 +101,15 @@ const MainUserTalento = ({ dadosTag, notify }) => {
 
   useEffect(() => {
     if (notify.length > 0) {
-      notify.forEach(notification => {
+      notify.forEach((notification, index) => {
         if (!shownNotifications.includes(notification._id)) {
-          showNotification(notification); 
+          showNotification(notification, index); 
           setShownNotifications(prev => [...prev, notification._id]); 
         }
       });
     }
   }, [notify]);
+  
 
   if (loading || loading2) {
     return (
@@ -99,18 +153,21 @@ const MainUserTalento = ({ dadosTag, notify }) => {
         }
       });
   
-      // Exibindo o console de sucesso
       console.log('Sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao atualizar vaga:', error);
       throw new Error('Erro ao atualizar vaga');
     }
   };
+
+
+
   
 
+  
   return (
     userDataVagas && data && (
-      <div className='flex flex-col' style={{ marginTop: '40px' }}>
+      <div className='flex flex-col' style={{ marginTop: '40px', position: 'relative', height: 'calc(100vh - 104px)'}}>
         <div className="containerTal">
           <div>
             <div className='flex flex-col gap-4' style={{ border: '1px solid #E2E8F0', borderRadius: '20px', padding: '80px 0px' }}>
@@ -158,12 +215,10 @@ const MainUserTalento = ({ dadosTag, notify }) => {
             </div>
           </div>
 
-          {selectedButton === 'home' && (
+          {selectedButton === 'home' && !configUser &&(
             <>
-              {/* Verifique se dadosTag é um array vazio ou se não é um array válido */}
               {(!Array.isArray(dadosTag) || dadosTag.length === 0) && <UserVagasTag />}
 
-              {/* Verifique se dadosTag é um array e contém elementos */}
               {Array.isArray(dadosTag) && dadosTag.length > 0 && (
                 <div className='flex flex-col'>
                   {dadosTag.map((item, index) => (
@@ -197,48 +252,32 @@ const MainUserTalento = ({ dadosTag, notify }) => {
             </>
           )}
 
-          {selectedButton === 'aplicacoes' && (
+          {selectedButton === 'aplicacoes' && !configUser &&(
             <UserVagasApl />
           )}
 
-          {selectedButton === 'curtidas' && (
+          {selectedButton === 'curtidas' && !configUser &&(
             <UserVagasLike />
           )}
 
-          {selectedButton === 'configuracoes' && (
+          {selectedButton === 'configuracoes' && !configUser &&(
             <ConfiguracaoConta />
           )}
 
-          {selectedButton === 'perfilCandidato' && (
-            <PerfilCandidato/>
+          {configUser && (
+            <PerfilCandidato dadosUser={data}/>
           )}
 
-          <div className='container-perfil flex flex-col items-center gap-4'>
-            {imagePerfil}
-            <div className='flex flex-col items-center'>
-              <span className='nome-perfil'>{data.firstName + ' ' + data.lastName}</span>
-              <span className='titulo-perfil'>{data.titulo}</span>
-            </div>
-            <div style={{ marginBottom: '1rem', width: '80%' }}>
-              <BtnPrincipal
-                 texto={'Ver Perfil'}
-                 back={'#3B82F6'}
-                 color={'#fff'}
-                 width={'100%'}
-                 padding={'10px'}
-                 borderRadius={'15px'}
-                click={() => handleButtonClick('perfilCandidato')}
-               />
-             </div>
-           </div>
          </div>
  
+
+
          <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={false}
         hideProgressBar={false}
         newestOnTop={true}
-        closeOnClick
+        closeOnClick={false}
         pauseOnHover
         draggable
         pauseOnFocusLoss
@@ -247,7 +286,13 @@ const MainUserTalento = ({ dadosTag, notify }) => {
         className='toast-container'
       />
 
-    
+
+         <div className='notify-caixa'>
+          {notify.map((notification, index) => showNotification(notification, index))}
+         </div>
+
+
+
     {dadosTag.map((item, index) => (
       <>
       {modalIndex === index && (

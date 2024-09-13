@@ -315,7 +315,6 @@ const atualizandoDados = async () => {
       }
     };
 
-    // Prepare os dados para enviar
     const dados = {
       titulo: profissional,
       bio: biografia,
@@ -341,8 +340,6 @@ const atualizandoDados = async () => {
     console.error('Token não encontrado no localStorage');
   }
 };
-
-// Chame a função em algum lugar apropriado
 atualizandoDados();
 
   
@@ -357,7 +354,6 @@ if (token) {
     }
   };
 
-  // Usando async/await para lidar com a promessa
   const updateDados = async () => {
     try {
       const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experiência, config);
@@ -381,7 +377,7 @@ if (token) {
 const handleInicioChange = (date) => {
   setInicio(date);
   if (fim && date > fim) {
-    setFim(null); // Reseta a data de término se for anterior à data de início
+    setFim(null); 
   }
 };
 
@@ -576,15 +572,18 @@ const handleFimChange = (date) => {
                 <h1 className='PassTit'>Muito bem <User nome={true}/>, agora, adicione um título para contar ao mundo o que você faz.</h1>
                   <p className='PassPar'>É a primeira coisa que as Empresas veem, então faça valer a pena. Destaque-se descrevendo sua experiência com suas próprias palavras.</p>
                 </div>
-                <div className='pd flex flex-col gap-2' style={{ paddingLeft: '4rem' }}>
-                  <p className='func'>Sua função Profissional</p>
-                     <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' border={border} required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+                <div className='ctx-input' style={{ padding: '0px 4rem 0px 4rem' }}>
 
-                     <div className='flex flex-col gap-2'>
-          <span>Habilidades</span>
+                  <div>
+                      <p className='func'>Sua função Profissional</p>
+                     <Input type='text' placeholder='Ex: Programador Fullstack' className='lin' border={border} required value={profissional} onChange={(e) => setProfissional(e.target.value)} />
+                  </div>
+
+          <div>
+          <p className='func'>Habilidades</p>
           <div
             style={{
-              maxWidth: '100%',
+              width: '100%',
               height: "40px",
               overflowX: "auto",
               overflowY: "hidden",
@@ -604,6 +603,7 @@ const handleFimChange = (date) => {
               onChange={handleChange}
               style={{ width: '100%', display: 'flex', alignItems: 'center', height: 'max-content', overflowX: 'auto' }}
               suffixIcon={null}
+              placeholder='Insira uma Habilidade'
               tagRender={(props) => {
                 const { label, closable, onClose } = props;
 

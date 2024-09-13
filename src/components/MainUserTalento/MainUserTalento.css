@@ -1,6 +1,6 @@
 .containerTal {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 4fr;
     width: 90vw;
     margin: 0 auto;
     margin-top: 40px;
@@ -67,14 +67,39 @@ border: 1px solid var(--grey-border, #E2E8F0);
 background: var(--Color, #FFF);
 }
 
-.toast-container {
-    width: 500px !important; /* Usa !important para garantir que a largura seja aplicada */
-  }
-
 .Toastify__toast-icon{
     display: none !important;
 }
-  
+
+.notify-sucess{
+    max-width: 450px;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--Color, #FFF);
+    padding: 24px 40px;
+}
+
+.notify-message{
+    color: var(--Grey-Color-Text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 160%; /* 19.2px */
+}
+
+
+.notify-caixa{
+    position: absolute;
+    bottom: 300px;
+    right: 6rem;
+}
+
+
+.notification-container{
+    background: red;
+    padding: 24px 40px;
+    margin-top: -10px;
+}
 
 .span-empresa {
     color: var(--primary-500, #3B82F6);
