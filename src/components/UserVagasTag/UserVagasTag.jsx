@@ -126,7 +126,7 @@ const UserVagasTag = () => {
   if (error2) return <p>Error: {error2.message}</p>;
 
   return (
-    <div className='flex flex-col gap-12' style={{position: 'relative'}}>
+    <div className='flex flex-col gap-12' style={{position: 'relative', height: '70%', overflowY: 'auto'}}>
         <span className='flex title' style={{position: 'absolute', top: '-50px'}}>Vagas recomendadas</span>
 
       {data2.map((item, index) => (

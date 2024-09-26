@@ -1,0 +1,35 @@
+.ant-select-selection-overflow-item{
+    align-self: start !important;
+}
+
+.ant-select-selector{
+    background: #fff !important;
+    height: 40px !important;
+}
+
+
+.ant-select-selection-overflow{
+    padding: 0px !important;
+}
+
+
+.txAreaEdit{
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    color: var(--grey-text-light, #000);
+    font-family: Lexend;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 22.4px */
+}
+
+.txAreaEdit::placeholder{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 22.4px */
+}

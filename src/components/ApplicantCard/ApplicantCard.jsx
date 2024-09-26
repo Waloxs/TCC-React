@@ -6,10 +6,12 @@ import BtnPrincipal from '../Buttons/BtnPrincipal';
 
 
 const ApplicantCard = ({ applicant, onAceitarClick, onVerPerfilClick }) => (
-  <div className='applicant-card' style={{height: '410px', width: '350px', position: 'relative', borderRadius: '15px'}}>
+  <div className='applicant-card' style={{height: '430px', width: '350px', position: 'relative', borderRadius: '15px'}}>
     <div className="fundo">
       <div className='banner'>
-        <img className='applicant-image' src={applicant.image} alt={`${applicant.firstName}'s profile`} />
+        {applicant.image ? <img className='applicant-image' src={applicant.image} alt={`${applicant.firstName}'s profile`} /> : 
+        <img src={`https://ui-avatars.com/api/?name=${applicant.firstName}+${applicant.lastName}&background=172554&rounded=true&color=fff`} alt='Foto não exibida' style={{ marginTop: '1rem', width: '50px', height: '50px' }} />
+        }
       </div>
       <div className='applicant-info'>
         <h4 className='applicant-name'>{applicant.firstName} {applicant.lastName}</h4>

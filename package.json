@@ -12,6 +12,7 @@
   "dependencies": {
     "antd": "^5.20.1",
     "axios": "^1.7.2",
+    "chromedriver": "^128.0.3",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.2.13",
@@ -34,6 +35,7 @@
     "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
+    "selenium-webdriver": "^4.24.0",
     "swiper": "^11.1.4"
   },
   "devDependencies": {
@@ -49,5 +51,10 @@
     "sass": "^1.77.4",
     "tailwindcss": "^3.4.4",
     "vite": "^5.2.0"
-  }
+  },
+  "description": "---",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

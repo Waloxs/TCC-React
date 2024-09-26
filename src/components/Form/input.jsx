@@ -4,6 +4,7 @@ const Input = ({ type, id, border, size, ...props }) => {
   return (
     <div>
       <input 
+        className='meui'
         type={type} 
         id={id} 
         {...props} 

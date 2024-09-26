@@ -729,7 +729,8 @@ const handleFimChange = (date) => {
     <p className='PassPar2'>Sua Biografia</p>
     <textarea
       id="area2"
-      style={{ height: '120px', maxWidth: '600px', resize: 'none', border: `2px solid ${border2}`, outline: 'none' }}
+      style={{ height: '120px', maxWidth: '600px', resize: 'none', border: `2px solid ${border2}`, outline: 'none'}}
+      maxLength={270}
       value={biografia}
       onChange={(e) => setBiografia(e.target.value)}
     />

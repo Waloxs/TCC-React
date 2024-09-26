@@ -1,11 +1,11 @@
 import MainUserTalento from '../../components/MainUserTalento/MainUserTalento.jsx';
-import Navbar from '../../components/Navbar/Navbar';
 import './Dashboard.css';
 import { useState, useEffect } from 'react';
 import { UserProvider as UserDados } from '../../services/UserContext.jsx';
 import { UserProvider as UserDadosEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { UserProvider as VagasTag } from '../../services/UserContextVagasTag.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
+import NavbarDashboard from '../../components/NavbarDashboard/NavbarDashboard.jsx';
 
 const Dashboard = () => {
   const [dadosTag, setDadosTag] = useState([]);
@@ -61,13 +61,12 @@ const Dashboard = () => {
     return () => clearTimeout(timer); // Limpar o timeout ao desmontar
   }, []);
 
-  // Exibição do dashboard sem esperar pelas notificações
   return (
-    <div>
+    <div style={{background: '#F8F8F8', height: '100vh', overflowY: 'hidden'}}>
       <UserDados>
         <VagasTag>
           <UserDadosEmpresa>
-            <Navbar showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} configUser={configUser} setConfigUser={setConfigUser}/>
+            <NavbarDashboard showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} configUser={configUser} setConfigUser={setConfigUser}/>
             <MainUserTalento dadosTag={dadosTag} notify={notify} loadingNotify={loadingNotify} configUser={configUser}/>
           </UserDadosEmpresa>
         </VagasTag>

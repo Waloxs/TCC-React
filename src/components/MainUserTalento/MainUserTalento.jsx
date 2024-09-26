@@ -10,13 +10,9 @@ import UserVagasLike from './UserVagasLike/UserVagasLike.jsx'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx'
-import PerfilCandidato from '../PerfilCandidato/PerfilCandidato.jsx';
+import VerPerfil from '../VerPerfil/VerPerfil.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import { motion } from 'framer-motion';
-
-
-
-
 
 
 const MainUserTalento = ({ dadosTag, notify, configUser }) => {
@@ -28,6 +24,8 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   const [modalIndex, setModalIndex] = useState(null);
   const [mudaborder, setmudaborder] = useState(null);
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [handleNotify, setHandleNotify] = useState(true);
 
   const VerDetalhes = (notification, index) => {
     setSelectedNotification(notification); 
@@ -36,7 +34,9 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   
   const teste = (notification) => {
 
+
     return(
+      <>
       <motion.div 
        initial={{y: '-10px'}}
        animate={{ y: 0 }}
@@ -44,9 +44,43 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
        className='notification-container'
       >
 
-          <h1>{notification.message}</h1>
+        <div className='notification-item flex justify-between items-center'>
+          <h1 className='notify-message-title'>{notification.job.title}</h1>
+        
+          <div className='flex gap-2 items-center'>
+            <h1 className='notify-message-title'>Nome da Empresa</h1>
+            <img src={notification.job.company.image} alt="" style={{maxWidth: '35px'}} />
+          </div>
+        </div>
 
       </motion.div>
+
+<motion.div 
+initial={{y: '-10px'}}
+animate={{ y: 0 }}
+transition={{ duration: 2, ease: 'easeOut' }}
+className='notification-container'
+>
+
+<div className='flex flex-col gap-6'>
+
+ <div className='notification-item flex flex-col'>
+     <h1 className='notify-message-title'>Localização</h1>
+     <h1 className='notify-message-title'>Localização do Job</h1>
+ </div>
+
+
+ <div className='notification-item flex flex-col'>
+     <h1 className='notify-message-title'>Informações de Contato</h1>
+     <h1 className='notify-message-title'>Telefone</h1>
+     <h1 className='notify-message-title'>Email</h1>
+ </div>
+
+ </div>
+ 
+
+</motion.div>
+</>
     )
   }
   
@@ -57,32 +91,42 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
     const differenceInHours = Math.floor(differenceInMs / (1000 * 60 * 60)); 
     return differenceInHours + 'h atrás';
   }
+
+
   
   const showNotification = (notification, index) => {
+
     return (
       <>
       <motion.div
         key={index}
         onClick={() => VerDetalhes(notification, index)} 
         className='notify-sucess'
-        style={{ position: 'relative', marginBottom: '10px', borderRadius: mudaborder === index ? '15px 0px 0px 0px' : '15px 0px 15px 15px'  }}
+        style={{ position: 'relative', marginBottom: '10px', borderRadius: mudaborder === index ? '15px 0px 0px 0px' : '15px 0px 15px 15px', cursor: 'pointer'  }}
         initial={{x: '100vw'}}
         animate={{ x: 0 }}
         transition={{ duration: 2, ease: 'easeOut' }}
       >
         <div className='flex justify-between'>
-          <div className='flex gap-2'>
+          <div className='flex gap-2 items-center'>
             <span className='notify-message'>{notification.message}</span>
             <img src='icons/check.svg' alt='check icon' style={{ width: '20px', marginRight: '10px' }} />
           </div>
 
+        <div className='flex items-center gap-5'>
           <span className='notify-message'>{getHoursDifference(notification.createdAt)}</span>
+          <img  src={isHovered ? "icons/fechar-red.svg" : "icons/fechar.svg"}
+          alt=""
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setHandleNotify(false)}/>
+        </div>
         </div>
   
       </motion.div>
 
-      
-      {selectedNotification === notification && teste(notification)}
+        {selectedNotification === notification && teste(notification)}
+        
       </>
     );
   };
@@ -167,10 +211,10 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   
   return (
     userDataVagas && data && (
-      <div className='flex flex-col' style={{ marginTop: '40px', position: 'relative', height: 'calc(100vh - 104px)'}}>
-        <div className="containerTal">
-          <div>
-            <div className='flex flex-col gap-4' style={{ border: '1px solid #E2E8F0', borderRadius: '20px', padding: '80px 0px' }}>
+      <div className='flex flex-col' style={{ position: 'relative'}}>
+        <div className="containerTalDash">
+          <div className='lateral-esquerda'>
+            <div className='flex flex-col gap-4' style={{ padding: '80px 0px' }}>
               <BtnPrincipal
                 texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{selectedButton === 'home' ? <img src="icons/icon-home-azul.svg" alt="Ícone Home" style={{ width: '20px' }} /> : <img src="icons/icon-home-cinza2.svg" alt="Ícone Home" style={{ width: '20px' }} />} Home</div>}
                 back={selectedButton === 'home' ? '#fff' : '#fff'}
@@ -217,7 +261,9 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
 
           {selectedButton === 'home' && !configUser &&(
             <>
+            <div style={{marginTop: '64px' ,height: 'calc(104px + 100vh)'}}>
               {(!Array.isArray(dadosTag) || dadosTag.length === 0) && <UserVagasTag />}
+            </div>
 
               {Array.isArray(dadosTag) && dadosTag.length > 0 && (
                 <div className='flex flex-col'>
@@ -265,7 +311,7 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
           )}
 
           {configUser && (
-            <PerfilCandidato dadosUser={data}/>
+            <VerPerfil dadosUser={data}/>
           )}
 
          </div>
@@ -287,9 +333,11 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
       />
 
 
+      {handleNotify && (
          <div className='notify-caixa'>
           {notify.map((notification, index) => showNotification(notification, index))}
          </div>
+      )}
 
 
 

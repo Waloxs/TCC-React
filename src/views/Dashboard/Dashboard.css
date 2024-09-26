@@ -17,6 +17,7 @@
 }
 
 
+
 .imgUserNone2{
     display: flex;
     justify-content: center;
@@ -37,7 +38,6 @@
 }
 
 .imgCadas{
-    margin-right: 2rem;
     cursor: pointer;
 }
 

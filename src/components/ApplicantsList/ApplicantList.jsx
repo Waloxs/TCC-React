@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { axiosInstance, setAuthToken } from '../../utils/api'; 
 import ApplicantCard from '../ApplicantCard/ApplicantCard';
-import PerfilCandidato from '../PerfilCandidato/PerfilCandidato';
+import VerPerfil from '../VerPerfil/VerPerfil';
 import './ApplicantsList.css'; 
 import Notify from '../Notify/Notify';
+import PerfilCandidato from '../PerfilCandidato/PerfilCandidato';
 
 const ApplicantsList = ({ jobId, onClose }) => {
   const [applicants, setApplicants] = useState([]);
@@ -19,7 +20,6 @@ const ApplicantsList = ({ jobId, onClose }) => {
       try {
         const response = await axiosInstance.get(`/jobs/${jobId}/applicants`);
         setApplicants(response.data.applicants);
-        console.log(response.data.applicants)
       } catch (error) {
         console.error('Erro ao buscar candidatos:', error);
         setError('Erro ao carregar candidatos.');
@@ -65,7 +65,9 @@ const ApplicantsList = ({ jobId, onClose }) => {
   };
 
   return (
-    <div>
+    <>
+      {applicants.map((applicant, index) => (
+      <>
       <div className='modal-overlay' onClick={onClose}></div>
 
       <div className='modalApplicants'>
@@ -74,7 +76,7 @@ const ApplicantsList = ({ jobId, onClose }) => {
         ) : error ? (
           <div className='error-message'>{error}</div>
         ) : selectedApplicant ? (
-          <PerfilCandidato applicant={selectedApplicant} onClose={handleClosePerfil} volta={handleClosePerfil} />
+          <PerfilCandidato applicant={selectedApplicant} onClose={handleClosePerfil} volta={handleClosePerfil} onAceitarClick={() => AceitarCandidato(applicant, index)} />
         ) : applicants.length === 0 ? (
           <div className='no-candidates'>Não há candidatos.</div>
         ) : (
@@ -99,7 +101,9 @@ const ApplicantsList = ({ jobId, onClose }) => {
           </div>
         )}
       </div>
-    </div>
+      </>
+      ))}
+    </>
   );
 };
 
