@@ -10,6 +10,8 @@ import Input from '../../components/Form/input';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { ThreeDots } from 'react-loader-spinner';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 const Talento = () => {
   const [passwordVisible2, setPasswordVisible2] = useState(false);
@@ -35,15 +37,16 @@ const Talento = () => {
       };
 
       try {
-        const response = await axios.post('https://workzen.onrender.com/v1/user/register', dados);
+        const response = await axiosInstance.post('/user/register', dados);
         console.log(response.data);
 
         if (response.status === 201) {
           const { token } = response.data;
+          setAuthToken(token);
           localStorage.setItem('authToken', token);
 
           try {
-            const emailResponse = await axios.post('https://workzen.onrender.com/v1/mail/send/verify', { email });
+            const emailResponse = await axiosInstance.post('/mail/send/verify', { email });
             console.log('Email de verificação enviado:', emailResponse.data);
           } catch (emailError) {
             console.error('Erro ao enviar o email de verificação:', emailError);

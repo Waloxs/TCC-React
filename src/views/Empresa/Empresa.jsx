@@ -11,6 +11,8 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import axios from 'axios';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 const Empresa = () => {
 
@@ -63,8 +65,9 @@ const HandleSave = async (e) => {
     console.log(dados);
 
     try {
-      const response = await axios.post('https://workzen.onrender.com/v1/empresa/register', dados);
+      const response = await axiosInstance.post('/empresa/register', dados);
       const { token } = response.data;
+      setAuthToken(token);
 
 
       localStorage.setItem('authToken', token);

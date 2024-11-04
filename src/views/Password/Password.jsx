@@ -5,6 +5,8 @@ import './Password.css';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import { MdMarkEmailRead } from "react-icons/md";
 import Footer from '../../components/Footer/Footer';
+import { axiosInstance } from '../../utils/api.js';
+
 
 const Password = () => {
   const [modal, setModal] = useState(true);
@@ -19,29 +21,22 @@ const Password = () => {
     setEmail(event.target.value);
   };
 
+
   const handleModal = async () => {
     if (!email) {
       setError('Por favor, insira um endereço de email.');
       return;
     }
-
+  
     setLoading(true);
     setError('');
     setMessage('');
-
+  
     try {
-      const response = await fetch('https://workzen.onrender.com/v1/mail/send/reset', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
+      const response = await axiosInstance.post('/mail/send/reset', {
+        email
       });
-
-      if (!response.ok) {
-        throw new Error('Erro na verificação de email');
-      }
-
+  
       setMessage('Email de redefinição de senha enviado com sucesso!');
       setModal(false);
       setModal2(true);
@@ -51,6 +46,7 @@ const Password = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className='scr'>

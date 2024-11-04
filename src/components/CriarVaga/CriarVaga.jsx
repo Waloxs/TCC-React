@@ -7,6 +7,8 @@ import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx'; // Importe o com
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import Input from '../Form/input.jsx';
 import { useForm } from 'react-hook-form';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 const { Option } = Select;
 
@@ -65,6 +67,7 @@ const CriarVaga = () => {
     }
 
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
 
     if (token) {
       try {
@@ -83,7 +86,9 @@ const CriarVaga = () => {
           requirements: requisits,
         };
 
-        const response = await axios.post('https://workzen.onrender.com/v1/jobs/create', postData, config);
+        const response = await axiosInstance.post('/jobs/create', postData, config);
+        
+        
 
         console.log(response.data);
 

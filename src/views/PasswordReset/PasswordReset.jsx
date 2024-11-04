@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import Input from '../../components/Form/input'; 
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal'; 
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
+import { axiosInstance } from '../../utils/api.js';
+
 
 const PasswordReset = () => {
   const { token } = useParams();
@@ -42,8 +44,7 @@ const PasswordReset = () => {
     setMessage('');
 
     try {
-      const response = await fetch('https://workzen.onrender.com/v1/mail/reset', {
-        method: 'POST',
+      const response = await axiosInstance.post('/mail/reset', {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -48,10 +48,10 @@ const NavbarDashboard = ({
   }
  
 
-  // Debounce para pesquisa em tempo real
+  
   useEffect(() => {
     if (inputValue.trim() !== '') {
-      setSearchText(inputValue); // Atualiza o texto da pesquisa imediatamente
+      setSearchText(inputValue); 
     }
   }, [inputValue, setSearchText]);
   
@@ -144,7 +144,7 @@ const NavbarDashboard = ({
           <div className='flex justify-start items-center' style={{padding: '24px 32px' }}>
             <img src={Logo} alt="" style={{maxWidth: '100px', height: '20px'}}/>
           </div>
-          <div style={{height: '2px', width: '90%', background: 'red', margin: '0 auto'}}></div>
+          <div style={{height: '2px', width: '90%', background: '#E2E8F0', margin: '0 auto'}}></div>
           </div>
             <div className='flex items-center justify-between gap-12 w-[100%]' style={{paddingTop: '1rem'}}>
               {barraPesquisa && (
@@ -161,9 +161,9 @@ const NavbarDashboard = ({
               )}
 
 
-             <div className='flex items-center gap-4' onClick={handleModal}>
+             <div className='flex items-center gap-4'>
             
-              <div style={{position: 'relative'}}>
+              <div style={{position: 'relative'}} onClick={handleModal}>
               <img src='icons/bell.svg' style={{width: '20px'}}/>
               {notify && (
                 <div style={{position: 'absolute', top: '0', right: '0'}}>

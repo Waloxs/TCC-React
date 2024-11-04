@@ -15,6 +15,8 @@ import { MdArrowDropDown } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 const TalentoPasso1 = () => {
   const [border3, setBorder3] = useState('#E2E8F0');
@@ -282,9 +284,9 @@ const handleImageUpload = (event) => {
   // Envia a requisição PUT
   
 const token = localStorage.getItem('authToken');
+setAuthToken(token);
 
-  fetch('https://workzen.onrender.com/v1/me/', {
-    method: 'PUT',
+  axiosInstance.put('/me/', {
     body: formData,
     headers: {
         'Authorization': `Bearer ${token}`
@@ -324,7 +326,7 @@ const atualizandoDados = async () => {
     console.log('Dados que serão enviados:', dados);
 
     try {
-      const response = await axios.put('https://workzen.onrender.com/v1/me', dados, config);
+      const response = await axiosInstance.put('/me', dados, config);
       console.log('Dados atualizados com sucesso:', response.data);
     } catch (error) {
       if (error.response) {
@@ -356,7 +358,7 @@ if (token) {
 
   const updateDados = async () => {
     try {
-      const response = await axios.post('https://workzen.onrender.com/v1/me/xp', experiência, config);
+      const response = await axiosInstance.post('/me/xp', experiência, config);
       console.log('Dados atualizados com sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao enviar dados:', error);

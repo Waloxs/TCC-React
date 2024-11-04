@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { axiosInstance, setAuthToken } from '../../utils/api';
 
 const VerificEmail = () => {
   const { token } = useParams();
+  setAuthToken(token);
 
   useEffect(() => {
     const verificarEmail = async () => {
       try {
-        const response = await fetch('https://workzen.onrender.com/v1/mail/verify', {
-          method: 'POST',
+        const response = await axiosInstance.post('https://workzen.onrender.com/v1/mail/verify', {
           headers: {
             'Content-Type': 'application/json',
           },

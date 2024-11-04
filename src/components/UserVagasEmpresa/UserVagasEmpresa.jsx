@@ -9,6 +9,8 @@ import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
 import { useForm } from 'react-hook-form';
 import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx';
 import './UserVagasEmpresa.css'
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 
 const { Option } = Select;
@@ -88,6 +90,7 @@ const UserVagasEmpresa = () => {
     const id = userDataVagasEmpresa[selectedIndex]._id;
   
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -95,7 +98,7 @@ const UserVagasEmpresa = () => {
     };
   
     try {
-      const response = await axios.delete(`https://workzen.onrender.com/v1/jobs/delete/${id}`, config);
+      const response = await axiosInstance.delete(`/jobs/delete/${id}`, config);
       console.log('Requisição bem-sucedida:', response);
 
       setUserDataVagasEmpresa(userDataVagasEmpresa.filter((_, i) => i !== selectedIndex));
@@ -117,6 +120,8 @@ const UserVagasEmpresa = () => {
     const id = userDataVagasEmpresa[selectedIndex]._id;
   
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
+    
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -156,7 +161,7 @@ const UserVagasEmpresa = () => {
     console.log('Dados enviados para atualização:', dados);
   
     try {
-      const response = await axios.put(`https://workzen.onrender.com/v1/jobs/update/${id}`, dados, config);
+      const response = await axiosInstance.put(`/jobs/update/${id}`, dados, config);
       console.log('Resposta da API:', response.data);
   
       const updatedVaga = response.data.job;

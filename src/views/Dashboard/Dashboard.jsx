@@ -62,7 +62,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div style={{background: '#F8F8F8', height: '100vh', overflowY: 'hidden'}}>
+    <div style={{background: '#F8F8F8'}}>
       <UserDados>
         <VagasTag>
           <UserDadosEmpresa>

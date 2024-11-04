@@ -7,6 +7,8 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import Footer from '../../components/Footer/Footer';
 import { motion } from 'framer-motion';
 import { useUser } from '../../services/UserContext';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 
 const Configura = () => {
@@ -49,68 +51,57 @@ const Configura = () => {
         const { value } = e.target;
         setInput3(value);
     };
-
     const saveChanges = async () => {
         if (!data) {
             console.error('Dados do usuário não estão carregados.');
             return;
         }
-
+    
         const updatedUserData = { firstName: input, lastName: input2, email: input3 };
-
+    
         console.log(updatedUserData);
-
+    
         try {
-            const response = await fetch('https://workzen.onrender.com/v1/me', {
-                method: 'PUT',
+            const response = await axiosInstance.put('/me', updatedUserData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-                },
-                body: JSON.stringify(updatedUserData)
+                }
             });
-
-            if (!response.ok) {
-                throw new Error('Erro ao atualizar os dados');
-            }
-
-            setUserData(updatedUserData); // Atualiza o estado de userData com os novos dados
+    
+            setUserData(response.data); // Atualiza o estado de userData com os dados retornados pela API
             alert('Dados atualizados com sucesso!');
         } catch (error) {
-            console.error('Erro ao atualizar os dados:', error); // Exibe o erro no console para depuração
+            console.error('Erro ao atualizar os dados:', error);
             alert('Ocorreu um erro ao atualizar os dados.');
         }
     };
+    
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
-        setImage(URL.createObjectURL(file)); // Exibe a pré-visualização da imagem para o usuário
-      
-        // Prepara os dados para enviar via formData
+        setImage(URL.createObjectURL(file)); 
+    
         const formData = new FormData();
-        formData.append('image', file); // 'image' deve ser o nome do campo esperado pela API
-      
-        // Envia a requisição PUT
+        formData.append('image', file); 
+    
         const token = localStorage.getItem('authToken');
-      
-        fetch('https://workzen.onrender.com/v1/me/image', { // Ajusta o endpoint conforme necessário
-          method: 'PUT',
-          body: formData,
-          headers: {
-              'Authorization': `Bearer ${token}`
-          }
+        setAuthToken(token);
+    
+        axiosInstance.put('/me/image', formData, { 
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data' 
+            }
         })
         .then(response => {
-          // Trata a resposta da API conforme necessário
-          console.log('Imagem enviada com sucesso:', response);
-          // Redireciona para a página de Dashboard após o envio
+            console.log('Imagem enviada com sucesso:', response);
         })
         .catch(error => {
-          console.error('Erro ao enviar imagem:', error);
-          // Trata o erro conforme necessário
+            console.error('Erro ao enviar imagem:', error);
         });
-      };
-
+    };
+    
     return (
         <div>
             <Navbar showDashnone={false} img={true} className='navDash' />

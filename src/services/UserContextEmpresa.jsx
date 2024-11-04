@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import { axiosInstance, setAuthToken } from '../utils/api.js';
 
 const UserContextEmpresa = createContext();
 
@@ -18,6 +19,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('authToken');
+      setAuthToken(token);
 
       if (!token) {
         setLoading(false);
@@ -40,7 +42,7 @@ export const UserProvider = ({ children }) => {
       };
 
       try {
-        const response = await axios.get('https://workzen.onrender.com/v1/empresa/profile', config);
+        const response = await axiosInstance.get('/empresa/profile', config);
         setData(response.data);
       } catch (error) {
         if (error.response && error.response.status === 404) {

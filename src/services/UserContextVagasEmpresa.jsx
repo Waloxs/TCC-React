@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { axiosInstance, setAuthToken } from '../utils/api.js'
+
 
 const UserContextVagaEmpresa = createContext();
 
@@ -13,6 +15,7 @@ export const UserProvider = ({ children }) => {
   const [error2, setError2] = useState(null);
   const fetchData = async () => {
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
 
     if (!token) {
       setLoading2(false);
@@ -26,7 +29,7 @@ export const UserProvider = ({ children }) => {
     };
 
     try {
-      const response = await axios.get('https://workzen.onrender.com/v1/jobs/companyJobs', config);
+      const response = await axiosInstance.get('/jobs/companyJobs', config);
       setData(response.data.jobs);
     } catch (error) {
       setError2(error);

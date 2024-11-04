@@ -13,6 +13,7 @@ import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx'
 import VerPerfil from '../VerPerfil/VerPerfil.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const MainUserTalento = ({ dadosTag, notify, configUser }) => {
@@ -26,6 +27,9 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [handleNotify, setHandleNotify] = useState(true);
+
+
+  console.log(configUser);
 
   const VerDetalhes = (notification, index) => {
     setSelectedNotification(notification); 
@@ -204,64 +208,82 @@ className='notification-container'
     }
   };
 
+  const Logout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/Login'; 
+  }
 
 
+
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   
 
   
   return (
     userDataVagas && data && (
-      <div className='flex flex-col' style={{ position: 'relative'}}>
+      <div className='flex flex-col' style={{ position: 'relative', height: 'calc(100vh - 100px)' }}>
         <div className="containerTalDash">
           <div className='lateral-esquerda'>
-            <div className='flex flex-col gap-4' style={{ padding: '80px 0px' }}>
+            <div className='flex flex-col gap-4' style={{ padding: '80px 0px 180px 0px' }}>
               <BtnPrincipal
-                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{selectedButton === 'home' ? <img src="icons/icon-home-azul.svg" alt="Ícone Home" style={{ width: '20px' }} /> : <img src="icons/icon-home-cinza2.svg" alt="Ícone Home" style={{ width: '20px' }} />} Home</div>}
-                back={selectedButton === 'home' ? '#fff' : '#fff'}
+                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{ <img src="icons/icon-home-cinza.svg" alt="Ícone Home" style={{ width: '20px' }} /> } Home</div>}
+                back={selectedButton === 'home' ? '#FAFAFA' : '#fff'}
                 padding='15px'
                 borderRadius='0px'
-                color={selectedButton === 'home' ? '#3B82F6' : '#64748B'}
-                width="85%"
+                color={'#64748B'}
+                width="100%"
                 borderLeft={selectedButton === 'home' ? '#3B82F6' : '#fff'}
                 weig="500"
                 click={() => handleButtonClick('home')}
               />
               <BtnPrincipal
-                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{selectedButton === 'aplicacoes' ? <img src="icons/Aplication-azul.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} /> : <img src="icons/Aplication-cinza.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} />} Minhas Aplicações</div>}
-                back={selectedButton === 'aplicacoes' ? '#fff' : '#fff'}
+                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{<img src="icons/Applicant-cinza.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} /> } Minhas Aplicações</div>}
+                back={selectedButton === 'aplicacoes' ? '#FAFAFA' : '#fff'}
                 padding='15px'
                 borderRadius='0px'
-                color={selectedButton === 'aplicacoes' ? '#3B82F6' : '#64748B'}
-                width="85%"
+                color={'#64748B'}
+                width="100%"
                 borderLeft={selectedButton === 'aplicacoes' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('aplicacoes')}
               />
               <BtnPrincipal
-                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{selectedButton === 'curtidas' ? <img src="icons/love-azul.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} /> : <img src="icons/love.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} />} Vagas Curtidas</div>}
-                back={selectedButton === 'curtidas' ? '#fff' : '#fff'}
+                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{<img src="icons/love.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} />} Vagas Curtidas</div>}
+                back={selectedButton === 'curtidas' ? '#FAFAFA' : '#fff'}
                 padding='15px'
                 borderRadius='0px'
-                color={selectedButton === 'curtidas' ? '#3B82F6' : '#64748B'}
-                width="85%"
+                color={'#64748B'}
+                width="100%"
                 borderLeft={selectedButton === 'curtidas' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('curtidas')}
               />
               <BtnPrincipal
-                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{selectedButton === 'configuracoes' ? <img src="icons/config-azul.svg" alt="Ícone Configurações" style={{ width: '20px' }} /> : <img src="icons/config-cinza.svg" alt="Ícone Configurações" style={{ width: '20px' }} />} Configurações</div>}
-                back={selectedButton === 'configuracoes' ? '#fff' : '#fff'}
+                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{<img src="icons/config-cinza.svg" alt="Ícone Configurações" style={{ width: '20px' }} />} Configurações</div>}
+                back={selectedButton === 'configuracoes' ? '#FAFAFA' : '#fff'}
                 padding='15px'
                 borderRadius='0px'
-                color={selectedButton === 'configuracoes' ? '#3B82F6' : '#64748B'}
-                width="85%"
+                color={'#64748B'}
+                width="100%"
                 borderLeft={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('configuracoes')}
               />
             </div>
+
+
+            <div className='flex flex-col items-start'>
+                <div style={{height: '2px', width: '90%', background: '#E2E8F0', margin: '0 auto'}}></div>
+                <div className='flex items-center' style={{padding: '20px 0px 0px 40px', cursor: 'pointer'}} onClick={Logout}>
+                  <img src="icons/logout.svg" alt="" style={{width: '30px'}}/>
+                  <span>Sair</span>
+                </div>
+            </div>
+
           </div>
 
           {selectedButton === 'home' && !configUser &&(
             <>
-            <div style={{marginTop: '64px' ,height: 'calc(104px + 100vh)'}}>
+            {configUser = false}
+            <div style={{marginTop: '64px' ,height: 'max-content'}}>
               {(!Array.isArray(dadosTag) || dadosTag.length === 0) && <UserVagasTag />}
             </div>
 
@@ -298,17 +320,28 @@ className='notification-container'
             </>
           )}
 
+
           {selectedButton === 'aplicacoes' && !configUser &&(
+            <>
+            {configUser = false}
             <UserVagasApl />
+            </>
           )}
 
           {selectedButton === 'curtidas' && !configUser &&(
-            <UserVagasLike />
+             <>
+             {configUser = false}
+             <UserVagasLike />
+             </>
           )}
 
           {selectedButton === 'configuracoes' && !configUser &&(
-            <ConfiguracaoConta />
+            <>
+              {configUser = false}
+              <ConfiguracaoConta />
+            </>
           )}
+
 
           {configUser && (
             <VerPerfil dadosUser={data}/>

@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 4fr;
     gap: 100px;
     margin-right: 100px;
-    height: 100vh;
+    height: 100%;
 }
 
 
@@ -17,7 +17,10 @@
     line-height: 160%; /* 32px */
 }
 
-.lateral-esquerda{
+.lateral-esquerda {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: #fff;
 }
 

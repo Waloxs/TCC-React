@@ -14,6 +14,8 @@ import { LuPen } from "react-icons/lu";
 import "antd/dist/reset.css";
 import CurrencyInput from 'react-currency-input-field';
 import ClipLoader from "react-spinners/ClipLoader.js";
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 
 import { Select } from "antd";
@@ -163,8 +165,8 @@ const EmpresaPasso = () => {
           localizacao: endereco,
         };
 
-        const response = await axios.put(
-          "https://workzen.onrender.com/v1/empresa/profile",
+        const response = await axiosInstance.put(
+          "/empresa/profile",
           dado,
           config
         );
@@ -209,8 +211,8 @@ const EmpresaPasso = () => {
           requirements: requisits,
         };
   
-        const response = await axios.post(
-          "https://workzen.onrender.com/v1/jobs/create",
+        const response = await axiosInstance.post(
+          "/jobs/create",
           data,
           config
         );

@@ -10,6 +10,7 @@ import EditEmpresa from '../EditarPerfilEmpresa/EditEmpresa.jsx';
 import ConfiguracaoConta from '../ConfiguracaoConta/ConfiguracaoConta.jsx';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import axios from 'axios';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import './MainUser.css';
 
 const MainUser = () => {
@@ -49,16 +50,17 @@ const MainUser = () => {
     formData.append('image', file);
   
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
   
     try {
-      const response = await axios.put('https://workzen.onrender.com/v1/empresa/profile', formData, {
+      const response = await axiosInstance.put('/empresa/profile', formData, {
+
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
         }
       });
 
-      console.log(response);
   
       const data = response.data;
       if (data.image) {

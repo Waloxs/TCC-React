@@ -11,6 +11,8 @@ import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 
 const Login = () => {
@@ -29,8 +31,11 @@ const Login = () => {
 
 
     try {
-      const response = await axios.post('https://workzen.onrender.com/v1/user/login', userData);
+      const response = await axiosInstance.post('/user/login', userData);
       localStorage.setItem('authToken', response.data.token);
+      const { token } = response.data;
+      setAuthToken(token);
+
 
       navigate('/Dashboard');
 
@@ -40,8 +45,11 @@ const Login = () => {
     } catch (error) {
       console.error('Erro ao tentar login de usuário:', error);
       try {
-        const responseEmpresa = await axios.post('https://workzen.onrender.com/v1/empresa/login', userData);
+        const responseEmpresa = await axiosInstance.post('/empresa/login', userData);
         localStorage.setItem('authToken', responseEmpresa.data.token);
+        const { token } = response.data;
+        setAuthToken(token);
+
         navigate('/DashboardEmpresa');
 
           window.location.reload();

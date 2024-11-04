@@ -5,6 +5,8 @@ import axios from 'axios';
 import './EditEmpresa.css';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { axiosInstance, setAuthToken } from '../../utils/api.js';
+
 
 const EditEmpresa = () => {
   const [nome, setNome] = useState('');
@@ -25,6 +27,7 @@ const EditEmpresa = () => {
 
   const editarEmpresa = async () => {
     const token = localStorage.getItem('authToken');
+    setAuthToken(token);
 
     if (token) {
       try {
@@ -40,7 +43,7 @@ const EditEmpresa = () => {
           ramo_atividade,
         };
 
-        const response = await axios.put('https://workzen.onrender.com/v1/empresa/profile', data, config);
+        const response = await axiosInstance.put('/empresa/profile', data, config);
 
 
         setNome(response.data.nome || '');

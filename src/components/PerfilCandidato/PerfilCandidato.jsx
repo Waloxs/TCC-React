@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BtnPrincipal from '../Buttons/BtnPrincipal';
-import { axiosInstance, setAuthToken } from '../../utils/api'; 
 import './PerfilCandidato.css';
-import axios from 'axios';
 
 const PerfilCandidato = ({applicant, onAceitarClick, volta}) => {
 
