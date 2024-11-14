@@ -27,11 +27,6 @@
   margin-right: 10px;
 }
 
-.navbarDashboard{
-  display: flex;
-  margin-right: 100px;
-  margin-left: 300px;
-}
 
 .imgUserNone, .imgUserNone2{
   color: #fff;
@@ -82,8 +77,9 @@
 
 
 
+
 @media (max-width: 1200px) {
-  .navbarDashboardbar{
+  .navbar{
     border-radius: 0px !important;
     width: 100vw !important;
   }

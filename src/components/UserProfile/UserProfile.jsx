@@ -8,6 +8,9 @@ const User = ({ nome, sobrenome, email, id, titulo, prLet, ...props }) => {
   if (loading) return <div><p>Loading...</p></div>;
   if (error) return <p>Error: {error.message}</p>;
 
+
+  console.log(data);
+
   return (
     <>
       {prLet && <>{data?.firstName[0]}</>}

@@ -6,6 +6,7 @@ import { Select } from "antd";
 import { axiosInstance, setAuthToken } from '../../utils/api'; 
 import './VerPerfil.css';
 import axios from 'axios';
+import User from '../UserProfile/UserProfile';
 
 const VerPerfil = ({dadosUser}) => {
   const [nome, setNome] = useState('');
@@ -81,13 +82,27 @@ const VerPerfil = ({dadosUser}) => {
 
   return (
     <div className='cx-form-edit flex flex-col'>
-      <div className='flex flex-row items-center gap-4 self-end'>
-        <div className='flex flex-col items-end'>
-          <h4 className='applicant-name'>{dadosUser.firstName} {dadosUser.lastName}</h4>
-          <p className='applicant-titulo'>{dadosUser.titulo}</p>
-        </div>
-        <img className='applicant-image' src={dadosUser.image} alt={`${dadosUser.firstName}'s profile`} style={{width: '120px', height: '120px'}}/>
-      </div>
+      <div className='flex items-center self-end gap-4'>
+                      <div className='flex flex-col items-end'>
+                        <h1 style={{color: '#020617', fontFamily: 'Lexend', fontSize: '1rem'}}>{dadosUser.firstName} {dadosUser.lastName}</h1>
+                        <h1 style={{color: '#334155', fontFamily: 'Lexend', fontSize: '0.95rem'}}>{dadosUser.titulo}</h1>
+                      </div>
+
+                      <div>
+                        {dadosUser && dadosUser.image && (
+                          <div className="imgCadas" style={{width: '40px', height: '80px'}}>
+                            <img src={user.image} alt="User Avatar" className='imgUser' />
+                          </div>
+                        )}
+                        {dadosUser && !dadosUser.image && (
+                          <div className="imgCadas">
+                            <div className='imgUserNone' style={{width: '80px', height: '80px', fontSize: '2rem'}}>
+                              <User prLet={true} />
+                            </div>
+                          </div>
+                        )}  
+                      </div>  
+                  </div>
 
       <div className='flex flex-col gap-5'>
         <div className="conteiner-editar flex flex-col gap-3">

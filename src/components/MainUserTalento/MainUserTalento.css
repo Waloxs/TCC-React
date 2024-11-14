@@ -1,8 +1,7 @@
 .containerTalDash {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    gap: 100px;
-    margin-right: 100px;
+    gap: 50px;
     height: 100%;
 }
 
@@ -22,6 +21,23 @@
     flex-direction: column;
     justify-content: space-between;
     background: #fff;
+    max-width: 300px;
+    padding-bottom: 40px;
+}
+
+
+.line-decorativa{
+    height: 2px;
+    width: 90%;
+    background: rgb(226, 232, 240);
+    margin: 0px auto;
+}
+
+.title-vagas{
+    color: var(--blackclear, #64748B);
+    font-family: Lexend;
+    font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 .container-vagas {
@@ -188,6 +204,10 @@ line-height: 160%; /* 19.2px */
     color: #94A3B8;
 }
 
+.modal{
+    margin-top: 50px;
+    height: 100%;
+}
 
 .nome-perfil{
     color: var(--grey-text-dark, #020617);

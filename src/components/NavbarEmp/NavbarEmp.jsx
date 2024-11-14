@@ -6,19 +6,19 @@ import { CiLogout } from "react-icons/ci";
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
-import User from '../../components/UserProfile/UserProfile.jsx';
-import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx';
-import { useUser as useUserTalento } from '../../services/UserContext';
+import User from '../UserProfile/UserProfile.jsx';
+import UserEmpresa from '../UserEmpresa/UserEmpresa.jsx';
+import { useUser as useUserTalento } from '../../services/UserContext.jsx';
 import { useUser as useUserEmpresa } from '../../services/UserContextEmpresa.jsx';
 import Logo from '../../assets/Logo.png';
 import LogoResp from '../../assets/logoResp.png';
-import './NavbarDashboard.css';
+import './NavbarEmp.css';
 import Notify from '../Notify/Notify.jsx';
 
 
 
 
-const NavbarDashboard = ({
+const NavbarEmp = ({
   menu,
   setMenu,
   showDashnone = true,
@@ -47,10 +47,10 @@ const NavbarDashboard = ({
   }
  
 
-  
+  // Debounce para pesquisa em tempo real
   useEffect(() => {
     if (inputValue.trim() !== '') {
-      setSearchText(inputValue); 
+      setSearchText(inputValue); // Atualiza o texto da pesquisa imediatamente
     }
   }, [inputValue, setSearchText]);
   
@@ -95,6 +95,8 @@ const NavbarDashboard = ({
     setBorder(!menuDrop2);
   };
 
+  const estiloSeta1 = menuDrop1 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
+  const estiloSeta2 = menuDrop2 ? <IoIosArrowUp className='dropList novaCor'/> : <IoIosArrowDown className='dropList'/>;
 
   const modalRef = useRef(null);
 
@@ -114,7 +116,8 @@ const NavbarDashboard = ({
 
   return (
     (userDataEmpresa || user || isHome) && (
-      <div className="navbarDashboard" >   
+ 
+        <>
         {showDashnone && (
           <div className="dashnone flex items-center gap-5 mr-[3rem]">
             <div className='dnone'>
@@ -139,7 +142,7 @@ const NavbarDashboard = ({
 
         {userTalento && user && (
           <>
-            <div className='flex items-center justify-between gap-12 w-[100%]' style={{paddingTop: '1rem'}}>
+            <div className='flex items-center gap-12'>
               {barraPesquisa && (
                 <div className='pesquisa' style={{position: 'relative'}}>
                   <input 
@@ -153,13 +156,10 @@ const NavbarDashboard = ({
                 </div>
               )}
 
-
-             <div className='flex items-center gap-4'>
-            
-              <div style={{position: 'relative'}} onClick={handleModal}>
+              <div style={{position: 'relative', cursor: 'pointer'}} onClick={handleModal}>
               <img src='icons/bell.svg' style={{width: '20px'}}/>
               {notify && (
-                <div style={{position: 'absolute', top: '0', right: '0'}}>
+                <div style={{position: 'absolute', top: '0px', right: '0px'}}>
                   <Notify notify={notify}/>
 
                   {modalNotify && (
@@ -167,8 +167,8 @@ const NavbarDashboard = ({
                   )}
                 </div>
               )}
-              </div>
               
+              </div>
 
               {img && user && user.image && (
                 <div className="imgCadas" onClick={sitModal}>
@@ -182,7 +182,6 @@ const NavbarDashboard = ({
                   </div>
                 </div>
               )}
-              </div>
             </div>
           </>
         )}
@@ -200,18 +199,6 @@ const NavbarDashboard = ({
                     placeholder={'Procurar'} 
                   />
                   <img src="icons/Search.svg" alt="Search Icon" style={{position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', cursor: 'pointer'}}/>
-                </div>
-              )}
-              {img && userDataEmpresa && userDataEmpresa.image && (
-                <div className="imgCadas" onClick={sitModal2}>
-                  <img src={userDataEmpresa.image} alt="Company Avatar" className='imgUser' />
-                </div>
-              )}
-              {img && userDataEmpresa && !userDataEmpresa.image && (
-                <div className="imgCadas" onClick={sitModal2}>
-                  <div className='imgUserNone'>
-                    <UserEmpresa prLet={true} />
-                  </div>
                 </div>
               )}
             </div>
@@ -251,12 +238,12 @@ const NavbarDashboard = ({
             )}
           </>
         )}
-      </div>
+        </>
     )
   );
 };
 
-NavbarDashboard.propTypes = {
+NavbarEmp.propTypes = {
   menu: PropTypes.bool,
   setMenu: PropTypes.func,
   showDashnone: PropTypes.bool,
@@ -269,4 +256,4 @@ NavbarDashboard.propTypes = {
   setSearchText: PropTypes.func,
 };
 
-export default NavbarDashboard;
+export default NavbarEmp;

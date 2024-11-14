@@ -35,29 +35,26 @@ const UserVagasTag = () => {
 
   const changeMarked = async (vaga) => {
     const isAlreadyLiked = vagasCurtidas.favoritedJobs.some((v) => v._id === vaga._id);
-
+  
     try {
-      setLoading(true);
-
+      // Atualizando o estado de forma otimista
+      setVagasCurtidas((prevState) => ({
+        favoritedJobs: isAlreadyLiked
+          ? prevState.favoritedJobs.filter((v) => v._id !== vaga._id)
+          : [...prevState.favoritedJobs, vaga],
+      }));
+  
+      // Envia a requisição para a API após atualizar o estado
       if (isAlreadyLiked) {
-        await sendFavoriteStatus(vaga, false); // Envia requisição para descurtir
-        setVagasCurtidas((prevState) => ({
-          favoritedJobs: prevState.favoritedJobs.filter((v) => v._id !== vaga._id)
-        }));
+        await sendFavoriteStatus(vaga, false); // Descurte a vaga
       } else {
-        await sendFavoriteStatus(vaga, true); // Envia requisição para curtir
-        setVagasCurtidas((prevState) => ({
-          favoritedJobs: [...prevState.favoritedJobs, vaga]
-        }));
+        await sendFavoriteStatus(vaga, true); 
       }
-
     } catch (error) {
       console.error("Erro ao atualizar o status de curtida:", error);
-    } finally {
-      setLoading(false);
     }
   };
-
+  
   const sendFavoriteStatus = async (vaga, isLiked) => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
@@ -122,44 +119,43 @@ const UserVagasTag = () => {
     setModalIndex(null);
   };
 
-  if (loading2 || loading) return <div><p>Loading...</p></div>;
   if (error2) return <p>Error: {error2.message}</p>;
 
   return (
-    <div className='flex flex-col gap-12' style={{position: 'relative', height: 'max-content', overflowY: 'auto'}}>
+    <div className='flex flex-col gap-12' style={{position: 'relative', height: '70vh', overflowY: 'auto'}}>
         <span className='flex title' style={{position: 'absolute', top: '-50px'}}>Vagas recomendadas</span>
 
       {data2.map((item, index) => (
-        <div className='flex flex-col container-vagas' style={{ width: '100%' }} key={item._id}>
-          <div>
-            <span className='span-title'>{item.title}</span>
-          </div>
-          <div>
-            <span className='span-description'>{item.localizacao}</span>
-          </div>
-          <div>
-            <span className="span-empresa">{item.company.nome}</span>
-          </div>
-          <div onClick={() => apareceModal(index)}>
-            <span className="span-description">{item.description}</span>
-          </div>
-          <div className='flex items-end'>
-            <span className="span-re">
-              {item.tags.map((req, tagIndex) => (
-                <span key={tagIndex} className='re'>{req}</span>
-              ))}
-            </span>
-            <div className='flex flex-col items-center'>
-              <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
-              <div onClick={() => changeMarked(item)}>
-                {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
-                  <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
-                ) : (
-                  <img src="icons/heart.svg" alt="not marked" style={{ width: '20px' }} />
-                )}
-              </div>
+        <div className='flex flex-col gap-3 container-vagas' style={{ width: '100%' }} key={item._id}>
+        <div>
+          <span className='span-title'>{item.title}</span>
+        </div>
+        <div>
+          <span className='span-description'>{item.localizacao}</span>
+        </div>
+        <div>
+          <span className="span-empresa">{item.company.nome}</span>
+        </div>
+        <div onClick={() => apareceModal(index)}>
+          <span className="span-description">{item.description}</span>
+        </div>
+        <div className='flex items-end'>
+          <span className="span-re">
+            {item.tags.map((req, tagIndex) => (
+              <span key={tagIndex} className='re'>{req}</span>
+            ))}
+          </span>
+          <div className='flex flex-col items-center'>
+            <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
+            <div onClick={() => changeMarked(item)}>
+              {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
+                <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
+              ) : (
+                <img src="icons/heart.svg" alt="not marked" style={{ width: '20px' }} />
+              )}
             </div>
           </div>
+        </div>
 
           {modalIndex === index && (
             <div className='moda'>

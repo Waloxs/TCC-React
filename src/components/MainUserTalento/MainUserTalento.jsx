@@ -14,9 +14,30 @@ import VerPerfil from '../VerPerfil/VerPerfil.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import Logo from '../../assets/Logo.png'
+import User from '../UserProfile/UserProfile.jsx';
+import { useUser as useUserTalento } from '../../services/UserContext.jsx';
+import Notify from '../Notify/Notify.jsx';
+import UserDados from '../UserDados/UserDados.jsx'
+import heart from '../../../public/icons/heart.svg'
+import heartPre from '../../../public/icons/heartPre.svg'
 
 
-const MainUserTalento = ({ dadosTag, notify, configUser }) => {
+const MainUserTalento = ({ 
+  dadosTag, 
+  notify, 
+  configUser,
+  menu,
+  setMenu,
+  showDashnone = true,
+  img = false,
+  criConta = true,
+  userTalento = false,
+  NavEmpresa = false,
+  barraPesquisa = false,
+  setConfigUser,
+  setSearchText
+}) => {
   const { data2: userDataVagas, loading2, error2 } = UsersVagasTag();
   const { data, loading, error } = useUser(); 
   const [selectedButton, setSelectedButton] = useState('home');
@@ -27,9 +48,166 @@ const MainUserTalento = ({ dadosTag, notify, configUser }) => {
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [handleNotify, setHandleNotify] = useState(true);
+  const [inputValue, setInputValue] = useState('');
+  const [modal, setModal] = useState(false);
+  const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
+  const [likedItems, setLikedItems] = useState({});
+  
+  const [searchResults, setSearchResults] = useState([]);
 
 
-  console.log(configUser);
+  useEffect(() => {
+    const fetchFavoritas = async () => {
+      const token = localStorage.getItem('authToken');
+      setAuthToken(token);
+
+      try {
+        const response = await axiosInstance.get('/jobs/favorite', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const favoritas = response.data.favoritedJobs || [];
+        setVagasCurtidas({ favoritedJobs: favoritas });
+      } catch (error) {
+        console.error("Erro ao buscar vagas favoritas:", error);
+      }
+    };
+
+    fetchFavoritas();
+  }, []);
+
+  const changeMarked = async (vaga) => {
+    const isAlreadyLiked = vagasCurtidas.favoritedJobs.some((v) => v._id === vaga._id);
+  
+    try {
+      // Atualizando o estado de forma otimista
+      setVagasCurtidas((prevState) => ({
+        favoritedJobs: isAlreadyLiked
+          ? prevState.favoritedJobs.filter((v) => v._id !== vaga._id)
+          : [...prevState.favoritedJobs, vaga],
+      }));
+  
+      // Envia a requisição para a API após atualizar o estado
+      if (isAlreadyLiked) {
+        await sendFavoriteStatus(vaga, false); // Descurte a vaga
+      } else {
+        await sendFavoriteStatus(vaga, true); 
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar o status de curtida:", error);
+    }
+  };
+  
+  const sendFavoriteStatus = async (vaga, isLiked) => {
+    const token = localStorage.getItem('authToken');
+    setAuthToken(token);
+
+    try {
+      let response;
+
+      if (isLiked) {
+        response = await axiosInstance.put(`/jobs/favorite`, { jobId: vaga._id }, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        });
+        console.log("Vaga marcada como favorita:", response.data);
+      } else {
+        response = await axiosInstance.delete(`/jobs/favorite/${vaga._id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        });
+        console.log("Vaga desmarcada como favorita:", response.data);
+      }
+
+      return response.data;
+
+    } catch (error) {
+      console.error('Erro ao atualizar vaga:', error);
+      throw new Error('Erro ao atualizar vaga');
+    }
+  };
+
+  console.log(searchResults);
+
+  const fetchSearchResults = async (query) => {
+
+    try {
+      const response = await axiosInstance.get(`/jobs/search?query=${encodeURIComponent(query)}&page=1`);
+
+      console.log(searchResults);
+
+      setSearchResults(response.data.jobs); 
+    } catch (error) {
+      console.error('Erro ao buscar vagas por tag:', error);
+    }
+  };
+
+  useEffect(() => {
+    // Debounce para esperar um curto período antes de disparar a busca
+    const delayDebounceFn = setTimeout(() => {
+      if (inputValue) {
+        fetchSearchResults(inputValue); // Chama a função de busca
+      } else {
+        setSearchResults([]); // Limpa os resultados se o campo estiver vazio
+      }
+    }, 500); // Tempo de debounce: 500ms
+
+    // Limpa o timeout se o usuário continuar digitando antes dos 500ms
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
+
+
+  const handleHeart = async (jobId, index) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      if (!token) throw new Error('Token não encontrado');
+  
+      setAuthToken(token);
+  
+      const isLiked = likedItems[index];
+  
+      setLikedItems((prevLikedItems) => ({
+        ...prevLikedItems,
+        [index]: !isLiked,
+      }));
+  
+      if (isLiked) {
+        await axiosInstance.delete(`/jobs/favorite/${jobId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(`Vaga ${jobId} desmarcada como favorita com sucesso!`);
+      } else {
+        await axiosInstance.put(
+          '/jobs/favorite',
+          { jobId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(`Vaga ${jobId} marcada como favorita com sucesso!`);
+      }
+    } catch (error) {
+      console.error('Erro ao marcar/desmarcar vaga como favorita:', error);
+  
+      setLikedItems((prevLikedItems) => ({
+        ...prevLikedItems,
+        [index]: likedItems[index],
+      }));
+    }
+  };
+  
+  
 
   const VerDetalhes = (notification, index) => {
     setSelectedNotification(notification); 
@@ -219,12 +397,24 @@ className='notification-container'
   const isHome = location.pathname === '/';
   
 
-  
+  const handleModal = () => {
+      setModal(!modal);
+  } 
+
+
   return (
     userDataVagas && data && (
-      <div className='flex flex-col' style={{ position: 'relative', height: 'calc(100vh - 100px)' }}>
+      <div className='flex flex-col' style={{ position: 'relative', height: '100vh' }}>
         <div className="containerTalDash">
+
+          
           <div className='lateral-esquerda'>
+
+            <div>
+              <img src={Logo} alt="" style={{maxWidth: '180px', padding: '30px'}}/>
+              <div className='line-decorativa'></div>
+           
+
             <div className='flex flex-col gap-4' style={{ padding: '80px 0px 180px 0px' }}>
               <BtnPrincipal
                 texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{ <img src="icons/icon-home-cinza.svg" alt="Ícone Home" style={{ width: '20px' }} /> } Home</div>}
@@ -268,6 +458,7 @@ className='notification-container'
                 click={() => handleButtonClick('configuracoes')}
               />
             </div>
+            </div>
 
 
             <div className='flex flex-col items-start'>
@@ -280,72 +471,138 @@ className='notification-container'
 
           </div>
 
-          {selectedButton === 'home' && !configUser &&(
+          <div style={{paddingRight: '200px'}}>
+          {selectedButton === 'home' && (
             <>
-            {configUser = false}
+
+          <div className='flex items-center justify-between' style={{marginTop: '20px'}}>
+            <div className='flex items-center gap-12'>
+              {barraPesquisa && (
+                 <div className='pesquisa' style={{ position: 'relative' }}>
+                 <input
+                   type="text"
+                   style={{ width: "300px", height: "35px" }}
+                   value={inputValue}
+                   onChange={(e) => setInputValue(e.target.value)}
+                   placeholder={'Procurar'}
+                 />
+                 <img 
+                   src="icons/Search.svg" 
+                   alt="Search Icon" 
+                   style={{
+                     position: 'absolute', 
+                     top: '50%', 
+                     right: '10px', 
+                     transform: 'translateY(-50%)', 
+                     cursor: 'pointer'
+                   }}
+                 />
+               </div>
+              )}
+          </div>
+
+
+       <UserDados toggleModal={handleModal}/>
+
+            </div>
+
+
+
+            {!modal && (searchResults.length === 0) && (
+            <>
             <div style={{marginTop: '64px' ,height: 'max-content'}}>
+
+              <h1 className='title-vagas'>Vagas recomendadas</h1>
+
               {(!Array.isArray(dadosTag) || dadosTag.length === 0) && <UserVagasTag />}
             </div>
 
-              {Array.isArray(dadosTag) && dadosTag.length > 0 && (
-                <div className='flex flex-col'>
-                  {dadosTag.map((item, index) => (
-                    <div className='flex flex-col container-vagas' style={{ width: '100%' }} key={item._id}>
-                      <div>
-                        <span className='span-title'>{item.title}</span>
-                      </div>
-                      <div>
-                        <span className='span-description'>{item.localizacao}</span>
-                      </div>
-                      <div>
-                        <span className="span-empresa">{item.company.nome}</span>
-                      </div>
-                      <div onClick={() => apareceModal(index)}>
-                        <span className="span-description">{item.description}</span>
-                      </div>
-                      <div className='flex items-end'>
-                        <span className="span-re">
-                          {item.tags.map((req, tagIndex) => (
-                            <span key={tagIndex} className='re'>{req}</span>
-                          ))}
-                        </span>
-                        <div className='flex flex-col items-center'>
-                          <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              </>  
               )}
+
+               {!modal && (searchResults.length > 0) && (
+
+              <div style={{marginTop: '64px'}}>
+                <h1 className='title-vagas'>Vagas encontradas</h1>
+
+                <div className='flex flex-col gap-8' style={{height: '70vh', overflowY: 'auto'}}>
+
+                {searchResults.map((item, index) => ( 
+
+                <>
+                <div className='flex flex-col gap-3 container-vagas' style={{ width: '100%' }} key={item._id}>
+                <div>
+                  <span className='span-title'>{item.title}</span>
+                </div>
+                <div>
+                  <span className='span-description'>{item.localizacao}</span>
+                </div>
+                <div>
+                  <span className="span-empresa">{item.company.nome}</span>
+                </div>
+                <div onClick={() => apareceModal(index)}>
+                  <span className="span-description">{item.description}</span>
+                </div>
+                <div className='flex items-end'>
+                  <span className="span-re">
+                    {item.tags.map((req, tagIndex) => (
+                      <span key={tagIndex} className='re'>{req}</span>
+                    ))}
+                  </span>
+                  <div className='flex flex-col items-center'>
+                    <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
+                    <div onClick={() => changeMarked(item)}>
+                      {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
+                        <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
+                      ) : (
+                        <img src="icons/heart.svg" alt="not marked" style={{ width: '20px' }} />
+                      )}
+                    </div>
+                </div>
+                </div>
+                </div>
+                </>
+                ))}
+                </div>
+                </div>
+               )}   
+
+
+              {modal && (
+                <div className='modal flex flex-col'>
+                  <VerPerfil dadosUser={data}/>
+                </div>
+              )}       
             </>
           )}
 
 
           {selectedButton === 'aplicacoes' && !configUser &&(
             <>
-            {configUser = false}
             <UserVagasApl />
             </>
           )}
 
           {selectedButton === 'curtidas' && !configUser &&(
              <>
-             {configUser = false}
              <UserVagasLike />
              </>
           )}
 
           {selectedButton === 'configuracoes' && !configUser &&(
             <>
-              {configUser = false}
               <ConfiguracaoConta />
             </>
           )}
 
+  
+           {configUser && (
+            <>
+                <VerPerfil dadosUser={data}/>
+            </>
+        )}
 
-          {configUser && (
-            <VerPerfil dadosUser={data}/>
-          )}
+        </div>
 
          </div>
  

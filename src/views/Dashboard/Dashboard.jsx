@@ -5,69 +5,63 @@ import { UserProvider as UserDados } from '../../services/UserContext.jsx';
 import { UserProvider as UserDadosEmpresa } from '../../services/UserContextEmpresa.jsx';
 import { UserProvider as VagasTag } from '../../services/UserContextVagasTag.jsx';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
-import NavbarDashboard from '../../components/NavbarDashboard/NavbarDashboard.jsx';
 
 const Dashboard = () => {
   const [dadosTag, setDadosTag] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [notify, setNotify] = useState([]);
   const [error, setError] = useState(null);
-  const [loadingNotify, setLoadingNotify] = useState(true); // Carregamento só das notificações
+  const [loadingData, setLoadingData] = useState(true); // Carregamento geral dos dados
   const [configUser, setConfigUser] = useState(false);
 
-  // Função para buscar as vagas favoritas
   useEffect(() => {
-    const fetchFavoritas = async () => {
+    // Função para buscar dados de vagas e notificações ao mesmo tempo
+    const fetchData = async () => {
       const token = localStorage.getItem('authToken');
       setAuthToken(token);
 
       try {
-        const response = await axiosInstance.get(`/jobs/search?query=${encodeURIComponent(searchText)}&page=1`);
-        setDadosTag(response.data.jobs);
+        // Buscar vagas favoritas e notificações ao mesmo tempo
+        const [vagasResponse, notifyResponse] = await Promise.all([
+          axiosInstance.get(`/recommended`),
+          axiosInstance.get('/notify')
+        ]);
+
+        setDadosTag(vagasResponse.data.jobs);
+
+        console.log(vagasResponse.data.jobs);
+        
+        setNotify(notifyResponse.data);
       } catch (error) {
-        console.error('Erro ao buscar vagas favoritas:', error);
+        console.error('Erro ao buscar dados:', error);
+        setError('Erro ao carregar dados.');
+      } finally {
+        setLoadingData(false);
       }
     };
 
-    if (searchText !== '') {
-      fetchFavoritas();
-    } else {
-      setSearchText(null);
-    }
+    fetchData();
   }, [searchText]);
 
-  // Função para buscar notificações 3 segundos após montagem
-  useEffect(() => {
-    const fetchApplicants = async () => {
-      const token = localStorage.getItem('authToken');
-      setAuthToken(token);
-
-      try {
-        const response = await axiosInstance.get('/notify');
-        setNotify(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar notificações:', error);
-        setError('Erro ao carregar notificações.');
-      } finally {
-        setLoadingNotify(false);
-      }
-    };
-
-    // Definir o delay de 3 segundos
-    const timer = setTimeout(() => {
-      fetchApplicants();
-    }, 3000); // Espera de 3 segundos
-
-    return () => clearTimeout(timer); // Limpar o timeout ao desmontar
-  }, []);
-
   return (
-    <div style={{background: '#F8F8F8'}}>
+    <div style={{ background: '#F8F8F8', height: '100vh'}}>
       <UserDados>
         <VagasTag>
           <UserDadosEmpresa>
-            <NavbarDashboard showDashnone={false} img={true} userTalento={true} className="navDash" userData={true} barraPesquisa={true} setSearchText={setSearchText} notify={notify} configUser={configUser} setConfigUser={setConfigUser}/>
-            <MainUserTalento dadosTag={dadosTag} notify={notify} loadingNotify={loadingNotify} configUser={configUser}/>
+            <MainUserTalento 
+              dadosTag={loadingData ? [] : dadosTag}  // Dados vazios se ainda estiver carregando
+              notify={loadingData ? [] : notify}      // Dados vazios se ainda estiver carregando
+              loadingNotify={loadingData}             // Passa estado de carregamento para MainUserTalento
+              configUser={configUser} 
+              showDashnone={false} 
+              img={true} 
+              userTalento={true} 
+              className="navDash" 
+              userData={true} 
+              barraPesquisa={true} 
+              setSearchText={setSearchText} 
+              setConfigUser={setConfigUser} 
+            />
           </UserDadosEmpresa>
         </VagasTag>
       </UserDados>

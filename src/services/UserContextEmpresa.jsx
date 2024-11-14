@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance, setAuthToken } from '../utils/api.js';
@@ -26,12 +25,11 @@ export const UserProvider = ({ children }) => {
         return;
       }
 
-      // Decodificar o token
       const decodedToken = jwt_decode(token);
       
-      // Verificar se o token é de talento e não de empresa
+
       if (decodedToken.role === 'talento') {
-        setLoading(false); // Parar o loading, pois não iremos buscar dados da empresa
+        setLoading(false); 
         return;
       }
 

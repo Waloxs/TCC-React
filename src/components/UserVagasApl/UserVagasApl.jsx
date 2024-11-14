@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import { Bars } from 'react-loader-spinner'; // Exemplo de loader
-import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
+import UserDados from '../UserDados/UserDados.jsx';
+import { useUser as useUserTalento } from '../../services/UserContext.jsx';
+import VerPerfil from '../VerPerfil/VerPerfil.jsx';
+
 
 const UserVagasApl = () => {
   const [vagasAplicadas, setVagasAplicadas] = useState([]);
   const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [modal, setModal] = useState(false);
+
+
+  
+  const {data: user} = useUserTalento();
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -31,13 +39,28 @@ const UserVagasApl = () => {
     fetchFavoritas();
   }, []);
 
+  const handleModal = () => {
+    setModal(!modal);
+} 
+
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12" style={{height: '100%', paddingTop: '25px'}}>
+
+    <UserDados toggleModal={handleModal}/>
+
+    {!modal && (
+    <>
+      {vagasAplicadas.length === 0 && (
+        <p>Nenhuma vaga aplicada.</p>
+      )}
+    </>
+    )}
+
   {loading ? (
     <div className="flex justify-center">
       <Bars height="80" width="80" color="#3B82F6" ariaLabel="loading" visible={true} />
     </div>
-  ) : vagasAplicadas && vagasAplicadas.length > 0 ? (
+  ) : vagasAplicadas && vagasAplicadas.length > 0 && !modal ?(
     vagasAplicadas.map((vaga, index) => (
         <div key={vaga._id} className="container-vagas p-4">
           <div className='flex justify-between'>
@@ -70,8 +93,18 @@ const UserVagasApl = () => {
         </div>
     ))
   ) : (
-    <p>Você ainda não aplicou para nenhuma vaga.</p>
+
+    <>
+    <>
+    {modal && (
+      <div className='modal flex flex-col'>
+        <VerPerfil dadosUser={user}/>
+      </div>
+    )}
+    </>  
+    </>
   )}
+
 </div>
 
   );

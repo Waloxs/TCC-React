@@ -413,7 +413,6 @@ const EmpresaPasso = () => {
             } containerEmpresa flex flex-col justify-center items-center`}
             style={{
               width: "70rem",
-              background: "#fff",
               height: "100vh",
               gap: "30px",
               padding: "20px",

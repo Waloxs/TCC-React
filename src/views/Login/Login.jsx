@@ -19,6 +19,7 @@ const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const navigate = useNavigate();
+
   
 
   const handleSubmit = async (event) => {
@@ -42,12 +43,12 @@ const Login = () => {
         window.location.reload();
  
 
-    } catch (error) {
-      console.error('Erro ao tentar login de usuário:', error);
+    } catch {
+
       try {
         const responseEmpresa = await axiosInstance.post('/empresa/login', userData);
         localStorage.setItem('authToken', responseEmpresa.data.token);
-        const { token } = response.data;
+        const { token } = responseEmpresa.data;
         setAuthToken(token);
 
         navigate('/DashboardEmpresa');
@@ -104,7 +105,7 @@ const Login = () => {
           <Link to='/'><img src={Logo} alt="Logo" style={{ width: '6rem', height: '1.10rem' }} className='imageout' /></Link>
           <div className="tituSub">
             <h1 className='titLogin'>Seja bem-vindo de volta!</h1>
-            <span className='subLogin'>Realize o Login para acessar a Workzen.</span>
+            <span className='subLogin flex justify-center'>Realize o Login para acessar a Workzen.</span>
           </div>
 
           <div className='cpSenha flex flex-col gap-2' style={{width: '100%'}}>

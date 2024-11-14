@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { axiosInstance, setAuthToken } from '../../../utils/api.js';
 import { Bars } from 'react-loader-spinner'; 
+import { useUser as useUserTalento } from '../../../services/UserContext.jsx';
+import UserDados from '../../UserDados/UserDados.jsx';
+import VerPerfil from '../../VerPerfil/VerPerfil.jsx';
+
 
 const UserVagasLike = () => {
   const [vagasCurtidas, setVagasCurtidas] = useState([]);
   const [loading, setLoading] = useState(true); 
+  const [modal, setModal] = useState(false);
+  const {data: user} = useUserTalento();
+
+
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -30,6 +38,11 @@ const UserVagasLike = () => {
     fetchFavoritas();
   }, []);
 
+
+  const handleModal = () => {
+    setModal(!modal);
+} 
+
   const toggleLike = async (vagaId) => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
@@ -51,12 +64,25 @@ const UserVagasLike = () => {
   };
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12" style={{paddingTop: '25px'}}>
+
+
+    <UserDados toggleModal={handleModal}/>
+
+          {!modal && (
+          <>
+            {vagasCurtidas.length === 0 && (
+              <p>Nenhuma vaga curtida.</p>
+            )}
+          </>
+          )}
+
+
       {loading ? (
         <div className="flex justify-center">
           <Bars height="80" width="80" color="#3B82F6" ariaLabel="loading" visible={true}/>
         </div>
-      ) : vagasCurtidas.length > 0 ? (
+      ) : vagasCurtidas.length > 0  && !modal ?(
         vagasCurtidas.map((vaga) => (
           <div key={vaga._id} className="container-vagas p-4">
             <div className='flex justify-between'>
@@ -96,7 +122,13 @@ const UserVagasLike = () => {
           </div>
         ))
       ) : (
-        <p>Nenhuma vaga curtida.</p>
+        <>
+        {modal && (
+          <div className='modal flex flex-col'>
+            <VerPerfil dadosUser={user}/>
+          </div>
+        )}
+        </> 
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
+import NavbarEmp from '../../components/NavbarEmp/NavbarEmp.jsx';
 import MainUser from '../../components/MainUser/MainUser';
 import { UserProvider as UserProviderEmpresa } from '../../services/UserContextEmpresa';
 import { UserProvider as UserProviderVagas } from '../../services/UserContextVagasEmpresa';
@@ -69,7 +69,7 @@ const DashboardEmpresa = () => {
       <UserProviderTalento>
         <UserProviderEmpresa>
           <UserProviderVagas>
-            <Navbar showDashnone={false} img={true} NavEmpresa={true} className='navDash' setSearchText={false}/>
+            <NavbarEmp showDashnone={false} img={true} NavEmpresa={true} className='navDash' setSearchText={false}/>
             <MainUser />
           </UserProviderVagas>
         </UserProviderEmpresa>

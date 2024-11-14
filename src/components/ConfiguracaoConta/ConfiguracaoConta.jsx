@@ -5,6 +5,10 @@ import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import { useForm } from 'react-hook-form';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
+import UserDados from '../UserDados/UserDados.jsx';
+import { useUser as useUserTalento } from '../../services/UserContext.jsx';
+import VerPerfil from '../VerPerfil/VerPerfil.jsx';
+
 
 const ConfiguracaoConta = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +20,15 @@ const ConfiguracaoConta = () => {
   const [textoBotao, setTextoBotao] = useState('Salvar');
   const [backBotao, setBackBotao] = useState('#3B82F6');
   const { handleSubmit } = useForm();
+  const [modal, setModal] = useState(false);
+  const {data: user} = useUserTalento();
+
+
+
+  const handleModal = () => {
+    setModal(!modal);
+} 
+
 
   useEffect(() => {
     const carregarDadosUsuario = async () => {
@@ -73,7 +86,16 @@ const ConfiguracaoConta = () => {
   };
 
   return (
-    <div className='formConfiguracao flex flex-col'>
+    <>
+
+
+    <div className='formConfiguracao flex flex-col' style={{paddingTop: '25px'}}>
+
+      <UserDados toggleModal={handleModal}/>
+
+
+      {!modal && (
+      <>
       <div className='flex flex-col gap-2' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
         
         <div className='flex flex-col gap-2'>
@@ -141,7 +163,16 @@ const ConfiguracaoConta = () => {
           hoverColor='#609AFA'
         />
       </div>
+      </>
+      )}
     </div>
+      {modal && (
+        <div className='modal flex flex-col'>
+          <VerPerfil dadosUser={user}/>
+        </div>
+      )}
+    </>
+
   );
 };
 

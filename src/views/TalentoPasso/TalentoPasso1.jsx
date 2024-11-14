@@ -275,31 +275,25 @@ const handleChange = (selected) => {
 
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
-  setImage(URL.createObjectURL(file)); // Exibe a pré-visualização da imagem para o usuário
+  setImage(URL.createObjectURL(file));
 
-  // Prepara os dados para enviar via formData
   const formData = new FormData();
-  formData.append('image', file); // 'profileImage' deve ser o nome do campo esperado pela API
+  formData.append('image', file);
 
-  // Envia a requisição PUT
-  
-const token = localStorage.getItem('authToken');
-setAuthToken(token);
+  const token = localStorage.getItem('authToken');
+  setAuthToken(token);
 
-  axiosInstance.put('/me/', {
-    body: formData,
+  axiosInstance.put('/me', formData, {  // Passa formData diretamente aqui
     headers: {
-        'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'  // Define o tipo de conteúdo como multipart
     }
   })
   .then(response => {
-    // Trata a resposta da API conforme necessário
     console.log('Imagem enviada com sucesso:', response);
-    // Redireciona para a página de Dashboard após o envio
   })
   .catch(error => {
     console.error('Erro ao enviar imagem:', error);
-    // Trata o erro conforme necessário
   });
 };
 
@@ -770,7 +764,7 @@ const handleFimChange = (date) => {
        back="#fff"
        border="#3B82F6"
        borderRadius="20px"
-       click={() => document.getElementById('file-upload').click()}  // Adicionando onClick para acionar o upload
+       click={() => document.getElementById('file-upload').click()}  
      />
      <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
      <Link to='/Dashboard'>

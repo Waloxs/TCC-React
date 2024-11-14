@@ -85,34 +85,44 @@ const MainUser = () => {
             }}
           >
             <div>
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Home {selectedButton === 'home' ? <img src="icons/icon-home.svg" alt="Ícone Home" /> : <img src="icons/icon-home-cinza.svg" alt="Ícone Home" />}</div>}
-                back={selectedButton === 'home' ? '#3B82F6' : '#fff'}
+
+            <BtnPrincipal
+                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{ <img src="icons/icon-home-cinza.svg" alt="Ícone Home" style={{ width: '20px' }} /> } Home</div>}
+                back={selectedButton === 'home' ? '#FAFAFA' : '#fff'}
                 padding='15px'
-                borderRadius='15px'
-                color={selectedButton === 'home' ? '#fff' : '#64748B'}
-                width="85%"
+                borderRadius='0px'
+                color={'#64748B'}
+                width="100%"
+                borderLeft={selectedButton === 'home' ? '#3B82F6' : '#fff'}
                 weig="500"
                 click={() => handleButtonClick('home')}
               />
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2' style={{ whiteSpace: 'nowrap' }}>Criar Vaga {selectedButton === 'criarVaga' ? <img src="icons/icon-adc-branco.svg" alt="Ícone Criar Vaga" /> : <img src="icons/icon-adc.svg" alt="Ícone Criar Vaga" />}</div>}
-                back={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
+
+            <BtnPrincipal
+                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{<img src="icons/adc.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} /> } Criar Vaga</div>}
+                back={selectedButton === 'criarVaga' ? '#FAFAFA' : '#fff'}
                 padding='15px'
-                borderRadius='15px'
-                color={selectedButton === 'criarVaga' ? '#fff' : '#64748B'}
-                width="85%"
+                borderRadius='0px'
+                color={'#64748B'}
+                width="100%"
+                borderLeft={selectedButton === 'criarVaga' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('criarVaga')}
               />
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Configurações {selectedButton === 'configuracoes' ? <img src="icons/icon-config-branco.svg" alt="Ícone Configurações" /> : <img src="icons/icon-config.svg" alt="Ícone Configurações" />}</div>}
-                back={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
+
+     
+            <BtnPrincipal
+                texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{<img src="icons/config-cinza.svg" alt="Ícone Configurações" style={{ width: '20px' }} />} Configurações</div>}
+                back={selectedButton === 'configuracoes' ? '#FAFAFA' : '#fff'}
                 padding='15px'
-                borderRadius='15px'
-                color={selectedButton === 'configuracoes' ? '#fff' : '#64748B'}
-                width="85%"
+                borderRadius='0px'
+                color={'#64748B'}
+                width="100%"
+                borderLeft={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('configuracoes')}
               />
+
+
+       
             </div>
 
             <div>
