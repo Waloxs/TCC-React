@@ -69,7 +69,6 @@ const DashboardEmpresa = () => {
       <UserProviderTalento>
         <UserProviderEmpresa>
           <UserProviderVagas>
-            <NavbarEmp showDashnone={false} img={true} NavEmpresa={true} className='navDash' setSearchText={false}/>
             <MainUser />
           </UserProviderVagas>
         </UserProviderEmpresa>

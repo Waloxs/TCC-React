@@ -1,6 +1,6 @@
 .container-central{
     overflow-y: auto;
-    height: 700px;
+    height: 70vh;
     scrollbar-width: none; /* Para Firefox */
 }
 

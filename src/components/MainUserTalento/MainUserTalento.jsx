@@ -56,6 +56,8 @@ const MainUserTalento = ({
   const [searchResults, setSearchResults] = useState([]);
 
 
+
+
   useEffect(() => {
     const fetchFavoritas = async () => {
       const token = localStorage.getItem('authToken');
@@ -530,7 +532,7 @@ className='notification-container'
                 {searchResults.map((item, index) => ( 
 
                 <>
-                <div className='flex flex-col gap-3 container-vagas' style={{ width: '100%' }} key={item._id}>
+                <div className='flex flex-col gap-3 container-vagas' style={{ width: '100%' }} key={item._id} onClick={() => apareceModal(index)}>
                 <div>
                   <span className='span-title'>{item.title}</span>
                 </div>
@@ -540,7 +542,7 @@ className='notification-container'
                 <div>
                   <span className="span-empresa">{item.company.nome}</span>
                 </div>
-                <div onClick={() => apareceModal(index)}>
+                <div>
                   <span className="span-description">{item.description}</span>
                 </div>
                 <div className='flex items-end'>
@@ -551,7 +553,7 @@ className='notification-container'
                   </span>
                   <div className='flex flex-col items-center'>
                     <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
-                    <div onClick={() => changeMarked(item)}>
+                    <div onClick={(event) => {event.stopPropagation(); changeMarked(item);}}>
                       {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
                         <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
                       ) : (
@@ -561,6 +563,76 @@ className='notification-container'
                 </div>
                 </div>
                 </div>
+
+                {modalIndex === index && (
+            <div className='moda'>
+
+              <div className="moda-content">
+                <div className='flex flex-col gap-12' style={{height: '100%', paddingTop: '0px'}}>
+
+                <button onClick={(event) => { event.stopPropagation(); fechaModal(); }}>
+                  <img src="icons/arrowLeft.svg" alt="" />
+                </button>
+
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>{searchResults[index].title}</span>
+                  <span className='apl-localizacao'>{searchResults[index].localizacao}</span>
+              </div>
+
+                  <span className='apl-description'>{searchResults[index].description}</span>
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Responsabilidades</span>
+                  <span className='flex flex-col'>
+                    {searchResults[index].requirements.map((req, i) => (
+                    <span key={i} className='flex items-center item-req'>{i < searchResults[index].requirements.length ? <div className='icone-circulo'></div> : ''}{req}</span>
+                    ))}
+                  </span>
+              </div>
+
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Preço</span>
+                  <span className='item-req'>{searchResults[index].salario}</span>
+              </div>
+
+              <div className='flex flex-col'>
+                  <span className='apl-title'>Habilidades e Expêriencias</span>
+                  <span className='apl-tags flex gap-2' style={{maxWidth: '500px', overflowX: 'auto'}}>{searchResults[index].tags.map((tag, i ) => (
+                    <span className='items-tags' key={i}>{tag}</span>
+                  ))}</span>
+              </div>
+
+
+
+                </div>
+
+
+                <div className='flex flex-col justify-between'>
+                  <div className='apl-dados-empresa flex flex-col items-center'>
+                    <span className=''><img src={searchResults[index].company.image} alt="" style={{borderRadius: '50%', width: '100px'}}/></span>
+                    <span className='apl-title-empresa'>{searchResults[index].company.nome}</span>
+                    <span className='apl-description-empresa'>Empresa</span> 
+                  </div>
+
+
+                  <div className='apl-buttons'>
+                    <BtnPrincipal
+                    texto={'Aplique agora'}
+                    back={'#3B82F6'}
+                    padding='15px'
+                    borderRadius='20px'
+                    color={'#fff'}
+                    width="100%"
+                    click={() => aplicarVaga(searchResults[index])}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
                 </>
                 ))}
                 </div>

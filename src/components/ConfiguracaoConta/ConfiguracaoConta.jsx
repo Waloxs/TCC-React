@@ -89,14 +89,12 @@ const ConfiguracaoConta = () => {
     <>
 
 
-    <div className='formConfiguracao flex flex-col' style={{paddingTop: '25px'}}>
-
-      <UserDados toggleModal={handleModal}/>
+    <div className='formConfiguracao flex flex-col'>
 
 
       {!modal && (
       <>
-      <div className='flex flex-col gap-2' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
+      <div className='flex flex-col gap-2' style={{ width: '100%', height: '100%' }}>
         
         <div className='flex flex-col gap-2'>
           <span>Email</span>

@@ -4,6 +4,7 @@ import { Bars } from 'react-loader-spinner';
 import { useUser as useUserTalento } from '../../../services/UserContext.jsx';
 import UserDados from '../../UserDados/UserDados.jsx';
 import VerPerfil from '../../VerPerfil/VerPerfil.jsx';
+import BtnPrincipal from '../../Buttons/BtnPrincipal.jsx';
 
 
 const UserVagasLike = () => {
@@ -11,6 +12,8 @@ const UserVagasLike = () => {
   const [loading, setLoading] = useState(true); 
   const [modal, setModal] = useState(false);
   const {data: user} = useUserTalento();
+  const [modalIndex, setModalIndex] = useState(null);
+
 
 
 
@@ -63,6 +66,14 @@ const UserVagasLike = () => {
     } 
   };
 
+  const apareceModal = (index) => {
+    setModalIndex(index);
+  };
+
+  const fechaModal = () => {
+    setModalIndex(null);
+  };
+
   return (
     <div className="flex flex-col gap-12" style={{paddingTop: '25px'}}>
 
@@ -83,8 +94,10 @@ const UserVagasLike = () => {
           <Bars height="80" width="80" color="#3B82F6" ariaLabel="loading" visible={true}/>
         </div>
       ) : vagasCurtidas.length > 0  && !modal ?(
-        vagasCurtidas.map((vaga) => (
-          <div key={vaga._id} className="container-vagas p-4">
+        <div className='flex flex-col gap-8' style={{height: '70vh', overflowY: 'auto'}}>
+        {vagasCurtidas.map((vaga, index) => (
+          <div>
+          <div key={vaga._id} className="flex flex-col container-vagas p-4 gap-3" onClick={() => apareceModal(index)}>
             <div className='flex justify-between'>
               <span className='span-title'>{vaga.title}</span>
               <span className='span-espera'>{vaga.status}</span>
@@ -110,7 +123,7 @@ const UserVagasLike = () => {
             </span>
             <div className='flex flex-col items-center'>
               <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{vaga.salario}</span>
-              <div onClick={() => toggleLike(vaga._id)}>
+              <div onClick={(event) => {event.stopPropagation(); toggleLike(vaga._id);}}>
                 {vagasCurtidas.some((v) => v._id === vaga._id) ? (
                   <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
                 ) : (
@@ -120,7 +133,72 @@ const UserVagasLike = () => {
             </div>
             </div>
           </div>
-        ))
+
+
+<>
+{modalIndex === index && (
+  <div className='moda'>
+    <div className="moda-content">
+      <div className='flex flex-col gap-12' style={{height: '100%', paddingTop: '0px'}}>
+
+      <button onClick={fechaModal}><img src="icons/arrowLeft.svg" alt="" /></button>
+
+    <div className='flex flex-col'>
+        <span className='apl-title'>{vagasCurtidas[index].title}</span>
+        <span className='apl-localizacao'>{vagasCurtidas[index].localizacao}</span>
+    </div>
+
+        <span className='apl-description'>{vagasCurtidas[index].description}</span>
+
+    <div className='flex flex-col'>
+        <span className='apl-title'>Responsabilidades</span>
+    </div>
+
+
+    <div className='flex flex-col'>
+        <span className='apl-title'>Preço</span>
+        <span className='item-req'>{vagasCurtidas[index].salario}</span>
+    </div>
+
+    <div className='flex flex-col'>
+        <span className='apl-title'>Habilidades e Expêriencias</span>
+        <span className='apl-tags flex gap-2' style={{maxWidth: '500px', overflowX: 'auto'}}>{vagasCurtidas[index].tags.map((tag, i ) => (
+          <span className='items-tags' key={i}>{tag}</span>
+        ))}</span>
+    </div>
+
+
+
+      </div>
+
+
+      <div className='flex flex-col justify-between'>
+        <div className='apl-dados-empresa flex flex-col items-center'>
+          <span className=''><img src={vagasCurtidas[index].company.image} alt="" style={{borderRadius: '50%', width: '100px'}}/></span>
+          <span className='apl-title-empresa'>{vagasCurtidas[index].company.nome}</span>
+          <span className='apl-description-empresa'>Empresa</span> 
+        </div>
+
+
+        <div className='apl-buttons'>
+          <BtnPrincipal
+          texto={'Aplique agora'}
+          back={'#3B82F6'}
+          padding='15px'
+          borderRadius='20px'
+          color={'#fff'}
+          width="100%"
+          click={() => aplicarVaga(vagasCurtidas[index])}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+</>
+</div>
+        ))}
+        </div>
       ) : (
         <>
         {modal && (

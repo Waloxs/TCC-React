@@ -131,7 +131,7 @@ const formatCurrencyValue = (value) => {
 
   return (
     <div className='formCriar flex flex-col'>
-      <div className='flex flex-col gap-1' style={{ marginTop: '30px', width: '100%', height: '100%' }}>
+      <div className='flex flex-col gap-1' style={{ width: '100%', height: '100%' }}>
         <div className='flex flex-col gap-2'>
           <span>Título</span>
           <Input type='text' required value={profissional} onChange={(e) => setProfissional(e.target.value)} />

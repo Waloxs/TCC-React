@@ -1,9 +1,8 @@
 .Container{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    gap: 2rem;
-    width: 90vw;
-    margin-top: 100px;
+    display: flex;
+
+  gap: clamp(1rem, 5vw, 10rem);
+    background: #F8F8F8;
 }
 
 

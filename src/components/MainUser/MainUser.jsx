@@ -12,6 +12,7 @@ import ClipLoader from 'react-spinners/ClipLoader.js';
 import axios from 'axios';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import './MainUser.css';
+import Logo from '../../assets/Logo.png'
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
@@ -70,6 +71,13 @@ const MainUser = () => {
       console.error('Erro ao enviar imagem:', error);
     }
   };
+
+  const Logout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/Login'; 
+  }
+
+
   
 
   return (
@@ -78,14 +86,20 @@ const MainUser = () => {
         <div>
           <div
             className='Container'
-            style={{
-              gridTemplateColumns: selectedButton !== 'home' && selectedButton !== 'criarVaga' && selectedButton !== 'configuracoes' 
-                ? '1fr 5fr'
-                : '1fr 4fr 1fr'
-            }}
           >
-            <div>
 
+<div className='lateral-esquerda' style={{height: '100vh'}}>
+
+  <div className='flex flex-col gap-12'>
+
+  <div>
+  <img src={Logo} alt="" style={{maxWidth: '180px', padding: '30px'}}/>
+  <div className='line-decorativa'></div>
+  </div>
+
+
+  <div>
+  
             <BtnPrincipal
                 texto={<div className='flex justify-start items-center gap-2' style={{ width: '100%', marginLeft: '30px' }}>{ <img src="icons/icon-home-cinza.svg" alt="Ícone Home" style={{ width: '20px' }} /> } Home</div>}
                 back={selectedButton === 'home' ? '#FAFAFA' : '#fff'}
@@ -99,7 +113,7 @@ const MainUser = () => {
               />
 
             <BtnPrincipal
-                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{<img src="icons/adc.svg" alt="Ícone Criar Vaga" style={{ width: '20px' }} /> } Criar Vaga</div>}
+                texto={<div className='flex justify-start items-center gap-2' style={{ whiteSpace: 'nowrap', width: '100%', marginLeft: '30px' }}>{<img src="icons/adc.svg" alt="Ícone Criar Vaga" style={{ width: '15px' }} /> } Criar Vaga</div>}
                 back={selectedButton === 'criarVaga' ? '#FAFAFA' : '#fff'}
                 padding='15px'
                 borderRadius='0px'
@@ -120,14 +134,22 @@ const MainUser = () => {
                 borderLeft={selectedButton === 'configuracoes' ? '#3B82F6' : '#fff'}
                 click={() => handleButtonClick('configuracoes')}
               />
+      </div>
+  </div>
 
-
-       
+  <div className='flex flex-col items-start'>
+                <div style={{height: '2px', width: '90%', background: '#E2E8F0', margin: '0 auto'}}></div>
+                <div className='flex items-center' style={{padding: '20px 0px 0px 40px', cursor: 'pointer'}} onClick={Logout}>
+                  <img src="icons/logout.svg" alt="" style={{width: '30px'}}/>
+                  <span>Sair</span>
+                </div>
             </div>
 
-            <div>
+</div>       
+
+            <div style={{width: '70%'}}>
               {userDataVagasEmpresa && selectedButton === 'home' && (
-                <div className='central' style={{paddingRight: '70px'}}>
+                <div className='central' style={{marginTop: '64px'}}>
                   <span className='vaga-tit'>Minhas Vagas</span>
                   <UserVagasEmpresa />
                 </div>
@@ -140,44 +162,12 @@ const MainUser = () => {
               )}
 
               {selectedButton === 'configuracoes' && (
-                <div className='central' style={{paddingRight: '70px'}}>
+                <div className='central'>
                   <ConfiguracaoConta />
                 </div>
               )}
 
-              {selectedButton === 'Edit' && (
-                <div className='centralEditVaga' style={{marginTop: '-40px'}}>
-                  <EditEmpresa />
-                  <div className='modalConfigura' style={{marginTop: '0px'}}>
-                <div className='perEmp'>
-                  <label htmlFor="file-upload">
-                    {image ? (
-                      <img src={image} alt="Profile" style={{ width: '100%', height: '120px', borderRadius: '50%', objectFit: 'cover' }} />
-                    ) : (
-                      <UserEmpresa className='' prLet={true} size={'3rem'} />
-                    )}
-                  </label>
-                  <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-                </div>
-                <div className='flex flex-col items-center'>
-                  <UserEmpresa nome={true} className='nomeEmp' />
-                  <span className='span-texto'>Empresa</span>
-                </div>
-                <div className="linha"></div>
-                <BtnPrincipal
-                  texto={<div className='flex justify-center items-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
-                  back='#3B82F6'
-                  padding='10px 24px'
-                  borderRadius='20px'
-                  color='#fff'
-                  width="85%"
-                  weig="500"
-                  click={() => handleButtonClick('Edit')}
-                  hoverColor='#609AFA'
-                />
-              </div>
-                </div>
-              )}
+            
 
               {!userDataVagasEmpresa && selectedButton === 'home' && (
                 <div className='central'>
@@ -187,36 +177,7 @@ const MainUser = () => {
               )}
             </div>
 
-            {(selectedButton === 'home' || selectedButton === 'criarVaga' || selectedButton === 'configuracoes') && (
-              <div className='modalConfigura'>
-                <div className='perEmp'>
-                  <label htmlFor="file-upload">
-                    {image ? (
-                      <img src={image} alt="Profile" style={{ width: '100%', height: '120px', borderRadius: '50%', objectFit: 'cover' }} />
-                    ) : (
-                      <UserEmpresa className='' prLet={true} size={'3rem'} />
-                    )}
-                  </label>
-                  <input id="file-upload" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-                </div>
-                <div className='flex flex-col items-center'>
-                  <UserEmpresa nome={true} className='nomeEmp' />
-                  <span className='span-texto'>Empresa</span>
-                </div>
-                <div className="linha"></div>
-                <BtnPrincipal
-                  texto={<div className='flex justify-center items-center gap-2'>Editar Perfil {selectedButton === 'Edit'}</div>}
-                  back='#3B82F6'
-                  padding='10px 24px'
-                  borderRadius='20px'
-                  color='#fff'
-                  width="85%"
-                  weig="500"
-                  click={() => handleButtonClick('Edit')}
-                  hoverColor='#609AFA'
-                />
-              </div>
-            )}
+           
           </div>
         </div>
       </>

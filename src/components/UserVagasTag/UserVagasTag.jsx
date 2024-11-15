@@ -24,6 +24,8 @@ const UserVagasTag = () => {
         });
 
         const favoritas = response.data.favoritedJobs || [];
+
+
         setVagasCurtidas({ favoritedJobs: favoritas });
       } catch (error) {
         console.error("Erro ao buscar vagas favoritas:", error);
@@ -123,10 +125,15 @@ const UserVagasTag = () => {
 
   return (
     <div className='flex flex-col gap-12' style={{position: 'relative', height: '70vh', overflowY: 'auto'}}>
+
+{}
+
+        
         <span className='flex title' style={{position: 'absolute', top: '-50px'}}>Vagas recomendadas</span>
 
       {data2.map((item, index) => (
-        <div className='flex flex-col gap-3 container-vagas' style={{ width: '100%' }} key={item._id}>
+        <div className='container-vagas' style={{ width: '100%' }} key={item._id} >
+        <div className='flex flex-col gap-3' onClick={() => apareceModal(index)}>
         <div>
           <span className='span-title'>{item.title}</span>
         </div>
@@ -136,7 +143,7 @@ const UserVagasTag = () => {
         <div>
           <span className="span-empresa">{item.company.nome}</span>
         </div>
-        <div onClick={() => apareceModal(index)}>
+        <div>
           <span className="span-description">{item.description}</span>
         </div>
         <div className='flex items-end'>
@@ -147,7 +154,12 @@ const UserVagasTag = () => {
           </span>
           <div className='flex flex-col items-center'>
             <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
-            <div onClick={() => changeMarked(item)}>
+            <div 
+              onClick={(event) => {
+                event.stopPropagation();
+                changeMarked(item);
+              }}
+            >
               {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
                 <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />
               ) : (
@@ -156,9 +168,11 @@ const UserVagasTag = () => {
             </div>
           </div>
         </div>
+        </div>
 
           {modalIndex === index && (
             <div className='moda'>
+
               <div className="moda-content">
                 <div className='flex flex-col gap-12' style={{height: '100%', paddingTop: '0px'}}>
 
