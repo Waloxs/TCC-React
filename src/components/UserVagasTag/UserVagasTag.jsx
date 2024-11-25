@@ -123,6 +123,26 @@ const UserVagasTag = () => {
 
   if (error2) return <p>Error: {error2.message}</p>;
 
+
+  const formatarSalario = (valor) => {
+    if (!valor) return '0,00R$';
+  
+    // Remove "R$", ".", ","
+    const valorLimpo = valor.replace(/[^\d]/g, '');
+    
+    // Multiplica o número por 100 e converte de volta para string
+    const valorCorrigido = (parseInt(valorLimpo, 10) * 100).toString();
+  
+    // Formata com separadores de milhar e duas casas decimais
+    const valorFormatado = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    }).format(valorCorrigido / 100);
+  
+    return valorFormatado;
+  };
+
   return (
     <div className='flex flex-col gap-12' style={{position: 'relative', height: '70vh', overflowY: 'auto'}}>
 
@@ -153,7 +173,7 @@ const UserVagasTag = () => {
             ))}
           </span>
           <div className='flex flex-col items-center'>
-            <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
+            <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{formatarSalario(item.salario)}</span>
             <div 
               onClick={(event) => {
                 event.stopPropagation();

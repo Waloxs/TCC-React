@@ -276,6 +276,7 @@ className='notification-container'
     return differenceInHours + 'h atrás';
   }
 
+  
 
   
   const showNotification = (notification, index) => {
@@ -404,6 +405,27 @@ className='notification-container'
   } 
 
 
+  const formatarSalario = (valor) => {
+    if (!valor) return '0,00R$';
+  
+    // Remove "R$", ".", ","
+    const valorLimpo = valor.replace(/[^\d]/g, '');
+    
+    // Multiplica o número por 100 e converte de volta para string
+    const valorCorrigido = (parseInt(valorLimpo, 10) * 100).toString();
+  
+    // Formata com separadores de milhar e duas casas decimais
+    const valorFormatado = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    }).format(valorCorrigido / 100);
+  
+    return valorFormatado;
+  };
+  
+
+
   return (
     userDataVagas && data && (
       <div className='flex flex-col' style={{ position: 'relative', height: '100vh' }}>
@@ -504,7 +526,7 @@ className='notification-container'
           </div>
 
 
-       <UserDados toggleModal={handleModal}/>
+       <UserDados toggleModal={handleModal} talento={true}/>
 
             </div>
 
@@ -552,7 +574,7 @@ className='notification-container'
                     ))}
                   </span>
                   <div className='flex flex-col items-center'>
-                    <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{item.salario}</span>
+                    <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{formatarSalario(item.salario)}</span>
                     <div onClick={(event) => {event.stopPropagation(); changeMarked(item);}}>
                       {vagasCurtidas.favoritedJobs.some((v) => v._id === item._id) ? (
                         <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />

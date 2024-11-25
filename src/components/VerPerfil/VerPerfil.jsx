@@ -7,19 +7,24 @@ import { axiosInstance, setAuthToken } from '../../utils/api';
 import './VerPerfil.css';
 import axios from 'axios';
 import User from '../UserProfile/UserProfile';
+import UserEmpresa from '../UserEmpresa/UserEmpresa';
 
-const VerPerfil = ({dadosUser}) => {
+const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   const [nome, setNome] = useState('');
+  const [nomeEmpresa, setNomeEmpresa] = useState('');
+  const [telEmpresa, settelEmpresa] = useState('');
   const [titulo, setTitulo] = useState('');
   const [habilidades, setHabilidades] = useState([]);
   const [bio, setBio] = useState('');
   const [options, setOptions] = useState([]);
   const [isEditable, setIsEditable] = useState({
     nome: false,
-    titulo: false,
+    telefone: false,
     habilidades: false,
     biografia: false,
   });
+
+
 
 
   useEffect(() => {
@@ -45,6 +50,9 @@ const VerPerfil = ({dadosUser}) => {
     fetchProfessions(); 
   }, []);
 
+
+  if(dadosUser) {
+
   useEffect(() => {
     setNome(dadosUser.firstName);
     setTitulo(dadosUser.titulo);
@@ -52,6 +60,17 @@ const VerPerfil = ({dadosUser}) => {
     setBio(dadosUser.bio);
   }, [dadosUser]);
   
+  }
+
+  if(dadosEmpresa) {
+
+    useEffect(() => {
+      setNomeEmpresa(dadosEmpresa.nome);
+      settelEmpresa(dadosEmpresa.telefone);
+    }, [dadosEmpresa]);
+    
+    }
+
   const handlePenClick = (field) => {
     setIsEditable((prevState) => ({
       ...prevState,
@@ -62,23 +81,35 @@ const VerPerfil = ({dadosUser}) => {
   const PutUser = async () => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
-
-    const updatedUser = {
-      firstName: nome,
-      titulo,
-      tags: habilidades,
-      bio,
-    };
-
+  
     try {
-      const response = await axiosInstance.put('/me', updatedUser);
-      console.log('Dados atualizados com sucesso:', response.data);
-
+      if (dadosUser) {
+        const updatedUser = {
+          firstName: nome,
+          titulo,
+          tags: habilidades,
+          bio,
+        };
+  
+        const response = await axiosInstance.put('/me', updatedUser);
+        console.log('Dados do usuário atualizados com sucesso:', response.data);
+  
+      } else if (dadosEmpresa) {
+        const updatedEmpresa = {
+          nome: nomeEmpresa,
+          telefone: telEmpresa
+        };
+  
+        const response = await axiosInstance.put('/empresa/profile', updatedEmpresa);
+        console.log('Dados da empresa atualizados com sucesso:', response.data);
+      }
     } catch (error) {
-      console.error('Erro ao atualizar os dados do usuário:', error);
+      console.error('Erro ao atualizar os dados:', error);
     }
   };
+  
 
+  if(dadosUser) {
 
   return (
     <div className='cx-form-edit flex flex-col'>
@@ -91,7 +122,7 @@ const VerPerfil = ({dadosUser}) => {
                       <div>
                         {dadosUser && dadosUser.image && (
                           <div className="imgCadas" style={{width: '40px', height: '80px'}}>
-                            <img src={user.image} alt="User Avatar" className='imgUser' />
+                            <img src={dadosUser.image} alt="User Avatar" className='imgUser' />
                           </div>
                         )}
                         {dadosUser && !dadosUser.image && (
@@ -182,7 +213,82 @@ const VerPerfil = ({dadosUser}) => {
         </div>
       </div>
     </div>
-  );
+    );
+  }
+    if(dadosEmpresa){
+      return (
+
+        <div className='cx-form-edit flex flex-col'>
+        <div className='flex items-center self-end gap-4'>
+                        <div className='flex flex-col items-end'>
+                          <h1 style={{color: '#020617', fontFamily: 'Lexend', fontSize: '1rem'}}>{dadosEmpresa.nome}</h1>
+                          <h1 style={{color: '#334155', fontFamily: 'Lexend', fontSize: '0.95rem'}}>{dadosEmpresa.titulo}</h1>
+                        </div>
+  
+                        <div>
+                          {dadosEmpresa && dadosEmpresa.image && (
+                            <div className="imgCadas" style={{width: '40px', height: '80px'}}>
+                              <img src={dadosEmpresa.image} alt="User Avatar" className='imgUser' />
+                            </div>
+                          )}
+                          {dadosEmpresa && !dadosEmpresa.image && (
+                            <div className="imgCadas">
+                              <div className='imgUserNone' style={{width: '80px', height: '80px', fontSize: '2rem'}}>
+                                <UserEmpresa prLet={true} />
+                              </div>
+                            </div>
+                          )}  
+                        </div>  
+                    </div>
+  
+        <div className='flex flex-col gap-5'>
+          <div className="conteiner-editar flex flex-col gap-3">
+            <span>Nome da Empresa</span>
+            <div className="input-editar">
+              <Input
+                type="text"
+                className="lin2edit"
+                required
+                value={nomeEmpresa}
+                onChange={(e) => setNomeEmpresa(e.target.value)}
+                disabled={!isEditable.nome}
+              />
+              <LuPen className="icon-pen" onClick={() => handlePenClick('nome')} />
+            </div>
+  
+            <span>Telefone</span>
+            <div className="input-editar">
+              <Input
+                type="text"
+                required
+                value={telEmpresa}
+                onChange={(e) => settelEmpresa(e.target.value)}
+                disabled={!isEditable.telEmpresa}
+              />
+              <LuPen className="icon-pen2" onClick={() => handlePenClick('titulo')} />
+            </div>
+
+          </div>
+  
+          <div className='flex self-end'>
+            <BtnPrincipal
+              texto="Salvar"
+              back='#3B82F6'
+              padding='10px'
+              borderRadius='20px'
+              color='#fff'
+              font='Lexend'
+              width='200px'
+              hoverColor='#609AFA'
+              click={PutUser}
+            />
+          </div>
+        </div>
+      </div>
+
+      )
+    }
+  
 };
 
 export default VerPerfil;

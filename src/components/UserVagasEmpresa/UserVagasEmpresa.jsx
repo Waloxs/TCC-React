@@ -10,7 +10,8 @@ import { useForm } from 'react-hook-form';
 import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx';
 import './UserVagasEmpresa.css'
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
-
+import lixo from '../../../public/icons/icon-block.svg';
+import lixoBranco from '../../../public/icons/iconWhite-block.svg';
 
 
 const { Option } = Select;
@@ -33,7 +34,6 @@ const UserVagasEmpresa = () => {
   const [showApplicants, setShowApplicants] = useState(false);
   const [jobId, setJobId] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
-  const [backVaga, setBackVaga] = useState('#3B82F6');
 
 
   const handleShowApplicants = (index) => {
@@ -277,27 +277,24 @@ const UserVagasEmpresa = () => {
   };
 
   const formatCurrencyValue = (value) => {
-    if (!value) return salar;
+    if (!value) return "R$ 0,00";
   
-    // Remove qualquer caractere não numérico
-    let numericValue = value.replace(/[^\d]/g, '');
+    // Remove caracteres não numéricos e converte para número
+    let numericValue = typeof value === 'number' 
+      ? value.toFixed(2) 
+      : value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+    
+    // Aumenta a escala em 100x
+    numericValue = (parseInt(numericValue, 10) * 1).toFixed(2);
   
-    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
-    if (numericValue.length <= 2) {
-      return `0,${numericValue.padStart(2, '0')}`;
-    }
-  
-    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
-    const integerPart = numericValue.slice(0, -2);
-    const decimalPart = numericValue.slice(-2);
-  
-    // Adiciona os pontos de milhar e formata a parte decimal
+    const [integerPart, decimalPart] = numericValue.split('.');
     const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    return `${formattedIntegerPart},${decimalPart}`;
+  
+    return `R$ ${formattedIntegerPart},${decimalPart}`;
   };
   
-
-
+  
+  
   return (
     <div className='container-central'>
       {modal && (
@@ -319,29 +316,14 @@ const UserVagasEmpresa = () => {
           <div className='modalExcluir flex flex-col text-center'>
             <span>Deseja excluir vaga?</span>
             <div className='buttons flex self-center gap-5' style={{ marginTop: '30px' }}>
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Cancelar</div>}
-                back='#93BBFD'
-                padding='10px'
-                borderRadius='25px'
-                color='#fff'
-                width='180px'
-                click={cancelaVaga}
-                hoverColor='#3B82F6'
-              />
-
-              <BtnPrincipal
-                texto={<div className='flex justify-center gap-2'>Deletar Vaga </div>} 
-                back='#fff'
-                padding='10px'
-                borderRadius='25px'
-                color='#EF4444'
-                width='180px'
-                border='#EF4444'
-                click={excluirVaga}
-                showIcon={true}
-                hoverColor='#EF4444'
-              />
+              <button className="flex items-center justify-center gap-2 cancelar-botao" onClick={cancelaVaga}>
+                  Cancelar
+              </button>
+              <button className="flex items-center justify-center gap-2 deletar-botao" onClick={excluirVaga}>
+                  Deletar Vaga
+                  <img src={lixo} alt="" />
+                  <img src={lixoBranco} alt="" />
+              </button>
             </div>
           </div>
         </div>
@@ -447,45 +429,32 @@ const UserVagasEmpresa = () => {
               </div>
 
               <div>
-                <span>Salário</span>
-                <CurrencyInput
-            value={formatCurrencyValue(watch('salary'))}
-            onChange={(formattedValue) => {
-              setValue('salary', formattedValue);
-            }}
-          />
-              </div>
+  <span>Salário</span>
+  <CurrencyInput
+  value={formatCurrencyValue(watch('salary'))} // Exibe o valor escalado e formatado
+  onChange={(formattedValue) => {
+    // Remove formatação e converte para valor bruto
+    const rawValue = formattedValue.replace(/[^\d]/g, ''); // Apenas números
+    const scaledValue = parseInt(rawValue, 1) * 10; // Multiplica por 100
+    setValue('salary', scaledValue); // Armazena o valor escalado
+  }}
+/>
+
+
+
+
+</div>
+
             </div>
 
             <div className='flex gap-4 self-end' style={{marginTop: '50px'}}>
-              <BtnPrincipal
-                texto="Cancelar"
-                back='#fff'
-                padding='10px'
-                borderRadius='15px'
-                border='#EF4444'
-                color='#EF4444'
-                font='Lexend'
-                width='180px'
-                click={cancelaVaga}
-                hoverColor='#EF4444'
-              />
+              <button className="flex items-center justify-center gap-2 cancelar-botao2" onClick={cancelaVaga}>
+                  Cancelar
+              </button>
 
-              <BtnPrincipal
-                texto="Salvar"
-                back={backVaga}
-                padding='10px'
-                borderRadius='15px'
-                color='#fff'
-                font='Lexend'
-                width='180px'
-                click={() => {
-                  if (backVaga === '#3B82F6') {
-                    handleSubmit(salvarEdicao)();
-                  }
-                }}
-                hoverColor='#3B82F6'
-              />
+              <button className="flex items-center justify-center gap-2 cancelar-botao" onClick={salvarEdicao}>
+                  Salvar
+              </button>
             </div>
           </div>
      
@@ -506,7 +475,8 @@ const UserVagasEmpresa = () => {
               <span className='span-description'>{item.description}</span>
             </div>
             <div style={{ marginBottom: '20px' }}>
-              <span className='span-description' style={{ fontWeight: '400' }}>{item.salario}</span>
+              <span className='span-description' style={{ fontWeight: '400' }}>
+              {formatCurrencyValue(item.salario)}</span>
             </div>
             <div className='flex justify-between caixa-tags' style={{ width: '100%' }}>
               <div className='flex gap-3'>

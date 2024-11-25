@@ -628,7 +628,7 @@ const EmpresaPasso = () => {
     >
       <Select
         mode="multiple"
-        options={options} // Agora as opções vêm da API
+        options={options} 
         value={selectedOptions}
         onChange={handleChange}
         placeholder="Selecione as opções..."

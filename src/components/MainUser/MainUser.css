@@ -134,13 +134,12 @@ line-height: 150%; /* 36px */
 }
 
 .formCriar{
-    background-color: #fff;
-    padding-right: 70px;
     border-radius: 15px;
     z-index: 9;
     height: 100%;
     width: 100%;
     grid-column: 1;
+    margin-top: 50px;
 }
 
 .containEdPerfil{

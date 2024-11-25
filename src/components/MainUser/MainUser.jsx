@@ -13,12 +13,17 @@ import axios from 'axios';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import './MainUser.css';
 import Logo from '../../assets/Logo.png'
+import UserDados from '../UserDados/UserDados.jsx';
+import VerPerfil from '../VerPerfil/VerPerfil.jsx';
+import Volta from '../../../public/icons/arrowLeft.svg'
 
 const MainUser = () => {
   const { data: userDataEmpresa, loading, error } = useUserEmpresa();
   const { data: userDataVagasEmpresa, loading2, error2 } = useUserVagasEmpresa();
   const [selectedButton, setSelectedButton] = useState('home');
   const [image, setImage] = useState(null);
+  const [modal, setModal] = useState(false); 
+
 
   useEffect(() => {
     if (userDataEmpresa && userDataEmpresa.image) {
@@ -76,6 +81,10 @@ const MainUser = () => {
     localStorage.removeItem('authToken');
     window.location.href = '/Login'; 
   }
+
+  const handleModal = () => {
+    setModal(!modal);
+} 
 
 
   
@@ -149,21 +158,78 @@ const MainUser = () => {
 
             <div style={{width: '70%'}}>
               {userDataVagasEmpresa && selectedButton === 'home' && (
+
+                <>
+
+                {!modal && (
+                <div>
+                <div className='flex justify-end' style={{marginTop: '20px'}}>
+      
+                <UserDados toggleModal={handleModal} empresa={true}/>
+
+                </div>
+
                 <div className='central' style={{marginTop: '64px'}}>
                   <span className='vaga-tit'>Minhas Vagas</span>
                   <UserVagasEmpresa />
                 </div>
+      
+                </div>
+                )}
+
+                {modal && (
+                  <div className='modal flex flex-col'>
+                    <img src={Volta} alt="" style={{width: '10px'}} onClick={() => handleModal(false)}/>
+                    <VerPerfil dadosEmpresa={userDataEmpresa} dadosUser={false}/>
+                  </div>
+                )} 
+                </>
               )}
 
               {selectedButton === 'criarVaga' && (
                 <div className='central'>
-                  <CriarVaga />
+
+                    {!modal &&(
+                      <>
+                     <div className='flex justify-end' style={{marginTop: '20px'}}>
+      
+                     <UserDados toggleModal={handleModal} empresa={true}/>
+      
+                     </div>
+  
+                    <CriarVaga />
+                    </>
+                    )}
+
+                    {modal && (
+                      <div className='modal flex flex-col'>
+                        <img src={Volta} alt="" style={{width: '10px'}} onClick={() => handleModal(false)}/>
+                        <VerPerfil dadosEmpresa={userDataEmpresa} dadosUser={false}/>
+                      </div>
+                    )} 
                 </div>
               )}
 
               {selectedButton === 'configuracoes' && (
                 <div className='central'>
-                  <ConfiguracaoConta />
+                  {!modal &&(
+                      <>
+                     <div className='flex justify-end' style={{marginTop: '20px'}}>
+      
+                     <UserDados toggleModal={handleModal} empresa={true}/>
+      
+                     </div>
+  
+                    <ConfiguracaoConta />
+                    </>
+                    )}
+
+                    {modal && (
+                      <div className='modal flex flex-col'>
+                        <img src={Volta} alt="" style={{width: '10px'}} onClick={() => handleModal(false)}/>
+                        <VerPerfil dadosEmpresa={userDataEmpresa} dadosUser={false}/>
+                      </div>
+                    )} 
                 </div>
               )}
 

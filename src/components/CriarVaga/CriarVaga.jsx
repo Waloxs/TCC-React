@@ -1,5 +1,5 @@
 // CriarVaga.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CriarVaga.css';
 import { Select } from "antd";
@@ -24,27 +24,33 @@ const CriarVaga = () => {
   const [backVaga, setBackVaga] = useState('#3B82F6');
   const [errorMessage, setErrorMessage] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
+  const [options, setOptions] = useState([]); 
 
-  const options = [
-    { value: 'designer', label: 'Designer' },
-    { value: 'design', label: 'Design' },
-    { value: 'front-end', label: 'Front-End' },
-    { value: 'back-end', label: 'Back-End' },
-    { value: 'full-stack', label: 'Full-Stack' },
-    { value: 'project-manager', label: 'Project Manager' },
-    { value: 'qa', label: 'Quality Assurance (QA)' },
-    { value: 'devops', label: 'DevOps' },
-    { value: 'data-scientist', label: 'Data Scientist' },
-    { value: 'product-manager', label: 'Product Manager' },
-    { value: 'ui-ux-designer', label: 'UI/UX Designer' },
-    { value: 'mobile-developer', label: 'Mobile Developer' },
-    { value: 'cloud-engineer', label: 'Cloud Engineer' },
-    { value: 'security-analyst', label: 'Security Analyst' },
-    { value: 'acrilista', label: 'Acrilista'},
-    { value: 'desenvolvedor front-end', label: 'Desenvolvedor front-end'},
-    { value: 'desenvolvedor back-end', label: 'Desenvolvedor back-end'},
 
-];
+
+  useEffect(() => {
+    const fetchProfessions = async () => {
+      try {
+        const response = await axios.get("https://gist.githubusercontent.com/wallacemaxters/7863699e750a48fc2e283892738f8ca5/raw/01c7748c4e1f2e1471ea73423b8e49fec6b23eab/lista_cargos.json");
+        const data = response.data;
+
+        if (Array.isArray(data)) {
+          const formattedOptions = data.map(profession => ({
+            value: profession,
+            label: profession
+          }));
+          setOptions(formattedOptions);
+          console.log(data);
+        } else {
+          console.error("Dados recebidos da API não são um array:", data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar as profissões:", error);
+      }
+    };
+
+    fetchProfessions(); // Executa apenas na montagem do componente
+  }, []); 
 
 
   const handleChange = (selected) => {
@@ -65,10 +71,10 @@ const CriarVaga = () => {
     if (!validarCampos()) {
       return;
     }
-
+  
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
-
+  
     if (token) {
       try {
         const config = {
@@ -76,28 +82,30 @@ const CriarVaga = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-
+  
+        // Remove qualquer caractere não numérico, divide por 10 e formata novamente
+        const originalSalary = data.salary.replace(/[^\d]/g, ''); // Remove os caracteres não numéricos
+        const salaryInCents = parseInt(originalSalary, 10) / 100; // Divide o valor por 10
+        const formattedSalary = formatCurrencyValue(salaryInCents.toString()); // Formata para o valor monetário com 2 casas decimais
+  
         const postData = {
           title: profissional,
           description: desc,
-          salario: data.salary + "R$",
+          salario: formattedSalary + "R$", // Adiciona "R$" ao valor formatado
           tags: selectedOptions,
           localizacao: local,
           requirements: requisits,
         };
-
+  
         const response = await axiosInstance.post('/jobs/create', postData, config);
-        
-        
-
         console.log(response.data);
-
+  
         if (response.data) {
           setImagemVaga(<img src="icons/correct.svg" alt="" />);
           setTextoVaga(<span style={{ whiteSpace: 'nowrap' }}>Vaga publicada</span>);
           setBackVaga('#4ADA3D');
         }
-
+  
       } catch (error) {
         console.error('Erro ao enviar dados:', error);
       }
@@ -105,28 +113,29 @@ const CriarVaga = () => {
       console.error('Token não encontrado no localStorage');
     }
   };
+  
+  // Função para formatar o valor monetário
+  const formatCurrencyValue = (value) => {
+    if (!value) return '0,00';
+  
+    // Remove qualquer caractere não numérico
+    let numericValue = value.replace(/[^\d]/g, '');
+  
+    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
+    if (numericValue.length <= 2) {
+      return `0,${numericValue.padStart(2, '0')}`;
+    }
+  
+    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
+    const integerPart = numericValue.slice(0, -2);
+    const decimalPart = numericValue.slice(-2);
+  
+    // Adiciona os pontos de milhar e formata a parte decimal
+    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return `${formattedIntegerPart},${decimalPart}`;
+  };
+  
 
-  // Função para formatar o valor para o formato monetário
-
-const formatCurrencyValue = (value) => {
-  if (!value) return '0,00';
-
-  // Remove qualquer caractere não numérico
-  let numericValue = value.replace(/[^\d]/g, '');
-
-  // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
-  if (numericValue.length <= 2) {
-    return `0,${numericValue.padStart(2, '0')}`;
-  }
-
-  // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
-  const integerPart = numericValue.slice(0, -2);
-  const decimalPart = numericValue.slice(-2);
-
-  // Adiciona os pontos de milhar e formata a parte decimal
-  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  return `${formattedIntegerPart},${decimalPart}`;
-};
 
 
   return (
@@ -200,6 +209,8 @@ const formatCurrencyValue = (value) => {
                 );
               }}
             />
+
+
           </div>
         </div>
 

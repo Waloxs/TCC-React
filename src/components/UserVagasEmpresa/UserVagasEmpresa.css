@@ -7,3 +7,86 @@
 .container-central::-webkit-scrollbar {
     display: none; /* Para Chrome, Safari e Edge */
 }
+
+.deletar-botao {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 25px;
+    color: #ef4444;
+    width: 170px;
+    border: 1px solid #ef4444;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .cancelar-botao {
+    background-color: #3B82F6;
+    padding: 10px;
+    border-radius: 25px;
+    color: #fff;
+    width: 170px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .cancelar-botao2 {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 25px;
+    color: #ef4444;
+    width: 170px;
+    border: 1px solid #ef4444;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .salvar-botao {
+    background-color: #3B82F6;
+    padding: 10px;
+    border-radius: 25px;
+    color: #fff;
+    width: 170px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .salvar-botao:hover{
+    background-color: #3B82F6;
+  }
+  
+  
+  .deletar-botao img {
+    display: inline-block;
+  }
+  
+  .deletar-botao img:nth-child(1) { /* Ícone lixo */
+    display: inline-block;
+  }
+  
+  .deletar-botao img:nth-child(2) { /* Ícone lixoBranco */
+    display: none;
+  }
+  
+  .deletar-botao:hover {
+    background-color: #ef4444;
+    color: #fff;
+  }
+
+  .cancelar-botao:hover {
+    background-color: #6ca5ff;
+    color: #fff;
+  }
+
+  .cancelar-botao2:hover {
+    background-color: #ef4444;
+    color: #fff;
+  }
+  
+  .deletar-botao:hover img:nth-child(1) { /* Ocultar lixo */
+    display: none;
+  }
+  
+  .deletar-botao:hover img:nth-child(2) { /* Mostrar lixoBranco */
+    display: inline-block;
+  }
+  
