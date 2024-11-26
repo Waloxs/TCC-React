@@ -13,6 +13,9 @@ import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import lixo from '../../../public/icons/icon-block.svg';
 import lixoBranco from '../../../public/icons/iconWhite-block.svg';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 
 const { Option } = Select;
 
@@ -34,7 +37,37 @@ const UserVagasEmpresa = () => {
   const [showApplicants, setShowApplicants] = useState(false);
   const [jobId, setJobId] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
+  const [options, setOptions] = useState([]); 
 
+
+  const MySwal = withReactContent(Swal);
+  
+
+  useEffect(() => {
+    const fetchProfessions = async () => {
+      try {
+        const response = await axios.get("https://gist.githubusercontent.com/wallacemaxters/7863699e750a48fc2e283892738f8ca5/raw/01c7748c4e1f2e1471ea73423b8e49fec6b23eab/lista_cargos.json");
+        const data = response.data;
+
+        if (Array.isArray(data)) {
+          const formattedOptions = data.map(profession => ({
+            value: profession,
+            label: profession
+          }));
+          setOptions(formattedOptions);
+          console.log(data);
+        } else {
+          console.error("Dados recebidos da API não são um array:", data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar as profissões:", error);
+      }
+    };
+
+    fetchProfessions(); // Executa apenas na montagem do componente
+  }, []); 
+
+  
 
   const handleShowApplicants = (index) => {
     const selectedJobId = userDataVagasEmpresa[index]._id; 
@@ -86,6 +119,7 @@ const UserVagasEmpresa = () => {
     setSelectedIndex(null);
   };
 
+  
   const excluirVaga = async () => {
     const id = userDataVagasEmpresa[selectedIndex]._id;
   
@@ -93,24 +127,51 @@ const UserVagasEmpresa = () => {
     setAuthToken(token);
     const config = {
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     };
   
     try {
       const response = await axiosInstance.delete(`/jobs/delete/${id}`, config);
       console.log('Requisição bem-sucedida:', response);
-
+  
+      // Atualiza o estado para remover a vaga excluída
       setUserDataVagasEmpresa(userDataVagasEmpresa.filter((_, i) => i !== selectedIndex));
-        
+  
+      // Exibe mensagem de sucesso
+      MySwal.fire('Deletado!', 'A vaga foi excluída com sucesso.', 'success');
     } catch (error) {
       console.error('Erro na exclusão:', error);
       setError(error);
+  
+      // Exibe mensagem de erro
+      MySwal.fire('Erro!', 'Não foi possível excluir a vaga.', 'error');
     } finally {
       cancelaVaga();
       console.log('Finalizando a operação de exclusão');
     }
   };
+  
+  const handleDeleteClick = () => {
+    MySwal.fire({
+      title: 'Tem certeza?',
+      text: 'Você não poderá reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        excluirVaga(); // Chama a função que faz a exclusão
+      }
+    });
+  };
+  
+
+
+
 
 
   const salvarEdicao = async (data) => {
@@ -184,93 +245,6 @@ const UserVagasEmpresa = () => {
     }
   };
   
-  
- 
-  const options = [
-    // Tecnologia
-    { value: 'designer', label: 'Designer' },
-    { value: 'front-end', label: 'Front-End' },
-    { value: 'back-end', label: 'Back-End' },
-    { value: 'full-stack', label: 'Full-Stack' },
-    { value: 'ux-ui', label: 'UX/UI Designer' },
-    { value: 'mobile', label: 'Desenvolvedor Mobile' },
-    { value: 'devops', label: 'DevOps' },
-    { value: 'qa', label: 'Quality Assurance (QA)' },
-    { value: 'data-science', label: 'Data Science' },
-    { value: 'machine-learning', label: 'Machine Learning' },
-    { value: 'cyber-security', label: 'Cyber Security' },
-    { value: 'cloud', label: 'Cloud Computing' },
-
-    // Saúde
-    { value: 'enfermeiro', label: 'Enfermeiro' },
-    { value: 'medico', label: 'Médico' },
-    { value: 'fisioterapeuta', label: 'Fisioterapeuta' },
-    { value: 'nutricionista', label: 'Nutricionista' },
-    { value: 'psicologo', label: 'Psicólogo' },
-    { value: 'dentista', label: 'Dentista' },
-    { value: 'farmaceutico', label: 'Farmacêutico' },
-    { value: 'biomedico', label: 'Biomédico' },
-    { value: 'veterinario', label: 'Veterinário' },
-
-    // Educação
-    { value: 'professor', label: 'Professor' },
-    { value: 'coordenador-pedagogico', label: 'Coordenador Pedagógico' },
-    { value: 'orientador-educacional', label: 'Orientador Educacional' },
-    { value: 'diretor-escolar', label: 'Diretor Escolar' },
-    { value: 'assistente-educacional', label: 'Assistente Educacional' },
-
-    // Marketing e Comunicação
-    { value: 'marketing', label: 'Marketing' },
-    { value: 'publicidade', label: 'Publicidade' },
-    { value: 'relações-públicas', label: 'Relações Públicas' },
-    { value: 'jornalista', label: 'Jornalista' },
-    { value: 'redator', label: 'Redator' },
-    { value: 'social-media', label: 'Social Media Manager' },
-    { value: 'seo', label: 'SEO Specialist' },
-    { value: 'content-creator', label: 'Content Creator' },
-
-    // Finanças e Administração
-    { value: 'financeiro', label: 'Financeiro' },
-    { value: 'contabilista', label: 'Contabilista' },
-    { value: 'auditor', label: 'Auditor' },
-    { value: 'analista-financeiro', label: 'Analista Financeiro' },
-    { value: 'gestor-de-recursos-humanos', label: 'Gestor de Recursos Humanos' },
-    { value: 'administrador', label: 'Administrador' },
-    { value: 'secretario', label: 'Secretário' },
-
-    // Vendas e Atendimento ao Cliente
-    { value: 'vendedor', label: 'Vendedor' },
-    { value: 'representante-comercial', label: 'Representante Comercial' },
-    { value: 'caixa', label: 'Operador de Caixa' },
-    { value: 'gerente-de-loja', label: 'Gerente de Loja' },
-    { value: 'atendente', label: 'Atendente' },
-
-    // Engenharia e Construção
-    { value: 'engenheiro-civil', label: 'Engenheiro Civil' },
-    { value: 'engenheiro-eletrico', label: 'Engenheiro Elétrico' },
-    { value: 'engenheiro-mecanico', label: 'Engenheiro Mecânico' },
-    { value: 'arquiteto', label: 'Arquiteto' },
-    { value: 'mestre-de-obras', label: 'Mestre de Obras' },
-    { value: 'pedreiro', label: 'Pedreiro' },
-
-    // Logística e Transporte
-    { value: 'motorista', label: 'Motorista' },
-    { value: 'entregador', label: 'Entregador' },
-    { value: 'coordenador-de-logistica', label: 'Coordenador de Logística' },
-    { value: 'operador-de-empilhadeira', label: 'Operador de Empilhadeira' },
-
-    // Outros
-    { value: 'advogado', label: 'Advogado' },
-    { value: 'secretaria', label: 'Secretária' },
-    { value: 'garcom', label: 'Garçom' },
-    { value: 'cozinheiro', label: 'Cozinheiro' },
-    { value: 'artista', label: 'Artista' },
-    { value: 'fotografo', label: 'Fotógrafo' },
-    { value: 'tradutor', label: 'Tradutor' },
-    { value: 'bibliotecario', label: 'Bibliotecário' },
-];
-
-
   const handleChange = (selected) => {
     setSelectedOptions(selected);
     setRequisits(selected.map((option) => option.value));
@@ -319,7 +293,7 @@ const UserVagasEmpresa = () => {
               <button className="flex items-center justify-center gap-2 cancelar-botao" onClick={cancelaVaga}>
                   Cancelar
               </button>
-              <button className="flex items-center justify-center gap-2 deletar-botao" onClick={excluirVaga}>
+              <button className="flex items-center justify-center gap-2 deletar-botao" onClick={handleDeleteClick}>
                   Deletar Vaga
                   <img src={lixo} alt="" />
                   <img src={lixoBranco} alt="" />

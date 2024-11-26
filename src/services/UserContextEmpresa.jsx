@@ -42,6 +42,7 @@ export const UserProvider = ({ children }) => {
       try {
         const response = await axiosInstance.get('/empresa/profile', config);
         setData(response.data);
+
       } catch (error) {
         if (error.response && error.response.status === 404) {
           console.warn('Empresa não encontrada.');

@@ -18,6 +18,7 @@ import { axiosInstance, setAuthToken } from '../../utils/api.js';
 
 
 
+
 import { Select } from "antd";
 
 const { Option } = Select;
@@ -42,9 +43,7 @@ const EmpresaPasso = () => {
   const [endereco, setEndereco] = useState("");
   const [localizacao, setLocalizacao] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [salar, setSalar] = useState("");
   const [detVagas, setDatVag] = useState("");
-  const [isEditable, setIsEditable] = useState(false);
   const [border, setBorder] = useState(null);
   const [border2, setBorder2] = useState(null);
   const [border3, setBorder3] = useState('#E2E8F0');
@@ -57,6 +56,10 @@ const EmpresaPasso = () => {
   const [borderSalar ,setBorderSalar] = useState('#E2E8F0');
   const [tags, setTags] = useState([]);
   const [input, setInput] = useState('');
+  const [isEditable, setIsEditable] = useState(false);
+  const [salar, setSalar] = useState("");
+
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && input.trim()) {
@@ -81,7 +84,8 @@ const EmpresaPasso = () => {
             label: profession
           }));
           setOptions(formattedOptions);
-          console.log(data);
+
+
         } else {
           console.error("Dados recebidos da API não são um array:", data);
         }
@@ -144,6 +148,7 @@ const EmpresaPasso = () => {
       profissional,
       descricao,
       tags: selectedOptions,
+      requisits: input
     };
 
     console.log(data);
@@ -162,7 +167,7 @@ const EmpresaPasso = () => {
 
         const dado = {
           telefone,
-          localizacao: endereco,
+          localizacao,
         };
 
         const response = await axiosInstance.put(
@@ -255,6 +260,12 @@ const EmpresaPasso = () => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+  };
+
+
+
+  const handleBlur = () => {
+    setIsEditing(false); // Sai do modo de edição
   };
 
   const handleSalaryChange = (e) => {
@@ -400,6 +411,8 @@ const EmpresaPasso = () => {
 
   const heightValue = !block6 ? "max-content" : "600px";
 
+
+
   return (
     <>
       {userEmpresa && (
@@ -465,7 +478,7 @@ const EmpresaPasso = () => {
                       style={{ paddingLeft: "4rem", paddingRight: "4rem" }}
                     >
                       <h1 className="PassTitEmp">
-                        Vamos começar com um título forte.
+                        Vamos começar criando sua primeira <br/>vaga, para isso insira um título.
                       </h1>
                       <p className="PassParEmp">
                         Isso ajuda a sua vaga a se destacar para os candidatos
@@ -975,14 +988,19 @@ const EmpresaPasso = () => {
 
                         <span>Salário</span>
                         <div className="input-editar">
-                          <input
-                            type="text"
-                            value={`R$ ${salar}`} 
-                            onChange={handleSalaryChange}
-                            placeholder="Ex: R$ 2.500,00"
-                            className="lin2edit"
-                            pattern="[0-9]*"
-                          />
+                        
+
+                        <CurrencyInput
+        value={salar}
+        onValueChange={handleValueChange} // Atualiza o valor enquanto edita
+        decimalSeparator=","
+        groupSeparator="."
+        prefix="R$ "
+        placeholder="Ex: R$ 2.500,00"
+        className="lin2edit"
+        readOnly={!isEditable} // Somente leitura se não estiver no modo de edição
+        onBlur={handleBlur} // Finaliza a edição e formata ao perder o foco
+      />
                           <LuPen
                             className="icon-pen"
                             onClick={handlePenClick}

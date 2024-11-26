@@ -11,6 +11,8 @@ import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { ThreeDots } from 'react-loader-spinner';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
+import Swal from 'sweetalert2';
+
 
 
 const Talento = () => {
@@ -35,33 +37,54 @@ const Talento = () => {
         email,
         password: senha
       };
-
+  
       try {
         const response = await axiosInstance.post('/user/register', dados);
         console.log(response.data);
-
+  
         if (response.status === 201) {
           const { token } = response.data;
           setAuthToken(token);
           localStorage.setItem('authToken', token);
-
+  
           try {
             const emailResponse = await axiosInstance.post('/mail/send/verify', { email });
             console.log('Email de verificação enviado:', emailResponse.data);
+  
+            Swal.fire({
+              title: 'Conta criada com sucesso!',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            }).then(() => {
+              navigate("/TalentoPasso1"); // Redireciona após confirmar o SweetAlert
+            });
           } catch (emailError) {
             console.error('Erro ao enviar o email de verificação:', emailError);
           }
-
-          navigate("/TalentoPasso1"); // Redireciona após salvar e enviar o email
         }
       } catch (error) {
         console.error('Erro ao enviar os dados:', error);
+        if (error.response && error.response.status === 400) {
+          Swal.fire({
+            title: 'Erro',
+            text: 'O email já está cadastrado!',
+            icon: 'error',
+            confirmButtonText: 'Tentar novamente'
+          });
+        } else {
+          Swal.fire({
+            title: 'Erro',
+            text: 'Algo deu errado. Tente novamente mais tarde.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
       }
     } else {
       form.reportValidity();
     }
   };
-
+  
 
   
   const [isImageLoaded, setIsImageLoaded] = useState(false);

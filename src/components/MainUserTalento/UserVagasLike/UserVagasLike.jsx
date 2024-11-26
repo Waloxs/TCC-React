@@ -122,7 +122,10 @@ const UserVagasLike = () => {
               )}
             </span>
             <div className='flex flex-col items-center'>
-              <span className="span-description" style={{ whiteSpace: 'nowrap' }}>{vaga.salario}</span>
+            <span className="span-description" style={{ whiteSpace: 'nowrap' }}>
+  {vaga.salario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+</span>
+
               <div onClick={(event) => {event.stopPropagation(); toggleLike(vaga._id);}}>
                 {vagasCurtidas.some((v) => v._id === vaga._id) ? (
                   <img src="icons/heartPre.svg" alt="marked" style={{ width: '20px' }} />

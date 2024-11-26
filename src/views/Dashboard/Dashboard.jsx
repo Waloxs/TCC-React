@@ -49,9 +49,9 @@ const Dashboard = () => {
         <VagasTag>
           <UserDadosEmpresa>
             <MainUserTalento 
-              dadosTag={loadingData ? [] : dadosTag}  // Dados vazios se ainda estiver carregando
-              notify={loadingData ? [] : notify}      // Dados vazios se ainda estiver carregando
-              loadingNotify={loadingData}             // Passa estado de carregamento para MainUserTalento
+              dadosTag={loadingData ? [] : dadosTag} 
+              notify={loadingData ? [] : notify}      
+              loadingNotify={loadingData}             
               configUser={configUser} 
               showDashnone={false} 
               img={true} 

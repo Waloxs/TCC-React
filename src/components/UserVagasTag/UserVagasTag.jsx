@@ -3,12 +3,15 @@ import { useUser } from '../../services/UserContextVagasTag.jsx';
 import './UserVagasTag.css';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
+import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx'
+
 
 const UserVagasTag = () => {
   const { data2, loading2, error2 } = useUser();
   const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
   const [modalIndex, setModalIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -234,7 +237,20 @@ const UserVagasTag = () => {
 
                 <div className='flex flex-col justify-between'>
                   <div className='apl-dados-empresa flex flex-col items-center'>
-                    <span className=''><img src={data2[index].company.image} alt="" style={{borderRadius: '50%', width: '100px'}}/></span>
+                  {data2[index].company.image ? (
+  <span className="">
+    <img
+      src={data2[index].company.image}
+      alt={data2[index].company.nome || 'Empresa'}
+      style={{ borderRadius: '50%', width: '100px' }}
+    />
+  </span>
+) : (
+  <></>
+)}
+
+
+
                     <span className='apl-title-empresa'>{data2[index].company.nome}</span>
                     <span className='apl-description-empresa'>Empresa</span> 
                   </div>

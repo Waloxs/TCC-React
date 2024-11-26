@@ -648,7 +648,7 @@ const handleFimChange = (date) => {
 
                     <div className='cx flex flex-row gap-2' style={{ paddingLeft: '4rem', paddingRight: '4rem', marginBottom: '3rem' }}>
                       <div onClick={click} style={{ cursor: 'pointer' }}>
-                        <BtnPrincipal texto="Adicionar Expêriencia" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' borderRadius="20px" padding="10px"/>
+                        <BtnPrincipal texto="Adicionar Experiência" color="#fff" width="200px" back="#3B82F6" className='fontbtn' hover='#3A61D4' borderRadius="20px" padding="10px"/>
                       </div>
                       <div onClick={handleClick2} style={{cursor: 'pointer'}}>
                         <BtnPrincipal texto="Pular por enquanto" color="#3B82F6" width="200px" back="#fff" className='fontbtn' border="#3B82F6" borderRadius="20px" padding="10px"/>

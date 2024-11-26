@@ -6,6 +6,13 @@
     z-index: 1;
 }
 
+.imgUserPerfil{
+    max-width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 1;
+}
+
 .imgUserNone{
     display: flex;
     justify-content: center;

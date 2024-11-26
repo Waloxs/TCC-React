@@ -1,4 +1,3 @@
-// CriarVaga.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CriarVaga.css';
@@ -8,7 +7,8 @@ import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import Input from '../Form/input.jsx';
 import { useForm } from 'react-hook-form';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 const { Option } = Select;
 
@@ -25,8 +25,6 @@ const CriarVaga = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const { handleSubmit, setValue, watch } = useForm();
   const [options, setOptions] = useState([]); 
-
-
 
   useEffect(() => {
     const fetchProfessions = async () => {
@@ -52,7 +50,6 @@ const CriarVaga = () => {
     fetchProfessions(); // Executa apenas na montagem do componente
   }, []); 
 
-
   const handleChange = (selected) => {
     setSelectedOptions(selected);
     setRequisits(selected.map(option => option.value));
@@ -77,37 +74,72 @@ const CriarVaga = () => {
   
     if (token) {
       try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-  
-        // Remove qualquer caractere não numérico, divide por 10 e formata novamente
-        const originalSalary = data.salary.replace(/[^\d]/g, ''); // Remove os caracteres não numéricos
-        const salaryInCents = parseInt(originalSalary, 10) / 100; // Divide o valor por 10
-        const formattedSalary = formatCurrencyValue(salaryInCents.toString()); // Formata para o valor monetário com 2 casas decimais
-  
-        const postData = {
-          title: profissional,
-          description: desc,
-          salario: formattedSalary + "R$", // Adiciona "R$" ao valor formatado
-          tags: selectedOptions,
-          localizacao: local,
-          requirements: requisits,
-        };
-  
-        const response = await axiosInstance.post('/jobs/create', postData, config);
-        console.log(response.data);
-  
-        if (response.data) {
-          setImagemVaga(<img src="icons/correct.svg" alt="" />);
-          setTextoVaga(<span style={{ whiteSpace: 'nowrap' }}>Vaga publicada</span>);
-          setBackVaga('#4ADA3D');
+        // Confirmar se o usuário quer publicar a vaga
+        const result = await Swal.fire({
+          title: 'Tem certeza que deseja publicar?',
+          text: 'Esta ação não pode ser revertida!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sim, publicar!',
+          cancelButtonText: 'Cancelar'
+        });
+
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Publicando Vaga...',
+            text: 'Aguarde enquanto sua vaga está sendo criada.',
+            allowOutsideClick: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+
+          const originalSalary = data.salary.replace(/[^\d]/g, '');
+          const salaryInCents = parseInt(originalSalary, 10) / 100;
+          const formattedSalary = formatCurrencyValue(salaryInCents.toString());
+
+          const postData = {
+            title: profissional,
+            description: desc,
+            salario: formattedSalary + 'R$',
+            tags: selectedOptions,
+            localizacao: local,
+            requirements: requisits,
+          };
+
+          const response = await axiosInstance.post('/jobs/create', postData, config);
+
+          if (response.data) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Sucesso!',
+              text: 'Sua vaga foi publicada com sucesso.',
+              confirmButtonText: 'OK',
+            });
+
+            setImagemVaga(<img src="icons/correct.svg" alt="" />);
+            setTextoVaga(<span style={{ whiteSpace: 'nowrap' }}>Vaga publicada</span>);
+            setBackVaga('#4ADA3D');
+          }
         }
-  
       } catch (error) {
         console.error('Erro ao enviar dados:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Ocorreu um erro ao publicar sua vaga. Por favor, tente novamente.',
+          confirmButtonText: 'OK',
+        });
       }
     } else {
       console.error('Token não encontrado no localStorage');
@@ -118,25 +150,18 @@ const CriarVaga = () => {
   const formatCurrencyValue = (value) => {
     if (!value) return '0,00';
   
-    // Remove qualquer caractere não numérico
     let numericValue = value.replace(/[^\d]/g, '');
   
-    // Se o valor tiver menos de 3 dígitos, formate com duas casas decimais
     if (numericValue.length <= 2) {
       return `0,${numericValue.padStart(2, '0')}`;
     }
   
-    // Se o valor tiver mais de 2 dígitos, separe a parte inteira da parte decimal
     const integerPart = numericValue.slice(0, -2);
     const decimalPart = numericValue.slice(-2);
   
-    // Adiciona os pontos de milhar e formata a parte decimal
     const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return `${formattedIntegerPart},${decimalPart}`;
   };
-  
-
-
 
   return (
     <div className='formCriar flex flex-col'>
@@ -209,8 +234,6 @@ const CriarVaga = () => {
                 );
               }}
             />
-
-
           </div>
         </div>
 
@@ -225,7 +248,7 @@ const CriarVaga = () => {
         </div>
       </div>
 
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
       <div className='flex self-end' style={{ marginTop: '40px', marginBottom: '40px' }}>
         <BtnPrincipal
@@ -243,6 +266,8 @@ const CriarVaga = () => {
           }}
           hoverColor='#609AFA'
         />
+
+        
       </div>
     </div>
   );

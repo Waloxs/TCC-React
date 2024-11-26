@@ -37,8 +37,9 @@ const ConfiguracaoConta = () => {
         setAuthToken(token);
         
         const response = await axiosInstance.get('/empresa/profile');
+
         if (response.status === 200) {
-          setEmail(response.data.email);
+          setEmail(response.data);
         }
       } catch (error) {
         console.error('Erro ao carregar dados do usuário:', error);

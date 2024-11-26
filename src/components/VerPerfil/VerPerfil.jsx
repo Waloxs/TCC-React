@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import BtnPrincipal from '../Buttons/BtnPrincipal';
 import Input from '../Form/input';
 import { LuPen } from "react-icons/lu";
@@ -8,6 +8,8 @@ import './VerPerfil.css';
 import axios from 'axios';
 import User from '../UserProfile/UserProfile';
 import UserEmpresa from '../UserEmpresa/UserEmpresa';
+import BtnEdit from '../../assets/btn-edit.svg';
+
 
 const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   const [nome, setNome] = useState('');
@@ -24,6 +26,42 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
     biografia: false,
   });
 
+
+  const [imageSrc, setImageSrc] = useState(null); // Estado para armazenar a imagem
+  const fileInputRef = useRef(null); // Referência para o input de arquivo
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Atualizar visualmente a imagem
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImageSrc(e.target.result); // Atualizar o estado com a URL da imagem
+      };
+      reader.readAsDataURL(file);
+
+      // Preparar o formulário para envio
+      const formData = new FormData();
+      formData.append('imagem_perfil', file); // Nome do campo esperado pela API
+
+      try {
+        // Realizar a requisição PUT com axiosInstance
+        const response = await axiosInstance.put('/empresa/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Garantir o formato correto
+          },
+        });
+
+        console.log('Imagem atualizada com sucesso:', response.data);
+      } catch (error) {
+        console.error('Erro ao atualizar a imagem:', error.response || error);
+      }
+    }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current.click(); // Abrir o seletor de arquivos ao clicar na div
+  };
 
 
 
@@ -121,8 +159,8 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
 
                       <div>
                         {dadosUser && dadosUser.image && (
-                          <div className="imgCadas" style={{width: '40px', height: '80px'}}>
-                            <img src={dadosUser.image} alt="User Avatar" className='imgUser' />
+                          <div className="imgCadas">
+                            <img src={dadosUser.image} alt="User Avatar" className='imgUserPerfil' />
                           </div>
                         )}
                         {dadosUser && !dadosUser.image && (
@@ -150,7 +188,7 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
             <LuPen className="icon-pen" onClick={() => handlePenClick('nome')} />
           </div>
 
-          <span>Título</span>
+          <span>Profissão</span>
           <div className="input-editar">
             <Input
               type="text"
@@ -232,14 +270,49 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
                             </div>
                           )}
                           {dadosEmpresa && !dadosEmpresa.image && (
-                            <div className="imgCadas">
-                              <div className='imgUserNone' style={{width: '80px', height: '80px', fontSize: '2rem'}}>
-                                <UserEmpresa prLet={true} />
-                              </div>
-                            </div>
+                                  <div className="imgCadas" onClick={handleClick} style={{ cursor: 'pointer' }}>
+                                  <div
+                                    className="imgUserNone"
+                                    style={{
+                                      width: '80px',
+                                      height: '80px',
+                                      fontSize: '2rem',
+                                      position: 'relative',
+                                    }}
+                                  >
+                                    {imageSrc ? (
+                                      <img
+                                        src={imageSrc}
+                                        alt="Imagem do usuário"
+                                        style={{
+                                          width: '100%',
+                                          height: '100%',
+                                          borderRadius: '50%',
+                                        }}
+                                      />
+                                    ) : (
+                                      <UserEmpresa prLet={true} />
+                                    )}
+                                    <img
+                                      src={BtnEdit}
+                                      alt="Editar"
+                                      style={{ position: 'absolute', bottom: '0px', right: '2%' }}
+                                    />
+                                  </div>
+                                  {/* Input de arquivo escondido */}
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    ref={fileInputRef}
+                                    onChange={handleFileChange}
+                                  />
+                                </div>
                           )}  
                         </div>  
                     </div>
+
+
   
         <div className='flex flex-col gap-5'>
           <div className="conteiner-editar flex flex-col gap-3">

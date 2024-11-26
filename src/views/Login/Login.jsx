@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'; // Importação do SweetAlert2
 import axios from 'axios';
 import './Login.css';
 import img from '../../assets/login.png';
@@ -13,62 +14,62 @@ import BtnPrincipal from '../../components/Buttons/BtnPrincipal';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 
-
-
 const Login = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
-  const navigate = useNavigate();
-
-  
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    const userData = {
-      email: event.target.email.value,
-      password: event.target.senha.value
-    };
-
-
-    try {
-      const response = await axiosInstance.post('/user/login', userData);
-      localStorage.setItem('authToken', response.data.token);
-      const { token } = response.data;
-      setAuthToken(token);
-
-
-      navigate('/Dashboard');
-
-        window.location.reload();
- 
-
-    } catch {
-
-      try {
-        const responseEmpresa = await axiosInstance.post('/empresa/login', userData);
-        localStorage.setItem('authToken', responseEmpresa.data.token);
-        const { token } = responseEmpresa.data;
-        setAuthToken(token);
-
-        navigate('/DashboardEmpresa');
-
-          window.location.reload();
-        
-
-      } catch (empresaError) {
-        console.error('Erro ao tentar login de empresa:', empresaError);
-      }
-    } finally {
-      console.log('certo'); 
-    }
-  };
-
   const [password, setPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePassword = () => {
     setPassword(!password);
-  }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const userData = {
+      email: event.target.email.value,
+      password: event.target.senha.value,
+    };
+  
+    try {
+      const response = await axiosInstance.post('/user/login', userData);
+      const { token } = response.data;
+      localStorage.setItem('authToken', token);
+      setAuthToken(token);
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Login bem-sucedido!',
+        text: 'Você será redirecionado ao Dashboard.',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+  
+      setTimeout(() => {
+        navigate('/Dashboard');
+        window.location.reload();
+      }, 3000);
+    } catch (talentError) {
+      console.log(talentError); 
+    
+      if (talentError.response?.status === 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Credenciais inválidas.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Algo deu errado. Por favor, tente novamente mais tarde.',
+        });
+      }
+    }
+    
+  };
+  
 
   useEffect(() => {
     const image = new Image();
@@ -78,16 +79,15 @@ const Login = () => {
     };
 
     const Loader = setTimeout(() => {
-      if(isImageLoaded){
+      if (isImageLoaded) {
         setShowLoader(false);
       }
     }, 1000);
 
     return () => {
-      clearTimeout(Loader)
+      clearTimeout(Loader);
     };
   }, [isImageLoaded]);
-
 
   if (showLoader) {
     return (
@@ -108,33 +108,38 @@ const Login = () => {
             <span className='subLogin flex justify-center'>Realize o Login para acessar a Workzen.</span>
           </div>
 
-          <div className='cpSenha flex flex-col gap-2' style={{width: '100%'}}>
-          <Input name='email' placeholder='Email' type='email'  />
-          <Input name='senha' placeholder='Senha' type={password ? 'text' : 'password'} />
-          {password ? (
-                    <IoEyeOffSharp className='Eye' onClick={togglePassword} />
-                  ) : (
-                    <IoEyeSharp className='Eye' onClick={togglePassword} />
-                  )}
+          <div className='cpSenha flex flex-col gap-2' style={{ width: '100%' }}>
+            <Input name='email' placeholder='Email' type='email' />
+            <Input name='senha' placeholder='Senha' type={password ? 'text' : 'password'} />
+            {password ? (
+              <IoEyeOffSharp className='Eye' onClick={togglePassword} />
+            ) : (
+              <IoEyeSharp className='Eye' onClick={togglePassword} />
+            )}
           </div>
 
           <Link to="/Password" className='flex self-end'>
             <span className='sub'>Esqueceu a Senha?</span>
           </Link>
 
-
-          <BtnPrincipal class="btnLogin" texto="Entrar" color="#fff" width="100%" back="#3B82F6" hover='#3A61D4' /> {/* Botão para salvar as mudanças */}
-          
+          <BtnPrincipal class="btnLogin" texto="Entrar" color="#fff" width="100%" back="#3B82F6" hover='#3A61D4' />
           <div className="lineLogin"></div>
           <span className='cont'>Ou continuar com</span>
 
           <a href='https://workzen.onrender.com/v1/auth/google' className="mid flex justify-center gap-2 items-center" style={{ maxWidth: '100%' }}>
-              <FcGoogle style={{ width: '20px', height: '20px' }} />
-              <span className='gog'>Google</span>
+            <FcGoogle style={{ width: '20px', height: '20px' }} />
+            <span className='gog'>Google</span>
           </a>
+
+          <div className='flex gap-2' style={{position: 'absolute', bottom: '10%'}}>
+            <span className='sub'>Ainda não tem conta?</span> 
+            <Link to="/escolha">
+            <span className='sub' style={{color: '#3B82F6'}}>Crie uma!</span> 
+            </Link>            
+          </div>
         </form>
         <div>
-        <img className='imgLogin' src={img} alt="Login Visual" style={{ maxWidth: '40rem', height: '40rem', transform: 'translateX(70px)' }} />
+          <img className='imgLogin' src={img} alt="Login Visual" style={{ maxWidth: '40rem', height: '40rem', transform: 'translateX(70px)' }} />
         </div>
       </div>
     </div>

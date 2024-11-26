@@ -73,7 +73,6 @@
     line-height: 130%;
     border-radius: 8px;
     border: 1px solid var(--grey-300, #CBD5E1);
-    color: var(--grey-text-light, #8C9FB4) !important;
     padding-left: 15px;
     background-color: #fff;
 
@@ -104,6 +103,17 @@
     pointer-events: none;
     color: #333;
     font-size: 36px;
+}
+
+.select-icon2{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    padding-right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 22px;
 }
 
 
