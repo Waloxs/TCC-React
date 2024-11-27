@@ -74,6 +74,26 @@ const UserVagasLike = () => {
     setModalIndex(null);
   };
 
+  const formatarSalario = (valor) => {
+    if (!valor) return '0,00R$';
+  
+    // Remove "R$", ".", ","
+    const valorLimpo = valor.replace(/[^\d]/g, '');
+    
+    // Multiplica o número por 100 e converte de volta para string
+    const valorCorrigido = (parseInt(valorLimpo, 10) * 100).toString();
+  
+    // Formata com separadores de milhar e duas casas decimais
+    const valorFormatado = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    }).format(valorCorrigido / 100);
+  
+    return valorFormatado;
+  };
+  
+
   return (
     <div className="flex flex-col gap-12" style={{paddingTop: '25px'}}>
 
@@ -123,7 +143,7 @@ const UserVagasLike = () => {
             </span>
             <div className='flex flex-col items-center'>
             <span className="span-description" style={{ whiteSpace: 'nowrap' }}>
-  {vaga.salario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+  {formatarSalario(vaga.salario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))}
 </span>
 
               <div onClick={(event) => {event.stopPropagation(); toggleLike(vaga._id);}}>

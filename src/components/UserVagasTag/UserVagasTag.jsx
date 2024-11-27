@@ -4,14 +4,14 @@ import './UserVagasTag.css';
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import BtnPrincipal from '../Buttons/BtnPrincipal.jsx';
 import UserEmpresa from '../../components/UserEmpresa/UserEmpresa.jsx'
-
+import Swal from 'sweetalert2';
 
 const UserVagasTag = () => {
   const { data2, loading2, error2 } = useUser();
   const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
   const [modalIndex, setModalIndex] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [aplicado, setAplicado] = useState({}); // Para controlar se o usuário já se candidatou
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -27,8 +27,6 @@ const UserVagasTag = () => {
         });
 
         const favoritas = response.data.favoritedJobs || [];
-
-
         setVagasCurtidas({ favoritedJobs: favoritas });
       } catch (error) {
         console.error("Erro ao buscar vagas favoritas:", error);
@@ -93,28 +91,45 @@ const UserVagasTag = () => {
     }
   };
 
-
   const aplicarVaga = async (vaga) => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
   
     try {
-
       const response = await axiosInstance.post(`/jobs/${vaga._id}/apply`, {}, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         }
       });
-  
-      // Exibindo o console de sucesso
-      console.log('Sucesso:', response.data);
+
+      // Exibindo o Swal de sucesso
+      Swal.fire({
+        icon: 'success',
+        title: 'Candidatura realizada!',
+        text: 'Sua candidatura foi enviada com sucesso.',
+        showConfirmButton: true,
+        timer: 3000, // Timer de 3 segundos para desaparecer
+      });
+
+      // Atualiza o estado para marcar que o usuário já se candidatou
+      setAplicado((prev) => ({
+        ...prev,
+        [vaga._id]: true,
+      }));
+
     } catch (error) {
-      console.error('Erro ao atualizar vaga:', error);
-      throw new Error('Erro ao atualizar vaga');
+      console.error('Erro ao aplicar para a vaga:', error);
+
+      // Exibindo o Swal de erro
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao aplicar',
+        text: 'Houve um erro ao enviar sua candidatura. Tente novamente.',
+        showConfirmButton: true,
+      });
     }
   };
-  
 
   const apareceModal = (index) => {
     setModalIndex(index);
@@ -123,9 +138,6 @@ const UserVagasTag = () => {
   const fechaModal = () => {
     setModalIndex(null);
   };
-
-  if (error2) return <p>Error: {error2.message}</p>;
-
 
   const formatarSalario = (valor) => {
     if (!valor) return '0,00R$';
@@ -256,15 +268,16 @@ const UserVagasTag = () => {
                   </div>
 
 
-                  <div className='apl-buttons'>
+                  <div className='apl-dados'>
                     <BtnPrincipal
-                    texto={'Aplique agora'}
-                    back={'#3B82F6'}
-                    padding='15px'
-                    borderRadius='20px'
-                    color={'#fff'}
-                    width="100%"
-                    click={() => aplicarVaga(data2[index])}
+                      texto={aplicado[data2[index]._id] ? 'Candidatura Enviada' : 'Aplique agora'}
+                      back={aplicado[data2[index]._id] ? '#B0B0B0' : '#3B82F6'} // Cor cinza quando já se candidatou
+                      padding='15px'
+                      borderRadius='20px'
+                      color={aplicado[data2[index]._id] ? '#fff' : '#fff'}
+                      width="100%"
+                      click={() => aplicarVaga(data2[index])}
+                      disabled={aplicado[data2[index]._id]} // Desabilita o botão se já se candidatou
                     />
                   </div>
                 </div>

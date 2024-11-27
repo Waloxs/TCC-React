@@ -53,6 +53,25 @@ const fechaModal = () => {
     setModal(!modal);
 } 
 
+const formatarSalario = (valor) => {
+  if (!valor) return '0,00R$';
+
+  // Remove "R$", ".", ","
+  const valorLimpo = valor.replace(/[^\d]/g, '');
+  
+  // Multiplica o número por 100 e converte de volta para string
+  const valorCorrigido = (parseInt(valorLimpo, 10) * 100).toString();
+
+  // Formata com separadores de milhar e duas casas decimais
+  const valorFormatado = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+  }).format(valorCorrigido / 100);
+
+  return valorFormatado;
+};
+
 
   return (
     <div className="flex flex-col gap-12" style={{height: '100%', paddingTop: '25px'}}>
@@ -75,7 +94,7 @@ const fechaModal = () => {
   : vagasAplicadas && vagasAplicadas.length > 0 && !modal ?(
 
     <>
-    <div style={{height: '70vh', overflowY: 'auto'}}>
+    <div style={{height: '70vh', overflowY: 'auto'}} className='flex flex-col gap-6'>
     {vagasAplicadas.map((vaga) => (
   <div key={vaga._id} className="flex flex-col gap-3 container-vagas p-4" onClick={() => abreModal(vaga._id)}>
     <div className="flex justify-between">
@@ -104,7 +123,7 @@ const fechaModal = () => {
         )}
       </span>
       <span className="span-description" style={{ whiteSpace: 'nowrap' }}>
-        {vaga.job.salario}
+        {formatarSalario(vaga.job.salario)}
       </span>
     </div>
 
@@ -133,7 +152,7 @@ const fechaModal = () => {
   
       <div className='flex flex-col'>
           <span className='apl-title'>Preço</span>
-          <span className='item-req'>{vaga.job.salario}</span>
+          <span className='item-req'>{formatarSalario(vaga.job.salario)}</span>
       </div>
   
       <div className='flex flex-col'>

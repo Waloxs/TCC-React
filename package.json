@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.2.1",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/material": "^6.1.9",
     "antd": "^5.20.1",
     "axios": "^1.7.2",
     "chromedriver": "^128.0.3",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
-    "framer-motion": "^11.2.13",
+    "framer-motion": "^11.12.0",
     "gsap": "^3.12.5",
     "inputmask": "^5.0.9",
     "jwt-decode": "^3.1.2",
