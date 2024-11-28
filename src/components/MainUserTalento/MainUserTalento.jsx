@@ -55,11 +55,31 @@ const MainUserTalento = ({
   const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
   const [likedItems, setLikedItems] = useState({});
   const [aplicado, setAplicado] = useState({}); 
-  
   const [searchResults, setSearchResults] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
 
 
+  const fetchNotifications = async () => {
+    const token = localStorage.getItem('authToken'); // Obtém o token do localStorage
+
+    try {
+      const response = await axiosInstance.get('/notify/', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho
+        },
+      });
+
+      setNotifications(response.data); // Atualiza as notificações no estado
+    } catch (error) {
+      console.error('Erro ao buscar notificações:', error);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
 
   useEffect(() => {
     const fetchFavoritas = async () => {
@@ -286,32 +306,41 @@ className='notification-container'
 
     return (
       <>
-      <motion.div
-        key={index}
-        onClick={() => VerDetalhes(notification, index)} 
-        className='notify-sucess'
-        style={{ position: 'relative', marginBottom: '10px', borderRadius: mudaborder === index ? '15px 0px 0px 0px' : '15px 0px 15px 15px', cursor: 'pointer'  }}
-        initial={{x: '100vw'}}
-        animate={{ x: 0 }}
-        transition={{ duration: 2, ease: 'easeOut' }}
-      >
-        <div className='flex justify-between'>
-          <div className='flex gap-2 items-center'>
-            <span className='notify-message'>{notification.message}</span>
-            <img src='icons/check.svg' alt='check icon' style={{ width: '20px', marginRight: '10px' }} />
-          </div>
+    {notifications.length > 0 && notifications.map((notification, index) => (
+  <motion.div
+    key={index}
+    onClick={() => VerDetalhes(notification, index)} 
+    className="notify-sucess"
+    style={{
+      position: 'relative',
+      marginBottom: '10px',
+      borderRadius: mudaborder === index ? '15px 0px 0px 0px' : '15px 0px 15px 15px',
+      cursor: 'pointer'
+    }}
+    initial={{ x: '100vw' }}
+    animate={{ x: 0 }}
+    transition={{ duration: 2, ease: 'easeOut' }}
+  >
+    <div className="flex justify-between">
+      <div className="flex gap-2 items-center">
+        <span className="notify-message">{notification.message}</span>
+        <img src="icons/check.svg" alt="check icon" style={{ width: '20px', marginRight: '10px' }} />
+      </div>
 
-        <div className='flex items-center gap-5'>
-          <span className='notify-message'>{getHoursDifference(notification.createdAt)}</span>
-          <img  src={isHovered ? "icons/fechar-red.svg" : "icons/fechar.svg"}
+      <div className="flex items-center gap-5">
+        <span className="notify-message">{getHoursDifference(notification.createdAt)}</span>
+        <img
+          src={isHovered ? "icons/fechar-red.svg" : "icons/fechar.svg"}
           alt=""
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          onClick={() => setHandleNotify(false)}/>
-        </div>
-        </div>
-  
-      </motion.div>
+          onClick={() => setHandleNotify(false)}
+        />
+      </div>
+    </div>
+  </motion.div>
+))}
+
 
         {selectedNotification === notification && teste(notification)}
         
@@ -450,6 +479,12 @@ className='notification-container'
     return valorFormatado;
   };
   
+
+
+
+
+  
+
 
 
   return (

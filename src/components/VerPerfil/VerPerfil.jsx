@@ -31,7 +31,7 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   const [imageSrc, setImageSrc] = useState(null); 
   const fileInputRef = useRef(null); 
 
-  const handleFileChange = async (event) => {
+  const handleFileChangeEmp = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -42,7 +42,7 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
 
     
       const formData = new FormData();
-      formData.append('imagem_perfil', file); 
+      formData.append('image', file); 
 
       try {
         const response = await axiosInstance.put('/empresa/profile', formData, {
@@ -108,13 +108,18 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
     
     }
 
-  const handlePenClick = (field) => {
-    setIsEditable((prevState) => ({
-      ...prevState,
-      [field]: true,
-    }));
-  };
-
+    const handlePenClick = (field) => {
+      setIsEditable((prevState) => ({
+        ...prevState,
+        [field]: true,
+      }));
+    
+      // Se o campo estiver vazio, inicializa um valor padrão
+      if (field === 'telefone' && !telEmpresa) {
+        settelEmpresa('');
+      }
+    };
+    
 
   const PutUser = async () => {
     const token = localStorage.getItem('authToken');
@@ -176,36 +181,52 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   if(dadosUser) {
 
 
-const ProfileImageUpdate = ({ dadosUser }) => {
-  const [imageSrc, setImageSrc] = useState(dadosUser?.image || null); 
-  const fileInputRef = useRef(null); 
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImageSrc(e.target.result); 
-      };
-      reader.readAsDataURL(file);
-
-      const formData = new FormData();
-      formData.append('imagem_perfil', file); 
-
-      try {
-        const response = await axiosInstance.put('/empresa/profile', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data', 
-          },
-        });
-
-        console.log('Imagem atualizada com sucesso:', response.data);
-      } catch (error) {
-        console.error('Erro ao atualizar a imagem:', error.response || error);
-      }
+  
+    if (!file) return;
+  
+    // Verifique o tipo e tamanho do arquivo
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+  
+    if (!allowedTypes.includes(file.type)) {
+      console.error('Tipo de arquivo inválido. Envie um arquivo JPEG ou PNG.');
+      return;
+    }
+  
+    if (file.size > maxSize) {
+      console.error('Arquivo muito grande. O tamanho máximo permitido é 5MB.');
+      return;
+    }
+  
+    // Pré-visualizar imagem
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImageSrc(e.target.result); 
+    };
+    reader.readAsDataURL(file);
+  
+    // Criar FormData
+    const formData = new FormData();
+    formData.append('image', file);
+  
+    try {
+      // Enviar imagem para o backend
+      const response = await axiosInstance.put('/me', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log('Imagem atualizada com sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao atualizar a imagem:', error.response || error);
     }
   };
-}
+  
+
 
 const handleClickUser = () => {
   if (fileInputRef.current) {
@@ -336,8 +357,8 @@ const handleClickUser = () => {
   
                         <div>
                           {dadosEmpresa && dadosEmpresa.image && (
-                            <div className="imgCadas" style={{width: '40px', height: '80px'}}>
-                              <img src={dadosEmpresa.image} alt="User Avatar" className='imgUser' />
+                            <div className="imgCadas">
+                              <img src={dadosEmpresa.image} alt="User Avatar" className='imgUser' style={{width: '100px', height: '100px'}} />
                             </div>
                           )}
                           {dadosEmpresa && !dadosEmpresa.image && (
@@ -376,7 +397,7 @@ const handleClickUser = () => {
                                     accept="image/*"
                                     style={{ display: 'none' }}
                                     ref={fileInputRef}
-                                    onChange={handleFileChange}
+                                    onChange={handleFileChangeEmp}
                                   />
                                 </div>
                           )}  
@@ -402,14 +423,16 @@ const handleClickUser = () => {
   
             <span>Telefone</span>
             <div className="input-editar">
-              <Input
-                type="text"
-                required
-                value={telEmpresa}
-                onChange={(e) => settelEmpresa(e.target.value)}
-                disabled={!isEditable.telEmpresa}
-              />
-              <LuPen className="icon-pen2" onClick={() => handlePenClick('titulo')} />
+            <Input
+  type="text"
+  required
+  value={telEmpresa}
+  placeholder="Telefone"
+  onChange={(e) => settelEmpresa(e.target.value)}
+  disabled={!isEditable.telEmpresa}
+/>
+
+              <LuPen className="icon-pen2" onClick={() => handlePenClick('telEmpresa')} />
             </div>
 
           </div>

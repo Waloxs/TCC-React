@@ -12,6 +12,9 @@ const UserVagasApl = () => {
   const [modal, setModal] = useState(false);
   const [modalId, setModalId] = useState(null); // Estado para controlar o modal
 
+
+  
+
 const abreModal = (id) => {
   setModalId(id); // Define o ID da vaga para abrir o modal
 };

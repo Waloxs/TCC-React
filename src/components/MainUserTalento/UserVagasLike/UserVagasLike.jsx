@@ -225,7 +225,7 @@ const UserVagasLike = () => {
         <span className='apl-description'>{vagasCurtidas[index].description}</span>
 
     <div className='flex flex-col'>
-        <span className='apl-title'>Responsabilidades</span>
+        <span className='apl-title'>Requisitos</span>
     </div>
 
 
