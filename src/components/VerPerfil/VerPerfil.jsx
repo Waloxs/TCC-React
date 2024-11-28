@@ -182,49 +182,62 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
 
 
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-  
-    if (!file) return;
-  
-    // Verifique o tipo e tamanho do arquivo
-    const allowedTypes = ['image/jpeg', 'image/png'];
-    const maxSize = 5 * 1024 * 1024; // 5MB
-  
-    if (!allowedTypes.includes(file.type)) {
-      console.error('Tipo de arquivo inválido. Envie um arquivo JPEG ou PNG.');
-      return;
-    }
-  
-    if (file.size > maxSize) {
-      console.error('Arquivo muito grande. O tamanho máximo permitido é 5MB.');
-      return;
-    }
-  
-    // Pré-visualizar imagem
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImageSrc(e.target.result); 
-    };
-    reader.readAsDataURL(file);
-  
-    // Criar FormData
-    const formData = new FormData();
-    formData.append('image', file);
-  
-    try {
-      // Enviar imagem para o backend
-      const response = await axiosInstance.put('/me', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    const handleFileChange = async (event) => {
+      const files = event.target.files;
+      
+      if (files.length === 0) return;
+    
+      // Verifique os tipos e tamanhos dos arquivos
+      const allowedTypes = ['image/jpeg', 'image/png'];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+    
+      // Armazenar os arquivos válidos
+      const validFiles = Array.from(files).filter(file => {
+        if (!allowedTypes.includes(file.type)) {
+          console.error(`Tipo de arquivo inválido: ${file.name}. Envie arquivos JPEG ou PNG.`);
+          return false;
+        }
+        if (file.size > maxSize) {
+          console.error(`Arquivo muito grande: ${file.name}. O tamanho máximo permitido é 5MB.`);
+          return false;
+        }
+        return true;
       });
-  
-      console.log('Imagem atualizada com sucesso:', response.data);
-    } catch (error) {
-      console.error('Erro ao atualizar a imagem:', error.response || error);
-    }
-  };
+    
+      if (validFiles.length === 0) return;
+    
+      // Pré-visualizar as imagens
+      const fileReaders = validFiles.map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
+      });
+    
+      const imagePreviews = await Promise.all(fileReaders);
+      setImageSrc(imagePreviews); // Salve as pré-visualizações no estado
+    
+      // Criar FormData para enviar os arquivos
+      const formData = new FormData();
+      validFiles.forEach(file => {
+        formData.append('images', file); // Envie cada arquivo com a chave 'images'
+      });
+    
+      try {
+        // Enviar imagens para o backend
+        const response = await axiosInstance.put('/me', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        console.log('Imagens atualizadas com sucesso:', response.data);
+      } catch (error) {
+        console.error('Erro ao atualizar as imagens:', error.response || error);
+      }
+    };
+    
   
 
 
@@ -356,52 +369,70 @@ const handleClickUser = () => {
                         </div>
   
                         <div>
-                          {dadosEmpresa && dadosEmpresa.image && (
-                            <div className="imgCadas">
-                              <img src={dadosEmpresa.image} alt="User Avatar" className='imgUser' style={{width: '100px', height: '100px'}} />
-                            </div>
-                          )}
-                          {dadosEmpresa && !dadosEmpresa.image && (
-                                  <div className="imgCadas" onClick={handleClick} style={{ cursor: 'pointer' }}>
-                                  <div
-                                    className="imgUserNone"
-                                    style={{
-                                      width: '80px',
-                                      height: '80px',
-                                      fontSize: '2rem',
-                                      position: 'relative',
-                                    }}
-                                  >
-                                    {imageSrc ? (
-                                      <img
-                                        src={imageSrc}
-                                        alt="Imagem do usuário"
-                                        style={{
-                                          width: '100%',
-                                          height: '100%',
-                                          borderRadius: '50%',
-                                        }}
-                                      />
-                                    ) : (
-                                      <UserEmpresa prLet={true} />
-                                    )}
-                                    <img
-                                      src={BtnEdit}
-                                      alt="Editar"
-                                      style={{ position: 'absolute', bottom: '0px', right: '2%' }}
-                                    />
-                                  </div>
-                                  {/* Input de arquivo escondido */}
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    style={{ display: 'none' }}
-                                    ref={fileInputRef}
-                                    onChange={handleFileChangeEmp}
-                                  />
-                                </div>
-                          )}  
-                        </div>  
+  {dadosEmpresa && dadosEmpresa.image ? (
+    <div className="imgCadas" onClick={handleClick} style={{ cursor: 'pointer' }}>
+      <img 
+        src={dadosEmpresa.image} 
+        alt="User Avatar" 
+        className="imgUser" 
+        style={{ width: '100px', height: '100px', borderRadius: '50%' }} 
+      />
+      <img 
+        src={BtnEdit} 
+        alt="Editar" 
+        style={{ position: 'absolute', bottom: '0px', right: '2%' }} 
+      />
+      {/* Input de arquivo escondido */}
+      <input 
+        type="file" 
+        accept="image/*" 
+        style={{ display: 'none' }} 
+        ref={fileInputRef} 
+        onChange={handleFileChangeEmp} 
+      />
+    </div>
+  ) : (
+    <div className="imgCadas" onClick={handleClick} style={{ cursor: 'pointer' }}>
+      <div
+        className="imgUserNone"
+        style={{
+          width: '80px',
+          height: '80px',
+          fontSize: '2rem',
+          position: 'relative',
+        }}
+      >
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt="Imagem do usuário"
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+            }}
+          />
+        ) : (
+          <UserEmpresa prLet={true} />
+        )}
+        <img
+          src={BtnEdit}
+          alt="Editar"
+          style={{ position: 'absolute', bottom: '0px', right: '2%' }}
+        />
+      </div>
+      {/* Input de arquivo escondido */}
+      <input
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        ref={fileInputRef}
+        onChange={handleFileChangeEmp}
+      />
+    </div>
+  )}
+</div>
+
                     </div>
 
 
