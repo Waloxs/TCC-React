@@ -8,7 +8,7 @@ import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import UserDados from '../UserDados/UserDados.jsx';
 import { useUser as useUserTalento } from '../../services/UserContext.jsx';
 import VerPerfil from '../VerPerfil/VerPerfil.jsx';
-
+import Swal from 'sweetalert2';
 
 const ConfiguracaoConta = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ const ConfiguracaoConta = () => {
         const response = await axiosInstance.get('/empresa/profile');
 
         if (response.status === 200) {
-          setEmail(response.data);
+          setEmail(response.data.email);
         }
       } catch (error) {
         console.error('Erro ao carregar dados do usuário:', error);
@@ -50,41 +50,68 @@ const ConfiguracaoConta = () => {
   }, []);
 
   const validarCampos = () => {
-    if (!email || !novaSenha || !confirmarSenha) {
-      setErrorMessage('Por favor, preencha todos os campos obrigatórios.');
+    if (!email) {
+      setErrorMessage('Por favor, preencha o e-mail.');
       return false;
     }
-    if (novaSenha !== confirmarSenha) {
+    
+    if ((novaSenha || confirmarSenha) && novaSenha !== confirmarSenha) {
       setErrorMessage('As senhas não coincidem.');
       return false;
     }
+  
     setErrorMessage('');
     return true;
   };
-
+  
+  
   const salvarConfiguracoes = async (data) => {
     if (!validarCampos()) {
       return;
     }
-
+  
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
-
+  
     try {
-      const response = await axiosInstance.put('/empresa/profile', {
-        email,
-        password: novaSenha,
-      });
-
-      if (response.status === 200) {
-        setTextoBotao('Configurações Salvas');
-        setBackBotao('#4ADA3D');
+      if (email) {
+        const responseEmail = await axiosInstance.put('/empresa/profile', { email });
+        if (responseEmail.status === 200) {
+          setTextoBotao('Atualizado');
+          setBackBotao('#4ADA3D');
+          
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Seu e-mail foi salvo com sucesso.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#4ADA3D',
+          });
+        }
       }
+  
+      if (novaSenha && novaSenha === confirmarSenha) {
+        const responseSenha = await axiosInstance.put('/empresa/profile', { password: novaSenha });
+        if (responseSenha.status === 200) {
+          setTextoBotao('Atualizado');
+          setBackBotao('#4ADA3D');
+          
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Sua senha foi salva com sucesso.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#4ADA3D',
+          });
+        }
+      }
+  
     } catch (error) {
       console.error('Erro ao salvar configurações:', error);
       setErrorMessage('Houve um erro ao salvar as configurações.');
     }
   };
+  
 
   return (
     <>

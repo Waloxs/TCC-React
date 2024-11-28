@@ -20,6 +20,8 @@ import { useUser as useUserTalento } from '../../services/UserContext.jsx';
 import Notify from '../Notify/Notify.jsx';
 import UserDados from '../UserDados/UserDados.jsx'
 import heart from '../../../public/icons/heart.svg'
+import Swal from 'sweetalert2';
+
 import heartPre from '../../../public/icons/heartPre.svg'
 
 
@@ -52,6 +54,7 @@ const MainUserTalento = ({
   const [modal, setModal] = useState(false);
   const [vagasCurtidas, setVagasCurtidas] = useState({ favoritedJobs: [] }); 
   const [likedItems, setLikedItems] = useState({});
+  const [aplicado, setAplicado] = useState({}); 
   
   const [searchResults, setSearchResults] = useState([]);
 
@@ -365,29 +368,52 @@ className='notification-container'
   };
 
 
+
   const aplicarVaga = async (vaga) => {
+    if (!vaga) {
+      console.error("Vaga indefinida");
+      return;
+    }
+  
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
-
   
     try {
-
-      console.log(vaga._id);
-
       const response = await axiosInstance.post(`/jobs/${vaga._id}/apply`, {}, {
-
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         }
       });
   
-      console.log('Sucesso:', response.data);
+      // Exibindo o Swal de sucesso
+      Swal.fire({
+        icon: 'success',
+        title: 'Candidatura realizada!',
+        text: 'Sua candidatura foi enviada com sucesso.',
+        showConfirmButton: true,
+        timer: 3000, // Timer de 3 segundos para desaparecer
+      });
+  
+      // Atualiza o estado para marcar que o usuário já se candidatou
+      setAplicado((prev) => ({
+        ...prev,
+        [vaga._id]: true,
+      }));
+  
     } catch (error) {
-      console.error('Erro ao atualizar vaga:', error);
-      throw new Error('Erro ao atualizar vaga');
+      console.error('Erro ao aplicar para a vaga:', error);
+  
+      // Exibindo o Swal de erro
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao aplicar',
+        text: 'Houve um erro ao enviar sua candidatura. Tente novamente.',
+        showConfirmButton: true,
+      });
     }
   };
+  
 
   const Logout = () => {
     localStorage.removeItem('authToken');
@@ -567,6 +593,13 @@ className='notification-container'
                 <div>
                   <span className="span-description">{item.description}</span>
                 </div>
+
+                <span className="span-re">
+                    {item.requirements.map((req, tagIndex) => (
+                      <span key={tagIndex} style={{fontFamily: 'Lexend'}}>{req}</span>
+                    ))}
+                  </span>
+
                 <div className='flex items-end'>
                   <span className="span-re">
                     {item.tags.map((req, tagIndex) => (
@@ -640,14 +673,15 @@ className='notification-container'
 
 
                   <div className='apl-buttons'>
-                    <BtnPrincipal
-                    texto={'Aplique agora'}
-                    back={'#3B82F6'}
-                    padding='15px'
-                    borderRadius='20px'
-                    color={'#fff'}
-                    width="100%"
-                    click={() => aplicarVaga(searchResults[index])}
+                  <BtnPrincipal
+                      texto={aplicado[searchResults[index]._id] ? 'Enviado' : 'Aplique agora'}
+                      back={aplicado[searchResults[index]._id] ? '#B0B0B0' : '#3B82F6'} // Cor cinza quando já se candidatou
+                      padding='15px'
+                      borderRadius='20px'
+                      color={aplicado[searchResults[index]._id] ? '#fff' : '#fff'}
+                      width="100%"
+                      click={() => aplicarVaga(searchResults[index])}
+                      disabled={aplicado[searchResults[index]._id]} // Desabilita o botão se já se candidatou
                     />
                   </div>
                 </div>

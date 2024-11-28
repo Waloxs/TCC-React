@@ -10,6 +10,7 @@ import User from '../UserProfile/UserProfile';
 import UserEmpresa from '../UserEmpresa/UserEmpresa';
 import BtnEdit from '../../assets/btn-edit.svg';
 
+import Swal from 'sweetalert2'; 
 
 const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   const [nome, setNome] = useState('');
@@ -27,28 +28,26 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   });
 
 
-  const [imageSrc, setImageSrc] = useState(null); // Estado para armazenar a imagem
-  const fileInputRef = useRef(null); // Referência para o input de arquivo
+  const [imageSrc, setImageSrc] = useState(null); 
+  const fileInputRef = useRef(null); 
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      // Atualizar visualmente a imagem
       const reader = new FileReader();
       reader.onload = (e) => {
-        setImageSrc(e.target.result); // Atualizar o estado com a URL da imagem
+        setImageSrc(e.target.result); 
       };
       reader.readAsDataURL(file);
 
-      // Preparar o formulário para envio
+    
       const formData = new FormData();
-      formData.append('imagem_perfil', file); // Nome do campo esperado pela API
+      formData.append('imagem_perfil', file); 
 
       try {
-        // Realizar a requisição PUT com axiosInstance
         const response = await axiosInstance.put('/empresa/profile', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data', // Garantir o formato correto
+            'Content-Type': 'multipart/form-data', 
           },
         });
 
@@ -60,7 +59,7 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   };
 
   const handleClick = () => {
-    fileInputRef.current.click(); // Abrir o seletor de arquivos ao clicar na div
+    fileInputRef.current.click(); 
   };
 
 
@@ -116,6 +115,7 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
     }));
   };
 
+
   const PutUser = async () => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
@@ -132,6 +132,13 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
         const response = await axiosInstance.put('/me', updatedUser);
         console.log('Dados do usuário atualizados com sucesso:', response.data);
   
+        
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Seus dados foram atualizados com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
       } else if (dadosEmpresa) {
         const updatedEmpresa = {
           nome: nomeEmpresa,
@@ -140,14 +147,71 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
   
         const response = await axiosInstance.put('/empresa/profile', updatedEmpresa);
         console.log('Dados da empresa atualizados com sucesso:', response.data);
+  
+        
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Dados da empresa atualizados com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
       }
     } catch (error) {
       console.error('Erro ao atualizar os dados:', error);
+  
+    
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Houve um erro ao atualizar os dados. Tente novamente.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     }
   };
   
 
+  
+  
+
   if(dadosUser) {
+
+
+const ProfileImageUpdate = ({ dadosUser }) => {
+  const [imageSrc, setImageSrc] = useState(dadosUser?.image || null); 
+  const fileInputRef = useRef(null); 
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImageSrc(e.target.result); 
+      };
+      reader.readAsDataURL(file);
+
+      const formData = new FormData();
+      formData.append('imagem_perfil', file); 
+
+      try {
+        const response = await axiosInstance.put('/empresa/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data', 
+          },
+        });
+
+        console.log('Imagem atualizada com sucesso:', response.data);
+      } catch (error) {
+        console.error('Erro ao atualizar a imagem:', error.response || error);
+      }
+    }
+  };
+}
+
+const handleClickUser = () => {
+  if (fileInputRef.current) {
+    fileInputRef.current.click(); 
+  }
+};
 
   return (
     <div className='cx-form-edit flex flex-col'>
@@ -157,20 +221,27 @@ const VerPerfil = ({dadosUser, dadosEmpresa}) => {
                         <h1 style={{color: '#334155', fontFamily: 'Lexend', fontSize: '0.95rem'}}>{dadosUser.titulo}</h1>
                       </div>
 
-                      <div>
-                        {dadosUser && dadosUser.image && (
-                          <div className="imgCadas">
-                            <img src={dadosUser.image} alt="User Avatar" className='imgUserPerfil' />
-                          </div>
-                        )}
-                        {dadosUser && !dadosUser.image && (
-                          <div className="imgCadas">
-                            <div className='imgUserNone' style={{width: '80px', height: '80px', fontSize: '2rem'}}>
-                              <User prLet={true} />
-                            </div>
-                          </div>
-                        )}  
-                      </div>  
+                      <div onClick={handleClick}>
+      {imageSrc ? (
+        <div className="imgCadas">
+          <img src={imageSrc} alt="User Avatar" className="imgUserPerfil" />
+        </div>
+      ) : (
+        <div className="imgCadas">
+          <div className="imgUserNone" style={{ width: '80px', height: '80px', fontSize: '2rem' }}>
+            <User prLet={true} />
+          </div>
+        </div>
+      )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        style={{ display: 'none' }} 
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+    </div>
                   </div>
 
       <div className='flex flex-col gap-5'>

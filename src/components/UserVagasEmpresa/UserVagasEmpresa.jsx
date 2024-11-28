@@ -7,7 +7,8 @@ import Input from '../Form/input.jsx';
 import { Select } from "antd";
 import ApplicantsList from '../ApplicantsList/ApplicantList.jsx';
 import { useForm } from 'react-hook-form';
-import CurrencyInput from '../CurrencyInput/CurrencyInput.jsx';
+
+import CurrencyInput from 'react-currency-input-field';
 import './UserVagasEmpresa.css'
 import { axiosInstance, setAuthToken } from '../../utils/api.js';
 import lixo from '../../../public/icons/icon-block.svg';
@@ -88,6 +89,8 @@ const UserVagasEmpresa = () => {
       setDesc(vaga.description);
       setLocal(vaga.localizacao);
       setSalar(vaga.salario);
+      setRequisits(vaga.requirements);
+
   
       // Verifique se as tags estão presentes e mapeie
       const updatedTags = vaga.tags?.length ? vaga.tags.map(tag => ({ value: tag, label: tag })) : [];
@@ -217,6 +220,7 @@ const UserVagasEmpresa = () => {
       tags: validSelectedOptions,
       salario: data.salary || salar ,
       title: tit,
+      requirements: requisits,
     };
   
     console.log('Dados enviados para atualização:', dados);
@@ -403,17 +407,22 @@ const UserVagasEmpresa = () => {
               </div>
 
               <div>
+                <span>Requisitos</span>
+                <Input type='text' required value={requisits} onChange={(e) => setRequisits(e.target.value)}/>
+              </div>
+
+              <div>
   <span>Salário</span>
   <CurrencyInput
-  value={formatCurrencyValue(watch('salary'))} // Exibe o valor escalado e formatado
-  onChange={(formattedValue) => {
-    // Remove formatação e converte para valor bruto
-    const rawValue = formattedValue.replace(/[^\d]/g, ''); // Apenas números
-    const scaledValue = parseInt(rawValue, 1) * 10; // Multiplica por 100
-    setValue('salary', scaledValue); // Armazena o valor escalado
-  }}
-/>
-
+        value={salar}
+        onValueChange={(value) => setSalar(value)} // Captura o valor sem formatação
+        prefix="R$ " // Prefixo do valor
+        decimalSeparator="," // Define separador decimal como vírgula
+        groupSeparator="." // Define separador de milhar como ponto
+        decimalsLimit={2} // Limita a 2 casas decimais
+        allowNegativeValue={false} // Impede valores negativos
+        placeholder="R$ 0,00" // Valor padrão exibido quando vazio
+      />
 
 
 
@@ -452,7 +461,14 @@ const UserVagasEmpresa = () => {
               <span className='span-description' style={{ fontWeight: '400' }}>
               {formatCurrencyValue(item.salario)}</span>
             </div>
-            <div className='flex justify-between caixa-tags' style={{ width: '100%' }}>
+
+              <div className='flex gap-3'>
+                {item.requirements.map((req, index) => (
+                  <span className='span-' style={{color: '#000', fontFamily: 'Lexend'}} key={index}>{req}</span>
+                ))}
+              </div>
+
+            <div className='flex justify-between caixa-tags' style={{ width: '100%', marginTop: '10px' }}>
               <div className='flex gap-3'>
                 {item.tags.map((tag, index) => (
                   <span className='span-tag' key={index}>{tag}</span>

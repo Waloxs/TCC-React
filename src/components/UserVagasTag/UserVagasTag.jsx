@@ -13,6 +13,9 @@ const UserVagasTag = () => {
   const [loading, setLoading] = useState(false);
   const [aplicado, setAplicado] = useState({}); // Para controlar se o usuário já se candidatou
 
+
+  console.log(data2);
+
   useEffect(() => {
     const fetchFavoritas = async () => {
       const token = localStorage.getItem('authToken');
@@ -158,6 +161,8 @@ const UserVagasTag = () => {
     return valorFormatado;
   };
 
+  
+
   return (
     <div className='flex flex-col gap-12' style={{position: 'relative', height: '70vh', overflowY: 'auto'}}>
 
@@ -181,10 +186,17 @@ const UserVagasTag = () => {
         <div>
           <span className="span-description">{item.description}</span>
         </div>
+
+        <span className="spanreq">
+            {item.requirements.map((req, tagIndex) => (
+              <span key={tagIndex} style={{fontFamily: 'Lexend'}}>{req}</span>
+            ))}
+          </span>
+
         <div className='flex items-end'>
           <span className="span-re">
-            {item.tags.map((req, tagIndex) => (
-              <span key={tagIndex} className='re'>{req}</span>
+            {item.tags.map((tag, tagIndex) => (
+              <span key={tagIndex} className='re'>{tag}</span>
             ))}
           </span>
           <div className='flex flex-col items-center'>
@@ -221,7 +233,7 @@ const UserVagasTag = () => {
                   <span className='apl-description'>{data2[index].description}</span>
 
               <div className='flex flex-col'>
-                  <span className='apl-title'>Responsabilidades</span>
+                  <span className='apl-title'>Requisitos</span>
                   <span className='flex flex-col'>
                     {data2[index].requirements.map((req, i) => (
                     <span key={i} className='flex items-center item-req'>{i < data2[index].requirements.length ? <div className='icone-circulo'></div> : ''}{req}</span>
@@ -232,7 +244,7 @@ const UserVagasTag = () => {
 
               <div className='flex flex-col'>
                   <span className='apl-title'>Preço</span>
-                  <span className='item-req'>{data2[index].salario}</span>
+                  <span className='item-req'>{formatarSalario(data2[index].salario)}</span>
               </div>
 
               <div className='flex flex-col'>
@@ -249,17 +261,6 @@ const UserVagasTag = () => {
 
                 <div className='flex flex-col justify-between'>
                   <div className='apl-dados-empresa flex flex-col items-center'>
-                  {data2[index].company.image ? (
-  <span className="">
-    <img
-      src={data2[index].company.image}
-      alt={data2[index].company.nome || 'Empresa'}
-      style={{ borderRadius: '50%', width: '100px' }}
-    />
-  </span>
-) : (
-  <></>
-)}
 
 
 

@@ -20,7 +20,9 @@ const PerfilCandidato = ({applicant, onAceitarClick, volta}) => {
       <img src="icons/arrowLeft.svg" onClick={volta} alt="" style={{width: '10px'}}/>
       <div className='flex flex-col items-center gap-4 '>
 
-      <img className='applicant-image' src={applicant.image} alt={`${applicant.firstName}'s profile`} style={{width: '120px', height: '120px'}}/>
+      {applicant.image ? <img className='applicant-image' src={applicant.image} alt={`${applicant.firstName}'s profile`} /> : 
+        <img src={`https://ui-avatars.com/api/?name=${applicant.firstName}+${applicant.lastName}&background=172554&rounded=true&color=fff`} alt='Foto não exibida' style={{ marginTop: '1rem', width: '50px', height: '50px' }} />
+        }
         <div className='flex flex-col items-center'>
           <h4 className='applicant-name'>{applicant.firstName} {applicant.lastName}</h4>
           <p className='applicant-titulo'>{applicant.titulo}</p>

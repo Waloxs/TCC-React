@@ -94,7 +94,7 @@ const formatarSalario = (valor) => {
   : vagasAplicadas && vagasAplicadas.length > 0 && !modal ?(
 
     <>
-    <div style={{height: '70vh', overflowY: 'auto'}} className='flex flex-col gap-6'>
+    <div style={{height: '70vh', overflowY: 'auto', marginTop: '50px'}} className='flex flex-col gap-6'>
     {vagasAplicadas.map((vaga) => (
   <div key={vaga._id} className="flex flex-col gap-3 container-vagas p-4" onClick={() => abreModal(vaga._id)}>
     <div className="flex justify-between">
@@ -107,7 +107,7 @@ const formatarSalario = (valor) => {
     <div>
       <span className="span-empresa">{vaga.job.company.nome}</span>
     </div>
-    <div className="" style={{ marginBottom: '30px' }}>
+    <div className="" style={{ marginBottom: '10px' }}>
       <span className="span-description">{vaga.job.description}</span>
     </div>
     <div className="flex items-center">
@@ -145,10 +145,7 @@ const formatarSalario = (valor) => {
   
           <span className='apl-description'>{vaga.job.description}</span>
   
-      <div className='flex flex-col'>
-          <span className='apl-title'>Responsabilidades</span>
-      </div>
-  
+     
   
       <div className='flex flex-col'>
           <span className='apl-title'>Preço</span>

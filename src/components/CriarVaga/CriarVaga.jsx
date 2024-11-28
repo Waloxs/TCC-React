@@ -38,7 +38,6 @@ const CriarVaga = () => {
             label: profession
           }));
           setOptions(formattedOptions);
-          console.log(data);
         } else {
           console.error("Dados recebidos da API não são um array:", data);
         }
@@ -205,6 +204,8 @@ const CriarVaga = () => {
             }}
             className="cx-selCr"
           >
+
+
             <Select
               mode="multiple"
               options={options}
@@ -235,6 +236,11 @@ const CriarVaga = () => {
               }}
             />
           </div>
+        </div>
+
+        <div className='flex flex-col gap-2'>
+          <span>Requisitos</span>
+          <Input type='text' required value={requisits} onChange={(e) => setRequisits(e.target.value)} />
         </div>
 
         <div className='flex flex-col gap-2'>

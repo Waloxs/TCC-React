@@ -5,6 +5,7 @@ import { useUser as useUserTalento } from '../../../services/UserContext.jsx';
 import UserDados from '../../UserDados/UserDados.jsx';
 import VerPerfil from '../../VerPerfil/VerPerfil.jsx';
 import BtnPrincipal from '../../Buttons/BtnPrincipal.jsx';
+import Swal from 'sweetalert2';
 
 
 const UserVagasLike = () => {
@@ -13,6 +14,8 @@ const UserVagasLike = () => {
   const [modal, setModal] = useState(false);
   const {data: user} = useUserTalento();
   const [modalIndex, setModalIndex] = useState(null);
+  const [aplicado, setAplicado] = useState({}); 
+
 
 
 
@@ -92,6 +95,52 @@ const UserVagasLike = () => {
   
     return valorFormatado;
   };
+
+
+  const aplicarVaga = async (vaga) => {
+    if (!vaga) {
+      console.error("Vaga indefinida");
+      return;
+    }
+  
+    const token = localStorage.getItem('authToken');
+    setAuthToken(token);
+  
+    try {
+      const response = await axiosInstance.post(`/jobs/${vaga._id}/apply`, {}, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+  
+      // Exibindo o Swal de sucesso
+      Swal.fire({
+        icon: 'success',
+        title: 'Candidatura realizada!',
+        text: 'Sua candidatura foi enviada com sucesso.',
+        showConfirmButton: true,
+        timer: 3000, // Timer de 3 segundos para desaparecer
+      });
+  
+      // Atualiza o estado para marcar que o usuário já se candidatou
+      setAplicado((prev) => ({
+        ...prev,
+        [vaga._id]: true,
+      }));
+  
+    } catch (error) {
+      console.error('Erro ao aplicar para a vaga:', error);
+  
+      // Exibindo o Swal de erro
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao aplicar',
+        text: 'Houve um erro ao enviar sua candidatura. Tente novamente.',
+        showConfirmButton: true,
+      });
+    }
+  };
   
 
   return (
@@ -114,7 +163,7 @@ const UserVagasLike = () => {
           <Bars height="80" width="80" color="#3B82F6" ariaLabel="loading" visible={true}/>
         </div>
       ) : vagasCurtidas.length > 0  && !modal ?(
-        <div className='flex flex-col gap-8' style={{height: '70vh', overflowY: 'auto'}}>
+        <div className='flex flex-col gap-8' style={{height: '70vh', overflowY: 'auto', marginTop: '50px'}}>
         {vagasCurtidas.map((vaga, index) => (
           <div>
           <div key={vaga._id} className="flex flex-col container-vagas p-4 gap-3" onClick={() => apareceModal(index)}>
@@ -128,9 +177,11 @@ const UserVagasLike = () => {
             <div>
               <span className="span-empresa">{vaga.company.nome}</span>
             </div>
-            <div className='' style={{ marginBottom: '30px' }}>
+            <div className='' style={{ marginBottom: '10px' }}>
               <span className="span-description">{vaga.description}</span>
             </div>
+
+            
             <div className='flex items-center'>
             <span className="span-re">
               {vaga.tags && vaga.tags.length > 0 ? (
@@ -180,7 +231,7 @@ const UserVagasLike = () => {
 
     <div className='flex flex-col'>
         <span className='apl-title'>Preço</span>
-        <span className='item-req'>{vagasCurtidas[index].salario}</span>
+        <span className='item-req'>{formatarSalario(vagasCurtidas[index].salario)}</span>
     </div>
 
     <div className='flex flex-col'>
@@ -204,15 +255,16 @@ const UserVagasLike = () => {
 
 
         <div className='apl-buttons'>
-          <BtnPrincipal
-          texto={'Aplique agora'}
-          back={'#3B82F6'}
-          padding='15px'
-          borderRadius='20px'
-          color={'#fff'}
-          width="100%"
-          click={() => aplicarVaga(vagasCurtidas[index])}
-          />
+        <BtnPrincipal
+                      texto={aplicado[vagasCurtidas[index]._id] ? 'Enviado' : 'Aplique agora'}
+                      back={aplicado[vagasCurtidas[index]._id] ? '#B0B0B0' : '#3B82F6'} // Cor cinza quando já se candidatou
+                      padding='15px'
+                      borderRadius='20px'
+                      color={aplicado[vagasCurtidas[index]._id] ? '#fff' : '#fff'}
+                      width="100%"
+                      click={() => aplicarVaga(vagasCurtidas[index])}
+                      disabled={aplicado[vagasCurtidas[index]._id]} // Desabilita o botão se já se candidatou
+                    />
         </div>
       </div>
     </div>
