@@ -1,0 +1,180 @@
+.EscPar2{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 40ch;
+    text-align: center;
+}
+
+.containerEmpresaInicial{
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+    width: 100%;
+}
+
+.form-empresa{
+        background-color: #fff;
+        border: 2px solid #E2E8F0;
+        border-radius: 20px;
+        width: 600px;
+}
+
+.in input{
+    height: 3rem !important;
+}
+
+.gri{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.conteudo{
+    position: relative;
+}
+
+.line2{
+    margin-top: 20px;
+    width: 100%;
+    height: 0.75px;
+    background: #94A3B8;
+}
+
+.cont3{
+    color: var(--grey-text-light, #64748B);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 140%; /* 1.75rem */
+    position: absolute;
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    bottom: 16.5%;
+}
+
+
+
+
+
+#areaDeAtuacao {
+    height: 3rem;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%;
+    border-radius: 8px;
+    border: 1px solid var(--grey-300, #CBD5E1);
+    padding-left: 15px;
+    background-color: #fff;
+
+    width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grey-border, #E2E8F0);
+  background: var(--white, #FFF);
+  padding-left: 15px;
+  font-family: 'Lexend';
+  font-weight: 100;
+
+  appearance: none; /* Remove the default dropdown arrow */
+  -webkit-appearance: none; /* Remove the default dropdown arrow for Safari */
+  -moz-appearance: none; /* Remove the default dropdown arrow for Firefox */
+}
+
+
+.select-wrapper {
+    position: relative;
+  }
+
+.select-icon{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    padding-right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 36px;
+}
+
+.select-icon2{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    padding-right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 22px;
+}
+
+
+.senha{
+    position: relative;
+}
+
+
+.EyeEmp{
+    cursor: pointer;
+    font-size: 1.25rem;
+    top: 13px;
+    right: 20px;
+    position: absolute;
+    color: rgb(198, 198, 198);
+}
+
+.top{
+    margin-top: -15px;
+}
+
+@media(max-width: 1060px){
+    .imgTalento{
+        display: none;
+    }
+
+    .conteudo{
+        height: 40rem !important;
+    }
+
+    .containerLogo{
+        max-width: 34rem !important;
+    }
+}
+
+@media(max-width: 500px){
+
+
+    .gri{
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+    }
+
+    #inputEmpresa, #areaDeAtuacao{
+        font-size: 0.85rem;
+    }
+
+    .ui{
+        height: 40rem !important;
+    }
+}
+
+
+
+@media(max-width: 430px){
+    .EscPar2{
+        max-width: 30ch;
+    }    
+
+    
+}
+
+

@@ -1,0 +1,25 @@
+.protected-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .protected-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .data {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #f00; /* Cor vermelha para mensagens de erro */
+  }

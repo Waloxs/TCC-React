@@ -1,0 +1,15 @@
+@media (max-width : 1000px){
+  .ex h1 {
+    display: inline-block;
+    font-weight: 400;
+    animation: netflix 2s ease-in-out forwards infinite;
+    margin-bottom: -15px !important;
+    font-size: 3rem !important;
+  }
+
+  .anim{
+    animation: netflix 2s ease-in-out forwards infinite;
+    animation-delay: 0s;
+    width: 70px;
+  }
+}

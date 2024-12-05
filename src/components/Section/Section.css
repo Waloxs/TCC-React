@@ -1,0 +1,163 @@
+.section{
+    transform: translateX(-1500px);
+    opacity: 0;
+    transition: 1s;
+}
+
+
+@media (max-width : 1200px){
+    .section{
+        width: 60rem !important;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .titu{
+        font-size: 1.5rem !important;
+        width: 25rem !important;
+    }
+
+    .subu{
+        width: 25rem !important;
+    }
+}
+
+
+@media (max-width : 1100px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .imgMain{
+        display: none;
+    }
+
+    .padding{
+        padding: 40px;
+    }
+    .pl-8{
+        padding-left: 0px !important;
+    }
+
+    .titu{
+        font-size: 2.5rem !important;
+        width: 35rem !important;
+    }
+
+    .subu{
+        fuont-size: 1.25rem !important;
+        width: 40rem !important;
+    }
+
+    .btn{
+        margin-top: 1rem;
+        width: 200px !important;
+        height: 70px !important;
+    }
+
+    .btn a{
+        font-size: 1.25rem !important;
+    }
+}
+
+@media (max-width : 780px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .titu{
+        font-size: 2rem !important;
+        width: 30rem !important;
+    }
+
+    .subu{
+        font-size: 1rem !important;
+        width: 30rem !important;
+    }
+}
+
+
+@media (max-width : 600px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .titu{
+        font-size: 1.5rem !important;
+        width: 25rem !important;
+    }
+
+    .subu{
+        font-size: 1rem !important;
+        width: 25rem !important;
+    }
+
+    .padding{
+        padding: 25px;
+    }
+}
+
+
+@media (max-width : 500px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .titu{
+        font-size: 1.25rem !important;
+        width: 20rem !important;
+    }
+
+    .subu{
+        font-size: 0.75rem !important;
+        width: 20rem !important;
+    }
+
+    .btn{
+        margin-top: 1rem;
+        width: 170px !important;
+        height: 50px !important;
+    }
+
+    .btn a{
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width : 420px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .titu{
+        font-size: 1.10rem !important;
+        width: 18rem !important;
+    }
+
+    .subu{
+        font-size: 0.75rem !important;
+        width: 18rem !important;
+    }
+}
+
+@media (max-width : 370px){
+    .section{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .titu{
+        font-size: 1rem !important;
+        width: 16rem !important;
+    }
+
+    .subu{
+        font-size: 0.65rem !important;
+        width: 16rem !important;
+    }
+}

@@ -1,0 +1,189 @@
+.tudo {
+    overflow-x: hidden;
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%);
+    height: 100vh; /* Certifique-se de que a altura esteja definida para visualizar o efeito */
+}
+
+
+
+.EscTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 28ch;
+}
+
+
+.EscPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+.buscarTal{
+    margin-bottom: 0px !important;
+    font-weight: 300;
+}
+
+.buscarEmp{
+    margin-bottom: 0px !important;
+    font-weight: 300;
+}
+
+.titEnt{
+    color: var(--primary-500, #3B82F6);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 1.625rem */
+}
+
+.camph2{
+    display: flex;
+    max-width: 290px;
+    padding: 0.85rem 1.75rem 0.85rem 1.75rem;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 0.9375rem;
+    border: 2px solid var(--grey-300, #CBD5E1);
+    background: #FFF;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.90rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+.azul {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--grey-text-light, #fff); /* Default color */
+    border: 2px solid #CBD5E1;
+}
+
+.azul.selected {
+    background: #0866FF; /* Color when selected */
+}
+
+
+.none{
+    display: none;
+}
+
+
+.containerEscolha{
+animation: animaCont 1s ease-out forwards;
+background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+
+}
+
+
+
+@keyframes animaCont {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@media(max-width: 1065px){
+    .imgEscolha{
+        display: none;
+    }
+
+    
+.EscTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 30ch;
+}
+
+.EscPar{
+    max-width: 30ch;
+}
+
+}
+
+@media(max-width: 452px){
+    .camph2{
+        font-size: 0.85rem;
+    }
+}
+
+
+@media(max-width: 422px){
+    .camph2{
+        font-size: 0.75rem;
+    }
+}
+
+
+@media(max-width: 390px){
+
+
+    .camph2{
+        font-size: 0.65rem;
+    }
+
+.EscTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 100%;
+}
+
+
+
+.EscPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+}
+
+}
+
+
+
+@media(max-width: 360px){
+
+
+    .camph2{
+        font-size: 0.60rem;
+    }
+}
+
+@media(max-width: 330px){
+    .EscTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 100%;
+    }
+}

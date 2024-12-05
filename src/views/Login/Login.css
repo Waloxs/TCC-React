@@ -1,0 +1,214 @@
+.anime{
+    animation: animaCont 1s ease-out forwards;
+}
+
+.tudo{
+    overflow-y: hidden;
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+}
+
+.sub:hover{
+    text-decoration: underline;
+}
+
+@keyframes animaCont {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.titLogin{
+    color: var(--grey-text-dark, #020617);
+text-align: center;
+font-family: Lexend;
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 600;
+line-height: 150%; /* 2.25rem */
+}
+
+.subLogin{
+    color: var(--grey-text-light, #64748B);
+text-align: center;
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 300;
+line-height: 140%; /* 1.75rem */
+}
+
+.lineLogin{
+
+    width: 100%;
+    height: 1px;
+    background: #d7d7d7;
+}
+
+.form{
+    padding: 2rem;
+    position: relative;
+    background: #fff;
+    border: 2px solid #E2E8F0;
+    border-radius: 20px;
+}
+
+input{
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--white, #FFF);
+    padding-left: 15px;
+    font-family: 'Lexend';
+    font-weight: 100;
+}
+
+input::placeholder{
+    font-family: 'Lexend' !important;
+    font-weight: 100 !important;
+}
+
+
+.btnLogin{
+    display: flex;
+    width: 100%;
+    height: 3.125rem;
+    padding: 0.625rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+    background: var(--primary-500, #3B82F6);
+    font-family: 'Lexend';
+    font-weight: 100;
+    color: #fff;
+}
+
+.line{
+    margin-top: 20px;
+    width: 100%;
+    height: 0.75px;
+    background: #94A3B8;
+}
+
+.cont{
+    color: var(--grey-disable-color, #94A3B8);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 1.4rem */
+    font-style: normal;
+    position: absolute;
+    top: 455px;
+    background: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.mid{
+    cursor: pointer;
+    border: 1px solid #E2E8F0;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 10px 40px;
+    width: 100%;
+}
+
+.gog{
+    font-family: Lexend;
+    color: rgb(236, 87, 87);
+    font-weight: 100;
+}
+
+.fac{
+    font-family: Lexend;
+    color: #0866FF;
+    font-weight: 100;
+}
+
+.sub{
+    color: var(--grey-disable-color, #94A3B8);
+    text-align: right;
+    font-family: Lexend;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 1.4rem */
+}
+
+.logoResp{
+    display: none;
+}
+
+.cpSenha{
+    position: relative;
+}
+
+.Eye{
+    position: absolute;
+    color: rgb(198, 198, 198);
+    cursor: pointer;
+    font-size: 1.25rem;
+    right: 20px;
+    bottom: 10px;
+}
+
+@media(max-width: 1200px){
+    .imgLogin{
+        display: none;
+    }
+
+    .logoResp{
+        display: flex;
+    }
+    
+
+    .anime{
+        width: 30rem !important;
+        height: 40rem !important;
+        background: #fff !important;
+    }
+
+    .cont{
+        background: #fff !important;
+    }
+
+    .imageout{
+        display: none;
+    }
+
+   
+}
+
+
+@media(max-width: 500px){
+    .anime{
+    width: 25rem !important;
+    }
+}
+
+
+
+
+@media(max-width: 425px){
+    .anime{
+    width: 20rem !important;
+    }
+
+    .subLogin{
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .cont{
+        top: 449px;
+    }
+}

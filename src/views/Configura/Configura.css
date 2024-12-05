@@ -1,0 +1,74 @@
+.Conta, .Conta2{
+    width: 90vw;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid transparent;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 50px 15px 0px rgba(0, 0, 0, 0.00), 
+            0px -50px 15px 0px rgba(0, 0, 0, 0.00), 
+            0px 30px 12px 0px rgba(0, 0, 0, 0.01), 
+            0px -30px 12px 0px rgba(0, 0, 0, 0.01), 
+            0px 15px 9px 0px rgba(0, 0, 0, 0.05), 
+            0px -15px 9px 0px rgba(0, 0, 0, 0.05), 
+            0px 7px 7px 0px rgba(0, 0, 0, 0.09), 
+            0px -7px 7px 0px rgba(0, 0, 0, 0.09), 
+            0px 3px 4px 0px rgba(0, 0, 0, 0.10), 
+            0px -3px 4px 0px rgba(0, 0, 0, 0.10);
+    margin-top: 40px;
+}
+
+.imgModal2{
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+    transition: ease .4s;
+}
+
+
+.imgModal2:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
+}
+
+.cameraIcon{
+    position: absolute;
+    top: calc(50% + 10px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.user{
+    position: relative;
+}
+
+
+.tit{
+    font-size: 2.5rem;
+    font-family: Lexend;
+}
+
+.subt{
+    font-size: 1.5rem;
+    font-family: Lexend;
+}
+
+.divPen{
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+
+
+.divPen:hover{
+    background-color: #3B82F6;
+
+    .pen{
+        color: #fff;
+    }
+}

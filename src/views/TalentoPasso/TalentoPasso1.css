@@ -1,0 +1,860 @@
+
+.PassTit{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 30ch;
+}
+
+.containerPasso{
+    background: linear-gradient(to bottom, #fff 50%, #F1F5F9 50%) !important;
+
+}
+
+.user{
+    cursor: pointer;
+    font-size: 5rem;
+}
+
+.pdl{
+    height: 50px !important;
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
+
+.pdl::placeholder{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+}
+
+.ctx-input{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.tudo{
+    position: relative;
+}
+
+.back{
+    background: #b3b3b3;
+}
+
+.sombra {
+    filter: brightness(0.7);
+}
+
+.ddd{
+    top: 50%;
+    z-index: 1;
+}
+
+@keyframes animeAdc {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.containAdc {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    animation: animeAdc 1s ease-in-out forwards;
+    transform: translate(-50%, -50%); ;
+}
+
+.FormAdc2{
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-radius: 0.9375rem;
+    padding: 10px 40px;
+}
+
+.FormAdc2 label{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 1.6rem */
+}
+
+.titAdc{
+    color: var(--grey-text-dark, #020617);
+    text-align: center;
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 2.25rem */
+}
+
+.gr1, .gr2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+
+@keyframes growTo25 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: calc(100% - 75%);
+    }
+}
+
+@keyframes growTo25antes {
+    from {
+        width: calc(100% - 50%)
+    }
+    to {
+        width: 25%;
+    }
+}
+
+@keyframes growTo50 {
+    from {
+        width: 25%;
+    }
+    to {
+        width: calc(100% - 50%);
+    }
+}
+
+@keyframes growTo50antes {
+    from {
+        width: calc(100% - 25%)
+    }
+    to {
+        width: 50%;
+    }
+}
+
+@keyframes growTo75 {
+    from {
+        width: 50%;
+    }
+    to {
+        width: calc(100% - 25%);
+    }
+}
+
+@keyframes growTo75antes {
+    from {
+        width: calc(100%)
+    }
+    to {
+        width: 75%;
+    }
+}
+
+@keyframes growTo100 {
+    from {
+        width: 75%;
+    }
+    to {
+        width: calc(100%);
+    }
+}
+
+.Azul25 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo25 1s ease-in-out forwards;
+}
+
+.Azul25antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo25antes 1s ease-in-out forwards;
+}
+
+.Azul50antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo50antes 1s ease-in-out forwards;
+}
+
+.Azul75antes{
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo75antes 1s ease-in-out forwards;
+}
+
+.Azul50 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo50 1s ease-in-out forwards;
+}
+
+.Azul75 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo75 1s ease-in-out forwards;
+}
+
+.Azul100 {
+    height: 2px;
+    background: #3B82F6;
+    animation: growTo100 1s ease-in-out forwards;
+}
+
+
+.animate{
+    position: relative;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.func{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
+.select-wrapper2{
+    position: relative;
+}
+
+
+.icondown{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 36px;
+}
+
+
+.PassPar{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+
+.PassTit3{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+
+
+.PassPar3{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 65ch;
+}
+
+
+.PassTit2{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+.conteudo{
+    display: relative;
+}
+
+
+.txArea{
+    width: 200px;
+    height: max-content;
+    padding: 20px;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--grey-disable-color, #94A3B8);
+}
+
+.titArea{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 0.975rem */
+}
+
+.subArea{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.50rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 0.975rem */
+}
+
+.PassPar2{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 65ch;
+}
+
+.lin{
+    width: calc(100% - 4rem) !important;
+}
+
+
+.container2{
+    animation: animaCont 1s ease-out forwards;
+}
+
+
+.btnProximo, .btnProximo2{
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+}
+
+.cxCinza{
+    width: calc(100% - 8rem);
+    height: 2px;
+    background: #fff;
+}
+
+.expTit{
+    color: var(--primary-500, #3B82F6);
+font-family: Lexend;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 110%; /* 1.1rem */
+}
+
+.expTitPr{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 0.85rem;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 1.625rem */
+}
+
+.bord{
+    border-radius: 0.9375rem;
+border: 2px solid var(--grey-300, #CBD5E1);
+}
+
+.tudoExp{
+    position: absolute;
+    bottom: 110px;
+}
+
+.descAdc{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    width: 100%;
+    height: 100px;
+    word-wrap: break-word; 
+}
+
+#cidade, #estado{
+    padding-left: 15px;
+    height: 40px;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;  
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+    outline: none;
+    background-color: #fff;
+
+    appearance: none; /* Remove o estilo padrão do dropdown */
+    -webkit-appearance: none; /* Remove o estilo padrão do dropdown no WebKit */
+    -moz-appearance: none; /* Remove o estilo padrão do dropdown no Firefox */
+}
+
+
+
+#inicio, #fim{
+    padding-left: 15px;
+    padding-right: 13px !important;
+}
+
+.data{
+    width: 100%;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+    background-color: #fff;
+
+    height: 40px;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+
+
+
+#area{
+    border: 1px solid #b3b3b3;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; /* 19.2px */
+    outline: none;
+}
+
+#area2{
+    border: 1px solid #b3b3b3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#areaExp{
+    font-size: 12px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--grey-border, #E2E8F0);
+    background: var(--white, #FFF);
+    padding: 10px;
+    font-family: Lexend;
+    font-weight: 100;
+    color: var(--grey-text-light, #64748B);
+}
+
+.modalexpTit{
+color: var(--grey-text-dark, #020617);
+font-family: Lexend;
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: 130%; /* 41.6px */
+}
+
+
+.form-modalExp span{
+
+color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 21px */
+}
+
+
+
+.span-erro{
+    color: var(--error-500, #EF4444);
+font-family: Lexend;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 130%; /* 16.9px */
+}
+
+
+
+.ant-select-multiple .ant-select-selection-overflow{
+    flex-wrap: nowrap !important;
+}
+
+
+@media(max-width: 940px){
+    .txArea{
+        display: none;
+    }
+}
+
+@media(max-width: 735px){
+    .cx{
+        margin-bottom: 10rem !important;
+        place-self: center;
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    .pd2{
+        
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
+
+@media(max-width: 655px){
+
+.m{
+    margin-right: 0px !important;
+}
+
+.PassTit3{
+    color: var(--grey-text-dark, #020617);
+    font-family: Lexend;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 2.6rem */
+    max-width: 40ch;
+}
+
+
+
+.PassPar3{
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 0.70rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%; /* 1.625rem */
+    max-width: 60ch;
+}
+}
+
+@media(max-width: 625px){
+
+    .PassPar{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.70rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+
+    .PassTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 30ch;
+    }
+
+    .PassTit2{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+
+    
+    
+    .PassPar2{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.70rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+}
+
+
+
+
+@media(max-width: 800px){
+
+    .FormAdc2{
+        height: 100%;
+        width: 500px !important;
+        background: #fff;
+        border-radius: 0.9375rem;
+        padding: 10px 40px;
+        margin: 0 auto;
+    }
+
+    #area{
+        height: 80px !important;
+    }
+
+}
+
+
+@media(max-width: 550px){
+
+    .titAdc{
+        font-size: 1.25rem;
+    }
+
+    .FormAdc2{
+        height: 100%;
+        width: 400px !important;
+        background: #fff;
+        border-radius: 0.9375rem;
+        padding: 10px 40px;
+        margin: 0 auto;
+    }
+
+    .form-modalExp{
+        height: 100%;
+        width: 400px !important;
+        background: #fff;
+        border-radius: 0.9375rem;
+    }
+
+    #area{
+        height: 90px !important;
+    }
+
+    .data{
+        font-size: 0.75rem !important;
+        padding-left: 10px;
+    }
+    
+    .pdl{
+        padding-left: 10px !important;
+    }
+
+    #inicio, #fim{
+        padding-right: 10px;
+    }
+
+    .icon-drop{
+        width: 10px;
+    }
+}
+
+@media(max-width: 540px){
+
+.form-modalExp{
+    flex-direction: column;
+    gap: 0px;
+}
+
+.btnProximo2{
+    right: -0.75rem !important;
+    bottom: -2rem !important;
+    position: absolute;
+}
+
+.descExp{
+    display: flex;
+    flex-direction: column !important;
+}
+
+}
+
+
+@media(max-width: 525px){
+
+    .form-modalExp{
+        flex-direction: column;
+    }
+    
+    .form-modalExp{
+        height: 100%;
+        width: 300px !important;
+        background: #fff;
+        border-radius: 0.9375rem;
+    }
+
+    }
+
+
+    @media(max-width: 420px){
+        
+        .form-modalExp{
+            height: 100%;
+            width: 240px !important;
+            background: #fff;
+            border-radius: 0.9375rem;
+        }
+    
+        }
+    
+@media(max-width: 430px){
+
+    .titAdc{
+        font-size: 0.85rem;
+        margin-top: 10px;
+    }
+
+    .FormAdc2{
+        margin-top: 0px !important;
+        height: 100% !important;
+        width: 350px !important;
+        background: #fff;
+        border-radius: 0.9375rem;
+        padding: 10px 40px;
+        margin: 0 auto;
+    }
+
+   
+    #area{
+        height: 60px !important;
+        font-size: 0.75rem;
+    }
+
+    #area2{
+        height: 100px !important;
+        font-size: 0.75rem;
+    }
+
+    .gr2{
+        grid-template-columns: auto;
+    }
+
+    .ct{
+        place-self: center;
+    }
+
+    .FormAdc2 label{
+        font-size: 0.75rem !important;
+    }
+
+    ::placeholder{
+        font-size: 0.75rem !important;
+    }
+
+    #cidade, #estado{
+        font-size: 0.75rem !important;
+    }
+    
+
+}
+
+
+@media(max-width: 370px){
+    #area2{
+        height: 80px !important;
+        font-size: 0.75rem; 
+    }
+
+    .FormAdc2{
+        width: 300px !important;
+    }
+}
+
+@media(max-width: 500px){
+    .cx{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 470px){
+    .pd{
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    .lin{
+        width: calc(100% - 2rem) !important;
+    }
+
+    .lin::placeholder{
+        font-size: 0.74rem;
+    }
+
+    .btnProximo{
+        right: -2rem !important;
+        bottom: 0px;
+        position: absolute;
+    }
+}
+
+
+@media(max-width: 410px){
+
+
+    .PassTit{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1rem !important;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 30ch;
+    }
+
+    .PassPar{
+        color: var(--grey-text-light, #64748B);
+        font-family: Lexend;
+        font-size: 0.60rem !important;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 130%; /* 1.625rem */
+        max-width: 60ch;
+    }
+
+
+    .PassTit2{
+        color: var(--grey-text-dark, #020617);
+        font-family: Lexend;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 2.6rem */
+        max-width: 40ch;
+    }
+
+}

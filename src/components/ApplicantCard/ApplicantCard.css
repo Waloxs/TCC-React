@@ -1,0 +1,107 @@
+.applicant-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 16px;
+  }
+  
+  .banner {
+    padding: 16px;
+    display: flex;
+    justify-content: center; 
+    height: 80px; 
+  }
+  
+  .fundo{
+    background-color: #F1F5F9;
+  }
+
+  .applicant-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background-color: #fff;
+    object-fit: cover; 
+  }
+  
+  .applicant-info {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .applicant-name {
+    margin: 0;
+    color: var(--blackclear, #202020);
+font-family: Lexend;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 160%; /* 25.6px */
+  }
+  
+  .applicant-titulo {
+    margin: 4px 0;
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
+  }
+  
+  .applicant-bio {
+    color: var(--grey-text-light, #64748B);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 160%; 
+    white-space: normal;
+    overflow-wrap: break-word;
+    height: auto;
+  }
+
+
+  .applicant-bio button{
+    color: var(--Primary-Color-500, #3B82F6);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%;
+  }
+
+
+  .listaTag {
+    display: flex;
+    width: 100%;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    white-space: nowrap; /* Garante que os itens não se movam para a linha seguinte */
+    box-sizing: border-box; /* Inclui padding e border no cálculo da largura total */
+  
+    /* Oculta a barra de rolagem em diferentes navegadores */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer e Edge */
+  }
+  
+  .listaTag::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Opera */
+  }
+  
+  
+
+  .listaTag li{
+    color: var(--grey-disable-color, #94A3B8);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 19.2px */
+border-radius: 20px;
+background: var(--grey-100, #F1F5F9);
+padding: 4px 19px;
+  }
+  
+  

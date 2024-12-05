@@ -1,0 +1,10 @@
+.bio-perfil{
+    color: var(--grey-text-light, #64748B);
+font-family: Lexend;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 160%; /* 19.2px */
+max-width: 80ch;
+text-align: justify;
+}

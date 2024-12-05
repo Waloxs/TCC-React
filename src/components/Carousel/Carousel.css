@@ -1,0 +1,5 @@
+@media (max-width: 1024px){
+    .carousel{
+        margin-left: 10px !important;
+    }
+}
